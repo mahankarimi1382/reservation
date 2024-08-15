@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.App {
+  text-align: center;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-drag {
+  height: 100%;
+  background-color: #005dad;
+  border-radius: 10px;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+swiper-container {
+  margin-top: 5px;
+  width: 80%;
+  height: 400px;
+  /* line-height: 200px;
+  text-align: center; */
+}
+/* .banner{
+  background-image: url("./assets/banner2.png");
+} */
+swiper-slide {
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: white;
+  align-items: center;
+  background-color: rgb(80, 95, 229);
+  border-radius: 30px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.fullBanner {
+  background-color: #61dafb;
+}
