@@ -116,6 +116,7 @@ function Footer() {
           </div>
         </div>
       </div>
+      
       <div className=" flex flex-col w-[85%] justify-between">
         <div className=" justify-center items-center flex gap-10">
           <SiLinkedin className=" text-[#5F5F5F] text-4xl" />

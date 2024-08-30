@@ -57,7 +57,7 @@ function MagezineSection() {
           return (
             <div
               key={item.id}
-              className=" py-2 lg:py-0 gap-2 lg:gap-6 rounded-2xl justify-center items-center min-w-[159px] min-h-[188px] lg:min-w-[278px] lg:h-[316px] border flex flex-col"
+              className=" shadow-lg py-2 lg:py-0 gap-2 lg:gap-6 rounded-2xl justify-center items-center min-w-[159px] min-h-[188px] lg:min-w-[278px] lg:h-[316px] border flex flex-col"
             >
               <Image
                 alt="magezine-pic"
@@ -67,8 +67,9 @@ function MagezineSection() {
               />
               <p className=" lg:px-5 px-2 text-[12px] lg:text-[18px]">{item.text}</p>
               <div className=" lg:w-5/6 flex justify-end  ">
-                <button className=" px-5 lg:px-0 p-2 flex rounded-lg text-[14px] text-[#005DAD] bg-[#D3E9FD]">
+                <button className=" items-center gap-1  px-5 lg:px-2 p-2 flex rounded-lg text-[14px] text-[#005DAD] bg-[#D3E9FD]">
                   مشاهده مقاله
+                  <FaArrowLeft/>
                 </button>
               </div>
             </div>

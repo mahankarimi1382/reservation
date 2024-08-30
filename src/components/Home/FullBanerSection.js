@@ -1,11 +1,11 @@
 import React from "react";
-import movaqatti2 from "../../../public/assets/movaqatti2.png";
+import fullBanner from "../../../public/assets/fullBaner.png";
 import Image from "next/image";
 
 function FullBanerSection() {
   return (
     <div className=" fullBanner w-full">
-      <Image alt="full banner" src={movaqatti2} />
+      <Image alt="full banner" src={fullBanner} />
     </div>
   );
 }

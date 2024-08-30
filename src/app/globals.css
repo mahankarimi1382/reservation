@@ -4,6 +4,13 @@
 
 .App {
   text-align: center;
+
+}
+@font-face {
+  font-family: 'iran-yekan';
+  src: url('../../public/assets/fonts/IRANYekanMobileFN.ttf');
+  font-weight: normal;
+  font-style: normal;
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -72,7 +79,4 @@ swiper-slide {
   to {
     transform: rotate(360deg);
   }
-}
-.fullBanner {
-  background-color: #61dafb;
 }

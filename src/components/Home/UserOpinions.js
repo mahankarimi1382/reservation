@@ -46,7 +46,7 @@ function UserOpinions() {
     },
   ];
   return (
-    <div className=" mt-20 bg-[#F3F6FF] w-full flex justify-center items-center h-[288px] lg:h-[431px]">
+    <div className=" mt-32 bg-[#F3F6FF] w-full flex justify-center items-center h-[288px] lg:h-[431px]">
       <div className=" w-11/12 flex flex-col justify-center items-center">
         <h2 className=" mt-5 w-full flex gap-2 text-[18px] lg:text-[38px]">
           <span className=" text-[#005DAD]">نظرات</span>

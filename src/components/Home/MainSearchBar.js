@@ -7,7 +7,7 @@ import Image from "next/image";
 
 function MainSearchBar() {
   return (
-    <div className=" flex flex-col gap-5 mb-10 lg:mb-0 lg:gap-9 justify-center items-center">
+    <div className=" relative flex flex-col gap-5 mb-10 lg:mb-0 lg:gap-9 justify-center items-center">
       <Image
         alt="icon"
         width={191}
@@ -36,7 +36,7 @@ function MainSearchBar() {
         width={60}
         src={heroLines}
         alt="icon"
-        className=" hidden lg:flex absolute top-[160px] left-[400px] "
+        className=" hidden lg:flex absolute -top-[70px] left-[360px] "
       />
       <Image
         width={20}
@@ -53,7 +53,7 @@ function MainSearchBar() {
         بهترین خدمات پزشکی در دستان شما
       </h2>
       <div className=" gap-6 w-[100%] -mt-10  lg:w-3/5 flex lg:mt-20 justify-center items-center rounded-xl h-[119px]">
-        <div className=" rounded-lg px-3 items-center justify-center gap-1 flex h-[43px] lg:h-[56px] mt-8 w-[80%] border bg-white   border-[#C7C6C6]">
+        <div className=" rounded-lg px-3 items-center justify-center gap-1 flex h-[43px] lg:h-[56px] mt-8 lg:mt-0 w-[80%] border bg-white   border-[#C7C6C6]">
           <CiSearch className=" text-[#919191] text-3xl" />
           <input
             className=" text-sm outline-none h-full w-[80%]"
