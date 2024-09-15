@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import ModalLogo from "../../../public/assets/ModalLogo.png";
-import Image from "next/image";
-import { RxCross2 } from "react-icons/rx";
+
 import PhoneNumModal from "../Modals/PhoneNumModal";
 import ValidateModal from "../Modals/ValidateModal";
 

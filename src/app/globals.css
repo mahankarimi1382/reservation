@@ -2,15 +2,86 @@
 @tailwind components;
 @tailwind utilities;
 
+.rmdp-prime .rmdp-day:not(.rmdp-day-hidden) span:hover {
+  background-color: #c4e2ff !important;
+  color: black;
+}
+.shadoww {
+  -webkit-box-shadow: 0px 0px 4px 1px rgba(0,93,173,0.32);
+-moz-box-shadow: 0px 0px 4px 1px rgba(0,93,173,0.32);
+box-shadow: 0px 0px 4px 1px rgba(0,93,173,0.32);
+}
+.rmdp-prime .rmdp-week-day {
+  font-size: 16px;
+  width: 96px;
+  color: black;
+}
+
+
+.rmdp-prime .rmdp-day-picker div {
+  width: 100%;
+}
+.rmdp-prime .rmdp-week {
+  display: flex;
+}
+.rmdp-prime .rmdp-day {
+  margin-right: 18px;
+  margin-top: 40px;
+}
+.rmdp-prime .rmdp-day .sd {
+  width: 67px;
+  height: 58px;
+
+  -webkit-box-shadow: 0px 0px 1px 1px rgba(0, 93, 173, 0.32);
+  -moz-box-shadow: 0px 0px 1px 1px rgba(0, 93, 173, 0.32);
+  box-shadow: 0px 0px 1px 1px rgba(0, 93, 173, 0.32);
+  background: white;
+  border-radius: 10px;
+  font-size: larger;
+  color: black;
+}
+
+.rmdp-wrapper.rmdp-shadow.rmdp-prime {
+  border-radius: 15px;
+  padding-bottom: 10px;
+}
+.rmdp-prime .rmdp-calendar {
+  width: 757px;
+  min-height: 597px;
+}
+
+.rmdp-shadow {
+  box-shadow: none;
+}
+.rmdp-prime .rmdp-header,
+.rmdp-prime .rmdp-panel-header {
+  background-color: #c4e2ff;
+  border-radius: 10px;
+  padding: 10px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  font-size: 20px;
+}
+
 .App {
   text-align: center;
-
 }
 @font-face {
-  font-family: 'iran-yekan';
-  src: url('../../public/assets/fonts/IRANYekanMobileFN.ttf');
+  font-family: "iran-yekan";
+  src: url("../../public/assets/fonts/IRANYekanMobileFN.ttf");
   font-weight: normal;
   font-style: normal;
+}
+
+.customScroll::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 10px;
+  background-color: rgba(217, 217, 217, 0.71);
+}
+.customScroll::-webkit-scrollbar-thumb {
+  background-color: #005dad;
+
+  border-radius: 10px;
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -21,10 +92,9 @@
   background-color: #005dad;
   border-radius: 10px;
 }
-/* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .App-logo {
   height: 40vmin;
@@ -34,12 +104,8 @@ swiper-container {
   margin-top: 5px;
   width: 80%;
   height: 400px;
-  /* line-height: 200px;
-  text-align: center; */
 }
-/* .banner{
-  background-image: url("./assets/banner2.png");
-} */
+
 swiper-slide {
   padding-bottom: 40px;
   display: flex;

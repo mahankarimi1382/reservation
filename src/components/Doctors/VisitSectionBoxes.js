@@ -14,7 +14,7 @@ function VisitSectionBoxes({ icon, topic }) {
   return (
     <div className=" w-full justify-center flex">
       {isBoxOpen ? (
-        <div className=" transition-all duration-1000 bg-blue-200 w-[95%] h-[600px] flex flex-col items-center rounded-2xl border border-[#005DAD]">
+        <div className=" transition-all duration-[1000ms]   w-[95%] h-[600px] flex flex-col items-center rounded-2xl border border-[#005DAD]">
           <div className=" w-full px-5 border-b border-dashed border-[#005DAD] py-3 flex items-center justify-between">
             <h2 className=" p-3 gap-2 text-[#005DAD] font-semibold flex items-end">
               <Image width={32} src={icon} alt="hispital-icon" />
@@ -26,9 +26,9 @@ function VisitSectionBoxes({ icon, topic }) {
             />
           </div>
           {topic === "ویزیت حضوری" && (
-            <div className=" w-full flex  flex-col gap-5 pt-10 items-center">
-              <VisitHozoriCard />
-              <VisitHozoriCard />
+            <div className=" delay-700 w-full flex  flex-col gap-5 pt-10 items-center">
+              <VisitHozoriCard  />
+              <VisitHozoriCard  />
             </div>
           )}
         </div>

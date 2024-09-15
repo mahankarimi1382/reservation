@@ -105,9 +105,9 @@ function SpecialtiesSection() {
             300: {
               slidesPerView: 2,
               spaceBetween: -10,
-              scrollbar:{
-                dragSize:50,
-              }
+              scrollbar: {
+                dragSize: 50,
+              },
             },
             640: {
               slidesPerView: 2,
@@ -121,7 +121,6 @@ function SpecialtiesSection() {
               slidesPerView: 6,
               spaceBetween: -20,
               dragClass: "scrollbar-drag",
-
             },
           }}
           modules={[Scrollbar, Autoplay]}
@@ -141,9 +140,9 @@ function SpecialtiesSection() {
               <SwiperSlide key={item.id} className=" p-3 lg:p-[25px]">
                 <div
                   key={item.id}
-                  className="  hover:shadow-lg w-[104px] h-[146px]  hover:-mt-3 transition-all hover:shadow-[#c2eeff] lg:w-[131px] lg:h-[170px] flex flex-col justify-evenly items-center rounded-xl border border-[#DBD7D7]"
+                  className="  hover:shadow-lg w-[104px] h-[146px]  hover:-mt-3 transition-all shadow-red-600  hover:shadow-[#005DAD] lg:w-[131px] lg:h-[170px] flex flex-col justify-evenly items-center rounded-xl border border-[#DBD7D7]"
                 >
-                  <div className=" bg-[#eaeaea] hover:bg-[#51a8f4] rounded-full w-[77px] h-[77px] flex justify-center items-center ">
+                  <div className=" bg-[#eaeaea] rounded-full w-[77px] h-[77px] flex justify-center items-center ">
                     <Image alt="icon" width={51} src={item.icon} />
                   </div>
                   <h2 className=" text-[10px] font-semibold lg:font-medium lg:text-[12px]">

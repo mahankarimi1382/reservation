@@ -1,5 +1,6 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import doctorProfileImg from "../../../public/assets/user-profile.png";
 import { IoLocationOutline } from "react-icons/io5";
@@ -15,12 +16,16 @@ import experinceFrame from "../../../public/assets/experience-frame.png";
 import imanKhosravi from "../../../public/assets/ImanKhosravi.png";
 import smmile from "../../../public/assets/Smile vector.png";
 import clock from "../../../public/assets/clock.png";
-
 import maqalepic from "../../../public/assets/ocdMaqale.png";
 import bookIcon from "../../../public/assets/book.png";
 import AcordinDoctorpanel from "../helpers/AcordinDoctorpanel";
 import VisitSection from "./VisitSection";
+import NazarModal from "./NazarModal";
+import SuccessOpinion from "./SuccessOpinion";
 function DoctorProfile() {
+  const [nazarModal, setNazarModal] = useState(false);
+  const [successModal, setSuccessModal] = useState(false);
+
   const usersExperineces = [
     {
       id: 1,
@@ -123,6 +128,14 @@ function DoctorProfile() {
   ];
   return (
     <div className=" pb-20  min-h-[2150px] flex flex-col w-full justify-between items-center bg-[#f5f5f5]">
+      {nazarModal && (
+        <NazarModal
+          setNazarModal={setNazarModal}
+          setSuccessModal={setSuccessModal}
+        />
+      )}
+      {successModal && <SuccessOpinion setSuccessModal={setSuccessModal} />}
+
       <div className=" pt-10 min-h-[1582px]  flex w-full items-start justify-between px-20 ">
         <div className=" flex flex-col  items-center w-[57%] bg-white rounded-xl">
           <div className="w-[90%] flex py-10 flex-col gap-10">
@@ -213,7 +226,10 @@ function DoctorProfile() {
                 میرزایی بوده‌اید می‌توانید نظر خود را ثبت کنید.
               </p>
               <div className=" w-full flex items-end justify-end">
-                <button className=" flex items-center bg-[#005DAD] text-white p-3 rounded-xl px-5 text-lg">
+                <button
+                  onClick={() => setNazarModal(true)}
+                  className=" flex items-center bg-[#005DAD] text-white p-3 rounded-xl px-5 text-lg"
+                >
                   ثبت نظر
                   <IoIosArrowRoundBack className=" text-2xl" />
                 </button>

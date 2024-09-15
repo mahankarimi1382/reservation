@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import ModalLogo from "../../../public/assets/ModalLogo.png";
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
