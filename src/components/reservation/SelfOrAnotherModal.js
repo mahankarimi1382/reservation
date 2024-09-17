@@ -36,11 +36,17 @@ function SelfOrAnotherModal({ setModal }) {
         </p>
 
         <div className=" flex w-full justify-center gap-5 items-center">
-          <button className=" text-[#005DAD] border-[#005DAD] border text-lg p-2 rounded-lg">
+          <button
+            onClick={() => router.push("ReservForMe")}
+            className=" text-[#005DAD] border-[#005DAD] border text-lg p-2 rounded-lg"
+          >
             {" "}
             نوبت برای خودم
           </button>
-          <button onClick={()=>router.push("ReservForAnother")} className=" text-[#005DAD] border-[#005DAD] border text-lg p-2 rounded-lg">
+          <button
+            onClick={() => router.push("ReservForAnother")}
+            className=" text-[#005DAD] border-[#005DAD] border text-lg p-2 rounded-lg"
+          >
             {" "}
             نوبت برای دیگری
           </button>

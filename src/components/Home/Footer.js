@@ -4,7 +4,6 @@ import certicicate1 from "../../../public/assets/cetificate.png";
 import certicicate2 from "../../../public/assets/cetificate2.png";
 import certicicate3 from "../../../public/assets/cetificate3.png";
 import certicicate4 from "../../../public/assets/cetificate4.png";
-
 import { SiLinkedin } from "react-icons/si";
 import { PiInstagramLogoFill } from "react-icons/pi";
 import { FaTelegramPlane } from "react-icons/fa";
