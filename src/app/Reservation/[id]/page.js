@@ -2,9 +2,9 @@ import Image from "next/image";
 import React from "react";
 import { PiWarningCircle } from "react-icons/pi";
 import { AiFillLike } from "react-icons/ai";
-import star from "../../../../public/assets/star.png";
-import bahramMirzayi from "../../../../public/assets/bahramMirzayi.png";
-import CallenderAndTime from "@/components/reservation/CallenderAndTime";
+import star from "../../../../public/pics/star.png";
+import bahramMirzayi from "../../../../public/pics/bahramMirzayi.png";
+import CallenderAndTime from "@/container/reservation/CallenderAndTime";
 function page() {
   return (
     <div dir="rtl" className=" bg-[#F5F5F5] flex justify-center items-center">
@@ -32,7 +32,7 @@ function page() {
                   97% پیشنهاد کابران دکتر رزرو
                 </p>
                 <p className="flex items-center gap-1">
-                  <Image src={star} alt="star" />
+                  <Image src={star} width={22} alt="star" />
                   4.5/5 از (نظر 320)
                 </p>
               </div>

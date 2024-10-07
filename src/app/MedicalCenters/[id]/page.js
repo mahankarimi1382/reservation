@@ -1,6 +1,6 @@
-import Footer from "@/components/Home/Footer";
-import Navbar from "@/components/Home/Navbar";
-import MedicalCenterProfile from "@/components/MedicalCenters/MedicalCenterProfile";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import MedicalCenterProfile from "@/container/MedicalCenters/id/MedicalCenterProfile";
 import React from "react";
 
 function page({params}) {

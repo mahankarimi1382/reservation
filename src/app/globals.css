@@ -7,9 +7,9 @@
   color: black;
 }
 .shadoww {
-  -webkit-box-shadow: 0px 0px 4px 1px rgba(0,93,173,0.32);
--moz-box-shadow: 0px 0px 4px 1px rgba(0,93,173,0.32);
-box-shadow: 0px 0px 4px 1px rgba(0,93,173,0.32);
+  -webkit-box-shadow: 0px 0px 4px 1px rgba(0, 93, 173, 0.32);
+  -moz-box-shadow: 0px 0px 4px 1px rgba(0, 93, 173, 0.32);
+  box-shadow: 0px 0px 4px 1px rgba(0, 93, 173, 0.32);
 }
 .rmdp-prime .rmdp-week-day {
   font-size: 16px;
@@ -17,7 +17,17 @@ box-shadow: 0px 0px 4px 1px rgba(0,93,173,0.32);
   color: black;
 }
 
-
+.canvas-style canvas {
+  all: initial;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  top: 50px;
+  right: 50px;
+  bottom: 50px;
+  left: 50px;
+}
 .rmdp-prime .rmdp-day-picker div {
   width: 100%;
 }
@@ -66,21 +76,23 @@ box-shadow: 0px 0px 4px 1px rgba(0,93,173,0.32);
 .App {
   text-align: center;
 }
-@font-face {
-  font-family: "iran-yekan";
-  src: url("../../public/assets/fonts/IRANYekanMobileFN.ttf");
-  font-weight: normal;
-  font-style: normal;
+.PsychiatryBg {
+  background-image: url("../../public/Pics/Psychiatry-background.png");
+  background-size: cover;
 }
-
+.dintistBg {
+  background-image: url("../../public/Pics/dentist-background.png");
+  background-size: cover;
+}
 .customScroll::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
   border-radius: 10px;
   background-color: rgba(217, 217, 217, 0.71);
 }
 .customScroll::-webkit-scrollbar-thumb {
   background-color: #005dad;
-
+  height: 5px;
   border-radius: 10px;
 }
 

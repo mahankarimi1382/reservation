@@ -1,12 +1,12 @@
-import Navbar from "@/components/Home/Navbar";
 import React from "react";
-import DoctorProfile from "@/components/Doctors/DoctorProfile";
-import Footer from "@/components/Home/Footer";
-function page({ params }) {
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import DoctorProfile from "@/container/Doctors/id/DoctorProfile";
+function page() {
   return (
     <div dir="rtl">
       <div className=" border border-b shadow">
-        <Navbar params={params} />
+        <Navbar />
       </div>
       <DoctorProfile />
       <Footer />

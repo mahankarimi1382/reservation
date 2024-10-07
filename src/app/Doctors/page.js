@@ -1,15 +1,13 @@
-import Navbar from "@/components/Home/Navbar";
-import Image from "next/image";
 import React from "react";
-import DoctorProfile from "@/components/Doctors/DoctorProfile";
-import Footer from "@/components/Home/Footer";
-import FilterDoctors from "@/components/Doctors/FilterDoctors";
-import DoctorsPaginate from "@/components/Doctors/DoctorsPaginate";
-function page({ params }) {
+import Footer from "@/components/Footer";
+import FilterDoctors from "@/container/Doctors/FilterDoctors";
+import DoctorsPaginate from "@/container/Doctors/DoctorsPaginate";
+import Navbar from "@/components/Navbar";
+function page() {
   return (
     <div dir="rtl">
       <div className=" border border-b shadow">
-        <Navbar params={params} />
+        <Navbar />
       </div>
       <div className=" w-full flex items-center justify-center  bg-[#f5f5f5]">
         <div className=" my-10 justify-between items-start w-[90%] flex ">

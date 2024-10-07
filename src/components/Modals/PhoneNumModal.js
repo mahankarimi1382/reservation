@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
-import ModalLogo from "../../../public/assets/ModalLogo.png";
+import ModalLogo from "../../../public/pics/ModalLogo.png";
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
-import { Eror } from "../helpers/ToastAlerts";
+import { Eror } from "../ToastAlerts";
 function PhoneNumModal({ closeModal, setModal2, phoneNum, setPhoneNum }) {
   const buttRef = useRef();
   const handleinputChange = (num) => {

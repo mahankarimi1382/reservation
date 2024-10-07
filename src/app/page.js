@@ -1,20 +1,19 @@
-import AccordionMenu from "@/components/helpers/AccordionMenu";
-import PhoneMenu from "@/components/helpers/PhoneMenu";
-import BannersSection from "@/components/Home/BannersSection";
-import DoctorsSection from "@/components/Home/DoctorsSection";
-import Footer from "@/components/Home/Footer";
-import FullBanerSection from "@/components/Home/FullBanerSection";
-import HospitalsSection from "@/components/Home/HospitalsSection";
-import MagezineSection from "@/components/Home/MagezineSection";
-import MainSearchBar from "@/components/Home/MainSearchBar";
-import MatabSection from "@/components/Home/MatabSection";
-import Navbar from "@/components/Home/Navbar";
-import QuestionsSection from "@/components/Home/QuestionsSection";
-import SamaneSection from "@/components/Home/SamaneSection";
-import SpecialtiesSection from "@/components/Home/SpecialtiesSection";
-import UserOpinions from "@/components/Home/UserOpinions";
+import Navbar from "@/components/Navbar";
+import PhoneMenu from "@/components/PhoneMenu";
+import BannersSection from "@/container/Home/BannersSection";
+import DoctorsSection from "@/container/Home/DoctorsSection";
+import Footer from "@/components/Footer";
+import FullBanerSection from "@/container/Home/FullBanerSection";
+import HospitalsSection from "@/container/Home/HospitalsSection";
+import MagezineSection from "@/container/Home/MagezineSection";
+import MatabSection from "@/container/Home/MatabSection";
+import QuestionsSection from "@/container/Home/QuestionsSection";
+import SamaneSection from "@/container/Home/SamaneSection";
+import SpecialtiesSection from "@/container/Home/SpecialtiesSection";
+import UserOpinions from "@/container/Home/UserOpinions";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MainSearchBar from "@/components/MainSearchBar";
 export default function Home() {
   return (
     <div dir="rtl">
