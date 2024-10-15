@@ -1,5 +1,5 @@
 import React from "react";
-import bahram from "../../../public/Pics/bahramMirzayi.png";
+import bahram from "../../../../public/Pics/bahramMirzayi.png";
 import Image from "next/image";
 
 function HistorySummarySection() {

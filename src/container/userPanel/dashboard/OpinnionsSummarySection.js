@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import bahram from "../../../public/Pics/bahramMirzayi.png";
+import bahram from "../../../../public/Pics/bahramMirzayi.png";
 import { RateCounter } from "@/utils/RateCounter";
 import { AiOutlineLike } from "react-icons/ai";
 

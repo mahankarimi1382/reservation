@@ -1,11 +1,11 @@
 import React from "react";
-import receipt from "../../../public/Pics/receipt-icon.png";
+import receipt from "../../../../public/Pics/receipt-icon.png";
 import Image from "next/image";
 function WalletSummarySection() {
   return (
     <div className=" w-[223px] text-sm flex flex-col gap-5">
       <div className=" border-b p-2  border-dashed border-[#D3E9FD] flex">
-        <Image src={receipt} width={24} />
+        <Image alt="icon" src={receipt} width={24} />
         <h5>موجودی حساب: 70،000 تومان</h5>
       </div>
       <h5 className=" text-xs">مبلغ مورد نظر جهت شارژ حساب را انتخاب کنید</h5>

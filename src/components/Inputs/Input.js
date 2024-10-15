@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
+import { myStore } from "@/store/Store";
 
 export const SerchDropDowns = (props) => {
   const Specialties = [
@@ -69,5 +70,67 @@ export const SerchDropDowns = (props) => {
         )}
       </div>
     </div>
+  );
+};
+export const AcountInfoInputs = (props) => {
+  const { isEdit } = myStore();
+
+  const [value, setValue] = useState(props.value);
+  return (
+    <div className=" flex flex-col gap-2">
+      <h2>{props.title}</h2>
+
+      <input
+        disabled={!isEdit}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        className="w-[320px] h-10 rounded-lg border disabled:bg-[rgba(219,215,215,0.44)]"
+      />
+    </div>
+  );
+};
+export const BirthDayInput = () => {
+  const { isEdit } = myStore();
+
+  return (
+    <div className=" flex justify-between items-center">
+      <input
+        disabled={!isEdit}
+        className=" w-[86px] h-10 rounded-lg border disabled:bg-[rgba(219,215,215,0.44)]"
+      />
+      <input
+        disabled={!isEdit}
+        className=" w-[86px] h-10 rounded-lg border disabled:bg-[rgba(219,215,215,0.44)]"
+      />
+      <input
+        disabled={!isEdit}
+        className=" w-[86px] h-10 rounded-lg border disabled:bg-[rgba(219,215,215,0.44)]"
+      />
+    </div>
+  );
+};
+export const CitySelect = () => {
+  const { isEdit } = myStore();
+
+  return (
+    <select
+      disabled={!isEdit}
+      className="w-[320px] h-10 rounded-lg border disabled:bg-[rgba(219,215,215,0.44)]"
+    >
+      <option></option>
+      <option>تهران</option>
+      <option>شیراز</option>
+      <option>اردبیل</option>
+    </select>
+  );
+};
+export const SelectFilter = ({ title }) => {
+  return (
+    <select className=" w-[200px] text-[#AAAAAA] h-10 rounded-lg border bg-white border-[rgba(219,215,215,0.44)]">
+      <option>{title}</option>
+      <option>تهران</option>
+      <option>شیراز</option>
+      <option>اردبیل</option>
+    </select>
   );
 };

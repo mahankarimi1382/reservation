@@ -52,7 +52,7 @@ function SeeDoctorNazarModal({ setIsNazarModal }) {
         <div className=" w-full flex  justify-end">
           <RxCross2
             onClick={handleCloseModal}
-            className=" cursor-pointer text-2xl text-[#353535]"
+            className=" cursor-pointer text-2xl ml-3 text-[#353535]"
           />
         </div>
         <div className=" bg-white customScroll overflow-auto gap-5  flex flex-col items-center h-full ">

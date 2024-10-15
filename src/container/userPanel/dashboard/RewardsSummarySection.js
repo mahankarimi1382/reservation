@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import coins from "../../../public/Pics/coins-icon.png";
-import ticket from "../../../public/Pics/ticket-icon.png";
-import eye from "../../../public/Pics/Specialties/eye-icon.png";
+import coins from "../../../../public/Pics/coins-icon.png";
+import ticket from "../../../../public/Pics/ticket-icon.png";
+import eye from "../../../../public/Pics/Specialties/eye-icon.png";
 function RewardsSummarySection() {
   return (
     <div className=" gap-5 pt-5 text-sm w-[190px] flex flex-col">

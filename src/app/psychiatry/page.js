@@ -13,6 +13,7 @@ import BannersSection_Psychiatry from "@/container/Psychiatry/BannersSection_Psy
 import HospitalsSection_Psychiatry from "@/container/Psychiatry/HospitalsSection_Psychiatry";
 import FullBanerSection_Psychiatry from "@/container/Psychiatry/FullBanerSection_Psychiatry";
 import MagezineSection_Psychiatry from "@/container/Psychiatry/MagezineSection_Psychiatry";
+import MatabSection from "@/container/Home/MatabSection";
 export default function Dentist() {
   return (
     <div dir="rtl">
@@ -25,6 +26,7 @@ export default function Dentist() {
       <BannersSection_Psychiatry />
       <HospitalsSection_Psychiatry />
       <FullBanerSection_Psychiatry />
+      <MatabSection/>
       <QuestionsSection />
       <SamaneSection />
       <UserOpinions />

@@ -19,31 +19,29 @@ function VisitSelectModal({ isVisitSelectModal, setIsVisitSelectModal }) {
   return (
     <div
       onClick={handleCloseModal}
-      className=" w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]"
+      className=" w-screen h-screen top-0 z-50 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]"
     >
       <div
         onClick={(e) => e.stopPropagation()}
         className=" w-[448px] h-[325px] flex flex-col justify-center gap-5 items-center bg-white rounded-xl"
       >
         <div className=" w-full  items-end flex justify-end px-2 -mb-10">
-          <RxCross2 onClick={handleCloseModal} className=" cursor-pointer text-xl text-[#717171]" />
+          <RxCross2
+            onClick={handleCloseModal}
+            className=" cursor-pointer text-xl text-[#717171]"
+          />
         </div>
         <Image width={67} src={logo} alt="logo" />
-        <div className=" w-[223px] flex px-1 justify-center items-center h-[43px] rounded-full border border-[#005DAD]">
-          <h2
-            className={`w-1/2 rounded-full p-1 flex justify-center items-center  ${
-              isVisitSelectModal === "حضوری" && "bg-[#005DAD] text-white"
-            }`}
-          >
-            حضوری
-          </h2>
-          <h2
-            className={`w-1/2 rounded-full p-1 flex justify-center items-center ${
-              isVisitSelectModal === "آنلاین" && "bg-[#005DAD] text-white"
-            }`}
-          >
-            مشاوره آنلاین
-          </h2>
+        <div className=" w-[223px] flex px-1 justify-center items-center h-[43px]">
+          {isVisitSelectModal === "حضوری" ? (
+            <h2 className="p-1 flex justify-center items-center text-[#005DAD] font-semibold text-xl">
+              حضوری
+            </h2>
+          ) : (
+            <h2 className="p-1 flex justify-center items-center text-[#005DAD] font-semibold text-xl">
+              مشاوره آنلاین
+            </h2>
+          )}
         </div>
         {isVisitSelectModal === "آنلاین" ? (
           <h2>لطفا نوع مشاوره آنلاین را انتخاب کنید</h2>

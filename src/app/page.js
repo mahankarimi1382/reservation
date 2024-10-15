@@ -14,6 +14,7 @@ import UserOpinions from "@/container/Home/UserOpinions";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MainSearchBar from "@/components/MainSearchBar";
+import SupportModal from "@/components/modals/SupportModal";
 export default function Home() {
   return (
     <div dir="rtl">
@@ -34,6 +35,7 @@ export default function Home() {
       <Footer />
       <PhoneMenu />
       <ToastContainer />
+      <SupportModal />
     </div>
   );
 }

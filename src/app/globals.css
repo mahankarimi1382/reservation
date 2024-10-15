@@ -145,11 +145,89 @@ swiper-slide {
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.cardBg {
+  background-image: url("../../public/Pics/cardBg.png");
+  background-size: 650px 500px;
+  background-position: center;
+}
 .App-link {
   color: #61dafb;
 }
+/* tabs {    
+  margin-bottom: 15px;        
+}
 
+.tab {
+  padding: 10px;
+  background-color: #a7aAaD;
+  display: table-cell;
+  height: 100%;
+}
+
+.tab.active {
+  background-color: white;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  transform-style: preserve-3d;
+}
+
+.tab.active:after {
+background-color: #a7aAaD;
+content: '';
+position: absolute;
+top: 0px;
+left: -10%;
+height: 30%;
+width: 120%;
+transform: translateZ(-1px);
+}
+
+.tab.prev{
+ border-bottom-right-radius: 15px;
+}
+
+.tab.next{
+ border-bottom-left-radius: 15px;
+}
+.active {
+  border: 1px solid red;
+  border-bottom: 0;
+  width: 80px;
+  height: 40px;
+  margin: 30px;
+  position: relative;
+  -moz-border-radius: 50px 50px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+  
+}
+
+.active:after,
+.active:before {
+  content: '';
+  width: 40px;
+  height: 30px;
+  border: 1px solid red;
+  position: absolute;
+  bottom: -3px;
+  border-top: 0;
+}
+
+.active:after {
+  border-left: 0;
+  -moz-border-radius: 0 0 50px 0;
+  -webkit-border-radius: 0 0 5px 0;
+  border-radius: 0 0 5px 0;
+  left: -41px;
+}
+
+.active:before {
+  border-right: 0;
+  -moz-border-radius: 0 0 0 5px;
+  -webkit-border-radius: 0 5px 10px 50px;
+  border-radius: 0 0 0 5px;
+  right: -41px;
+} */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

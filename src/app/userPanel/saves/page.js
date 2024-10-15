@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import UserPanelMenue from "@/container/userPanel/UserPanelMenue";
+import UserPanelMenue from "@/container/userPanel/DashBoard/UserPanelMenue";
 import React from "react";
 
 function page() {

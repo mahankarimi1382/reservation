@@ -1,29 +1,29 @@
 import Navbar from "@/components/Navbar";
-import DashboardBox from "@/container/userPanel/DashboardBox";
-import HistorySummarySection from "@/container/userPanel/HistorySummarySection";
+import DashboardBox from "@/container/userPanel/dashboard/DashboardBox";
+import HistorySummarySection from "@/container/userPanel/dashboard/HistorySummarySection";
 import UserPanelMenue from "@/container/userPanel/UserPanelMenue";
 import React from "react";
 import historyIcon from "../../../../public/Pics/history-icon.png";
-import RewardsSummarySection from "@/container/userPanel/RewardsSummarySection";
+import RewardsSummarySection from "@/container/userPanel/dashboard/RewardsSummarySection";
 import rewardsIcon from "../../../../public/Pics/UserPanel-Icons/rewards-icon.png";
 import messageIcon from "../../../../public/Pics/UserPanel-Icons/message-icon.png";
 import profile from "../../../../public/Pics/userPanelProfile.png";
-import MessageSummarySection from "@/container/userPanel/MessageSummarySection";
+import MessageSummarySection from "@/container/userPanel/dashboard/MessageSummarySection";
 import opinnionsIcon from "../../../../public/Pics/UserPanel-Icons/opinions-icon.png";
 import Image from "next/image";
-import OpinnionsSummarySection from "@/container/userPanel/OpinnionsSummarySection";
-import WalletSummarySection from "@/container/userPanel/WalletSummarySection";
+import OpinnionsSummarySection from "@/container/userPanel/dashboard/OpinnionsSummarySection";
+import WalletSummarySection from "@/container/userPanel/dashboard/WalletSummarySection";
 import walletIcon from "../../../../public/Pics/UserPanel-Icons/wallet-icon.png";
 import savedsIcon from "../../../../public/Pics/UserPanel-Icons/saves-icon.png";
-import SavedsSummarySection from "@/container/userPanel/SavedsSummarySection";
+import SavedsSummarySection from "@/container/userPanel/dashboard/SavedsSummarySection";
 function page() {
   return (
     <div dir="rtl" className=" bg-[#F6FBFF] w-full">
       <Navbar />
       <div className=" flex w-full">
         <UserPanelMenue />
-        <div className=" w-[90%] flex justify-center ">
-          <div className=" bg-white rounded-xl shadow-md flex flex-col gap-10 w-[85%]">
+        <div className=" w-[82%] flex justify-center ">
+          <div className=" bg-white rounded-xl shadow-md flex flex-col gap-10 w-[90%]">
             <div className=" flex gap-3 p-5 items-center">
               <Image src={profile} width={67} alt="profile" />
               <h2 className=" text-lg">شاهین خسروی خوش آمدید</h2>

@@ -13,6 +13,7 @@ import BannersSection_dentist from "@/container/dentistry/BannersSection_dentist
 import HospitalsSection_dentist from "@/container/dentistry/HospitalsSection_dentist";
 import FullBanerSection_dentist from "@/container/dentistry/FullBanerSection_dentist";
 import MagezineSection_dentist from "@/container/dentistry/MagezineSection_dentist";
+import MatabSection from "@/container/Home/MatabSection";
 export default function Dentist() {
   return (
     <div dir="rtl">
@@ -25,6 +26,7 @@ export default function Dentist() {
       <BannersSection_dentist />
       <HospitalsSection_dentist />
       <FullBanerSection_dentist />
+      <MatabSection />
       <QuestionsSection />
       <SamaneSection />
       <UserOpinions />

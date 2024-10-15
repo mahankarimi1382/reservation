@@ -14,6 +14,8 @@ import { IoEyeOutline } from "react-icons/io5";
 import SeeDoctorNazarModal from "../modals/SeeDoctorNazarModal";
 import EmptyReservDoctorModal from "../modals/EmptyReservDoctorModal";
 import { IoIosArrowDown } from "react-icons/io";
+import { FiEdit3 } from "react-icons/fi";
+import { myStore } from "@/store/Store";
 
 export const LoginButton = () => {
   const [isLoginModal, setIsLoginModal] = useState(false);
@@ -214,5 +216,43 @@ export const MatabShowButt = ({ locs }) => {
         نشانی مطب ونک: میدان ونک,خیابان صانعیو, ساختمان پزشکان,طبقه اول
       </h2>
     </div>
+  );
+};
+export const EditUserInfoButt = () => {
+  const { setIsEdit, isEdit } = myStore();
+
+  return (
+    <button
+      onClick={setIsEdit}
+      className=" flex justify-center items-center p-3 font-semibold rounded-lg bg-[#DBEDFD]"
+    >
+      <FiEdit3 className=" text-xl" />
+      <h5>{isEdit ? " لغو ویرایش " : " ویرایش"}</h5>
+    </button>
+  );
+};
+export const ManOrWomanButt = ({ gender }) => {
+  const { isEdit } = myStore();
+  return (
+    <button
+      disabled={!isEdit}
+      className="w-[146px] h-10 rounded-lg border disabled:bg-[rgba(219,215,215,0.44)]"
+    >
+      {gender}
+    </button>
+  );
+};
+
+export const ApllyEditButt = () => {
+  const { isEdit, setIsEdit } = myStore();
+
+  return (
+    <button
+      onClick={setIsEdit}
+      hidden={!isEdit}
+      className=" text-white px-32 bg-[#005DAD] rounded-lg p-2"
+    >
+      ذخیره تغییرات
+    </button>
   );
 };

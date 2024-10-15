@@ -1,9 +1,9 @@
 import React from "react";
-import takhfif from "../../../public/Pics/discount-shape.png";
-import copy from "../../../public/Pics/copy-icon.png";
+import takhfif from "../../../../public/Pics/discount-shape.png";
+import copy from "../../../../public/Pics/copy-icon.png";
 import Image from "next/image";
-import callender from "../../../public/Pics/callender-icon-blue.png";
-import reminder from "../../../public/Pics/reminder-icon.png";
+import callender from "../../../../public/Pics/callender-icon-blue.png";
+import reminder from "../../../../public/Pics/reminder-icon.png";
 function MessageSummarySection() {
   return (
     <div className=" text-sm gap-5 pt-5  w-[284px] flex flex-col">
