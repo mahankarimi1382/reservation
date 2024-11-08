@@ -126,7 +126,7 @@ export const CitySelect = () => {
 };
 export const SelectFilter = ({ title }) => {
   return (
-    <select className=" w-[200px] text-[#AAAAAA] h-10 rounded-lg border bg-white border-[rgba(219,215,215,0.44)]">
+    <select className=" w-[200px] text-[#AAAAAA] h-10 rounded-lg border-2 bg-white border-[rgba(219,215,215,0.44)]">
       <option>{title}</option>
       <option>تهران</option>
       <option>شیراز</option>

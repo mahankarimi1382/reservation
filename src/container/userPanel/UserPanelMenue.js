@@ -23,6 +23,9 @@ import opinions_blue from "../../../public/Pics/UserPanel-Icons/opinions-icon.pn
 import opinions_black from "../../../public/Pics/UserPanel-Icons/opinions-icon-black.png";
 import saves_blue from "../../../public/Pics/UserPanel-Icons/saves-icon.png";
 import saves_black from "../../../public/Pics/UserPanel-Icons/saves-icon-black.png";
+import heart_blue from "../../../public/Pics/UserPanel-Icons/heart-blue.png";
+import heart_black from "../../../public/Pics/UserPanel-Icons/heart-black.png";
+
 import SubsetedUsers_blue from "../../../public/Pics/UserPanel-Icons/subsetedUsers-icon.png";
 import SubsetedUsers_black from "../../../public/Pics/UserPanel-Icons/subsetedUsers-icon-black.png";
 import { IoLogOutOutline } from "react-icons/io5";
@@ -95,12 +98,24 @@ function UserPanelMenue() {
         title="ذخیره شده ها"
       />
       <PanelLink
+        blueIcon={heart_blue}
+        blackIcon={heart_black}
+        href="/userPanel/favorites"
+        title="علاقه مندی ها"
+      />
+      <PanelLink
         blueIcon={SubsetedUsers_blue}
         blackIcon={SubsetedUsers_black}
         href="/userPanel/subsetedusers"
         title="کاربران زیرمجموعه"
       />
-      <div className={pathName==="/userPanel/subsetedusers"?"bg-[#DBEDFF] pr-6 rounded-l-[60px] w-full ":"bg-[#DBEDFF] pr-6 rounded-bl-[60px] w-full "}>
+      <div
+        className={
+          pathName === "/userPanel/subsetedusers"
+            ? "bg-[#DBEDFF] pr-6 rounded-l-[60px] w-full "
+            : "bg-[#DBEDFF] pr-6 rounded-bl-[60px] w-full "
+        }
+      >
         <Link
           className=" justify-start gap-2  p-5 flex  items-center w-full"
           href="/"
