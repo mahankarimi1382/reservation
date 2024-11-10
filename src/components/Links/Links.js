@@ -12,6 +12,7 @@ export const NavLinks = (props) => {
   return (
     <div className=" flex flex-col justify-center items-center">
       <Link
+        prefetch
         href={props.href}
         className={
           pathName === props.href

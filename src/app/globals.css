@@ -8,6 +8,7 @@
 }
 *{
   font-family: "mainfont";
+  background-color: none;
 }
 .rmdp-prime .rmdp-day:not(.rmdp-day-hidden) span:hover {
   background-color: #c4e2ff !important;

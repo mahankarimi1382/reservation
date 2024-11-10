@@ -36,7 +36,7 @@ const specialties = [
   { id: 14, title: "بیهوشی", icon: bihooshi, isselected: false },
   { id: 15, title: "دندانپزشکی", icon: tooth, isselected: false },
 ];
-function page() {
+ function  page() {
 
   return (
     <div
