@@ -10,7 +10,7 @@ function Navbar() {
       <div className=" hidden lg:flex items-start text-[18px] font-medium  justify-center gap-10 ">
         <Image className=" -mt-7" alt="logo" width={150} src={logo} />
         <NavLinks title="خانه" href="/" />
-        <NavLinks title="تخصص ها" href="/specialties" />
+        <NavLinks title="تخصص ها" href="/Specialties" />
         <NavLinks title="مراکز درمانی" href="/medicalCenters" />
         <NavLinks title="دندان پزشکی" href="/dentistry" />
         <NavLinks title="روانپزشک" href="/psychiatry" />

@@ -18,8 +18,10 @@ import { FiEdit3 } from "react-icons/fi";
 import { myStore } from "@/store/Store";
 import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
+import { useRouter } from "next/navigation";
 
 export const LoginButton = () => {
+  const router = useRouter();
   const [isLoginModal, setIsLoginModal] = useState(false);
   const openModal = () => {
     setIsLoginModal(true);
@@ -28,13 +30,13 @@ export const LoginButton = () => {
     <div className=" flex justify-center items-center gap-3">
       {isLoginModal && <LoginModals setIsLoginModal={setIsLoginModal} />}
       <button
-        onClick={openModal}
+        onClick={() => router.push("medicalCentersLogin")}
         className=" lg:-mt-12 shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
       >
         ثبت نام | ورود مرکز درمانی{" "}
       </button>
       <button
-        onClick={openModal}
+        onClick={() => router.push("doctorLogin")}
         className=" lg:-mt-12 shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
       >
         ثبت نام | ورود پزشکان
