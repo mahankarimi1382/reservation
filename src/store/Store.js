@@ -4,4 +4,7 @@ export const myStore = create((set) => ({
   setReservationType: (type) => set(() => ({ reservationType: type })),
   isEdit: false,
   setIsEdit: () => set((state) => ({ isEdit: !state.isEdit })),
+  isSpecialtiesClick: false,
+  setIsSpecialtiesClick: () =>
+    set((state) => ({ isSpecialtiesClick: !state.isSpecialtiesClick })),
 }));
