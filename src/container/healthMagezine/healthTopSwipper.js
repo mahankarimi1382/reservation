@@ -1,5 +1,9 @@
 "use client";
-
+import dog from "../../../public/Pics/healthmagezine-pics/dog.png";
+import food from "../../../public/Pics/healthmagezine-pics/food.png";
+import stadium from "../../../public/Pics/healthmagezine-pics/statuim.png";
+import technology from "../../../public/Pics/healthmagezine-pics/technology.png";
+import terapy from "../../../public/Pics/healthmagezine-pics/terapy.png";
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { IoIosArrowBack } from "react-icons/io";
@@ -10,7 +14,24 @@ import "swiper/css/navigation";
 
 import Image from "next/image";
 
-export default function TopSwipper({ Topics }) {
+export default function TopSwipper() {
+  const topics = [
+    { id: 1, title: "ورزش  سلامت", img: dog },
+    { id: 2, title: "روانشناسی", img: food },
+    { id: 3, title: "قلب و عروق", img: stadium },
+    { id: 4, title: "اعصاب", img: technology },
+    { id: 5, title: "ارتوپدی", img: terapy },
+    { id: 6, title: "گوش ، حلق و بینی", img: dog },
+    { id: 7, title: "پوست و مو" },
+    { id: 8, title: "چشم پزشکی" },
+    { id: 9, title: "زنان و زایمان" },
+    { id: 10, title: "کودکان" },
+    { id: 11, title: "روانپرشکی" },
+    { id: 12, title: "رادیولوژی" },
+    { id: 13, title: "پزشکی خانواده" },
+    { id: 14, title: "بیهوشی" },
+    { id: 15, title: "دندانپزشکی" },
+  ];
   const swiperRef = useRef(null);
   const goNext = () => {
     if (swiperRef.current && swiperRef.current.swiper) {
@@ -23,7 +44,7 @@ export default function TopSwipper({ Topics }) {
     }
   };
   return (
-    <div className=" relative w-[90%] m-auto flex justify-center items-center">
+    <div className=" relative w-[90%] m-auto flex justify-center">
       <IoIosArrowForward
         onClick={goNext}
         className=" absolute left-0  shadow-[-3px_0px_23px_32px_rgba(255,_255,_255,_1)] bg-white h-14 z-10  right-0 text-4xl text-[#3E88F6] cursor-pointer"
@@ -35,11 +56,11 @@ export default function TopSwipper({ Topics }) {
         loop={true}
         className=" w-full"
       >
-        {Topics.map((item) => {
+        {topics.map((item) => {
           return (
             <SwiperSlide
               key={item.id}
-              className=" flex justify-center items-center"
+              className=" cursor-pointer flex justify-center items-center"
             >
               <div className=" w-48 min-w-[93px] gap-2 relative flex flex-col justify-center items-center">
                 <Image

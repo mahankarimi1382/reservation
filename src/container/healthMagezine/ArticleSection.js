@@ -54,7 +54,7 @@ function ArticleSection() {
     },
   ];
   return (
-    <div className=" gap-4 w-full flex flex-col">
+    <div className=" gap-5 w-full flex flex-col">
       <div className=" text-lg w-full flex justify-between items-center">
         <h5>جدیدترین مقالات</h5>
         <button className=" text-sm text-[#005DAD] flex justify-center items-center gap-1">

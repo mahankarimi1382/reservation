@@ -20,9 +20,9 @@ function ImageArticle() {
     },
   ];
   return (
-    <div className=" w-full flex flex-col">
+    <div className=" w-full flex gap-5 flex-col">
       <div className=" text-lg w-full flex justify-between items-center">
-        <h5>جدیدترین مقالات</h5>
+        <h5>مقالات تصویری دکتر رزرو</h5>
         <button className=" text-sm text-[#005DAD] flex justify-center items-center gap-1">
           مشاهده همه
           <IoIosArrowBack />
