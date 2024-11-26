@@ -11,6 +11,16 @@
   background-color: none;
 }
 
+.MuiChartsAxis-line{
+visibility: hidden;
+}
+input{
+  padding-right: 20px;
+}
+line{
+  visibility: hidden;
+  }
+  
 .rmdp-prime .rmdp-day:not(.rmdp-day-hidden) span:hover {
   background-color: #c4e2ff !important;
   color: black;

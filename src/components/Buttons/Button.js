@@ -18,7 +18,8 @@ import { FiEdit3 } from "react-icons/fi";
 import { myStore } from "@/store/Store";
 import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const LoginButton = () => {
   const router = useRouter();
@@ -319,3 +320,4 @@ export const IOSSwitch = styled((props) => (
     }),
   },
 }));
+

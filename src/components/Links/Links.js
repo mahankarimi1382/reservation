@@ -112,8 +112,9 @@ export const AdminPanelLink = (props) => {
   return (
     <Link
       href={props.href}
-      className={`flex justify-center items-center relative gap-2 w-full p-3 text-lg ${
-        pathname === props.href && "text-[#005DAD] bg-[#C4E2FF]"
+      className={`flex justify-center items-center  relative gap-2 w-full py-3 text-lg ${
+        (pathname === props.href || pathname === props.href2) &&
+        "text-[#005DAD] bg-[#C4E2FF]"
       }`}
     >
       <span
@@ -416,5 +417,29 @@ export const AdminPanelimageSetting_action = (props) => {
         </Link>
       </div>
     </div>
+  );
+};
+export const DoctorProfileUploadOptionButtons = ({
+  blueicon,
+  blackicon,
+  path,
+  text,
+}) => {
+  const pathName = usePathname();
+
+  return (
+    <Link
+    href={path}
+      className={`${
+        pathName === path && "text-[#005DAD] bg-white rounded-xl shadow-md"
+      }  gap-1 flex justify-center items-center p-1 px-4 `}
+    >
+      <Image
+        src={pathName === path ? blueicon : blackicon}
+        alt="icon"
+        width={40}
+      />
+      <h5 className="text-lg">{text}</h5>
+    </Link>
   );
 };

@@ -120,7 +120,7 @@ function page() {
                   className=" bg-white rounded-xl w-[30%] flex flex-col"
                 >
                   <div className=" flex flex-col justify-center items-center relative">
-                    <Image className=" rounded-xl" src={item.img} />
+                    <Image alt="image" className=" rounded-xl" src={item.img} />
                     <span className=" p-4 rounded-full bg-[rgba(255,255,255,0.75)] absolute">
                       <FaPlay className=" text-3xl text-[#005DAD]" />
                     </span>
