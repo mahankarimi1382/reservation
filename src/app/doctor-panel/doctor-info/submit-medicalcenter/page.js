@@ -6,7 +6,8 @@ import { IoIosArrowDown } from "react-icons/io";
 import DoctorPanelMenu from "@/container/doctor-panel/DoctorPanelMenu";
 import bahramMirzayi from "../../../../../public/Pics/bahramMirzayi.png";
 import DoctorUploadingOptions from "@/container/doctor-panel/doctor-info/DoctorUploadingOptions";
-import UploadLicensesForm from "@/container/doctor-panel/doctor-info/UploadLicensesForm";
+import MakeProfileForm from "@/container/doctor-panel/doctor-info/MakeProfileForm";
+import SubmitMedicalCenterForm from "@/container/doctor-panel/doctor-info/SubmitMedicalCenterForm";
 function page() {
   return (
     <div dir="rtl" className="flex pb-20  bg-[#F6FBFF]">
@@ -33,9 +34,9 @@ function page() {
           <h5 className=" text-xl font-semibold">طاهر ثابتیان</h5>
           <h5 className=" text-lg">کد نظام پزشکی: 12345</h5>
         </div>
-        <div className=" p-5 px-10 bg-white rounded-3xl shadow-md w-[80%] flex flex-col items-center">
+        <div className=" bg-white rounded-3xl gap-10 p-5 px-10 shadow-md w-[80%] flex flex-col items-center">
           <DoctorUploadingOptions />
-          <UploadLicensesForm/>
+          <SubmitMedicalCenterForm />
         </div>
       </div>
     </div>

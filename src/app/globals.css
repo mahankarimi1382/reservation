@@ -3,24 +3,29 @@
 @tailwind utilities;
 @font-face {
   font-family: "mainfont";
-  src:
-    url("../../public/fonts/IRANYekanMobileFN.ttf")
+  src: url("../../public/fonts/IRANYekanMobileFN.ttf");
 }
-*{
+* {
   font-family: "mainfont";
   background-color: none;
 }
 
-.MuiChartsAxis-line{
-visibility: hidden;
+
+
+.file-input::file-selector-button {
+  display: none;
+
 }
-input{
+.MuiChartsAxis-line {
+  visibility: hidden;
+}
+input {
   padding-right: 20px;
 }
-line{
+line {
   visibility: hidden;
-  }
-  
+}
+
 .rmdp-prime .rmdp-day:not(.rmdp-day-hidden) span:hover {
   background-color: #c4e2ff !important;
   color: black;

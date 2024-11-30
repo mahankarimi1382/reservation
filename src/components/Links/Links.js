@@ -113,7 +113,10 @@ export const AdminPanelLink = (props) => {
     <Link
       href={props.href}
       className={`flex justify-center items-center  relative gap-2 w-full py-3 text-lg ${
-        (pathname === props.href || pathname === props.href2) &&
+        (pathname === props.href ||
+          pathname === props.href2 ||
+          pathname === props.href3 ||
+          pathname === props.href4) &&
         "text-[#005DAD] bg-[#C4E2FF]"
       }`}
     >
@@ -127,7 +130,14 @@ export const AdminPanelLink = (props) => {
       <span className=" flex justify-start items-center gap-2 w-[70%]">
         <Image
           width={24}
-          src={pathname === props.href ? props.icon : props.blackIcon}
+          src={
+            pathname === props.href ||
+            pathname === props.href2 ||
+            pathname === props.href3 ||
+            pathname === props.href4
+              ? props.icon
+              : props.blackIcon
+          }
           alt="icon"
         />
         {props.title}
@@ -429,7 +439,7 @@ export const DoctorProfileUploadOptionButtons = ({
 
   return (
     <Link
-    href={path}
+      href={path}
       className={`${
         pathName === path && "text-[#005DAD] bg-white rounded-xl shadow-md"
       }  gap-1 flex justify-center items-center p-1 px-4 `}

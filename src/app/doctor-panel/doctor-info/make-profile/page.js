@@ -33,7 +33,7 @@ function page() {
           <h5 className=" text-xl font-semibold">طاهر ثابتیان</h5>
           <h5 className=" text-lg">کد نظام پزشکی: 12345</h5>
         </div>
-        <div className=" bg-white rounded-3xl gap-10 p-5 shadow-md w-[80%] flex flex-col items-center">
+        <div className=" bg-white rounded-3xl gap-10 p-5 px-10 shadow-md w-[80%] flex flex-col items-center">
           <DoctorUploadingOptions />
           <MakeProfileForm />
         </div>

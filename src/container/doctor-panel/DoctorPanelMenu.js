@@ -43,6 +43,8 @@ function DoctorPanelMenu() {
         blackIcon={doctorInfoIcon_black}
         href="/doctor-panel/doctor-info/make-profile"
         href2="/doctor-panel/doctor-info/upload-licenses"
+        href3="/doctor-panel/doctor-info/submit-medicalcenter"
+        href4="/doctor-panel/doctor-info/financial"
       />
       <AdminPanelLink
         title="تنظیمات مرکز درمانی"
