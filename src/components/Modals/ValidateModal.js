@@ -4,8 +4,53 @@ import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
 import Timer from "../Timer";
 import { Eror, success } from "../ToastAlerts";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
-function ValidateModal({ closeModal, phoneNum, setModal2 }) {
+function ValidateModal({ closeModal, phoneNumber, setModal2, nationalCode }) {
+  const router=useRouter()
+  const [inputs, setInputs] = useState({
+    input1: "",
+    input2: "",
+    input3: "",
+    input4: "",
+    input5: "",
+  });
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setInputs({ ...inputs, [name]: value });
+
+    if (name === "input5") {
+      const allInputs = { ...inputs, [name]: value };
+      const activationCode = Object.values(allInputs).join("");
+      fetchData(activationCode);
+    }
+  };
+
+  const fetchData = (activationCode) => {
+    console.log(activationCode);
+
+    axios
+      .post("http://84.47.224.220:8040/api/v1/Authentication/activating-registration", {
+        metadata: {
+          userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          userName: nationalCode,
+        },
+        mobile: phoneNumber,
+        activationCode,
+      })
+      .then((res) => {
+        console.log(res);
+        success("ورود موفق")
+        router.push("/userPanel/dashboard")
+      })
+      .catch((err) => {
+        Eror("کد وارد شده صحیح نمی باشد");
+        setIsWrongCode(true);
+
+        console.log(err.response.data.message);
+      });
+  };
   const changeNumber = () => {
     setModal2(false);
   };
@@ -45,7 +90,7 @@ function ValidateModal({ closeModal, phoneNum, setModal2 }) {
       <h2 className=" flex justify-center items-center  w-full">کد تایید</h2>
       <p className=" text-[14px] w-full flex justify-center items-center text-[#717171]">
         کد تایید پنج‌رقمی به شماره
-        {phoneNum}
+        {phoneNumber}
         ارسال شد.
         <button onClick={changeNumber} className=" text-sm text-[#005DAD]">
           ویرایش شماره
@@ -53,7 +98,10 @@ function ValidateModal({ closeModal, phoneNum, setModal2 }) {
       </p>
       <div className=" w-full gap-4 justify-center flex flex-row-reverse items-center">
         <input
+          name="input1"
+          value={inputs.input1}
           onChange={(e) => {
+            handleChange(e);
             focusOnInput(e, input2Ref);
           }}
           className={
@@ -63,8 +111,11 @@ function ValidateModal({ closeModal, phoneNum, setModal2 }) {
           }
         />
         <input
+          name="input2"
+          value={inputs.input2}
           ref={input2Ref}
           onChange={(e) => {
+            handleChange(e);
             focusOnInput(e, input3Ref);
           }}
           className={
@@ -74,8 +125,11 @@ function ValidateModal({ closeModal, phoneNum, setModal2 }) {
           }
         />
         <input
+          name="input3"
+          value={inputs.input3}
           ref={input3Ref}
           onChange={(e) => {
+            handleChange(e);
             focusOnInput(e, input4Ref);
           }}
           className={
@@ -85,8 +139,11 @@ function ValidateModal({ closeModal, phoneNum, setModal2 }) {
           }
         />
         <input
+          name="input4"
+          value={inputs.input4}
           ref={input4Ref}
           onChange={(e) => {
+            handleChange(e);
             focusOnInput(e, input5Ref);
           }}
           className={
@@ -96,10 +153,11 @@ function ValidateModal({ closeModal, phoneNum, setModal2 }) {
           }
         />
         <input
+          name="input5"
+          value={inputs.input5}
           ref={input5Ref}
           onChange={(e) => {
-            Eror("کد وارد شده صحیح نمی باشد");
-            setIsWrongCode(true);
+            handleChange(e);
           }}
           className={
             isWrongCode

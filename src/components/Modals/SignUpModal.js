@@ -1,0 +1,125 @@
+import React, { useRef, useState } from "react";
+import ModalLogo from "../../../public/pics/ModalLogo.png";
+import Image from "next/image";
+import { RxCross2 } from "react-icons/rx";
+import { baseUrl } from "@/api/BaseUrl";
+import axios from "axios";
+import ValidateModal from "./ValidateModal";
+
+function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
+  const [nationalCode, setNationalCode] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullname, setFullname] = useState("");
+  const fetchData = () => {
+    console.log("an");
+    setIsValidateModal(true);
+    axios
+      .post("http://84.47.224.220:8040/api/v1/Authentication/sign-up", {
+        metadata: {
+          userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          userName: nationalCode,
+        },
+        userName: nationalCode,
+        password,
+        phoneNumber,
+        fullname,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      });
+  };
+
+  return (
+    <div
+      onClick={closeModal}
+      className=" z-50 fixed top-0 right-0 w-screen h-screen flex justify-center items-center"
+    >
+      {isValidateModal ? (
+        <ValidateModal phoneNumber={phoneNumber} nationalCode={nationalCode} closeModal={closeModal} />
+      ) : (
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className=" py-2 w-[394px] gap-5     bg-white flex flex-col justify-between rounded"
+        >
+          <div className=" w-full flex px-1 justify-end">
+            <RxCross2
+              onClick={closeModal}
+              className=" text-[#717171] z-30 cursor-pointer text-2xl"
+            />
+          </div>
+          <div className=" w-full flex justify-center items-center -mt-8">
+            <Image src={ModalLogo} alt="Logo" width={67} />
+          </div>
+          <h2 className=" flex text-lg justify-center items-center w-full">
+            ثبت نام
+          </h2>
+
+          <div className=" relative w-full justify-center flex items-center">
+            <h2 className=" absolute bg-white mb-12 px-2 right-10 ">کد ملی</h2>
+            <input
+              onChange={(e) => setNationalCode(e.target.value)}
+              dir="ltr"
+              className=" px-3 border-2 border-black rounded h-[48px] w-11/12"
+            />
+          </div>
+          <div className=" relative w-full justify-center flex items-center">
+            <h2 className=" absolute bg-white mb-12 px-2 right-10">گذرواژه</h2>
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              dir="ltr"
+              className=" px-3 border-2 border-black rounded h-[48px] w-11/12"
+            />
+          </div>
+          <div className=" relative w-full justify-center flex items-center">
+            <h2 className=" absolute bg-white mb-12 px-2 right-10">
+              شماره همراه
+            </h2>
+            <input
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              dir="ltr"
+              className=" px-3 border-2 border-black rounded h-[48px] w-11/12"
+            />
+          </div>
+          <div className=" relative w-full justify-center flex items-center">
+            <h2 className=" absolute bg-white mb-12 px-2 right-10">
+              نام و نام خانوادگی
+            </h2>
+            <input
+              onChange={(e) => setFullname(e.target.value)}
+              dir="ltr"
+              className=" px-3 border-2 border-black rounded h-[48px] w-11/12"
+            />
+          </div>
+          <div className=" flex w-full justify-center items-center">
+            <button
+              onClick={fetchData}
+              // onClick={submitPhoneNum}
+              disabled={!nationalCode && !phoneNumber && !password && !fullname}
+              className={
+                nationalCode && phoneNumber && password && fullname
+                  ? " text-xl w-11/12 h-[48px] bg-[#005DAD] rounded text-white"
+                  : " text-xl w-11/12 h-[48px] bg-[#EDEDED] rounded text-[#CBCBCB]"
+              }
+            >
+              ادامه
+            </button>
+          </div>
+          <h2 className=" w-full flex justify-center items-center text-[12px] gap-1">
+            ورود و عضویت در دکتر رزرو به منزله قبول
+            <span className=" cursor-pointer text-[#005DAD]">
+              قوانین و مقررات
+            </span>
+            است.
+          </h2>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default SignupModal;

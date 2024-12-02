@@ -20,16 +20,17 @@ import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import SignupModal from "../modals/SignUpModal";
 
 export const LoginButton = () => {
   const router = useRouter();
-  const [isLoginModal, setIsLoginModal] = useState(false);
+  const [isModal, setIsModal] = useState(false);
   const openModal = () => {
-    setIsLoginModal(true);
+    setIsModal(true);
   };
   return (
     <div className=" flex justify-center items-center gap-3">
-      {isLoginModal && <LoginModals setIsLoginModal={setIsLoginModal} />}
+      {isModal && <LoginModals setIsModal={setIsModal} />}
       <button
         onClick={() => router.push("medicalCentersLogin")}
         className=" lg:-mt-12 shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
@@ -320,4 +321,18 @@ export const IOSSwitch = styled((props) => (
     }),
   },
 }));
+export const SignUpButton = () => {
+  const [isModal, setIsModal] = useState(false);
 
+  const handleOpenModal = () => {
+    setIsModal(true);
+  };
+  return (
+    <div>
+      {isModal && <LoginModals type="signup" />}
+      <button onClick={handleOpenModal} className="text-[#005DAD]">
+        ثبت نام کنید
+      </button>
+    </div>
+  );
+};

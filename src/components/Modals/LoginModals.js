@@ -2,13 +2,22 @@ import React, { useState } from "react";
 
 import PhoneNumModal from "./PhoneNumModal";
 import ValidateModal from "./ValidateModal";
+import SignupModal from "./SignUpModal";
 
-function LoginModals({ setIsLoginModal }) {
-  const [modal2, setModal2] = useState(false);
-  const [phoneNum, setPhoneNum] = useState("");
+function LoginModals({ type, setIsModal }) {
+  const [isPhoneNumModal, setIsPhoneNuumModal] = useState(true);
+  const [isSignupModal, setIsSignupModal] = useState(false);
+  const [isValidateModal, setIsValidateModal] = useState(false);
+  const selectModal = () => {
+    if (type === "signup") {
+      return <SignupModal />;
+    } else if (type === "signin") {
+      return <PhoneNumModal />;
+    } else return <ValidateModal />;
+  };
 
   const closeModal = () => {
-    setIsLoginModal(false);
+    setIsModal(false);
   };
 
   return (
@@ -16,17 +25,17 @@ function LoginModals({ setIsLoginModal }) {
       onClick={closeModal}
       className=" z-50 fixed top-0 right-0 w-screen h-screen bg-[rgba(0,0,0,0.6)] flex justify-center items-center"
     >
-      {modal2 ? (
-        <ValidateModal
-          setModal2={setModal2}
-          phoneNum={phoneNum}
-          closeModal={closeModal}
-        />
-      ) : (
+      {isPhoneNumModal && (
         <PhoneNumModal
-          setPhoneNum={setPhoneNum}
-          phoneNum={phoneNum}
-          setModal2={setModal2}
+          closeModal={closeModal}
+          setIsPhoneNuumModal={setIsPhoneNuumModal}
+          setIsSignupModal={setIsSignupModal}
+        />
+      )}
+      {isSignupModal && (
+        <SignupModal
+          isValidateModal={isValidateModal}
+          setIsValidateModal={setIsValidateModal}
           closeModal={closeModal}
         />
       )}
