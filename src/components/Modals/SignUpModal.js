@@ -1,21 +1,21 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import ModalLogo from "../../../public/pics/ModalLogo.png";
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
 import { baseUrl } from "@/api/BaseUrl";
 import axios from "axios";
 import ValidateModal from "./ValidateModal";
+import { Eror, success } from "../ToastAlerts";
 
 function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
   const [nationalCode, setNationalCode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [fullname, setFullname] = useState("");
+
   const fetchData = () => {
-    console.log("an");
-    setIsValidateModal(true);
     axios
-      .post("http://84.47.224.220:8040/api/v1/Authentication/sign-up", {
+      .post(`${baseUrl}Authentication/sign-up`, {
         metadata: {
           userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
           userName: nationalCode,
@@ -27,9 +27,16 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
       })
       .then((res) => {
         console.log(res);
+        success(`کد تایید به شماره ی ${phoneNumber} پیامک شد`);
+        setIsValidateModal(true);
       })
       .catch((err) => {
-        console.log(err.response.data.message);
+        console.log(err.response);
+        if (err.response.data.code == 409) {
+          Eror("این کد ملی قبلا ثبت شده است");
+        }else if(err.response.data.code == 500){
+          Eror("گذرواژه باید شامل حروف بزرگ و عدد باشد")
+        }
       });
   };
 
@@ -39,7 +46,11 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
       className=" z-50 fixed top-0 right-0 w-screen h-screen flex justify-center items-center"
     >
       {isValidateModal ? (
-        <ValidateModal phoneNumber={phoneNumber} nationalCode={nationalCode} closeModal={closeModal} />
+        <ValidateModal
+          phoneNumber={phoneNumber}
+          nationalCode={nationalCode}
+          closeModal={closeModal}
+        />
       ) : (
         <div
           onClick={(e) => e.stopPropagation()}
@@ -98,7 +109,6 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
           <div className=" flex w-full justify-center items-center">
             <button
               onClick={fetchData}
-              // onClick={submitPhoneNum}
               disabled={!nationalCode && !phoneNumber && !password && !fullname}
               className={
                 nationalCode && phoneNumber && password && fullname

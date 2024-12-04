@@ -4,17 +4,10 @@ import PhoneNumModal from "./PhoneNumModal";
 import ValidateModal from "./ValidateModal";
 import SignupModal from "./SignUpModal";
 
-function LoginModals({ type, setIsModal }) {
+function LoginModals({ setIsModal }) {
   const [isPhoneNumModal, setIsPhoneNuumModal] = useState(true);
   const [isSignupModal, setIsSignupModal] = useState(false);
   const [isValidateModal, setIsValidateModal] = useState(false);
-  const selectModal = () => {
-    if (type === "signup") {
-      return <SignupModal />;
-    } else if (type === "signin") {
-      return <PhoneNumModal />;
-    } else return <ValidateModal />;
-  };
 
   const closeModal = () => {
     setIsModal(false);

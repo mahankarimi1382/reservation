@@ -8,7 +8,6 @@ import { IoIosArrowDown } from "react-icons/io";
 
 export const NavLinks = (props) => {
   const pathName = usePathname();
-  console.log(pathName);
   return (
     <div className=" flex flex-col justify-center items-center">
       <Link

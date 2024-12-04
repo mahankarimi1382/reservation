@@ -65,8 +65,8 @@ function SwipperSection({ categorys }) {
         dragClass: "scrollbar-drag",
       }}
       className=" flex lg:w-[80%] justify-center items-center"
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
+      // onSlideChange={() => console.log("slide change")}
+      // onSwiper={(swiper) => console.log(swiper)}
     >
       {mappingCategoryFn()}
     </Swiper>
