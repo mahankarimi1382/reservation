@@ -6,9 +6,15 @@ import Timer from "../Timer";
 import { Eror, success } from "../ToastAlerts";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { SyncLoader } from "react-spinners";
 
-function ValidateModal({ closeModal, phoneNumber, setModal2, nationalCode }) {
-  const router=useRouter()
+function ValidateModal({
+  closeModal,
+  phoneNumber,
+  nationalCode,
+  setIsValidateModal,
+}) {
+  const router = useRouter();
   const [inputs, setInputs] = useState({
     input1: "",
     input2: "",
@@ -28,23 +34,28 @@ function ValidateModal({ closeModal, phoneNumber, setModal2, nationalCode }) {
   };
 
   const fetchData = (activationCode) => {
+    setIsLoading(true);
     console.log(activationCode);
 
     axios
-      .post("http://84.47.224.220:8040/api/v1/Authentication/activating-registration", {
-        metadata: {
-          userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-          userName: nationalCode,
-        },
-        mobile: phoneNumber,
-        activationCode,
-      })
+      .post(
+        "http://84.47.224.220:8040/api/v1/Authentication/activating-registration",
+        {
+          metadata: {
+            userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            userName: nationalCode,
+          },
+          mobile: phoneNumber,
+          activationCode,
+        }
+      )
       .then((res) => {
         console.log(res);
-        success("ورود موفق")
-        router.push("/userPanel/dashboard")
+        success("ورود موفق");
+        closeModal();
       })
       .catch((err) => {
+        setIsLoading(false);
         Eror("کد وارد شده صحیح نمی باشد");
         setIsWrongCode(true);
 
@@ -52,10 +63,11 @@ function ValidateModal({ closeModal, phoneNumber, setModal2, nationalCode }) {
       });
   };
   const changeNumber = () => {
-    setModal2(false);
+    setIsValidateModal(false);
   };
   const [isWrongCode, setIsWrongCode] = useState(false);
   const [isSendAgain, setIsSendAgain] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const input2Ref = useRef();
   const input3Ref = useRef();
   const input4Ref = useRef();
@@ -106,8 +118,8 @@ function ValidateModal({ closeModal, phoneNumber, setModal2, nationalCode }) {
           }}
           className={
             isWrongCode
-              ? " text-center rounded border border-[#f53f3f]  w-[56px] h-[40px]"
-              : " text-center rounded border border-[#717171] w-[56px] h-[40px]"
+              ? " text-center rounded border p-0 border-[#f53f3f]  w-[56px] h-[40px]"
+              : " text-center rounded border p-0 border-[#717171] w-[56px] h-[40px]"
           }
         />
         <input
@@ -120,8 +132,8 @@ function ValidateModal({ closeModal, phoneNumber, setModal2, nationalCode }) {
           }}
           className={
             isWrongCode
-              ? " text-center rounded border border-[#f53f3f] w-[56px] h-[40px]"
-              : " text-center rounded border border-[#717171] w-[56px] h-[40px]"
+              ? " text-center rounded border p-0 border-[#f53f3f] w-[56px] h-[40px]"
+              : " text-center rounded border p-0 border-[#717171] w-[56px] h-[40px]"
           }
         />
         <input
@@ -134,8 +146,8 @@ function ValidateModal({ closeModal, phoneNumber, setModal2, nationalCode }) {
           }}
           className={
             isWrongCode
-              ? " text-center rounded border border-[#f53f3f] w-[56px] h-[40px]"
-              : " text-center rounded border border-[#717171] w-[56px] h-[40px]"
+              ? " text-center rounded border p-0 border-[#f53f3f] w-[56px] h-[40px]"
+              : " text-center rounded border p-0 border-[#717171] w-[56px] h-[40px]"
           }
         />
         <input
@@ -148,8 +160,8 @@ function ValidateModal({ closeModal, phoneNumber, setModal2, nationalCode }) {
           }}
           className={
             isWrongCode
-              ? " text-center rounded border border-[#f53f3f] w-[56px] h-[40px]"
-              : " text-center rounded border border-[#717171] w-[56px] h-[40px]"
+              ? " text-center rounded border p-0 border-[#f53f3f] w-[56px] h-[40px]"
+              : " text-center rounded border p-0 border-[#717171] w-[56px] h-[40px]"
           }
         />
         <input
@@ -161,26 +173,34 @@ function ValidateModal({ closeModal, phoneNumber, setModal2, nationalCode }) {
           }}
           className={
             isWrongCode
-              ? " text-center rounded border border-[#f53f3f] w-[56px] h-[40px]"
-              : " text-center rounded border border-[#717171] w-[56px] h-[40px]"
+              ? " text-center rounded border p-0 border-[#f53f3f] w-[56px] h-[40px]"
+              : " text-center rounded border p-0 border-[#717171] w-[56px] h-[40px]"
           }
         />
       </div>
-      <div className=" flex w-full justify-center items-center">
-        {isSendAgain ? (
+      {isLoading ? (
+        <div className=" flex w-full justify-center items-center">
           <button className=" text-[#005DAD] flex justify-center items-center gap-2 w-10/12 h-[45px] border-2 border-[#005DAD] rounded-lg">
-            <Timer time={2} />
-            تا ارسال مجدد کد
+            <SyncLoader color="#005DAD" size={10} />
           </button>
-        ) : (
-          <button
-            onClick={sendAgain}
-            className=" w-10/12 h-[45px] bg-[#005DAD] rounded-lg text-white"
-          >
-            ارسال مجدد کد
-          </button>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className=" flex w-full justify-center items-center">
+          {isSendAgain ? (
+            <button className=" text-[#005DAD] flex justify-center items-center gap-2 w-10/12 h-[45px] border-2 border-[#005DAD] rounded-lg">
+              <Timer time={2} />
+              تا ارسال مجدد کد
+            </button>
+          ) : (
+            <button
+              onClick={sendAgain}
+              className=" w-10/12 h-[45px] bg-[#005DAD] rounded-lg text-white"
+            >
+              ارسال مجدد کد
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }

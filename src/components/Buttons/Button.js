@@ -19,10 +19,12 @@ import { myStore } from "@/store/Store";
 import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import { usePathname, useRouter } from "next/navigation";
-import Link from "next/link";
-import SignupModal from "../modals/SignUpModal";
+import { IoPersonCircleSharp } from "react-icons/io5";
 
 export const LoginButton = () => {
+  const { userName, token } = myStore();
+  console.log(userName);
+  console.log(token);
   const router = useRouter();
   const [isModal, setIsModal] = useState(false);
   const openModal = () => {
@@ -31,24 +33,40 @@ export const LoginButton = () => {
   return (
     <div className=" flex justify-center items-center gap-3">
       {isModal && <LoginModals setIsModal={setIsModal} />}
-      <button
-        onClick={() => router.push("medicalCentersLogin")}
-        className=" lg:-mt-12 shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
-      >
-        ثبت نام | ورود مرکز درمانی{" "}
-      </button>
-      <button
-        onClick={() => router.push("doctorLogin")}
-        className=" lg:-mt-12 shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
-      >
-        ثبت نام | ورود پزشکان
-      </button>
+      {!userName && (
+        <button
+          onClick={() => router.push("medicalCentersLogin")}
+          className=" lg:-mt-12 shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
+        >
+          ثبت نام | ورود مرکز درمانی{" "}
+        </button>
+      )}
+
+      {!userName && (
+        <button
+          onClick={() => router.push("doctorLogin")}
+          className=" lg:-mt-12 shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
+        >
+          ثبت نام | ورود پزشکان
+        </button>
+      )}
+
       <button
         onClick={openModal}
         className=" lg:-mt-12 bg-white shadow-xl px-2 text-[12px] lg:text-[14px] lg:p-2 p-1 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
       >
-        <CiLogin className=" hidden lg:flex text-xl" />
-        ثبت نام | ورود
+        {userName ? (
+          <div className=" w-full justify-center items-center gap-2 flex">
+            <IoPersonCircleSharp className=" text-xl" />
+            {userName}
+          </div>
+        ) : (
+          <div className=" w-full flex justify-center gap-1">
+            {" "}
+            <CiLogin className=" hidden lg:flex text-xl" />
+            ثبت نام | ورود
+          </div>
+        )}
       </button>
     </div>
   );

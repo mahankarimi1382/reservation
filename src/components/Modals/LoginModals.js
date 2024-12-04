@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import PhoneNumModal from "./PhoneNumModal";
-import ValidateModal from "./ValidateModal";
 import SignupModal from "./SignUpModal";
 
 function LoginModals({ setIsModal }) {

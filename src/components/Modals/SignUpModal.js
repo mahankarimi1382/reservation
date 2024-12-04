@@ -6,14 +6,17 @@ import { baseUrl } from "@/api/BaseUrl";
 import axios from "axios";
 import ValidateModal from "./ValidateModal";
 import { Eror, success } from "../ToastAlerts";
+import { SyncLoader } from "react-spinners";
 
 function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [nationalCode, setNationalCode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [fullname, setFullname] = useState("");
 
-  const fetchData = () => {
+  const fetchData = () => { 
+    setIsLoading(true)
     axios
       .post(`${baseUrl}Authentication/sign-up`, {
         metadata: {
@@ -31,11 +34,20 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
         setIsValidateModal(true);
       })
       .catch((err) => {
+        setIsLoading(false)
         console.log(err.response);
-        if (err.response.data.code == 409) {
-          Eror("این کد ملی قبلا ثبت شده است");
-        }else if(err.response.data.code == 500){
-          Eror("گذرواژه باید شامل حروف بزرگ و عدد باشد")
+        if (
+          err.response.data.message.message ===
+          "نام کاربری یا شماره تلفن صحیح نمیباشد ."
+        ) {
+          Eror(err.response.data.message.message);
+        } else if (
+          err.response.data.message.message ==
+          `نام کاربری ${nationalCode} قبلا توسط شخص دیگری انتخاب شده است`
+        ) {
+          Eror(err.response.data.message.message);
+        } else if (err.response.data.code == 500) {
+          Eror("گذرواژه باید شامل حروف بزرگ و عدد باشد");
         }
       });
   };
@@ -47,6 +59,7 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
     >
       {isValidateModal ? (
         <ValidateModal
+          setIsValidateModal={setIsValidateModal}
           phoneNumber={phoneNumber}
           nationalCode={nationalCode}
           closeModal={closeModal}
@@ -72,6 +85,7 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
           <div className=" relative w-full justify-center flex items-center">
             <h2 className=" absolute bg-white mb-12 px-2 right-10 ">کد ملی</h2>
             <input
+              value={nationalCode}
               onChange={(e) => setNationalCode(e.target.value)}
               dir="ltr"
               className=" px-3 border-2 border-black rounded h-[48px] w-11/12"
@@ -80,6 +94,7 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
           <div className=" relative w-full justify-center flex items-center">
             <h2 className=" absolute bg-white mb-12 px-2 right-10">گذرواژه</h2>
             <input
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
               type="password"
               dir="ltr"
@@ -102,6 +117,7 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
             </h2>
             <input
               onChange={(e) => setFullname(e.target.value)}
+              value={fullname}
               dir="ltr"
               className=" px-3 border-2 border-black rounded h-[48px] w-11/12"
             />
@@ -116,7 +132,7 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
                   : " text-xl w-11/12 h-[48px] bg-[#EDEDED] rounded text-[#CBCBCB]"
               }
             >
-              ادامه
+              {isLoading ? <SyncLoader color="white" size={10} /> : "ادامه"}
             </button>
           </div>
           <h2 className=" w-full flex justify-center items-center text-[12px] gap-1">

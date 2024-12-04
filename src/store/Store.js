@@ -7,4 +7,8 @@ export const myStore = create((set) => ({
   isSpecialtiesClick: false,
   setIsSpecialtiesClick: () =>
     set((state) => ({ isSpecialtiesClick: !state.isSpecialtiesClick })),
+  userName: "",
+  setUserName: (name) => set(() => ({ userName: name })),
+  token: "",
+  setToken: (token) => set(() => ({ token: token })),
 }));
