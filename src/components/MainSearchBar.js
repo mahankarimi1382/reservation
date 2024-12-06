@@ -42,7 +42,7 @@ function MainSearchBar() {
         width={20}
         src={heroLines}
         alt="icon"
-        className=" lg:hidden absolute left-7 -mt-[200px] "
+        className=" sm:hidden block  absolute left-7 -mt-[200px] "
       />
       <h2 className=" -mt-10 font-semibold lg:font-medium text-[18px] flex gap-1 lg:gap-3 lg:text-[38px]">
         با

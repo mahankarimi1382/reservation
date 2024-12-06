@@ -15,16 +15,14 @@ import SeeDoctorNazarModal from "../modals/SeeDoctorNazarModal";
 import EmptyReservDoctorModal from "../modals/EmptyReservDoctorModal";
 import { IoIosArrowDown } from "react-icons/io";
 import { FiEdit3 } from "react-icons/fi";
-import { myStore } from "@/store/Store";
+import { myStore, StorageStore } from "@/store/Store";
 import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { IoPersonCircleSharp } from "react-icons/io5";
 
 export const LoginButton = () => {
-  const { userName, token } = myStore();
-  console.log(userName);
-  console.log(token);
+  const { fullName } = StorageStore();
   const router = useRouter();
   const [isModal, setIsModal] = useState(false);
   const openModal = () => {
@@ -33,7 +31,7 @@ export const LoginButton = () => {
   return (
     <div className=" flex justify-center items-center gap-3">
       {isModal && <LoginModals setIsModal={setIsModal} />}
-      {!userName && (
+      {!fullName && (
         <button
           onClick={() => router.push("medicalCentersLogin")}
           className=" lg:-mt-12 shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
@@ -42,7 +40,7 @@ export const LoginButton = () => {
         </button>
       )}
 
-      {!userName && (
+      {!fullName && (
         <button
           onClick={() => router.push("doctorLogin")}
           className=" lg:-mt-12 shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
@@ -51,23 +49,23 @@ export const LoginButton = () => {
         </button>
       )}
 
-      <button
-        onClick={openModal}
-        className=" lg:-mt-12 bg-white shadow-xl px-2 text-[12px] lg:text-[14px] lg:p-2 p-1 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
+      <div
+        onClick={fullName ? () => console.log("first") : openModal}
+        className=" lg:-mt-12 cursor-pointer bg-white shadow-xl px-2 text-[12px] lg:text-[14px] lg:p-2 p-1 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
       >
-        {userName ? (
-          <div className=" w-full justify-center items-center gap-2 flex">
+        {fullName ? (
+          <h5 className=" w-full justify-center items-center gap-2 flex">
             <IoPersonCircleSharp className=" text-xl" />
-            {userName}
-          </div>
+            {fullName}
+          </h5>
         ) : (
-          <div className=" w-full flex justify-center gap-1">
+          <h5 className=" w-full flex justify-center gap-1">
             {" "}
             <CiLogin className=" hidden lg:flex text-xl" />
             ثبت نام | ورود
-          </div>
+          </h5>
         )}
-      </button>
+      </div>
     </div>
   );
 };
@@ -138,7 +136,7 @@ export const SpecialtiesSectionButton = () => {
       )}
       <div
         onClick={handleOpenModal}
-        className=" group lg:-mr-20  bg-[#eaeaea] hover:bg-[#63a2da] hover:shadow-lg hover:border-none hover:-mt-2 transition-all hover:shadow-[#c2eeff] min-w-[104px] h-[146px] lg:w-[131px] lg:h-[170px] flex flex-col justify-evenly items-center rounded-xl border border-[#DBD7D7]"
+        className=" w-[95px] h-[120px] md:w-[100px] md:h-[130px] group lg:-mr-20  bg-[#eaeaea] hover:bg-[#63a2da] hover:shadow-lg hover:border-none hover:-mt-2 transition-all hover:shadow-[#c2eeff] min-w-[104px] lg:w-[131px] lg:h-[170px] flex flex-col justify-evenly items-center rounded-xl border border-[#DBD7D7]"
       >
         <div className=" bg-white rounded-full w-[77px] h-[77px] flex justify-center items-center ">
           <IoIosMore className=" group-hover:text-[#336692] text-3xl" />

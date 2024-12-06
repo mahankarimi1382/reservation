@@ -7,6 +7,7 @@ import axios from "axios";
 import ValidateModal from "./ValidateModal";
 import { Eror, success } from "../ToastAlerts";
 import { SyncLoader } from "react-spinners";
+import PasswordStrengthBar from "react-password-strength-bar";
 
 function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,8 +16,8 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
   const [password, setPassword] = useState("");
   const [fullname, setFullname] = useState("");
 
-  const fetchData = () => { 
-    setIsLoading(true)
+  const fetchData = () => {
+    setIsLoading(true);
     axios
       .post(`${baseUrl}Authentication/sign-up`, {
         metadata: {
@@ -34,7 +35,7 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
         setIsValidateModal(true);
       })
       .catch((err) => {
-        setIsLoading(false)
+        setIsLoading(false);
         console.log(err.response);
         if (
           err.response.data.message.message ===
@@ -91,7 +92,7 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
               className=" px-3 border-2 border-black rounded h-[48px] w-11/12"
             />
           </div>
-          <div className=" relative w-full justify-center flex items-center">
+          <div className=" relative w-full justify-center flex flex-col  items-center">
             <h2 className=" absolute bg-white mb-12 px-2 right-10">گذرواژه</h2>
             <input
               value={password}
@@ -100,6 +101,14 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
               dir="ltr"
               className=" px-3 border-2 border-black rounded h-[48px] w-11/12"
             />
+            <div dir="ltr" className=" w-full flex justify-center items-center">
+              <PasswordStrengthBar
+                scoreWords={["ضعیف", "ضعیف", "متوسط", "خوب", "قوی"]}
+                shortScoreWord="گذرواژه باید شامل حروف بزرگ و عدد باشد"
+                className=" w-[90%]"
+                password={password}
+              />
+            </div>
           </div>
           <div className=" relative w-full justify-center flex items-center">
             <h2 className=" absolute bg-white mb-12 px-2 right-10">

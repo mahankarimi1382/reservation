@@ -15,7 +15,7 @@ function Footer() {
   return (
     <div className=" mb-32 mt-36 lg:mb-0 lg:mt-28 w-full h-[595px] gap-10 flex justify-center items-center flex-col lg:border-t-4 ">
       <FooterAcordion />
-      <div className=" hidden lg:flex flex-col w-full h-1/2">
+      <div className=" hidden xl:flex flex-col w-full h-1/2">
         <div className=" hidden text-[22px]  lg:flex px-32 p-10 text-[#414141]">
           <h2 className=" w-44 ">دکتر سریع</h2>
           <h2 className=" w-44 ">خدمات</h2>

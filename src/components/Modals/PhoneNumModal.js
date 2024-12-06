@@ -7,10 +7,11 @@ import { baseUrl } from "@/api/BaseUrl";
 import { useRouter } from "next/navigation";
 import { SyncLoader } from "react-spinners";
 import axios from "axios";
-import { myStore } from "@/store/Store";
+import { myStore, StorageStore } from "@/store/Store";
+import Cookies from "js-cookie";
 function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
-  const { setToken, setUserName } = myStore();
-  const router = useRouter();
+  const { setToken } = myStore();
+  const { setFullName } = StorageStore();
   const [isLoading, setIsLoading] = useState(false);
   const [nationalCode, setNationalCode] = useState("");
   const [password, setPassword] = useState("");
@@ -27,23 +28,21 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
         isPersistent: true,
       })
       .then((res) => {
+        setIsLoading(false);
         console.log(res);
         console.log(res.data);
-        setToken(res.data.result.token);
         let Name = res.data.result.userFullname;
-        setUserName(Name);
+        let token = res.data.result.token;
+        setToken(token);
+        setFullName(Name);
         success(`${Name} خوش آمدید`);
         closeModal();
       })
       .catch((err) => {
+        console.log(err)
         setIsLoading(false);
-        console.log(err.response);
-        // if (
-        //   err.response.data.message.message ==
-        //   "نام کاربری یا کلمه عبور اشتباه است !"
-        // ) {
-        //   Eror(err.response.data.message.message);
-        // }
+
+        Eror("نام کاربری یا کلمه عبور اشتباه است !");
       });
   };
 

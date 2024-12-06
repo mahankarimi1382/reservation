@@ -44,7 +44,7 @@ function MagezineSection() {
         </h2>
         <div className=" flex gap-5"></div>
       </div>
-      <div className=" flex no-scrollbar overflow-x-auto mt-4 lg:mt-10 gap-6 lg:p-0 p-2 lg:w-[1184px]">
+      <div className=" flex no-scrollbar overflow-x-auto mt-4 lg:mt-10 gap-6 lg:p-0 p-2 max-w-full lg:w-[1184px]">
         {Magezine.map((item) => {
           return (
             <div
