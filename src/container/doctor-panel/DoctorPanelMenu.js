@@ -8,6 +8,7 @@ import {
   AdminPanelLink,
   AdminPanelreport_action,
   AdminPanelsupport_action,
+  DoctorPanel_reservationManagment,
 } from "@/components/Links/Links";
 import doctorInfoIcon_blue from "../../../public/Pics/doctorpanelmenu-icons/doctor-info-icon-blue.png";
 import doctorInfoIcon_black from "../../../public/Pics/doctorpanelmenu-icons/doctor-info-icon-black.png";
@@ -52,12 +53,12 @@ function DoctorPanelMenu() {
         blackIcon={medicalcenterIcon_black}
         href="/doctor-panel/medicalcenter-setting"
       />
-      <AdminPanelLink
+      <DoctorPanel_reservationManagment
         title="مدیریت نوبت دهی"
         icon={reservationManagmentIcon_black}
         blackIcon={reservationManagmentIcon_black}
         href="/doctor-panel/reservation-managment"
-      />
+      />{" "}
       <AdminPanelLink
         title="لیست بیماران"
         icon={patientslisticon_blue}

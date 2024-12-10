@@ -10,11 +10,8 @@
   background-color: none;
 }
 
-
-
 .file-input::file-selector-button {
   display: none;
-
 }
 .MuiChartsAxis-line {
   visibility: hidden;
@@ -26,21 +23,11 @@ line {
   visibility: hidden;
 }
 
-.rmdp-prime .rmdp-day:not(.rmdp-day-hidden) span:hover {
-  background-color: #c4e2ff !important;
-  color: black;
-}
 .shadoww {
   -webkit-box-shadow: 0px 0px 4px 1px rgba(0, 93, 173, 0.32);
   -moz-box-shadow: 0px 0px 4px 1px rgba(0, 93, 173, 0.32);
   box-shadow: 0px 0px 4px 1px rgba(0, 93, 173, 0.32);
 }
-.rmdp-prime .rmdp-week-day {
-  font-size: 16px;
-  width: 96px;
-  color: black;
-}
-
 .canvas-style canvas {
   all: initial;
   display: flex;
@@ -52,6 +39,25 @@ line {
   bottom: 50px;
   left: 50px;
 }
+.rmdp-top-class {
+  background-color: none;
+  box-shadow: 0px;
+  border-radius: 30px;
+}
+.rmdp-wrapper {
+  border-radius: 70px !important;
+  box-shadow: none !important;
+}
+.rmdp-prime .rmdp-day:not(.rmdp-day-hidden) span:hover {
+  background-color: #c4e2ff !important;
+  color: white;
+}
+.rmdp-prime .rmdp-week-day {
+  font-size: 12px;
+  width: 10px;
+  color: black;
+}
+
 .rmdp-prime .rmdp-day-picker div {
   width: 100%;
 }
@@ -63,25 +69,20 @@ line {
   margin-top: 40px;
 }
 .rmdp-prime .rmdp-day .sd {
-  width: 67px;
-  height: 58px;
+  width: 30px;
+  height: 30px;
 
-  -webkit-box-shadow: 0px 0px 1px 1px rgba(0, 93, 173, 0.32);
-  -moz-box-shadow: 0px 0px 1px 1px rgba(0, 93, 173, 0.32);
-  box-shadow: 0px 0px 1px 1px rgba(0, 93, 173, 0.32);
-  background: white;
-  border-radius: 10px;
-  font-size: larger;
-  color: black;
+
+}
+.rmdp-day .rmdp-selected span:not(.highlight){
+  padding: 5px;
 }
 
-.rmdp-wrapper.rmdp-shadow.rmdp-prime {
-  border-radius: 15px;
-  padding-bottom: 10px;
-}
 .rmdp-prime .rmdp-calendar {
-  width: 757px;
-  min-height: 597px;
+  width: 450px;
+  min-height: 516px;
+  border-radius: 30px;
+  background-color: #ecf3fe;
 }
 
 .rmdp-shadow {
@@ -89,7 +90,7 @@ line {
 }
 .rmdp-prime .rmdp-header,
 .rmdp-prime .rmdp-panel-header {
-  background-color: #c4e2ff;
+  /* background-color: #c4e2ff; */
   border-radius: 10px;
   padding: 10px;
   padding-bottom: 20px;
