@@ -45,7 +45,8 @@ line {
   border-radius: 30px;
 }
 .rmdp-wrapper {
-  border-radius: 70px !important;
+  background-color: #ecf3fe !important;
+  border-radius: 50px !important;
   box-shadow: none !important;
 }
 .rmdp-prime .rmdp-day:not(.rmdp-day-hidden) span:hover {
@@ -66,15 +67,13 @@ line {
 }
 .rmdp-prime .rmdp-day {
   margin-right: 18px;
-  margin-top: 40px;
+  margin-top: 10px;
 }
 .rmdp-prime .rmdp-day .sd {
   width: 30px;
   height: 30px;
-
-
 }
-.rmdp-day .rmdp-selected span:not(.highlight){
+.rmdp-day .rmdp-selected span:not(.highlight) {
   padding: 5px;
 }
 
@@ -91,11 +90,12 @@ line {
 .rmdp-prime .rmdp-header,
 .rmdp-prime .rmdp-panel-header {
   /* background-color: #c4e2ff; */
-  border-radius: 10px;
-  padding: 10px;
-  padding-bottom: 20px;
-  padding-top: 20px;
+  border-bottom: 2px solid #cac4d0;
+  margin-bottom: 5px;
+  padding-bottom: 10px;
+  padding-top: 40px;
   font-size: 20px;
+  font-size: 40px;
 }
 
 .App {

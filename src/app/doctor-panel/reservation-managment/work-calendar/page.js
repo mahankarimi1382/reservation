@@ -1,4 +1,4 @@
-import { CiEdit, CiSearch } from "react-icons/ci";
+import {  CiSearch } from "react-icons/ci";
 import DoctorProfIcon from "../../../../../public/Pics/doctor-profile-icon.png";
 import React from "react";
 import Image from "next/image";
@@ -7,6 +7,8 @@ import DoctorPanelMenu from "@/container/doctor-panel/DoctorPanelMenu";
 import monitor_mobbile from "../../../../../public/Pics/doctorPanel/monitor-mobbile.png";
 import buliding from "../../../../../public/Pics/doctorPanel/buliding.png";
 import DoctorWorkCalendar from "@/container/doctor-panel/reservation-managment/DoctorWorkCalendar";
+import setting from "../../../../../public/Pics/doctorPanel/setting.png";
+import { Switch } from "@mui/material";
 function page() {
   return (
     <div dir="rtl" className="flex pb-20  bg-[#F6FBFF]">
@@ -42,7 +44,77 @@ function page() {
             </button>{" "}
           </div>
         </div>
-        <DoctorWorkCalendar />
+        <div className=" w-[80%] flex justify-between items-start">
+          <div className=" flex flex-col gap-5">
+            <DoctorWorkCalendar />
+            <h3 className=" font-semibold bg-[rgba(238,161,250,0.53)] rounded-2xl p-3">
+              روز 10 آبان در مجموع 10 نوبت غیر حضوری دارید{" "}
+            </h3>
+            <h3 className=" font-semibold bg-[rgba(248,238,147,0.68)] rounded-2xl p-3">
+              روز 10 آبان در مجموع 10 نوبت غیر حضوری دارید{" "}
+            </h3>
+            <h3 className=" font-semibold bg-[rgba(184,250,161,0.5)] rounded-2xl p-3">
+              روز 10 آبان در مجموع 10 نوبت غیر حضوری دارید{" "}
+            </h3>
+          </div>
+          <div className=" gap-5 bg-white p-3 py-5 shadow-md rounded-[30px] w-[550px] flex flex-col">
+            <h5 className=" flex gap-1 items-center  font-semibold">
+              <Image src={setting} width={20} alt="icon" />
+              تنظیمات نوبت حضوری
+            </h5>
+            <div className=" flex items-start justify-between">
+              <div className=" flex-col gap-6 flex w-[45%]">
+                <div className=" flex  items-center justify-between">
+                  <h4>تعداد افراد در هر بازه:</h4>
+                  <input className=" shadow-md text-center p-0 outline-none w-[81px] h-[38px] rounded-lg border-[#005DAD] border" />
+                </div>
+                <div className=" flex items-center justify-between">
+                  <h4>زمان کنسل نوبت (دقیقه):</h4>
+                  <input className=" shadow-md text-center p-0 outline-none w-[81px] h-[38px] rounded-lg border-[#005DAD] border" />
+                </div>
+                <div className=" flex items-center justify-between">
+                  <h4>از ساعت:</h4>
+                  <input className=" shadow-md text-center p-0 outline-none w-[81px] h-[38px] rounded-lg border-[#005DAD] border" />
+                </div>
+              </div>
+              <div className=" flex-col gap-6  flex w-[45%]">
+                <div className=" flex items-center justify-between">
+                  <h4>بازه زمانی نوبت (دقیقه):</h4>
+                  <input className=" shadow-md text-center p-0 outline-none w-[81px] h-[38px] rounded-lg border-[#005DAD] border" />
+                </div>
+                <div className=" flex items-center justify-between">
+                  <h4>تعداد نوبت :</h4>
+                  <input className=" shadow-md text-center p-0 outline-none w-[81px] h-[38px] rounded-lg border-[#005DAD] border" />
+                </div>
+                <div className=" flex items-center justify-between">
+                  <h4>تا ساعت:</h4>
+                  <input className=" shadow-md text-center p-0 outline-none w-[81px] h-[38px] rounded-lg border-[#005DAD] border" />
+                </div>
+              </div>
+            </div>
+            <hr className="border-2 rounded-xl" />
+            <div className=" flex flex-col gap-3">
+              <div className=" flex justify-between items-center">
+                <h5>ویزیت در روز های تعطیل رسمی</h5>
+                <Switch />
+              </div>
+              <div className=" flex justify-between items-center">
+                <h5>ویزیت در روز های جمعه</h5>
+                <Switch />
+              </div>
+              <hr className="border-2 rounded-xl" />
+
+              <div className=" w-full flex justify-center gap-10 items-center">
+                <button className=" bg-[rgba(230,35,51,0.15)] text-[#E62333F2] border border-[#E62333F2] p-3 w-1/3 rounded-lg">
+                  انصراف
+                </button>
+                <button className=" bg-[#005DAD] text-white  p-3 w-1/3 rounded-lg">
+                  ثبت تغییرات
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

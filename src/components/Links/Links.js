@@ -458,10 +458,8 @@ export const DoctorPanel_reservationManagment = (props) => {
   const handlePagePath = () => {
     if (
       pathname === "/doctor-panel/reservation-managment/work-calendar" ||
-      pathname === "/adminPanel/reports/onlinereports" ||
-      pathname === "/adminPanel/reports/centerstatus" ||
-      pathname === "/adminPanel/reports/doctorstatus" ||
-      pathname === "/adminPanel/reports/doctorscancels"
+      pathname === "/doctor-panel/reservation-managment/cancel-reservation" ||
+      pathname === "/doctor-panel/reservation-managment/delay-&-haste"
     ) {
       return true;
     } else {
@@ -511,7 +509,8 @@ export const DoctorPanel_reservationManagment = (props) => {
           className={` transition-opacity flex pr-2 gap-2 py-4 rounded-lg items-center  w-full text-[#005DAD] ${
             isAction ? "opacity-100 delay-500" : "opacity-0 del"
           } ${
-            pathname === "/doctor-panel/reservation-managment/work-calendar" && "bg-[#DBEDFF] w-40"
+            pathname === "/doctor-panel/reservation-managment/work-calendar" &&
+            "bg-[#DBEDFF] w-40"
           }`}
           href="/doctor-panel/reservation-managment/work-calendar"
         >
@@ -522,7 +521,9 @@ export const DoctorPanel_reservationManagment = (props) => {
           className={` transition-opacity flex pr-2 gap-2 py-4 rounded-lg items-center  w-full text-[#005DAD] ${
             isAction ? "opacity-100 delay-500" : "opacity-0"
           } ${
-            pathname === "/adminPanel/reports/onlinereports" && "bg-[#DBEDFF]"
+            pathname ===
+              "/doctor-panel/reservation-managment/cancel-reservation" &&
+            "bg-[#DBEDFF] w-40"
           }`}
           href="/doctor-panel/reservation-managment/cancel-reservation"
         >
@@ -533,7 +534,8 @@ export const DoctorPanel_reservationManagment = (props) => {
           className={` transition-opacity flex pr-2 gap-2 py-4 rounded-lg items-center  w-full text-[#005DAD] ${
             isAction ? "opacity-100 delay-500" : "opacity-0"
           } ${
-            pathname === "/adminPanel/reports/centerstatus" && "bg-[#DBEDFF]"
+            pathname === "/doctor-panel/reservation-managment/delay-&-haste" &&
+            "bg-[#DBEDFF] w-48"
           }`}
           href="/doctor-panel/reservation-managment/delay-&-haste"
         >
