@@ -8,6 +8,7 @@ import {
   AdminPanelLink,
   AdminPanelreport_action,
   AdminPanelsupport_action,
+  DoctorPanel_financialreports,
   DoctorPanel_reservationManagment,
 } from "@/components/Links/Links";
 import doctorInfoIcon_blue from "../../../public/Pics/doctorpanelmenu-icons/doctor-info-icon-blue.png";
@@ -65,7 +66,7 @@ function DoctorPanelMenu() {
         blackIcon={patientslisticon_black}
         href="/doctor-panel/patients-list"
       />
-      <AdminPanelLink
+      <DoctorPanel_financialreports
         title="گزارش های مالی"
         icon={financialreporticon_blue}
         blackIcon={financialreporticon_black}

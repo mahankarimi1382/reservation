@@ -5,14 +5,20 @@ import {
   lineElementClasses,
   markElementClasses,
 } from "@mui/x-charts/LineChart";
-function DrLineChart() {
-  const uData1 = [200, 450, 300, 100, 150, 200, 250];
-  const uData2 = [800, 310, 500, 50, 180, 100, 300];
-  const xLabels = [1397, 1398, 1399, 1400, 1401, 1402, 1403];
+function PaidListChart() {
+  const uData1 = [500, 100, 850, 200, 1150, 700, 500];
+  const xLabels = [
+    "فروردین",
+    "اردیبهشت",
+    "خرداد",
+    "تیر",
+    "مرداد",
+    "شهریور",
+    "مهر",
+  ];
   return (
     <div className=" " dir="ltr">
-      <div dir="rtl" className=" flex justify-between items-center">
-        <h5 className=" font-semibold">آمار نوبت ها</h5>
+      <div dir="rtl" className=" w-full  flex justify-end items-center">
         <div className=" flex justify-center items-center gap-2">
           <button className=" border rounded-2xl p-2">یک سال</button>
           <button className=" border rounded-2xl p-2">یک ماه</button>
@@ -27,7 +33,6 @@ function DrLineChart() {
         height={232}
         series={[
           { data: uData1, color: "#0E5FD9", showMark: false, id: "UD1" },
-          { data: uData2, color: "#E62333F2", showMark: false, id: "UD2" },
         ]}
         sx={{
           [`.${lineElementClasses.root}, .${markElementClasses.root}`]: {
@@ -35,10 +40,10 @@ function DrLineChart() {
           },
         }}
         xAxis={[{ scaleType: "point", data: xLabels }]}
-        yAxis={[{ min: 0, max: 1000 }]}
+        yAxis={[{ min: 0, max: 1400 }]}
       />
     </div>
   );
 }
 
-export default DrLineChart;
+export default PaidListChart;

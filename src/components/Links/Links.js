@@ -546,3 +546,82 @@ export const DoctorPanel_reservationManagment = (props) => {
     </div>
   );
 };
+export const DoctorPanel_financialreports = (props) => {
+  const pathname = usePathname();
+  const handlePagePath = () => {
+    if (
+      pathname === "/doctor-panel/financial-reports/paid-list" ||
+      pathname === "/doctor-panel/financial-reports/Settlement-request"
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const [isAction, setIsAction] = useState(handlePagePath());
+  const handleAction = () => {
+    setIsAction(!isAction);
+  };
+  return (
+    <div
+      onClick={handleAction}
+      className={
+        isAction
+          ? " transition-all h-44  bg-[#C4E2FF] duration-700 cursor-pointer flex flex-col items-center relative gap-2 w-full p-3 text-lg"
+          : " transition-all h-10 duration-700 cursor-pointer flex flex-col items-center relative gap-2 w-full p-3 text-lg"
+      }
+    >
+      <span
+        className={
+          !isAction
+            ? "hidden delay-200"
+            : " w-[6px] h-full delay-200 bg-[#005DAD] absolute right-0 top-0 rounded-l-lg"
+        }
+      ></span>{" "}
+      <div
+        className={` relative h-5 flex justify-start items-center gap-2 w-[80%] ${
+          isAction && "text-[#005DAD]"
+        }`}
+      >
+        <Image
+          width={24}
+          src={isAction ? props.icon : props.blackIcon}
+          alt="icon"
+        />
+        {props.title}
+
+        <IoIosArrowDown
+          className={
+            isAction ? " left-0 absolute text-sm text-[#005DAD]" : "hidden"
+          }
+        />
+      </div>
+      <div onClick={(e) => e.stopPropagation()}>
+        <Link
+          className={` transition-opacity flex pr-2 gap-2 py-4 rounded-lg items-center  w-full text-[#005DAD] ${
+            isAction ? "opacity-100 delay-500" : "opacity-0 del"
+          } ${
+            pathname === "/doctor-panel/financial-reports/paid-list" &&
+            "bg-[#DBEDFF] w-40"
+          }`}
+          href="/doctor-panel/financial-reports/paid-list"
+        >
+          <IoIosArrowDown className=" text-xs rotate-90" />
+          لیست پرداخت شده ها
+        </Link>
+        <Link
+          className={` transition-opacity flex pr-2 gap-2 py-4 rounded-lg items-center  w-full text-[#005DAD] ${
+            isAction ? "opacity-100 delay-500" : "opacity-0"
+          } ${
+            pathname === "/doctor-panel/financial-reports/Settlement-request" &&
+            "bg-[#DBEDFF] w-40"
+          }`}
+          href="/doctor-panel/financial-reports/Settlement-request"
+        >
+          <IoIosArrowDown className=" text-xs rotate-90" />
+          درخواست تسویه
+        </Link>
+      </div>
+    </div>
+  );
+};

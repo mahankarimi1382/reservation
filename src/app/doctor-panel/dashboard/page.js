@@ -147,17 +147,7 @@ function page() {
             </div>
           </div>
           <div className=" w-[49%] shadow-xl flex flex-col gap-2 p-4 bg-white  rounded-3xl h-full">
-            <div className=" flex justify-between items-center">
-              <h5 className=" font-semibold">آمار نوبت ها</h5>
-              <div className=" flex justify-center items-center gap-2">
-                <button className=" border rounded-2xl p-2">یک سال</button>
-                <button className=" border rounded-2xl p-2">یک ماه</button>
-                <button className=" border rounded-2xl p-2">یک هفته</button>
-                <button className=" bg-[#005DAD] text-white px-3 border rounded-2xl p-2">
-                  همه
-                </button>
-              </div>
-            </div>
+
             <DrLineChart />
             <div className=" flex w-full gap-4 px-5 items-center ">
               <div className=" gap-2  flex items-center">
