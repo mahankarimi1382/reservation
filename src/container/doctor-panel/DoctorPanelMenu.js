@@ -84,7 +84,7 @@ function DoctorPanelMenu() {
         blackIcon={opinionsaboutmeicon_black}
         href="/doctor-panel/opinions-about-me"
       />{" "}
-      <AdminPanelreport_action
+      <AdminPanelLink
         title="مقاله"
         icon={articleicon_blue}
         blackIcon={articleicon_black}

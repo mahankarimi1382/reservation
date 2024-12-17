@@ -1,10 +1,6 @@
-import { CiSearch } from "react-icons/ci";
-import DoctorProfIcon from "../../../../public/Pics/doctor-profile-icon.png";
+
 import React from "react";
-import Image from "next/image";
-import { IoIosArrowDown } from "react-icons/io";
-import DoctorPanelMenu from "@/container/doctor-panel/DoctorPanelMenu";
-import { PiWarningCircle } from "react-icons/pi";
+
 
 function PaideListTable() {
   const fakeData = [
