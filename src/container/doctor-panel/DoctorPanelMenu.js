@@ -90,11 +90,11 @@ function DoctorPanelMenu() {
         blackIcon={articleicon_black}
         href="/doctor-panel/article"
       />{" "}
-      <AdminPanelsupport_action
+      <AdminPanelLink
         title="پشتیبانی آنلاین"
         icon={support_icon}
         blackIcon={support_icon_black}
-        href="/doctor-panel/support"
+        href="/doctor-panel/online-support"
       />
     </div>
   );

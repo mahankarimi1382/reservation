@@ -7,6 +7,7 @@ import DoctorPanelMenu from "@/container/doctor-panel/DoctorPanelMenu";
 import { PiWarningCircle } from "react-icons/pi";
 import { CiEdit } from "react-icons/ci";
 import { GoTrash } from "react-icons/go";
+import UploadingInputContainer from "@/container/doctor-panel/doctor-info/UploadingInputContainer";
 
 function page() {
   return (
@@ -82,6 +83,7 @@ function page() {
               className=" h-52 bg-[#F5F5F5] p-4 resize-none border rounded-2xl"
               placeholder="پزشک گرامی لطفا مقاله را اینجا بگذارید ( کپی کنید سپس اینجا پیست کنید )"
             />
+            <UploadingInputContainer title="7 ) آپلود عکس کاور مقاله" />
           </div>
         </div>
       </div>
