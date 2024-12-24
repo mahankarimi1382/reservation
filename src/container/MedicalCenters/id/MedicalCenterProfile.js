@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import React from "react";
 import karenLogo from "../../../../public/pics/karenLogo.png";
@@ -10,6 +11,7 @@ import gooshiPezeshki from "../../../../public/pics/gooshiPezeshki.png";
 import { IoLocationOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import AllDoctorsCard from "../../../components/AllDoctorsCard";
+import MapComponent from "@/components/MapComponent";
 
 function MedicalCenterProfile() {
   return (
@@ -82,8 +84,8 @@ function MedicalCenterProfile() {
                   فدک طبقه اول
                 </h5>
               </div>
-              <div className=" w-full flex justify-center items-center">
-                <Image src={map2} alt="map" width={597} />
+              <div className=" w-full h-40 flex justify-center items-center">
+                <MapComponent />
               </div>
             </div>
           </div>
