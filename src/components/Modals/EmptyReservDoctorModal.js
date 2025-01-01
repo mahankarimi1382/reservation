@@ -12,10 +12,10 @@ import monitor from "../../../public/pics/monitor-mobbile.png";
 import matni from "../../../public/pics/matniIcon.png";
 import callenderIcon from "../../../public/pics/callenderIcon.png";
 import telefoniIcon from "../../../public/pics/telefoniIcon.png";
-function EmptyReservDoctorModal({ selectedDoctor, setIsModalOpen }) {
-  console.log(selectedDoctor);
+function EmptyReservDoctorModal({setIsEmptyModal}) {
+  
   const handleCloseModal = () => {
-    setIsModalOpen(false);
+    setIsEmptyModal(false);
   };
   return (
     <div
@@ -37,8 +37,8 @@ function EmptyReservDoctorModal({ selectedDoctor, setIsModalOpen }) {
                 alt="doctor-prof"
               />
               <div className=" flex flex-col  gap-5">
-                <h2 className=" text-[22px]">{selectedDoctor.name}</h2>
-                <h2 className=" text-[#757575]">{selectedDoctor.mainskill}</h2>
+                <h2 className=" text-[22px]">بهرام میزایی</h2>
+                <h2 className=" text-[#757575]">زنان زایمان</h2>
                 <h2 className=" text-red-600 flex justify-center gap-2 items-center">
                   <RiErrorWarningLine className=" text-xl" />
                   لطفا اولین نوبت خالی خود را باتوجه به نوع و مکان نوبت دهی
@@ -49,11 +49,11 @@ function EmptyReservDoctorModal({ selectedDoctor, setIsModalOpen }) {
             <div className=" flex flex-col items-start justify-center gap-5 ">
               <h2 className=" text-[12px] rounded p-1 flex items-center justify-center gap-1 bg-[#F0F0F0] text-[#1F7168]">
                 <AiFillLike className=" text-lg" />
-                {selectedDoctor.recomend}
+                پیشنهاد میکنم
               </h2>
               <h2 className=" flex items-center justify-center gap-1">
                 <Image src={star} alt="star" width={18} />
-                {selectedDoctor.rate}
+                5
               </h2>
             </div>
           </div>

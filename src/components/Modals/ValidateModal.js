@@ -5,8 +5,8 @@ import { RxCross2 } from "react-icons/rx";
 import Timer from "../Timer";
 import { Eror, success } from "../ToastAlerts";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { SyncLoader } from "react-spinners";
+import { baseUrl } from "@/api/BaseUrl";
 
 function ValidateModal({
   closeModal,
@@ -14,7 +14,6 @@ function ValidateModal({
   nationalCode,
   setIsValidateModal,
 }) {
-  const router = useRouter();
   const [inputs, setInputs] = useState({
     input1: "",
     input2: "",
@@ -38,21 +37,18 @@ function ValidateModal({
     console.log(activationCode);
 
     axios
-      .post(
-        "http://84.47.224.220:8040/api/v1/Authentication/activating-registration",
-        {
-          metadata: {
-            userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-            userName: nationalCode,
-          },
-          mobile: phoneNumber,
-          activationCode,
-        }
-      )
+      .post(`${baseUrl}Authentication/activating-registration`, {
+        metadata: {
+          userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          userName: nationalCode,
+        },
+        mobile: phoneNumber,
+        activationCode,
+      })
       .then((res) => {
         console.log(res);
         success("ورود موفق");
-        closeModal();
+        // closeModal();
       })
       .catch((err) => {
         setIsLoading(false);

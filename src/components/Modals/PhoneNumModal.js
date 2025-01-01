@@ -9,6 +9,7 @@ import { SyncLoader } from "react-spinners";
 import axios from "axios";
 import { myStore, StorageStore } from "@/store/Store";
 import Cookies from "js-cookie";
+import { axiosConfig } from "@/api/axiosConfig";
 function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
   const { setToken } = myStore();
   const { setFullName } = StorageStore();
@@ -17,8 +18,8 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
   const [password, setPassword] = useState("");
   const fetchData = () => {
     setIsLoading(true);
-    axios
-      .put(`${baseUrl}Authentication/sign-in`, {
+    axiosConfig
+      .put("Authentication/sign-in", {
         metadata: {
           userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
           userName: nationalCode,
@@ -39,11 +40,12 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
         closeModal();
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         setIsLoading(false);
 
         Eror("نام کاربری یا کلمه عبور اشتباه است !");
       });
+
   };
 
   const buttRef = useRef();

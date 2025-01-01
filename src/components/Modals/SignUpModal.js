@@ -20,7 +20,9 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
     setIsLoading(true);
     axios
       .post(`${baseUrl}Authentication/sign-up`, {
+        
         metadata: {
+          
           userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
           userName: nationalCode,
         },
@@ -93,7 +95,7 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
             />
           </div>
           <div className=" relative w-full justify-center flex flex-col  items-center">
-            <h2 className=" absolute bg-white mb-12 px-2 right-10">گذرواژه</h2>
+            <h2 className=" absolute bg-white -top-3 px-2 right-10">گذرواژه</h2>
             <input
               value={password}
               onChange={(e) => setPassword(e.target.value)}

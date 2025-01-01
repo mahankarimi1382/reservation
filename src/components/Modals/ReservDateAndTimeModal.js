@@ -4,9 +4,10 @@ import { RxCross2 } from "react-icons/rx";
 import { IoLocationOutline } from "react-icons/io5";
 
 import docProf from "../../../public/Pics/bahramMirzayi.png";
+import SelfOrAnotherModal from "./SelfOrAnotherModal";
 function ReservDateAndTimeModal({ setIsReservModal }) {
   const [hours, setHours] = useState(false);
-  
+  const [isSelfOrAnother, setIsSelfOrAnother] = useState(false);
   const dayDetails = [
     {
       id: 1,
@@ -102,6 +103,7 @@ function ReservDateAndTimeModal({ setIsReservModal }) {
       onClick={handleCloseModal}
       className="   w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]"
     >
+      {isSelfOrAnother && <SelfOrAnotherModal />}
       <div
         onClick={(e) => e.stopPropagation()}
         className={`${
@@ -145,7 +147,10 @@ function ReservDateAndTimeModal({ setIsReservModal }) {
               <button className=" border px-10 rounded-lg p-2 text-[#005DAD] border-[#005DAD]">
                 انصراف
               </button>
-              <button className=" border px-10 rounded-lg p-2 text-white bg-[#005DAD]">
+              <button
+                onClick={() => setIsSelfOrAnother(true)}
+                className=" border px-10 rounded-lg p-2 text-white bg-[#005DAD]"
+              >
                 تایید و ادامه
               </button>
             </div>

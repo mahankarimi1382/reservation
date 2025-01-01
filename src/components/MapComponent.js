@@ -52,7 +52,7 @@ export default function MapComponent() {
 
   return (
     <div className=" w-full h-full rounded-xl" ref={mapContainerRef}>
-      App
+      map
     </div>
   );
 }

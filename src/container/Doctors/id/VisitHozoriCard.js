@@ -24,7 +24,7 @@ function VisitHozoriCard() {
         IscardAnimate ? "opacity-100" : "opacity-0"
       } duration-1000 transition-opacity px-5 gap-2 p-5 flex flex-col bg-white shadow-xl rounded-xl`}
     >
-      {isEmtyModal && <EmptyReservDoctorModal />}
+      {isEmtyModal && <EmptyReservDoctorModal setIsEmptyModal={setIsEmptyModal} />}
       {isReservModal && (
         <ReservDateAndTimeModal setIsReservModal={setIsReservModal} />
       )}

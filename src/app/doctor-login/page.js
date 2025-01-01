@@ -8,6 +8,7 @@ import trendDownIcon from "../../../public/Pics/trend-down-icon.png";
 import volumeIcon from "../../../public/Pics/trend-down-icon.png";
 import monitorIcon from "../../../public/Pics/monitor-mobbile.png";
 import Footer from "@/components/Footer";
+import { DoctorLoginButt } from "@/components/Buttons/Button";
 const cards = [
   {
     id: 1,
@@ -56,10 +57,13 @@ function page() {
               ساخته می شود و بیماران میتوانند در زمان جست و جوی نام شما نوبت خود
               را نیز خریداری کنند.
             </p>
-            <button className=" text-lg flex justify-center items-center gap-3 px-16 p-2 text-white bg-[#005DAD] rounded-lg">
-              عضویت پزشکان
-              <IoIosArrowBack />
-            </button>
+            <div className=" w-full flex items-center gap-10">
+              <button className=" text-lg flex justify-center items-center gap-3 px-16 p-2 text-white bg-[#005DAD] rounded-lg">
+                عضویت پزشکان
+                <IoIosArrowBack />
+              </button>
+              <DoctorLoginButt />
+            </div>
           </div>
         </div>
         <h2 className=" text-2xl">خدمات دکتر رزرو برای پزشکان</h2>

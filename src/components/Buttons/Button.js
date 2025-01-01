@@ -20,9 +20,12 @@ import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import { useRouter } from "next/navigation";
 import { IoPersonCircleSharp } from "react-icons/io5";
+import { IoIosArrowBack } from "react-icons/io";
+import Cookies from "js-cookie";
 
 export const LoginButton = () => {
   const { fullName } = StorageStore();
+  const { setFullName } = StorageStore();
   const router = useRouter();
   const [isModal, setIsModal] = useState(false);
   const openModal = () => {
@@ -50,7 +53,15 @@ export const LoginButton = () => {
       )}
 
       <div
-        onClick={fullName ? () => console.log("first") : openModal}
+        onClick={
+          fullName
+            ? () => {
+                Cookies.remove("token");
+                setFullName(null);
+                router.push("/");
+              }
+            : openModal
+        }
         className=" lg:-mt-12 cursor-pointer bg-white shadow-xl px-2 text-[12px] lg:text-[14px] lg:p-2 p-1 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
       >
         {fullName ? (
@@ -119,6 +130,23 @@ export const SabteNazarButton = () => {
       >
         ثبت نظر
         <IoIosArrowRoundBack className=" text-2xl" />
+      </button>
+    </div>
+  );
+};
+export const DoctorLoginButt = () => {
+  const [isModal, setIsModal] = useState(false);
+
+  return (
+    <div>
+      {isModal && <LoginModals setIsModal={setIsModal} />}
+
+      <button
+        onClick={() => setIsModal(true)}
+        className=" text-lg flex justify-center items-center gap-3 px-16 p-2 border-2 border-[#005DAD] text-[#005DAD] rounded-lg"
+      >
+        ورود پزشک
+        <IoIosArrowBack />
       </button>
     </div>
   );
