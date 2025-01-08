@@ -15,17 +15,27 @@ import SeeDoctorNazarModal from "../modals/SeeDoctorNazarModal";
 import EmptyReservDoctorModal from "../modals/EmptyReservDoctorModal";
 import { IoIosArrowDown } from "react-icons/io";
 import { FiEdit3 } from "react-icons/fi";
-import { myStore, StorageStore } from "@/store/Store";
+import {
+  fullNameStorage,
+  myStore,
+  nationalCodeStorage,
+  smeIdStorage,
+} from "@/store/Store";
 import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import { useRouter } from "next/navigation";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
 import Cookies from "js-cookie";
+import { IoMenuOutline } from "react-icons/io5";
+import BurgerMenu from "../BurgerMenu";
+import { GoPlus } from "react-icons/go";
+import SubmitSpecialModal from "../modals/SubmitSpecialModal";
 
 export const LoginButton = () => {
-  const { fullName } = StorageStore();
-  const { setFullName } = StorageStore();
+  const { fullName, setFullName } = fullNameStorage();
+  const { removeSmeId, smeId } = smeIdStorage();
+  console.log(smeId);
   const router = useRouter();
   const [isModal, setIsModal] = useState(false);
   const openModal = () => {
@@ -37,7 +47,7 @@ export const LoginButton = () => {
       {!fullName && (
         <button
           onClick={() => router.push("medicalCentersLogin")}
-          className=" lg:-mt-12 shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
+          className=" lg:-mt-12 lg:flex hidden shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2  justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
         >
           ثبت نام | ورود مرکز درمانی{" "}
         </button>
@@ -46,7 +56,7 @@ export const LoginButton = () => {
       {!fullName && (
         <button
           onClick={() => router.push("doctorLogin")}
-          className=" lg:-mt-12 shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
+          className=" lg:-mt-12 lg:flex hidden  shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2 justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
         >
           ثبت نام | ورود پزشکان
         </button>
@@ -56,6 +66,7 @@ export const LoginButton = () => {
         onClick={
           fullName
             ? () => {
+                removeSmeId();
                 Cookies.remove("token");
                 setFullName(null);
                 router.push("/");
@@ -292,7 +303,6 @@ export const ManOrWomanButt = ({ gender }) => {
     </button>
   );
 };
-
 export const ApllyEditButt = () => {
   const { isEdit, setIsEdit } = myStore();
 
@@ -376,6 +386,55 @@ export const SignUpButton = () => {
       {isModal && <LoginModals type="signup" />}
       <button onClick={handleOpenModal} className="text-[#005DAD]">
         ثبت نام کنید
+      </button>
+    </div>
+  );
+};
+export const BurgerMenuButt = () => {
+  const [burgerMenu, setBurgerMenu] = useState(false);
+  const openburgermenu = () => {
+    setBurgerMenu(true);
+  };
+  return (
+    <div>
+      {burgerMenu ? (
+        <div
+          onClick={() => setBurgerMenu(false)}
+          className=" w-full fixed transition-opacity duration-500 z-[60] top-0 right-0 bg-[rgba(0,0,0,0.6)] h-screen"
+        >
+          <BurgerMenu />
+        </div>
+      ) : (
+        <div
+          onClick={() => setBurgerMenu(false)}
+          className=" w-full fixed opacity-0  -z-10 top-0 right-0 bg-[rgba(0,0,0,0.6)] h-screen"
+        >
+          <BurgerMenu />
+        </div>
+      )}
+      <IoMenuOutline
+        onClick={openburgermenu}
+        className=" text-[#005DAD] text-2xl"
+      />
+    </div>
+  );
+};
+export const AddSpecialtiesButt = () => {
+  const [isAddSpecialtiesModal, setIsAddSpecialtiesModal] = useState(false);
+  return (
+    <div>
+      {isAddSpecialtiesModal && (
+        <SubmitSpecialModal
+          setIsAddSpecialtiesModal={setIsAddSpecialtiesModal}
+        />
+      )}
+      <button
+        onClick={() => setIsAddSpecialtiesModal(true)}
+        className=" flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
+      >
+        <GoPlus className=" text-2xl" />
+        
+        افزودن تخصص
       </button>
     </div>
   );

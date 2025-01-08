@@ -1,1 +1,0 @@
-export const baseUrl="http://84.47.224.220:8040/API/v1/"

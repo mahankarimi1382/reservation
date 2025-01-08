@@ -1,5 +1,9 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import logo from "../../public/Pics/logo-doctor.png";
+
+import Image from "next/image";
+import { PropagateLoader, PuffLoader, SyncLoader } from "react-spinners";
 const myFont = localFont({
   src: "../../public/fonts/IRANYekanMobileFN.ttf",
   display: "swap",

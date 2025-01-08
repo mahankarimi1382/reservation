@@ -54,7 +54,7 @@ function AdminPanelMenu() {
         title="تخصص ها"
         icon={skills_icon}
         blackIcon={skills_icon_black}
-        href="/adminPanel/skills"
+        href="/adminPanel/specialties"
       />
       <AdminPanelLink
         title="پزشکان"

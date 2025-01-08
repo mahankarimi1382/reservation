@@ -9,11 +9,11 @@ import "react-toastify/dist/ReactToastify.css";
 import MainSearchBar from "@/components/MainSearchBar";
 import SpecialtiesSection_Psychiatry from "@/container/Psychiatry/SpecialtiesSection_Psychiatry";
 import DoctorsSection_Psychiatry from "@/container/Psychiatry/DoctorsSection_Psychiatry";
-import BannersSection_Psychiatry from "@/container/Psychiatry/BannersSection_Psychiatry";
 import HospitalsSection_Psychiatry from "@/container/Psychiatry/HospitalsSection_Psychiatry";
-import FullBanerSection_Psychiatry from "@/container/Psychiatry/FullBanerSection_Psychiatry";
 import MagezineSection_Psychiatry from "@/container/Psychiatry/MagezineSection_Psychiatry";
 import MatabSection from "@/container/Home/MatabSection";
+import BannersSection from "@/container/Home/BannersSection";
+import FullBanerSection from "@/container/Home/FullBanerSection";
 export default function Dentist() {
   return (
     <div dir="rtl">
@@ -23,9 +23,9 @@ export default function Dentist() {
       </div>
       <SpecialtiesSection_Psychiatry />
       <DoctorsSection_Psychiatry />
-      <BannersSection_Psychiatry />
+      <BannersSection />
       <HospitalsSection_Psychiatry />
-      <FullBanerSection_Psychiatry />
+      <FullBanerSection />
       <MatabSection/>
       <QuestionsSection />
       <SamaneSection />

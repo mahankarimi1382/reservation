@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import ModalLogo from "../../../public/pics/ModalLogo.png";
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
-import { baseUrl } from "@/api/BaseUrl";
-import axios from "axios";
 import ValidateModal from "./ValidateModal";
-import { Eror, success } from "../ToastAlerts";
 import { SyncLoader } from "react-spinners";
 import PasswordStrengthBar from "react-password-strength-bar";
+import { signup } from "@/api/ApiCalling";
 
 function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,46 +13,17 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [fullname, setFullname] = useState("");
+  const data = {
+    metadata: {
+      userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      userName: nationalCode,
+    },
 
-  const fetchData = () => {
-    setIsLoading(true);
-    axios
-      .post(`${baseUrl}Authentication/sign-up`, {
-        
-        metadata: {
-          
-          userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-          userName: nationalCode,
-        },
-        userName: nationalCode,
-        password,
-        phoneNumber,
-        fullname,
-      })
-      .then((res) => {
-        console.log(res);
-        success(`کد تایید به شماره ی ${phoneNumber} پیامک شد`);
-        setIsValidateModal(true);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        console.log(err.response);
-        if (
-          err.response.data.message.message ===
-          "نام کاربری یا شماره تلفن صحیح نمیباشد ."
-        ) {
-          Eror(err.response.data.message.message);
-        } else if (
-          err.response.data.message.message ==
-          `نام کاربری ${nationalCode} قبلا توسط شخص دیگری انتخاب شده است`
-        ) {
-          Eror(err.response.data.message.message);
-        } else if (err.response.data.code == 500) {
-          Eror("گذرواژه باید شامل حروف بزرگ و عدد باشد");
-        }
-      });
+    userName: nationalCode,
+    password,
+    phoneNumber,
+    fullname,
   };
-
   return (
     <div
       onClick={closeModal}
@@ -135,7 +104,10 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
           </div>
           <div className=" flex w-full justify-center items-center">
             <button
-              onClick={fetchData}
+              onClick={() => {
+                signup(setIsLoading, data,setIsValidateModal);
+                ;
+              }}
               disabled={!nationalCode && !phoneNumber && !password && !fullname}
               className={
                 nationalCode && phoneNumber && password && fullname

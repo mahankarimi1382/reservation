@@ -4,9 +4,8 @@ import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
 import Timer from "../Timer";
 import { Eror, success } from "../ToastAlerts";
-import axios from "axios";
 import { SyncLoader } from "react-spinners";
-import { baseUrl } from "@/api/BaseUrl";
+import { activating_registarion } from "@/api/ApiCalling";
 
 function ValidateModal({
   closeModal,
@@ -21,46 +20,6 @@ function ValidateModal({
     input4: "",
     input5: "",
   });
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setInputs({ ...inputs, [name]: value });
-
-    if (name === "input5") {
-      const allInputs = { ...inputs, [name]: value };
-      const activationCode = Object.values(allInputs).join("");
-      fetchData(activationCode);
-    }
-  };
-
-  const fetchData = (activationCode) => {
-    setIsLoading(true);
-    console.log(activationCode);
-
-    axios
-      .post(`${baseUrl}Authentication/activating-registration`, {
-        metadata: {
-          userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-          userName: nationalCode,
-        },
-        mobile: phoneNumber,
-        activationCode,
-      })
-      .then((res) => {
-        console.log(res);
-        success("ورود موفق");
-        // closeModal();
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        Eror("کد وارد شده صحیح نمی باشد");
-        setIsWrongCode(true);
-
-        console.log(err.response.data.message);
-      });
-  };
-  const changeNumber = () => {
-    setIsValidateModal(false);
-  };
   const [isWrongCode, setIsWrongCode] = useState(false);
   const [isSendAgain, setIsSendAgain] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -68,6 +27,30 @@ function ValidateModal({
   const input3Ref = useRef();
   const input4Ref = useRef();
   const input5Ref = useRef();
+  const [activationCode, setActivationCode] = useState(null);
+  const data = {
+    metadata: {
+      userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      userName: nationalCode,
+    },
+    mobile: phoneNumber,
+    activationCode,
+  };
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setInputs({ ...inputs, [name]: value });
+
+    if (name === "input5") {
+      const allInputs = { ...inputs, [name]: value };
+      const code = Object.values(allInputs).join("");
+      setActivationCode(code);
+      activating_registarion(data, setIsWrongCode, setIsLoading,closeModal);
+    }
+  };
+
+  const changeNumber = () => {
+    setIsValidateModal(false);
+  };
 
   const focusOnInput = (e, inputRef) => {
     if (e.target.value.length === 1) {

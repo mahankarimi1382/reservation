@@ -3,6 +3,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
 export const myStore = create((set) => ({
+
   reservationType: null,
   setReservationType: (type) => set(() => ({ reservationType: type })),
   isEdit: false,
@@ -19,7 +20,7 @@ export const myStore = create((set) => ({
   },
 }));
 
-export const StorageStore = create(
+export const fullNameStorage = create(
   persist(
     (set) => ({
       fullName: "",
@@ -27,6 +28,31 @@ export const StorageStore = create(
     }),
     {
       name: "FullName",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);
+export const smeIdStorage = create(
+  persist(
+    (set) => ({
+      smeId: "",
+      setSmeId: (id) => set({ smeId: id }),
+      removeSmeId: () => set({ smeId: "" }),
+    }),
+    {
+      name: "smeId",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);
+export const nationalCodeStorage = create(
+  persist(
+    (set) => ({
+      userName: "",
+      setUserName: (code) => set({ userName: code }),
+    }),
+    {
+      name: "userName",
       storage: createJSONStorage(() => sessionStorage),
     }
   )

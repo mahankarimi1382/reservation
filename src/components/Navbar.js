@@ -1,7 +1,7 @@
 import Image from "next/image";
 import logo from "../../public/pics/logo-doctor.png";
 import { IoMenuOutline } from "react-icons/io5";
-import { LoginButton } from "./Buttons/Button";
+import { BurgerMenuButt, LoginButton } from "./Buttons/Button";
 import { NavLinks } from "./Links/Links";
 
 function Navbar() {
@@ -17,7 +17,7 @@ function Navbar() {
         <NavLinks title="مجله درمانی" href="/healthMagezine" />
       </div>
       <div className=" lg:hidden rounded-lg p-[1px] border-2 border-[#005DAD]">
-        <IoMenuOutline className=" text-[#005DAD] text-2xl" />
+        <BurgerMenuButt/>
       </div>
       <div className=" flex items-center gap-4 justify-center">
         <LoginButton />
