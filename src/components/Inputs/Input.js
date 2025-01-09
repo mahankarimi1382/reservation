@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
 import { myStore } from "@/store/Store";
+import { get_province, get_specialties, read_city } from "@/api/ApiCalling";
 
 export const SerchDropDowns = (props) => {
   const Specialties = [
@@ -132,5 +133,80 @@ export const SelectFilter = ({ title }) => {
       <option>شیراز</option>
       <option>اردبیل</option>
     </select>
+  );
+};
+export const CitySelectInput = ({ cities }) => {
+  console.log(cities);
+  return (
+    <div className=" w-[40%] flex gap-2 flex-col items-start">
+      <h5>شهر</h5>
+      <select className=" border w-full border-[#636972] rounded-lg p-2">
+        {cities.map((item) => {
+          return <option key={item.id}>{item.cityName}</option>;
+        })}
+      </select>
+    </div>
+  );
+};
+export const ProvinceSelectInput = ({ setCities }) => {
+  const [provinces, setProvinces] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await get_province();
+      if (data) {
+        setProvinces(data);
+      }
+    };
+    fetchData();
+  }, []);
+  return (
+    <div className=" w-[40%] flex gap-2 flex-col items-start">
+      <h5>استان</h5>
+      <select
+        onChange={(e) => read_city(e.target.value, setCities)}
+        className=" border w-full border-[#636972] rounded-lg p-2"
+      >
+        {provinces.map((item) => {
+          return (
+            <option key={item.id} value={item.value}>
+              {item.label}
+            </option>
+          );
+        })}
+      </select>
+    </div>
+  );
+};
+export const SpecialtiesSelectInput = ({ setSpecialistId }) => {
+  const [specialist, setSpecialist] = useState([]);
+  console.log(specialist);
+  useEffect(() => {
+    const fetchData = async () => {
+      const url = "Specialist/read-specialists";
+
+      const data = await get_specialties(url);
+      if (data) {
+        console.log(data);
+        setSpecialist(data);
+      }
+    };
+    fetchData();
+  }, []);
+  return (
+    <div className=" w-[40%] flex gap-2 flex-col items-start">
+      <h5>تخصص</h5>
+      <select
+        onChange={(e) => setSpecialistId(e.target.value)}
+        className=" border w-full border-[#636972] rounded-lg p-2"
+      >
+        {specialist.map((item) => {
+          return (
+            <option value={item.id} key={item.id}>
+              {item.name}
+            </option>
+          );
+        })}
+      </select>
+    </div>
   );
 };

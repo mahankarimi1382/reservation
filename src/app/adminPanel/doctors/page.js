@@ -6,6 +6,7 @@ import React from "react";
 import excel_icon from "../../../../public/Pics/excelIcon.png";
 import printer from "../../../../public/Pics/printer.png";
 import { TiArrowSortedDown } from "react-icons/ti";
+import { AddDoctorButt } from "@/components/Buttons/Button";
 
 function page() {
   const fakeData = [
@@ -95,10 +96,11 @@ function page() {
             <Image src={excel_icon} alt=" icon" width={24} />
             خروجی اکسل
           </button>
-          <button className=" border rounded-lg px-3 p-1 gap-2 text-[#3F444D] border-[#3F444D] flex">
+          {/* <button className=" border rounded-lg px-3 p-1 gap-2 text-[#3F444D] border-[#3F444D] flex">
             <Image src={printer} alt=" icon" width={24} />
             چاپ اطلاعات{" "}
-          </button>
+          </button> */}
+          <AddDoctorButt />
         </div>
         <div className=" gap-3 flex flex-col w-[80%] rounded-lg border shadow-md p-4 bg-white">
           <div className=" py-2 w-full flex rounded-lg bg-[#F4F4F4]">

@@ -193,3 +193,42 @@ export const delete_specialties = async (id, route) => {
     console.log(error);
   }
 };
+export const get_province = async () => {
+  try {
+    const response = await axiosConfig.get("Province/read-province");
+    const provinces = response.data.result.list;
+    console.log(provinces);
+    return provinces;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+export const read_city = (id, setCities) => {
+  axiosConfig
+    .post("City/read-city", {
+      metadata: {
+        userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        userName: "string",
+      },
+      provinceId: id,
+    })
+    .then((res) => {
+      console.log(res);
+      setCities(res.data.result.list);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+export const add_doctor = (data) => {
+  console.log(data)
+  axiosConfig
+    .post("Doctor/create-doctor", data)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

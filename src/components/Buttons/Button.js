@@ -31,6 +31,7 @@ import { IoMenuOutline } from "react-icons/io5";
 import BurgerMenu from "../BurgerMenu";
 import { GoPlus } from "react-icons/go";
 import SubmitSpecialModal from "../modals/SubmitSpecialModal";
+import AddDoctorModal from "../modals/AddDoctorModal";
 
 export const LoginButton = () => {
   const { fullName, setFullName } = fullNameStorage();
@@ -433,8 +434,24 @@ export const AddSpecialtiesButt = () => {
         className=" flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
       >
         <GoPlus className=" text-2xl" />
-        
         افزودن تخصص
+      </button>
+    </div>
+  );
+};
+export const AddDoctorButt = () => {
+  const [isAddDoctorModal, setIsAddDoctorModal] = useState(false);
+  return (
+    <div>
+      {isAddDoctorModal && (
+        <AddDoctorModal setIsAddDoctorModal={setIsAddDoctorModal} />
+      )}
+      <button
+        onClick={() => setIsAddDoctorModal(true)}
+        className=" flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
+      >
+        <GoPlus className=" text-2xl" />
+        افزودن دکتر
       </button>
     </div>
   );

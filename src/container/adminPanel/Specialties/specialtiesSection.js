@@ -6,12 +6,10 @@ import { CiEdit } from "react-icons/ci";
 import { HiOutlineTrash } from "react-icons/hi2";
 import { TiArrowSortedDown } from "react-icons/ti";
 import heartIcon from "../../../../public/Pics/Specialties/heart-icon.png";
-import { useRouter } from "next/navigation";
 
 function SpecialtiesPanelSection() {
   const [specialist, setSpecialist] = useState([]);
   const url = "Specialist/read-specialists";
-  const route = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
