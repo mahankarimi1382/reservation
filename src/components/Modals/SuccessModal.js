@@ -4,7 +4,7 @@ import ModalLogo from "../../../public/pics/ModalLogo.png";
 import Image from "next/image";
 import Confetti from "react-confetti";
 
-function SuccessOpinionModal({ setIsSuccessModal }) {
+function SuccessModal({ setIsSuccessModal }) {
   const handleClose = () => {
     setIsSuccessModal(false);
   };
@@ -37,4 +37,4 @@ function SuccessOpinionModal({ setIsSuccessModal }) {
   );
 }
 
-export default SuccessOpinionModal;
+export default SuccessModal;

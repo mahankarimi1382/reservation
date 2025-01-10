@@ -9,7 +9,7 @@ import dentist from "../../../public/pics/Specialties/dentist-icon.png";
 import Image from "next/image";
 import { CiSearch } from "react-icons/ci";
 
-function SpecialtiesModal({ setIsSpecialtiesModal }) {
+function SpecialtiesListModal({ setIsSpecialtiesModal }) {
   const categorys = [
     {
       id: 1,
@@ -178,4 +178,4 @@ function SpecialtiesModal({ setIsSpecialtiesModal }) {
   );
 }
 
-export default SpecialtiesModal;
+export default SpecialtiesListModal;

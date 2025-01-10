@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import PhoneNumModal from "./PhoneNumModal";
 import SignupModal from "./SignUpModal";
 
-function LoginModals({ setIsModal }) {
+function LoginModal({ setIsModal }) {
   const [isPhoneNumModal, setIsPhoneNuumModal] = useState(true);
   const [isSignupModal, setIsSignupModal] = useState(false);
   const [isValidateModal, setIsValidateModal] = useState(false);
@@ -35,4 +35,4 @@ function LoginModals({ setIsModal }) {
   );
 }
 
-export default LoginModals;
+export default LoginModal;

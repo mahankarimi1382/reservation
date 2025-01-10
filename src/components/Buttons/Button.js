@@ -1,14 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { CiLogin } from "react-icons/ci";
-import LoginModals from "../modals/LoginModals";
 import Image from "next/image";
-import VisitSelectModal from "../modals/VisitSelectModal";
 import screenIcon from "../../../public/Pics/mirroring-screen.png";
 import { IoIosArrowRoundBack } from "react-icons/io";
-import NazarModal from "../modals/NazarModal";
-import SuccessOpinionModal from "../modals/SuccessOpinionModal";
-import SpecialtiesModal from "../modals/SpecialtiesModal";
 import { IoIosMore } from "react-icons/io";
 import { IoEyeOutline } from "react-icons/io5";
 import SeeDoctorNazarModal from "../modals/SeeDoctorNazarModal";
@@ -32,6 +27,11 @@ import BurgerMenu from "../BurgerMenu";
 import { GoPlus } from "react-icons/go";
 import SubmitSpecialModal from "../modals/SubmitSpecialModal";
 import AddDoctorModal from "../modals/AddDoctorModal";
+import VisitSelectionModal from "../modals/VisitSelectionModal";
+import OpinionModal from "../modals/OpinionModal";
+import SuccessModal from "../modals/SuccessModal";
+import LoginModal from "../modals/LoginModal";
+import SpecialtiesListModal from "../modals/SpecialtiesListModal";
 
 export const LoginButton = () => {
   const { fullName, setFullName } = fullNameStorage();
@@ -44,7 +44,7 @@ export const LoginButton = () => {
   };
   return (
     <div className=" flex justify-center items-center gap-3">
-      {isModal && <LoginModals setIsModal={setIsModal} />}
+      {isModal && <LoginModal setIsModal={setIsModal} />}
       {!fullName && (
         <button
           onClick={() => router.push("medicalCentersLogin")}
@@ -101,7 +101,7 @@ export const NobatButton = (props) => {
   return (
     <div className=" flex justify-between px-2 w-[171px] h-[54px] border shadow-[0_1px_15px_-5px_rgba(0,0,0,0.3)] rounded-xl">
       {isVisitSelectModal && (
-        <VisitSelectModal
+        <VisitSelectionModal
           isVisitSelectModal={isVisitSelectModal}
           setIsVisitSelectModal={setIsVisitSelectModal}
         />
@@ -127,14 +127,12 @@ export const SabteNazarButton = () => {
   return (
     <div>
       {isNazarModal && (
-        <NazarModal
+        <OpinionModal
           setIsNazarModal={setIsNazarModal}
           setIsSuccessModal={setIsSuccessModal}
         />
       )}
-      {IsSuccessModal && (
-        <SuccessOpinionModal setIsSuccessModal={setIsSuccessModal} />
-      )}
+      {IsSuccessModal && <SuccessModal setIsSuccessModal={setIsSuccessModal} />}
 
       <button
         onClick={() => setIsNazarModal(true)}
@@ -151,7 +149,7 @@ export const DoctorLoginButt = () => {
 
   return (
     <div>
-      {isModal && <LoginModals setIsModal={setIsModal} />}
+      {isModal && <LoginModal setIsModal={setIsModal} />}
 
       <button
         onClick={() => setIsModal(true)}
@@ -172,7 +170,7 @@ export const SpecialtiesSectionButton = () => {
   return (
     <div>
       {isSpecialtiesModal && (
-        <SpecialtiesModal setIsSpecialtiesModal={setIsSpecialtiesModal} />
+        <SpecialtiesListModal setIsSpecialtiesModal={setIsSpecialtiesModal} />
       )}
       <div
         onClick={handleOpenModal}
@@ -384,7 +382,7 @@ export const SignUpButton = () => {
   };
   return (
     <div>
-      {isModal && <LoginModals type="signup" />}
+      {isModal && <LoginModal type="signup" />}
       <button onClick={handleOpenModal} className="text-[#005DAD]">
         ثبت نام کنید
       </button>

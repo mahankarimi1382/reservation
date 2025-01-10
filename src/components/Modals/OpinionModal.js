@@ -6,7 +6,7 @@ import RatingStars from "../../container/Doctors/RatingStars";
 import { BiSolidLike } from "react-icons/bi";
 import { BiDislike } from "react-icons/bi";
 
-function NazarModal({ setIsNazarModal, setIsSuccessModal }) {
+function OpinionModal({ setIsNazarModal, setIsSuccessModal }) {
   const handleSuccessModal = () => {
     setIsNazarModal(false);
     setIsSuccessModal(true);
@@ -71,4 +71,4 @@ function NazarModal({ setIsNazarModal, setIsSuccessModal }) {
   );
 }
 
-export default NazarModal;
+export default OpinionModal;
