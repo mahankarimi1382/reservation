@@ -1,11 +1,11 @@
 import React from "react";
-import heart from "../../../public/pics/Specialties/heart-icon.png";
-import brain from "../../../public/pics/Specialties/brain-icon.png";
-import dakheli from "../../../public/pics/Specialties/dakheli-icon.png";
-import eye from "../../../public/pics/Specialties/eye-icon.png";
-import zayman from "../../../public/pics/Specialties/zayman-icon.png";
-import kollie from "../../../public/pics/Specialties/kollie-icon.png";
-import dentist from "../../../public/pics/Specialties/dentist-icon.png";
+import heart from "../../../public/Pics/Specialties/heart-icon.png";
+import brain from "../../../public/Pics/Specialties/brain-icon.png";
+import dakheli from "../../../public/Pics/Specialties/dakheli-icon.png";
+import eye from "../../../public/Pics/Specialties/eye-icon.png";
+import zayman from "../../../public/Pics/Specialties/zayman-icon.png";
+import kollie from "../../../public/Pics/Specialties/kollie-icon.png";
+import dentist from "../../../public/Pics/Specialties/dentist-icon.png";
 import SwipperSection from "../../components/SwipperSection";
 import { SpecialtiesSectionButton } from "@/components/Buttons/Button";
 function SpecialtiesSection() {

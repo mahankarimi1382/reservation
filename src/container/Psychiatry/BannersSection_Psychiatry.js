@@ -1,6 +1,6 @@
 import React from "react";
-import banner1 from "../../../public/pics/banner.png";
-import banner2 from "../../../public/pics/baannerr2.png";
+import banner1 from "../../../public/Pics/banner.png";
+import banner2 from "../../../public/Pics/baannerr2.png";
 import Baner from "../../components/Baner";
 
 function BannersSection_Psychiatry() {

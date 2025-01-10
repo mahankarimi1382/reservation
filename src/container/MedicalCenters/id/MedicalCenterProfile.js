@@ -1,13 +1,12 @@
 "use client"
 import Image from "next/image";
 import React from "react";
-import karenLogo from "../../../../public/pics/karenLogo.png";
+import karenLogo from "../../../../public/Pics/karenLogo.png";
 import { CiBookmark } from "react-icons/ci";
 import { CiShare2 } from "react-icons/ci";
 import { BsTelephone } from "react-icons/bs";
-import taminejtemaei from "../../../../public/pics/taminejtemaei.png";
-import map2 from "../../../../public/pics/map2.png";
-import gooshiPezeshki from "../../../../public/pics/gooshiPezeshki.png";
+import taminejtemaei from "../../../../public/Pics/taminejtemaei.png";
+import gooshiPezeshki from "../../../../public/Pics/gooshiPezeshki.png";
 import { IoLocationOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import AllDoctorsCard from "../../../components/AllDoctorsCard";

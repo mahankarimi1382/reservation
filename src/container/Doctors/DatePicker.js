@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import calenderIcon from "../../../public/pics/calendar.png";
+import calenderIcon from "../../../public/Pics/calendar.png";
 
 function DatePicker() {
   return (

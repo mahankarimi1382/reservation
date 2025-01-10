@@ -1,9 +1,9 @@
 import React from "react";
 import { FiArrowLeftCircle } from "react-icons/fi";
-import certicicate1 from "../../public/pics/cetificate.png";
-import certicicate2 from "../../public/pics/cetificate2.png";
-import certicicate3 from "../../public/pics/cetificate3.png";
-import certicicate4 from "../../public/pics/cetificate4.png";
+import certicicate1 from "../../public/Pics/cetificate.png";
+import certicicate2 from "../../public/Pics/cetificate2.png";
+import certicicate3 from "../../public/Pics/cetificate3.png";
+import certicicate4 from "../../public/Pics/cetificate4.png";
 import { SiLinkedin } from "react-icons/si";
 import { PiInstagramLogoFill } from "react-icons/pi";
 import { FaTelegramPlane } from "react-icons/fa";

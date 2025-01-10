@@ -1,10 +1,10 @@
 import Image from "next/image";
 import React from "react";
 import pesorasos from "../../../../public/Pics/pesoriasos.png";
-import hospital from "../../../../public/pics/hospital.png";
-import monitor from "../../../../public/pics/monitor-mobbile.png";
-import userTag from "../../../../public/pics/user-tag.png";
-import favoriteChart from "../../../../public/pics/favorite-chart.png";
+import hospital from "../../../../public/Pics/hospital.png";
+import monitor from "../../../../public/Pics/monitor-mobbile.png";
+import userTag from "../../../../public/Pics/user-tag.png";
+import favoriteChart from "../../../../public/Pics/favorite-chart.png";
 import star from "../../../../public/Pics/star.png";
 import { IoLocationOutline } from "react-icons/io5";
 function MedicalCenterSave() {

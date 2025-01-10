@@ -2,8 +2,8 @@ import Image from "next/image";
 import React from "react";
 import { PiWarningCircle } from "react-icons/pi";
 import { AiFillLike } from "react-icons/ai";
-import star from "../../../../public/pics/star.png";
-import bahramMirzayi from "../../../../public/pics/bahramMirzayi.png";
+import star from "../../../../public/Pics/star.png";
+import bahramMirzayi from "../../../../public/Pics/bahramMirzayi.png";
 import CallenderAndTime from "@/container/reservation/CallenderAndTime";
 function page() {
   return (

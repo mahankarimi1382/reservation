@@ -1,6 +1,6 @@
-import heroPerson from "../../public/pics/hero-small-pesron-pic.png";
-import heroArrow from "../../public/pics/heroArrow.png";
-import heroLines from "../../public/pics/3lines.png";
+import heroPerson from "../../public/Pics/hero-small-pesron-pic.png";
+import heroArrow from "../../public/Pics/heroArrow.png";
+import heroLines from "../../public/Pics/3lines.png";
 import { CiSearch } from "react-icons/ci";
 import { IoLocationOutline } from "react-icons/io5";
 import Image from "next/image";

@@ -1,9 +1,9 @@
 import React from "react";
-import iphone14 from "../../../public/pics/iPhone 14.png";
-import appstore from "../../../public/pics/appstore.png";
-import playstore from "../../../public/pics/googleplay.png";
-import bazzar from "../../../public/pics/bazzar.png";
-import iphone13 from "../../../public/pics/iPhone 13.png";
+import iphone14 from "../../../public/Pics/iPhone 14.png";
+import appstore from "../../../public/Pics/appstore.png";
+import playstore from "../../../public/Pics/googleplay.png";
+import bazzar from "../../../public/Pics/bazzar.png";
+import iphone13 from "../../../public/Pics/iPhone 13.png";
 import Image from "next/image";
 function SamaneSection() {
   return (

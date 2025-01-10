@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import layer from "../../public/pics/Layer_1.png";
+import layer from "../../public/Pics/Layer_1.png";
 import { MdOutlineArrowCircleLeft } from "react-icons/md";
 import Image from "next/image";
 function Baner({ pic, text }) {

@@ -1,7 +1,7 @@
 import React from "react";
 import { IoIosArrowBack } from "react-icons/io";
 
-import MattabIcon from "../../../public/pics/MattabIcon.png";
+import MattabIcon from "../../../public/Pics/MattabIcon.png";
 import Image from "next/image";
 
 function MatabSection() {

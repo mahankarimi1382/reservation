@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "../../public/pics/logo-doctor.png";
+import logo from "../../public/Pics/logo-doctor.png";
 import { IoMenuOutline } from "react-icons/io5";
 import { BurgerMenuButt, LoginButton } from "./Buttons/Button";
 import { NavLinks } from "./Links/Links";

@@ -1,7 +1,7 @@
 
 import React from "react";
-import hospitalIcon from "../../../../public/pics/hospital.png";
-import monitorIcon from "../../../../public/pics/monitor-mobbile.png";
+import hospitalIcon from "../../../../public/Pics/hospital.png";
+import monitorIcon from "../../../../public/Pics/monitor-mobbile.png";
 import VisitSectionBoxes from "./VisitSectionBoxes";
 function VisitSection() {
   return (

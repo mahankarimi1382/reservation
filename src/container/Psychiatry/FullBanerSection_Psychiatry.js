@@ -1,5 +1,5 @@
 import React from "react";
-import fullBanner from "../../../public/pics/fullBaner.png";
+import fullBanner from "../../../public/Pics/fullBaner.png";
 import Image from "next/image";
 import hospitalIcon from "../../../public/Pics/FullBannerIcons/hospital.png";
 import group from "../../../public/Pics/FullBannerIcons/group.png";

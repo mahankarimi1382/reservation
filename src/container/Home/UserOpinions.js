@@ -1,6 +1,6 @@
 import React from "react";
-import userProfile from "../../../public/pics/user-profile.png";
-import rate from "../../../public/pics/rate.png";
+import userProfile from "../../../public/Pics/user-profile.png";
+import rate from "../../../public/Pics/rate.png";
 import Image from "next/image";
 function UserOpinions() {
   const opinions = [

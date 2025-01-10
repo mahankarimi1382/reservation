@@ -1,7 +1,7 @@
 import React from "react";
 import { IoIosArrowBack } from "react-icons/io";
 
-import hospitalIcon from "../../../public/pics/hospitalIcon.png";
+import hospitalIcon from "../../../public/Pics/hospitalIcon.png";
 import Image from "next/image";
 
 function HospitalsSection_Psychiatry() {

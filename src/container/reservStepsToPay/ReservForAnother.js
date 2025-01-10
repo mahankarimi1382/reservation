@@ -1,7 +1,7 @@
 import { Checkbox } from "@mui/material";
 import Image from "next/image";
 import React from "react";
-import step1reservation from "../../../public/pics/reservationStep1.png";
+import step1reservation from "../../../public/Pics/reservationStep1.png";
 
 function ReservForAnother({ setSteps }) {
   const handlCompleteStep1 = () => {

@@ -1,14 +1,14 @@
 import React from "react";
 import Image from "next/image";
-import karenLogo from "../../../public/pics/karenLogo.png";
-import star from "../../../public/pics/star.png";
-import hospital from "../../../public/pics/hospital.png";
-import monitor from "../../../public/pics/monitor-mobbile.png";
+import karenLogo from "../../../public/Pics/karenLogo.png";
+import star from "../../../public/Pics/star.png";
+import hospital from "../../../public/Pics/hospital.png";
+import monitor from "../../../public/Pics/monitor-mobbile.png";
 import { IoLocationOutline } from "react-icons/io5";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
-import userTag from "../../../public/pics/user-tag.png";
-import favoriteChart from "../../../public/pics/favorite-chart.png";
+import userTag from "../../../public/Pics/user-tag.png";
+import favoriteChart from "../../../public/Pics/favorite-chart.png";
 import Link from "next/link";
 const allCenters = [
   {

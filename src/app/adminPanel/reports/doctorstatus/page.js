@@ -6,9 +6,7 @@ import React from "react";
 import excel_icon from "../../../../../public/Pics/excelIcon.png";
 import printer from "../../../../../public/Pics/printer.png";
 import { TiArrowSortedDown } from "react-icons/ti";
-import { RateCounter } from "@/utils/RateCounter";
-import { HiOutlineTrash } from "react-icons/hi2";
-import { IoEyeOutline } from "react-icons/io5";
+
 
 function page() {
   const fakeData = [

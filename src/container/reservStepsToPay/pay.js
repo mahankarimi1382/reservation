@@ -1,11 +1,11 @@
 import Image from "next/image";
 import React from "react";
-import step2pay from "../../../public/pics/step2pay.png";
+import step2pay from "../../../public/Pics/step2pay.png";
 import PayDetails from "@/container/reservStepsToPay/PayDetails";
-import discountIcon from "../../../public/pics/discount-shape.png";
-import cardIcon from "../../../public/pics/card.png";
-import cardIcon_white from "../../../public/pics/card-white.png";
-import samanBank from "../../../public/pics/samanBank.png";
+import discountIcon from "../../../public/Pics/discount-shape.png";
+import cardIcon from "../../../public/Pics/card.png";
+import cardIcon_white from "../../../public/Pics/card-white.png";
+import samanBank from "../../../public/Pics/samanBank.png";
 function Pay({ setSteps }) {
   const handleCompleteStep2 = () => {
     setSteps(3);
@@ -53,9 +53,9 @@ function Pay({ setSteps }) {
             </h2>
             <div className=" -mt-5 w-full gap-2 flex flex-col justify-center items-center">
               <div className=" flex gap-3">
-                <Image src={samanBank} width={77} />
-                <Image src={samanBank} width={77} />
-                <Image src={samanBank} width={77} />
+                <Image alt="bank" src={samanBank} width={77} />
+                <Image alt="bank" src={samanBank} width={77} />
+                <Image alt="bank" src={samanBank} width={77} />
               </div>
               <div className=" flex flex-col gap-2">
                 <h5 className=" text-[#717171]">

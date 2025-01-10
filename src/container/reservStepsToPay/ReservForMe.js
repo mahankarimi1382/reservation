@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React from "react";
 import { CiEdit } from "react-icons/ci";
-import bahramProf from "../../../public/pics/bahramMirzayi.png";
-import star from "../../../public/pics/star.png";
-import step1reservation from "../../../public/pics/reservationStep1.png";
+import bahramProf from "../../../public/Pics/bahramMirzayi.png";
+import star from "../../../public/Pics/star.png";
+import step1reservation from "../../../public/Pics/reservationStep1.png";
 
 function ReservForMe({setSteps}) {
   const handleCompleteStep1=()=>{

@@ -1,5 +1,5 @@
 import React from "react";
-import filterIcon from "../../../public/pics/filter.png";
+import filterIcon from "../../../public/Pics/filter.png";
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
 import { SerchDropDowns } from "@/components/Inputs/Input";

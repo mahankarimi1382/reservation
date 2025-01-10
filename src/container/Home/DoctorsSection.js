@@ -1,6 +1,6 @@
 import React from "react";
-import abbas from "../../../public/pics/abbas.png";
-import star from "../../../public/pics/star.png";
+import abbas from "../../../public/Pics/abbas.png";
+import star from "../../../public/Pics/star.png";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
 

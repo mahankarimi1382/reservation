@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React from "react";
 import pesorasos from "../../../../public/Pics/pesoriasos.png";
-import hospital from "../../../../public/pics/hospital.png";
-import monitor from "../../../../public/pics/monitor-mobbile.png";
-import barezvijegi from "../../../../public/pics/barezvijegi.png";
+import hospital from "../../../../public/Pics/hospital.png";
+import monitor from "../../../../public/Pics/monitor-mobbile.png";
+import barezvijegi from "../../../../public/Pics/barezvijegi.png";
 import { AiFillLike } from "react-icons/ai";
 import star from "../../../../public/Pics/star.png";
 function DoctorSave() {

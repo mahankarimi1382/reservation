@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
-import calenderIcon from "../../../../public/pics/calendar.png";
+import calenderIcon from "../../../../public/Pics/calendar.png";
 import { RxCross2 } from "react-icons/rx";
 import VisitHozoriCard from "./VisitHozoriCard";
 

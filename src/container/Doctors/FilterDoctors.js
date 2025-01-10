@@ -1,5 +1,5 @@
 import React from "react";
-import filterIcon from "../../../public/pics/filter.png";
+import filterIcon from "../../../public/Pics/filter.png";
 import Image from "next/image";
 import MyLocMap from "../../../public/Pics/myLocMap.png";
 import FormGroup from "@mui/material/FormGroup";

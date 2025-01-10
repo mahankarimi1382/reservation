@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import calenderIcon from "../../../../public/pics/calendar.png";
+import calenderIcon from "../../../../public/Pics/calendar.png";
 import { IoLocationOutline } from "react-icons/io5";
 import { FiPhone } from "react-icons/fi";
 import { useRouter } from "next/navigation";

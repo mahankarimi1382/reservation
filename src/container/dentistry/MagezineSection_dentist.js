@@ -1,6 +1,6 @@
 import React from "react";
 import { FaArrowLeft } from "react-icons/fa6";
-import magezineimg from "../../../public/pics/magezineimg.png";
+import magezineimg from "../../../public/Pics/magezineimg.png";
 import Image from "next/image";
 function MagezineSection_dentist() {
   const Magezine = [

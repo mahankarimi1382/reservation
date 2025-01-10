@@ -1,5 +1,5 @@
 import React from "react";
-import HomeIcon from "../../public/pics/home-icon.png";
+import HomeIcon from "../../public/Pics/home-icon.png";
 import Image from "next/image";
 function PhoneMenu() {
   return (

@@ -5,7 +5,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Image from "next/image";
-import OperatorPic from "../../public/pics/OperatorPic.png";
+import OperatorPic from "../../public/Pics/OperatorPic.png";
 export default function AccordionMenu() {
   const [expanded, setExpanded] = React.useState(true);
   const [isOpen, setIsOpen] = React.useState(true);
