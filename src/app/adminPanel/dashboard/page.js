@@ -1,14 +1,14 @@
 "use client";
 import AdminPanelMenu from "@/container/adminPanel/AdminPanelMenu";
 import { CiSearch } from "react-icons/ci";
-import DoctorProfIcon from "../../../../public/Pics/doctor-profile-icon.png";
+import DoctorProfIcon from "../../../../public/pics/doctor-profile-icon.png";
 import React from "react";
 import Image from "next/image";
 import { IoIosArrowDown } from "react-icons/io";
-import Doctor from "../../../../public/Pics/AdminDashboard-icons/miniDoctorAvatar.png";
-import patient from "../../../../public/Pics/AdminDashboard-icons/patientAvatar.png";
-import select from "../../../../public/Pics/AdminDashboard-icons/select-all 1.png";
-import people from "../../../../public/Pics/AdminDashboard-icons/peopleAvatar.png";
+import Doctor from "../../../../public/pics/AdminDashboard-icons/miniDoctorAvatar.png";
+import patient from "../../../../public/pics/AdminDashboard-icons/patientAvatar.png";
+import select from "../../../../public/pics/AdminDashboard-icons/select-all 1.png";
+import people from "../../../../public/pics/AdminDashboard-icons/peopleAvatar.png";
 import IncomeAdminChart from "@/container/adminPanel/dashBoard/IncomeAdminChart";
 import TurnStatusChart from "@/container/adminPanel/dashBoard/TurnStatusChart";
 
