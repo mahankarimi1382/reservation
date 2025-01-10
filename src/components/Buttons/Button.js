@@ -4,7 +4,7 @@ import { CiLogin } from "react-icons/ci";
 import LoginModals from "../modals/LoginModals";
 import Image from "next/image";
 import VisitSelectModal from "../modals/VisitSelectModal";
-import screenIcon from "../../../public/pics/mirroring-screen.png";
+import screenIcon from "../../../public/Pics/mirroring-screen.png";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import NazarModal from "../modals/NazarModal";
 import SuccessOpinionModal from "../modals/SuccessOpinionModal";
