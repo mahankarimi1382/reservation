@@ -11,6 +11,7 @@ export default function AccordionMenu() {
   const [isOpen, setIsOpen] = React.useState(true);
   const handleChange = (panel) => (event, isExpanded) => {
     setIsOpen(false);
+    
     setExpanded(isExpanded ? panel : false);
   };
 
