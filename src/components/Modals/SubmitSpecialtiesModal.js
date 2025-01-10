@@ -4,7 +4,7 @@ import logo from "../../../public/Pics/logo-doctor.png";
 import { add_specialties } from "@/api/ApiCalling";
 import { nationalCodeStorage } from "@/store/Store";
 import { SyncLoader } from "react-spinners";
-function SubmitSpecialModal({ setIsAddSpecialtiesModal }) {
+function SubmitSpecialtiesModal({ setIsAddSpecialtiesModal }) {
   const { userName } = nationalCodeStorage();
   const [specialName, setSpecialName] = useState("");
   const [isLoading,setIsLoading]=useState(false)
@@ -85,4 +85,4 @@ function SubmitSpecialModal({ setIsAddSpecialtiesModal }) {
   );
 }
 
-export default SubmitSpecialModal;
+export default SubmitSpecialtiesModal;

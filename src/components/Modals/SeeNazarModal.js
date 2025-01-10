@@ -7,9 +7,8 @@ import star from "../../../public/pics/star.png";
 import doctorAnswer from "../../../public/Pics/doctorAnswerFake.png";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
-import { capitalize } from "@mui/material";
 
-function SeeDoctorNazarModal({ setIsNazarModal }) {
+function SeeNazarModal({ setIsNazarModal }) {
   const nazarat = [
     {
       id: 1,
@@ -132,4 +131,4 @@ function SeeDoctorNazarModal({ setIsNazarModal }) {
   );
 }
 
-export default SeeDoctorNazarModal;
+export default SeeNazarModal;

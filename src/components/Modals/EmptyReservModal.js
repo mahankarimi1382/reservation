@@ -12,7 +12,7 @@ import monitor from "../../../public/pics/monitor-mobbile.png";
 import matni from "../../../public/pics/matniIcon.png";
 import callenderIcon from "../../../public/pics/callenderIcon.png";
 import telefoniIcon from "../../../public/pics/telefoniIcon.png";
-function EmptyReservDoctorModal({setIsEmptyModal}) {
+function EmptyReservModal({setIsEmptyModal}) {
   
   const handleCloseModal = () => {
     setIsEmptyModal(false);
@@ -149,4 +149,4 @@ function EmptyReservDoctorModal({setIsEmptyModal}) {
   );
 }
 
-export default EmptyReservDoctorModal;
+export default EmptyReservModal;

@@ -5,7 +5,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import { FiPhone } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import ReservDateAndTimeModal from "@/components/modals/ReservDateAndTimeModal";
-import EmptyReservDoctorModal from "@/components/modals/EmptyReservDoctorModal";
+import EmptyReservDoctorModal from "@/components/modals/EmptyReservModal";
 
 function VisitHozoriCard() {
   const [isEmtyModal, setIsEmptyModal] = useState(false);

@@ -12,7 +12,7 @@ import tasviriminimal from "../../../public/pics/tasviriMinimal.png";
 import hospitalMinimal from "../../../public/pics/hospitalMinimal.png";
 import matabMinimal from "../../../public/pics/matabMinimal.png";
 
-function VisitSelectionModal({ isVisitSelectModal, setIsVisitSelectModal }) {
+function VisitTypeSelectionModal({ isVisitSelectModal, setIsVisitSelectModal }) {
   const handleCloseModal = () => {
     setIsVisitSelectModal("");
   };
@@ -120,4 +120,4 @@ function VisitSelectionModal({ isVisitSelectModal, setIsVisitSelectModal }) {
   );
 }
 
-export default VisitSelectionModal;
+export default VisitTypeSelectionModal;

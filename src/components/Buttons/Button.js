@@ -6,8 +6,6 @@ import screenIcon from "../../../public/Pics/mirroring-screen.png";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { IoIosMore } from "react-icons/io";
 import { IoEyeOutline } from "react-icons/io5";
-import SeeDoctorNazarModal from "../modals/SeeDoctorNazarModal";
-import EmptyReservDoctorModal from "../modals/EmptyReservDoctorModal";
 import { IoIosArrowDown } from "react-icons/io";
 import { FiEdit3 } from "react-icons/fi";
 import {
@@ -25,13 +23,15 @@ import Cookies from "js-cookie";
 import { IoMenuOutline } from "react-icons/io5";
 import BurgerMenu from "../BurgerMenu";
 import { GoPlus } from "react-icons/go";
-import SubmitSpecialModal from "../modals/SubmitSpecialModal";
-import AddDoctorModal from "../modals/AddDoctorModal";
-import VisitSelectionModal from "../modals/VisitSelectionModal";
 import OpinionModal from "../modals/OpinionModal";
 import SuccessModal from "../modals/SuccessModal";
 import LoginModal from "../modals/LoginModal";
 import SpecialtiesListModal from "../modals/SpecialtiesListModal";
+import SeeNazarModal from "../modals/SeeNazarModal";
+import EmptyReservModal from "../modals/EmptyReservModal";
+import SubmitSpecialtiesModal from "../modals/SubmitSpecialtiesModal";
+import AddNewDoctorModal from "../modals/AddNewDoctorModal";
+import VisitTypeSelectionModal from "../modals/VisitTypeSelectionModal";
 
 export const LoginButton = () => {
   const { fullName, setFullName } = fullNameStorage();
@@ -101,7 +101,7 @@ export const NobatButton = (props) => {
   return (
     <div className=" flex justify-between px-2 w-[171px] h-[54px] border shadow-[0_1px_15px_-5px_rgba(0,0,0,0.3)] rounded-xl">
       {isVisitSelectModal && (
-        <VisitSelectionModal
+        <VisitTypeSelectionModal
           isVisitSelectModal={isVisitSelectModal}
           setIsVisitSelectModal={setIsVisitSelectModal}
         />
@@ -194,9 +194,7 @@ export const SeeDoctorNazaratButt = () => {
   };
   return (
     <div>
-      {isNazarModal && (
-        <SeeDoctorNazarModal setIsNazarModal={setIsNazarModal} />
-      )}
+      {isNazarModal && <SeeNazarModal setIsNazarModal={setIsNazarModal} />}
       <button
         onClick={handleOpenModal}
         className=" text-[#005DAD] flex justify-center items-center gap-1 text-sm"
@@ -218,7 +216,7 @@ export const EmtyReservButt = ({ docDetail }) => {
   return (
     <div>
       {isModalOpen && (
-        <EmptyReservDoctorModal
+        <EmptyReservModal
           setIsModalOpen={setIsModalOpen}
           selectedDoctor={selectedDoctor}
         />
@@ -423,7 +421,7 @@ export const AddSpecialtiesButt = () => {
   return (
     <div>
       {isAddSpecialtiesModal && (
-        <SubmitSpecialModal
+        <SubmitSpecialtiesModal
           setIsAddSpecialtiesModal={setIsAddSpecialtiesModal}
         />
       )}
@@ -442,7 +440,7 @@ export const AddDoctorButt = () => {
   return (
     <div>
       {isAddDoctorModal && (
-        <AddDoctorModal setIsAddDoctorModal={setIsAddDoctorModal} />
+        <AddNewDoctorModal setIsAddDoctorModal={setIsAddDoctorModal} />
       )}
       <button
         onClick={() => setIsAddDoctorModal(true)}

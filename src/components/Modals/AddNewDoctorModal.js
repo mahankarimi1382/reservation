@@ -9,7 +9,7 @@ import {
 } from "../Inputs/Input";
 import { add_doctor } from "@/api/ApiCalling";
 import { smeIdStorage } from "@/store/Store";
-function AddDoctorModal({ setIsAddDoctorModal }) {
+function AddNewDoctorModal({ setIsAddDoctorModal }) {
   const { smeId } = smeIdStorage();
   const [cities, setCities] = useState([]);
   const [doctorName, setDoctorName] = useState("");
@@ -113,4 +113,4 @@ function AddDoctorModal({ setIsAddDoctorModal }) {
   );
 }
 
-export default AddDoctorModal;
+export default AddNewDoctorModal;
