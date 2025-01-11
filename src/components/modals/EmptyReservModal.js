@@ -1,17 +1,17 @@
 import React from "react";
-import doctorprof from "../../../public/pics/abbas.png";
-import star from "../../../public/pics/star.png";
-import hospital from "../../../public/pics/hospital.png";
+import doctorprof from "../../../public/Pics/abbas.png";
+import star from "../../../public/Pics/star.png";
+import hospital from "../../../public/Pics/hospital.png";
 import { IoIosArrowDown } from "react-icons/io";
 import { AiFillLike } from "react-icons/ai";
 import Image from "next/image";
 import { RiErrorWarningLine } from "react-icons/ri";
 import { IoLocationOutline } from "react-icons/io5";
-import tasviri from "../../../public/pics/tasviri.png";
-import monitor from "../../../public/pics/monitor-mobbile.png";
-import matni from "../../../public/pics/matniIcon.png";
-import callenderIcon from "../../../public/pics/callenderIcon.png";
-import telefoniIcon from "../../../public/pics/telefoniIcon.png";
+import tasviri from "../../../public/Pics/tasviri.png";
+import monitor from "../../../public/Pics/monitor-mobbile.png";
+import matni from "../../../public/Pics/matniIcon.png";
+import callenderIcon from "../../../public/Pics/callenderIcon.png";
+import telefoniIcon from "../../../public/Pics/telefoniIcon.png";
 function EmptyReservModal({setIsEmptyModal}) {
   
   const handleCloseModal = () => {

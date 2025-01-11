@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { RxCross2 } from "react-icons/rx";
-import doctorProfileImg from "../../../public/pics/user-profile.png";
+import doctorProfileImg from "../../../public/Pics/user-profile.png";
 import RatingStars from "../../container/Doctors/RatingStars";
 import { BiSolidLike } from "react-icons/bi";
 import { BiDislike } from "react-icons/bi";

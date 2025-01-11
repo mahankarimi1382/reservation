@@ -1,6 +1,6 @@
 import React from "react";
 import { RxCross2 } from "react-icons/rx";
-import ModalLogo from "../../../public/pics/ModalLogo.png";
+import ModalLogo from "../../../public/Pics/ModalLogo.png";
 import Image from "next/image";
 import Confetti from "react-confetti";
 

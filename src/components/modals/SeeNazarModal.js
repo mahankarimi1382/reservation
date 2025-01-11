@@ -3,7 +3,7 @@ import React from "react";
 import { RxCross2 } from "react-icons/rx";
 import person from "../../../public/Pics/personFake.png";
 import { FaRegSmile } from "react-icons/fa";
-import star from "../../../public/pics/star.png";
+import star from "../../../public/Pics/star.png";
 import doctorAnswer from "../../../public/Pics/doctorAnswerFake.png";
 import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";

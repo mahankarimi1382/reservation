@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import ModalLogo from "../../../public/pics/ModalLogo.png";
+import ModalLogo from "../../../public/Pics/ModalLogo.png";
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
 import Timer from "../Timer";

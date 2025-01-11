@@ -1,18 +1,21 @@
 import Image from "next/image";
 import React from "react";
-import logo from "../../../public/pics/logo-doctor.png";
+import logo from "../../../public/Pics/logo-doctor.png";
 import { RxCross2 } from "react-icons/rx";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import matniminimal from "../../../public/pics/matniminimal.png";
-import sotiminimal from "../../../public/pics/sotiMinimal.png";
-import tasviriminimal from "../../../public/pics/tasviriMinimal.png";
-import hospitalMinimal from "../../../public/pics/hospitalMinimal.png";
-import matabMinimal from "../../../public/pics/matabMinimal.png";
+import matniminimal from "../../../public/Pics/matniminimal.png";
+import sotiminimal from "../../../public/Pics/sotiMinimal.png";
+import tasviriminimal from "../../../public/Pics/tasviriMinimal.png";
+import hospitalMinimal from "../../../public/Pics/hospitalMinimal.png";
+import matabMinimal from "../../../public/Pics/matabMinimal.png";
 
-function VisitTypeSelectionModal({ isVisitSelectModal, setIsVisitSelectModal }) {
+function VisitTypeSelectionModal({
+  isVisitSelectModal,
+  setIsVisitSelectModal,
+}) {
   const handleCloseModal = () => {
     setIsVisitSelectModal("");
   };
