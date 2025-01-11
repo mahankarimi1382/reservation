@@ -96,7 +96,7 @@ export const activating_registarion = (
 export const create_sme_profile = (Name, nationalCode, token, setSmeId) => {
   axios
     .post(
-      "http://84.47.224.220:8040/API/v1/SmeProfile/create-sme-profile",
+      "https://myapi.dadehavaran.com:8040/API/v1/SmeProfile/create-sme-profile",
       {
         metadata: {
           userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -222,7 +222,7 @@ export const read_city = (id, setCities) => {
     });
 };
 export const add_doctor = (data) => {
-  console.log(data)
+  console.log(data);
   axiosConfig
     .post("Doctor/create-doctor", data)
     .then((res) => {
