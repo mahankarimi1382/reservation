@@ -3,7 +3,6 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
 export const myStore = create((set) => ({
-
   reservationType: null,
   setReservationType: (type) => set(() => ({ reservationType: type })),
   isEdit: false,
@@ -28,6 +27,19 @@ export const fullNameStorage = create(
     }),
     {
       name: "FullName",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);
+export const MovaqatiDoctorStorage = create(
+  persist(
+    (set) => ({
+      doctors: [],
+      setDoctors: (data) =>
+        set((state) => ({ doctors: [...state.doctors, data] })),
+    }),
+    {
+      name: "doctors",
       storage: createJSONStorage(() => sessionStorage),
     }
   )

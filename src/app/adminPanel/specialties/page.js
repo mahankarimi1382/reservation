@@ -8,66 +8,6 @@ import { ToastContainer } from "react-toastify";
 import SpecialtiesPanelSection from "@/container/adminPanel/Specialties/specialtiesSection";
 
 function page() {
-
-
-  const fakeData = [
-    {
-      id: 1,
-      name: "ایمان سالارکیا",
-      time: "1403/0402 ساعت 10:30",
-      code: "0024567980",
-      phone: "09129804556",
-    },
-    {
-      id: 2,
-      name: "ایمان سالارکیا",
-      time: "1403/0402 ساعت 10:30",
-      code: "0024567980",
-      phone: "09129804556",
-    },
-    {
-      id: 3,
-      name: "ایمان سالارکیا",
-      time: "1403/0402 ساعت 10:30",
-      code: "0024567980",
-      phone: "09129804556",
-    },
-    {
-      id: 4,
-      name: "ایمان سالارکیا",
-      time: "1403/0402 ساعت 10:30",
-      code: "0024567980",
-      phone: "09129804556",
-    },
-    {
-      id: 5,
-      name: "ایمان سالارکیا",
-      time: "1403/0402 ساعت 10:30",
-      code: "0024567980",
-      phone: "09129804556",
-    },
-    {
-      id: 6,
-      name: "ایمان سالارکیا",
-      time: "1403/0402 ساعت 10:30",
-      code: "0024567980",
-      phone: "09129804556",
-    },
-    {
-      id: 7,
-      name: "ایمان سالارکیا",
-      time: "1403/0402 ساعت 10:30",
-      code: "0024567980",
-      phone: "09129804556",
-    },
-    {
-      id: 8,
-      name: "ایمان سالارکیا",
-      time: "1403/0402 ساعت 10:30",
-      code: "0024567980",
-      phone: "09129804556",
-    },
-  ];
   return (
     <div dir="rtl" className="flex bg-[#F6FBFF] justify-start">
       <AdminPanelMenu />

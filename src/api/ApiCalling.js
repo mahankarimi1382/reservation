@@ -76,7 +76,6 @@ export const activating_registarion = (
   closeModal
 ) => {
   setIsLoading(true);
-  console.log(activationCode);
 
   axiosConfig
     .post(`Authentication/activating-registration`, data)
@@ -221,12 +220,16 @@ export const read_city = (id, setCities) => {
       console.log(err);
     });
 };
-export const add_doctor = (data) => {
+export const add_doctor = (data, setIsAddDoctorModal, setDoctors) => {
+  setDoctors(data);
+
   console.log(data);
   axiosConfig
     .post("Doctor/create-doctor", data)
     .then((res) => {
       console.log(res);
+      success("پزشک با موفقیت ثبت شد");
+      setIsAddDoctorModal(false);
     })
     .catch((err) => {
       console.log(err);

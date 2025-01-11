@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import heart from "../../../public/Pics/Specialties/heart-icon.png";
 import brain from "../../../public/Pics/Specialties/brain-icon.png";
 import dakheli from "../../../public/Pics/Specialties/dakheli-icon.png";
@@ -8,135 +8,22 @@ import kollie from "../../../public/Pics/Specialties/kollie-icon.png";
 import dentist from "../../../public/Pics/Specialties/dentist-icon.png";
 import Image from "next/image";
 import { CiSearch } from "react-icons/ci";
+import { get_specialties } from "@/api/ApiCalling";
 
 function SpecialtiesListModal({ setIsSpecialtiesModal }) {
-  const categorys = [
-    {
-      id: 1,
-      name: "متخصص قلب و عروق",
-      icon: heart,
-    },
-    {
-      id: 2,
-      name: "متخصص مغز و اعصاب",
-      icon: brain,
-    },
-    {
-      id: 3,
-      name: "متخصص زنان و زایمان",
-      icon: zayman,
-    },
-    {
-      id: 4,
-      name: "دندانپزشکی",
-      icon: dentist,
-    },
-    {
-      id: 5,
-      name: "متخصص کلیه و مجاری",
-      icon: kollie,
-    },
-    {
-      id: 6,
-      name: "بینایی سنجی",
-      icon: eye,
-    },
-    {
-      id: 8,
-      name: "متخصص داخلی",
-      icon: dakheli,
-    },
-    {
-      id: 9,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-    {
-      id: 10,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-    {
-      id: 11,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-    {
-      id: 12,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-    {
-      id: 13,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-    {
-      id: 14,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-    {
-      id: 15,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-    {
-      id: 15,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-    {
-      id: 15,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-    {
-      id: 15,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-    {
-      id: 15,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-    {
-      id: 15,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-    {
-      id: 15,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-    {
-      id: 15,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-    {
-      id: 15,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-    {
-      id: 15,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-    {
-      id: 15,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-    {
-      id: 15,
-      name: "متخصص قلب و عروق",
-      icon: dakheli,
-    },
-  ];
+  const [categorys, setCategorys] = useState([]);
+  useEffect(() => {
+    const url = "Specialist/read-specialists";
+
+    const fetchData = async () => {
+      const data = await get_specialties(url);
+      if (data) {
+        setCategorys(data);
+      }
+    };
+    fetchData();
+  }, []);
+
   const handleCloseModal = () => {
     setIsSpecialtiesModal(false);
   };
@@ -164,7 +51,7 @@ function SpecialtiesListModal({ setIsSpecialtiesModal }) {
                 className="  group cursor-pointer  hover:shadow-lg w-[123px] h-[123px]  hover:-mt-3 transition-all shadow-red-600  hover:shadow-[#6991b4] lg:w-[123px] lg:h-[123px] flex flex-col justify-evenly items-center rounded-xl border border-[#DBD7D7]"
               >
                 <div className=" bg-[#eaeaea] transition-all group-hover:bg-[#6eb6f6] rounded-full w-[55px] h-[55px] flex justify-center items-center ">
-                  <Image alt="icon" width={42} src={item.icon} />
+                  <Image alt="icon" width={42} src={heart} />
                 </div>
                 <h2 className=" text-[10px] font-semibold lg:font-medium lg:text-[12px]">
                   {item.name}

@@ -8,7 +8,7 @@ import {
   SpecialtiesSelectInput,
 } from "../Inputs/Input";
 import { add_doctor } from "@/api/ApiCalling";
-import { smeIdStorage } from "@/store/Store";
+import { MovaqatiDoctorStorage, smeIdStorage } from "@/store/Store";
 function AddNewDoctorModal({ setIsAddDoctorModal }) {
   const { smeId } = smeIdStorage();
   const [cities, setCities] = useState([]);
@@ -18,7 +18,8 @@ function AddNewDoctorModal({ setIsAddDoctorModal }) {
   const [specialistId, setSpecialistId] = useState("1");
   const [codeNezam, setCodeNezam] = useState("");
   const [mobile, setMobile] = useState("");
-
+  const { setDoctors, doctors } = MovaqatiDoctorStorage();
+  console.log("doctors",doctors);
   const data = {
     metadata: {
       userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -69,7 +70,10 @@ function AddNewDoctorModal({ setIsAddDoctorModal }) {
           </div>
           <div className=" flex w-[40%] gap-2 flex-col items-start">
             <h5>جنسیت</h5>
-            <input className=" border border-[#636972] rounded-lg p-2 w-full" />
+            <select className=" border border-[#636972] rounded-lg p-2 w-full">
+              <option>مرد</option>
+              <option>زن</option>
+            </select>
           </div>
           <div className=" w-[40%] flex gap-2 flex-col items-start">
             <h5>کد نظام پزشکی</h5>
@@ -102,7 +106,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal }) {
         </div>
         <button
           onClick={() => {
-            add_doctor(data);
+            add_doctor(data, setIsAddDoctorModal, setDoctors);
           }}
           className=" w-1/2 flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
         >

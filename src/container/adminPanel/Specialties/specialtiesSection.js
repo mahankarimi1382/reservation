@@ -9,9 +9,10 @@ import heartIcon from "../../../../public/Pics/Specialties/heart-icon.png";
 
 function SpecialtiesPanelSection() {
   const [specialist, setSpecialist] = useState([]);
-  const url = "Specialist/read-specialists";
 
   useEffect(() => {
+    const url = "Specialist/read-specialists";
+
     const fetchData = async () => {
       const data = await get_specialties(url);
       if (data) {
