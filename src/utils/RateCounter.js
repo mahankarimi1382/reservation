@@ -1,5 +1,5 @@
 import Image from "next/image";
-import star from "../../public/pics/star.png";
+import star from "../../public/Pics/star.png";
 
 export const RateCounter = ({ rate,width }) => {
   return (
