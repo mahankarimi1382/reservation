@@ -81,6 +81,8 @@ export const LoginButton = () => {
         {fullName ? (
           <h5
             onMouseEnter={() => setIsHover(true)}
+            onClick={() => setIsHover(!isHover)}
+
             className=" w-full justify-center items-center gap-2 flex"
           >
             <IoPersonCircleSharp className=" text-xl" />
@@ -97,7 +99,7 @@ export const LoginButton = () => {
           <div
             onMouseEnter={() => setIsHover(true)}
             onMouseLeave={() => setIsHover(false)}
-            className=" top-8 p-3 bg-white rounded-lg flex flex-col gap-3 shadow-xl border absolute "
+            className=" top-8 p-3 bg-white z-50 rounded-lg flex flex-col gap-3 shadow-xl border absolute "
           >
             <Link
               href="/userPanel/dashboard"
