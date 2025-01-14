@@ -8,6 +8,9 @@ import { IoIosMore } from "react-icons/io";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
 import { FiEdit3 } from "react-icons/fi";
+import { LuLayoutDashboard } from "react-icons/lu";
+import { CiLogout } from "react-icons/ci";
+
 import {
   fullNameStorage,
   myStore,
@@ -32,10 +35,12 @@ import EmptyReservModal from "../modals/EmptyReservModal";
 import SubmitSpecialtiesModal from "../modals/SubmitSpecialtiesModal";
 import AddNewDoctorModal from "../modals/AddNewDoctorModal";
 import VisitTypeSelectionModal from "../modals/VisitTypeSelectionModal";
+import Link from "next/link";
 
 export const LoginButton = () => {
   const { fullName, setFullName } = fullNameStorage();
   const { removeSmeId, smeId } = smeIdStorage();
+  const [isHover, setIsHover] = useState(false);
   console.log(smeId);
   const router = useRouter();
   const [isModal, setIsModal] = useState(false);
@@ -67,17 +72,17 @@ export const LoginButton = () => {
         onClick={
           fullName
             ? () => {
-                removeSmeId();
-                Cookies.remove("token");
-                setFullName(null);
-                router.push("/");
+                console.log("first");
               }
             : openModal
         }
-        className=" lg:-mt-12 cursor-pointer bg-white shadow-xl px-2 text-[12px] lg:text-[14px] lg:p-2 p-1 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
+        className=" lg:-mt-12 relative cursor-pointer bg-white shadow-xl px-2 text-[12px] lg:text-[14px] lg:p-2 p-1 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
       >
         {fullName ? (
-          <h5 className=" w-full justify-center items-center gap-2 flex">
+          <h5
+            onMouseEnter={() => setIsHover(true)}
+            className=" w-full justify-center items-center gap-2 flex"
+          >
             <IoPersonCircleSharp className=" text-xl" />
             {fullName}
           </h5>
@@ -87,6 +92,35 @@ export const LoginButton = () => {
             <CiLogin className=" hidden lg:flex text-xl" />
             ثبت نام | ورود
           </h5>
+        )}
+        {isHover && (
+          <div
+            onMouseEnter={() => setIsHover(true)}
+            onMouseLeave={() => setIsHover(false)}
+            className=" top-8 p-3 bg-white rounded-lg flex flex-col gap-3 shadow-xl border absolute "
+          >
+            <Link
+              href="/userPanel/dashboard"
+              className=" flex justify-center gap-10 items-center text-[#004D8F]"
+            >
+              داشبورد
+              <LuLayoutDashboard />
+            </Link>
+            <div
+              onClick={() => {
+                removeSmeId();
+                Cookies.remove("token");
+                setFullName(null);
+                router.push("/");
+                setIsHover(false);
+              }}
+              className=" text-red-600 flex justify-between gap-10 items-center"
+            >
+              <h5>خروج</h5>
+
+              <CiLogout />
+            </div>
+          </div>
         )}
       </div>
     </div>
