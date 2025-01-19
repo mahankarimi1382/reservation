@@ -1,3 +1,4 @@
+"use client"
 import { upload_file } from "@/api/ApiCalling";
 import Cookies from "js-cookie";
 import Image from "next/image";
