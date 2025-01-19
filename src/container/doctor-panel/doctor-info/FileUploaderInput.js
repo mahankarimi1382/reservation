@@ -1,38 +1,20 @@
 import { upload_file } from "@/api/ApiCalling";
 import Cookies from "js-cookie";
-import Image from "next/image";
 import React, { useState } from "react";
 import { ClipLoader } from "react-spinners";
 
-function UploadingInputContainer({ setFileId, fileId }) {
-  const [preview, setPreview] = useState(null);
-
+function FileUploaderInput({ setFileId, fileId }) {
   const token = Cookies.get("token");
   const [file, setFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   return (
     <div className=" w-full flex flex-col gap-5">
       <label className=" relative flex-col cursor-pointer border gap-2 bg-[rgba(211,233,253,0.24)] h-[300px] rounded-md border-dashed border-[#005DAD] flex justify-center items-center">
-        {preview && (
-          <Image
-            className=" max-w-full max-h-full absolute"
-            width={500}
-            height={100}
-            src={preview}
-            alt="image"
-          />
-        )}
         <input
           onChange={(e) => {
             setFileId(null);
             const file = e.target.files[0];
             setFile(file);
-            setPreview(null);
-            if (file) {
-              setPreview(URL.createObjectURL(file));
-            } else {
-              setFile(null);
-            }
           }}
           multiple
           type="file"
@@ -83,4 +65,4 @@ function UploadingInputContainer({ setFileId, fileId }) {
   );
 }
 
-export default UploadingInputContainer;
+export default FileUploaderInput;

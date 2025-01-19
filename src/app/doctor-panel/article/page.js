@@ -4,10 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { IoIosArrowDown } from "react-icons/io";
 import DoctorPanelMenu from "@/container/doctor-panel/DoctorPanelMenu";
-import { PiWarningCircle } from "react-icons/pi";
-import { CiEdit } from "react-icons/ci";
-import { GoTrash } from "react-icons/go";
-import UploadingInputContainer from "@/container/doctor-panel/doctor-info/UploadingInputContainer";
+import AddArticle from "@/container/doctor-panel/article/AddArticle";
 
 function page() {
   return (
@@ -26,7 +23,7 @@ function page() {
           </button>
         </div>
         <div className=" w-[80%] mt-14 p-5 items-center flex gap-7 bg-white rounded-3xl flex-col">
-          <div className=" w-[90%] flex p-3 border border-[#005DAD] bg-[#ECF6FF] rounded-xl items-center text-[#005DAD] gap-1">
+          {/* <div className=" w-[90%] flex p-3 border border-[#005DAD] bg-[#ECF6FF] rounded-xl items-center text-[#005DAD] gap-1">
             <PiWarningCircle />
             <h5>
               لیست زیر شامل بیماران شما در مطب انتخاب شده می باشد در صورت نیاز
@@ -42,49 +39,8 @@ function page() {
               <GoTrash />
               حذف
             </button>
-          </div>
-          <div className=" w-full gap-4 flex flex-col">
-            <h5 className=" font-semibold">1 ) عنوان مقاله</h5>
-            <textarea
-              className=" p-4 resize-none border rounded-2xl"
-              placeholder="لطفا عنوان مقاله  خود را بنویسید"
-            />
-            <h5 className=" font-semibold">2 ) توضیحات مختصر</h5>
-            <textarea
-              className=" h-32 p-4 resize-none border rounded-2xl"
-              placeholder="خلاصه یا چکیده‌ای از مقاله که محتوای اصلی و نکات مهم مقاله را در چند خط توضیح دهید."
-            />
-            <h5 className=" font-semibold">3 ) دسته بندی مقاله</h5>
-            <select className=" text-[#C1C0C0] w-[270px] p-2 border rounded-lg">
-              <option>لطفا موضوع مقاله را مشخص کنید</option>
-            </select>
-            <h5 className=" font-semibold">4 ) نویسندگان مقاله</h5>
-            <input
-              placeholder="نام و نام خانوادگی نویسنده"
-              className=" w-[270px] p-2 border rounded-lg"
-            />
-            <h5 className=" font-semibold">5 ) تاریخ انتشار مقاله</h5>
-            <div className=" flex gap-3 items-center">
-              <input
-                placeholder="روز"
-                className=" text-center w-[130px] p-2 border rounded-lg"
-              />
-              <input
-                placeholder="ماه"
-                className=" text-center w-[130px] p-2 border rounded-lg"
-              />
-              <input
-                placeholder="سال"
-                className=" text-center w-[130px] p-2 border rounded-lg"
-              />
-            </div>
-            <h5 className=" font-semibold">6 ) بارگذاری مقاله</h5>
-            <textarea
-              className=" h-52 bg-[#F5F5F5] p-4 resize-none border rounded-2xl"
-              placeholder="پزشک گرامی لطفا مقاله را اینجا بگذارید ( کپی کنید سپس اینجا پیست کنید )"
-            />
-            <UploadingInputContainer title="7 ) آپلود عکس کاور مقاله" />
-          </div>
+          </div> */}
+          <AddArticle />
         </div>
       </div>
     </div>

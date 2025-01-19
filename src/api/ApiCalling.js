@@ -235,3 +235,44 @@ export const add_doctor = (data, setIsAddDoctorModal, setDoctors) => {
       console.log(err);
     });
 };
+export const add_article = (data, setLoading) => {
+  console.log(data);
+  axiosConfig
+    .post("Article/create-articles", data)
+    .then((res) => {
+      setLoading(false);
+      console.log(res);
+      success(`مقاله با عنوان ${data.title} ثبت شد`);
+    })
+    .catch((err) => {
+      setLoading(false);
+      Eror();
+      console.log(err);
+    });
+};
+
+export const upload_file = (file, token, setFileId, setIsLoading) => {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  axios
+    .post(
+      "https://myapi.dadehavaran.com:8040/api/v1/FileManagement/upload",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: token || "",
+        },
+      }
+    )
+    .then((res) => {
+      setIsLoading(false);
+      console.log(res);
+      setFileId(res.data.result.id)
+    })
+    .catch((err) => {
+      setIsLoading(false);
+      console.log(err);
+    });
+};
