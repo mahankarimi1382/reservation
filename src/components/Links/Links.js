@@ -334,7 +334,8 @@ export const AdminPanelimageSetting_action = (props) => {
       pathname === "/adminPanel/imagesetting/doctorimage" ||
       pathname === "/adminPanel/imagesetting/banner" ||
       pathname === "/adminPanel/imagesetting/medicalcenterimage" ||
-      pathname === "/adminPanel/imagesetting/magezine"
+      pathname === "/adminPanel/imagesetting/magezine" ||
+      pathname === "/adminPanel/imagesetting/banner/add-banner"
     ) {
       return true;
     } else {
@@ -394,7 +395,9 @@ export const AdminPanelimageSetting_action = (props) => {
           className={` transition-opacity flex pr-2 gap-2 py-4 rounded-lg items-center   w-full text-[#005DAD] ${
             isAction ? "opacity-100 delay-500" : "opacity-0"
           } ${
-            pathname === "/adminPanel/imagesetting/banner" && "bg-[#DBEDFF]"
+            (pathname === "/adminPanel/imagesetting/banner" ||
+              pathname === "/adminPanel/imagesetting/banner/add-banner") &&
+            "bg-[#DBEDFF]"
           }`}
           href="/adminPanel/imagesetting/banner"
         >

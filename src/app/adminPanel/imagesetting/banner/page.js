@@ -6,12 +6,10 @@ import React from "react";
 import excel_icon from "../../../../../public/Pics/excelIcon.png";
 import printer from "../../../../../public/Pics/printer.png";
 import { TiArrowSortedDown } from "react-icons/ti";
-import { RateCounter } from "@/utils/RateCounter";
-import { HiOutlineTrash } from "react-icons/hi2";
-import { IoEyeOutline } from "react-icons/io5";
-import bahram from "../../../../../public/Pics/bahramMirzayi.png";
 import { CiEdit } from "react-icons/ci";
 import folder from "../../../../../public/Pics/folder.png";
+import { GoPlus } from "react-icons/go";
+import Link from "next/link";
 function page() {
   const fakeData = [
     {
@@ -96,6 +94,14 @@ function page() {
           <SelectFilter title="نوع ویزیت" />
           <SelectFilter title="محل ویزیت" />
           <SelectFilter title="ساعت" />
+        </div>
+        <div className=" w-[80%] justify-end flex items-center">
+          <Link href="/adminPanel/imagesetting/banner/add-banner"
+            className=" flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
+          >
+            افزودن
+            <GoPlus className=" text-2xl" />
+          </Link>
         </div>
         <div className=" gap-2 flex justify-end w-[80%] items-center">
           <button className=" border rounded-lg px-3 p-1 gap-2 text-[#185B37] border-[#185B37] flex">

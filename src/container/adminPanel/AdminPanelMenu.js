@@ -96,13 +96,11 @@ function AdminPanelMenu() {
         title="پشتیبانی"
         icon={support_icon}
         blackIcon={support_icon_black}
-        href="/adminPanel/skills"
       />
       <AdminPanelimageSetting_action
         title="تنظیمات عکس"
         icon={imagesetting_icon}
         blackIcon={imagesetting_icon_black}
-        href="/adminPanel/skills"
       />
       <AdminPanelLink
         title="دسترسی کاربران"

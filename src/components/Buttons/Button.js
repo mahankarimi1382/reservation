@@ -82,7 +82,6 @@ export const LoginButton = () => {
           <h5
             onMouseEnter={() => setIsHover(true)}
             onClick={() => setIsHover(!isHover)}
-
             className=" w-full justify-center items-center gap-2 flex"
           >
             <IoPersonCircleSharp className=" text-xl" />
@@ -488,3 +487,4 @@ export const AddDoctorButt = () => {
     </div>
   );
 };
+

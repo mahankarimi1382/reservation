@@ -15,9 +15,11 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MainSearchBar from "@/components/MainSearchBar";
 import SupportModal from "@/components/modals/SupportModal";
+import EventSection from "@/components/EventSection";
 export default function Home() {
   return (
     <div dir="rtl">
+      <EventSection />
       <div className=" lg:rounded-bl-[300px] rounded-bl-[80px] w-full h-[291px] md:h-[400px] lg:h-[600px]  flex flex-col justify-start gap-20  bg-[#C2E2FF]">
         <Navbar />
         <MainSearchBar />

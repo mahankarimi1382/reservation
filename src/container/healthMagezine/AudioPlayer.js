@@ -1,9 +1,11 @@
 "use client";
+import audiofile from "../../../public/testaudio.mp3";
+
 import WavesurferPlayer from "@wavesurfer/react";
 import { FaPlay } from "react-icons/fa";
 import { FaPause } from "react-icons/fa6";
 import { useState } from "react";
-const AudioPlayer = ({ audiofile,width }) => {
+const AudioPlayer = ({ width }) => {
   const [wavesurfer, setWavesurfer] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
