@@ -59,8 +59,8 @@ function AddArticle() {
         className=" text-[#C1C0C0] w-[270px] p-2 border rounded-lg"
       >
         <option value={1}>صوتی</option>
-        <option value={2}>تصویری</option>
-        <option value={3}>متنی</option>
+        <option value={1}>تصویری</option>
+        <option value={2}>متنی</option>
         <option value={3}>فایلی</option>
       </select>
       <h5 className=" font-semibold">4 ) نویسندگان مقاله</h5>
@@ -72,11 +72,11 @@ function AddArticle() {
       />
       <div className=" flex  items-center gap-2">
         <h5 className=" font-semibold">6 ) بارگذاری مقاله</h5>
-        {articleTypeId == 4 && (
+        {articleTypeId == 3 && (
           <div>{articleFileId ? <FcOk /> : <FcHighPriority />}</div>
         )}
       </div>
-      {articleTypeId == 4 ? (
+      {articleTypeId == 3 ? (
         <FileUploaderInput
           fileId={articleFileId}
           setFileId={setArticleFileId}
