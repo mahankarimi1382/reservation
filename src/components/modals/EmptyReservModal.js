@@ -12,6 +12,7 @@ import monitor from "../../../public/Pics/monitor-mobbile.png";
 import matni from "../../../public/Pics/matniIcon.png";
 import callenderIcon from "../../../public/Pics/callenderIcon.png";
 import telefoniIcon from "../../../public/Pics/telefoniIcon.png";
+import { RxCross2 } from "react-icons/rx";
 function EmptyReservModal({ setIsEmptyModal }) {
   const handleCloseModal = () => {
     setIsEmptyModal(false);
