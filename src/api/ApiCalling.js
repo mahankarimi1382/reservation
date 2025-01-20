@@ -146,7 +146,7 @@ export const add_specialties = (
   setIsAddSpecialtiesModal
 ) => {
   setIsLoading(true);
-
+  console.log(data);
   axiosConfig
     .post("Specialist/create-specialist", data)
     .then((res) => {
@@ -159,7 +159,14 @@ export const add_specialties = (
     .catch((err) => {
       console.log(err);
       setIsLoading(false);
-      Eror("خطا");
+      if (
+        err.response.data.message.message ==
+        "حجم فایل برای ذخیره در بیس64 زیاد است !"
+      ) {
+        Eror("حجم فایل بیش از حد مجاز است");
+      } else {
+        Eror();
+      }
     });
 };
 
@@ -269,10 +276,40 @@ export const upload_file = (file, token, setFileId, setIsLoading) => {
     .then((res) => {
       setIsLoading(false);
       console.log(res);
-      setFileId(res.data.result.id)
+      setFileId(res.data.result.id);
     })
     .catch((err) => {
       setIsLoading(false);
       console.log(err);
+    });
+};
+export const edit_specialties = (
+  data,
+  setIsLoading,
+  setIsAddSpecialtiesModal
+) => {
+  setIsLoading(true);
+  console.log(data);
+  axiosConfig
+    .put("Specialist/update-specialist", data)
+    .then((res) => {
+      setIsLoading(false);
+      console.log(res);
+      success("تخصص با موفقیت ویرایش شد");
+      setIsAddSpecialtiesModal(false);
+      window.location.reload();
+    })
+    .catch((err) => {
+      console.log(err);
+      setIsLoading(false);
+      if (
+        err.response.data.message &&
+        err.response.data.message.message ==
+          "حجم فایل برای ذخیره در بیس64 زیاد است !"
+      ) {
+        Eror("حجم فایل بیش از حد مجاز است");
+      } else {
+        Eror();
+      }
     });
 };

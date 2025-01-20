@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { CiLogin } from "react-icons/ci";
+import { CiEdit, CiLogin } from "react-icons/ci";
 import Image from "next/image";
 import screenIcon from "../../../public/Pics/mirroring-screen.png";
 import { IoIosArrowRoundBack } from "react-icons/io";
@@ -487,4 +487,23 @@ export const AddDoctorButt = () => {
     </div>
   );
 };
-
+export const EditSpecialistButt = ({ item }) => {
+  const [isEditSpecialtiesModal, setIsEditSpecialtiesModal] = useState(false);
+  return (
+    <div>
+      {isEditSpecialtiesModal && (
+        <SubmitSpecialtiesModal
+          item={item}
+          setIsAddSpecialtiesModal={setIsEditSpecialtiesModal}
+        />
+      )}
+      <button
+        onClick={() => setIsEditSpecialtiesModal(true)}
+        className=" gap-2 border rounded-lg px-5 p-1 flex justify-center items-center bg-[#F2FEF8] border-[#1F7168] text-[#1F7168]"
+      >
+        <CiEdit className=" font-bold text-2xl" />
+        ویرایش
+      </button>
+    </div>
+  );
+};

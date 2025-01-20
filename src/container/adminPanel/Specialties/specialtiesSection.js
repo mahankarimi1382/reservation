@@ -6,10 +6,11 @@ import { CiEdit } from "react-icons/ci";
 import { HiOutlineTrash } from "react-icons/hi2";
 import { TiArrowSortedDown } from "react-icons/ti";
 import heartIcon from "../../../../public/Pics/Specialties/heart-icon.png";
+import { EditSpecialistButt } from "@/components/Buttons/Button";
 
 function SpecialtiesPanelSection() {
   const [specialist, setSpecialist] = useState([]);
-
+  console.log(specialist);
   useEffect(() => {
     const url = "Specialist/read-specialists";
 
@@ -46,7 +47,13 @@ function SpecialtiesPanelSection() {
             key={item.id}
           >
             <div className=" w-1/4 flex justify-center items-center">
-              <Image width={47} src={heartIcon} alt="icon" />
+              <img src={item.logoFile} width={47} height={47} alt="logo" />
+              {/* <Image
+                width={47}
+                height={47}
+                src={item.logoFile || heartIcon}
+                alt="icon"
+              /> */}
             </div>
             <h4 className=" w-1/4 flex justify-center items-center text-[#3F444D] text-lg">
               {item.name}
@@ -59,10 +66,7 @@ function SpecialtiesPanelSection() {
                 <HiOutlineTrash />
                 حذف
               </button>
-              <button className=" gap-2 border rounded-lg px-5 p-1 flex justify-center items-center bg-[#F2FEF8] border-[#1F7168] text-[#1F7168]">
-                <CiEdit className=" font-bold text-2xl" />
-                ویرایش
-              </button>
+              <EditSpecialistButt item={item} />
             </div>
           </div>
         );

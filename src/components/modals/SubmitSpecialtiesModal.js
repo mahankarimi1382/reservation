@@ -1,14 +1,19 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import logo from "../../../public/Pics/logo-doctor.png";
-import { add_specialties } from "@/api/ApiCalling";
+import { add_specialties, edit_specialties } from "@/api/ApiCalling";
 import { nationalCodeStorage } from "@/store/Store";
 import { SyncLoader } from "react-spinners";
-function SubmitSpecialtiesModal({ setIsAddSpecialtiesModal }) {
+import { MdDeleteForever } from "react-icons/md";
+import { RxCross1, RxCross2 } from "react-icons/rx";
+
+function SubmitSpecialtiesModal({ setIsAddSpecialtiesModal, item }) {
+  console.log(item);
   const { userName } = nationalCodeStorage();
-  const [specialName, setSpecialName] = useState("");
-  const [isLoading,setIsLoading]=useState(false)
-  const [image, setImage] = useState(null);
+  const [specialName, setSpecialName] = useState(item ? item.name : "");
+  const [maxa, setMaxa] = useState(item ? item.maxa : "");
+  const [isLoading, setIsLoading] = useState(false);
+  const [image, setImage] = useState(item ? item.logoFile : null);
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -24,29 +29,33 @@ function SubmitSpecialtiesModal({ setIsAddSpecialtiesModal }) {
       userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       userName: userName,
     },
+    id: item && item.id,
     name: specialName,
+    maxa,
+    logoFile: image,
   };
   return (
-    <div
-      onClick={() => setIsAddSpecialtiesModal(false)}
-      className=" z-20  w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]"
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className=" w-1/3 h-3/4 rounded-xl p-3 bg-white flex flex-col items-center"
-      >
-        <Image src={logo} alt="logo" width={67} />
+    <div className=" z-20  w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]">
+      <div className=" w-1/3 h-3/4 rounded-xl p-3 bg-white flex flex-col gap-3 items-center">
+        <div className=" relative w-full justify-center items-center flex">
+          <Image src={logo} alt="logo" width={67} />
+          <RxCross2
+            onClick={() => setIsAddSpecialtiesModal(false)}
+            className=" cursor-pointer absolute left-1 top-1 "
+          />
+        </div>
         <div className=" w-full flex gap-2 p-2 flex-col">
           <h5 className=" text-lg">کد مکسا :</h5>
-          <input className=" border shadow-md rounded-lg p-3" />
-        </div>
-        <div className=" w-full flex gap-2 p-2 flex-col">
-          <h5 className=" text-lg">عنوان مکسا</h5>
-          <input className=" border shadow-md rounded-lg p-3" />
-        </div>
-        <div className=" w-full flex gap-2 p-2 flex-col">
-          <h5 className=" text-lg">عنوان عمومی</h5>
           <input
+            value={maxa}
+            onChange={(e) => setMaxa(e.target.value)}
+            className=" border shadow-md rounded-lg p-3"
+          />
+        </div>
+        <div className=" w-full flex gap-2 p-2 flex-col">
+          <h5 className=" text-lg">عنوان تخصص</h5>
+          <input
+            value={specialName}
             onChange={(e) => setSpecialName(e.target.value)}
             className=" border shadow-md rounded-lg p-3"
           />
@@ -56,14 +65,21 @@ function SubmitSpecialtiesModal({ setIsAddSpecialtiesModal }) {
 
           <div className=" w-full flex  justify-center items-center">
             {image ? (
-              <Image
-                className=" bg-black w-20 h-20 aspect-square"
-                onClick={() => setImage(null)}
-                width={50}
-                height={20}
-                src={image}
-                alt="Uploaded"
-              />
+              <div className=" relative w-20 h-20 ">
+                <Image
+                  className=" bg-black w-20 h-20 aspect-square"
+                  width={50}
+                  height={20}
+                  src={image ? image : item.logoFile}
+                  alt="Uploaded"
+                />
+                <div
+                  onClick={() => setImage(null)}
+                  className=" group flex justify-center items-center absolute top-0 w-full h-full bg-sky-300 bg-opacity-10 hover:bg-opacity-50 transition-all"
+                >
+                  <MdDeleteForever className=" text-3xl text-red-600 opacity-0 transition-all group-hover:opacity-100 " />
+                </div>
+              </div>
             ) : (
               <input
                 className=" w-full border shadow-md rounded-lg p-3"
@@ -75,7 +91,11 @@ function SubmitSpecialtiesModal({ setIsAddSpecialtiesModal }) {
           </div>
         </div>
         <button
-          onClick={() => add_specialties(data,setIsLoading,setIsAddSpecialtiesModal)}
+          onClick={() =>
+            item
+              ? edit_specialties(data, setIsLoading, setIsAddSpecialtiesModal)
+              : add_specialties(data, setIsLoading, setIsAddSpecialtiesModal)
+          }
           className=" flex justify-center items-center min-h-10 w-1/3 gap-2 rounded-lg bg-[#005DAD] text-white"
         >
           {isLoading ? <SyncLoader color="white" size={10} /> : "ثبت"}
