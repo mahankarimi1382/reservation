@@ -44,7 +44,6 @@ function SeeNazarModal({ setIsNazarModal }) {
   };
   return (
     <div
-      onClick={handleCloseModal}
       className=" z-20  w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]"
     >
       <div className=" w-[70%] h-[500px] p-3 pb-10 bg-white rounded-xl">

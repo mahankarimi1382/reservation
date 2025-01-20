@@ -12,30 +12,30 @@ import monitor from "../../../public/Pics/monitor-mobbile.png";
 import matni from "../../../public/Pics/matniIcon.png";
 import callenderIcon from "../../../public/Pics/callenderIcon.png";
 import telefoniIcon from "../../../public/Pics/telefoniIcon.png";
-function EmptyReservModal({setIsEmptyModal}) {
-  
+function EmptyReservModal({ setIsEmptyModal }) {
   const handleCloseModal = () => {
     setIsEmptyModal(false);
   };
   return (
-    <div
-      onClick={handleCloseModal}
-      className=" w-screen h-screen top-0 justify-center items-center z-20 flex right-0 fixed bg-[rgba(0,0,0,0.6)]"
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className=" w-[82%] flex justify-center items-center border-2 h-[95vh] bg-white rounded-3xl shadow-lg"
-      >
+    <div className=" w-screen h-screen top-0 justify-center items-center z-20 flex right-0 fixed bg-[rgba(0,0,0,0.6)]">
+      <div className=" w-[82%] flex justify-center items-center border-2 h-[95vh] bg-white rounded-3xl shadow-lg">
         <div className="  w-[99%]  gap-10 py-10 justify-start flex h-[98%] rounded-3xl  customScroll flex-col  items-center overflow-auto  ">
           <div className=" w-[90%] rounded-2xl bg-white flex justify-between px-5 shadow-md min-h-[188px]">
             <div className=" w-2/3  flex items-center justify-start gap-5">
-              <Image
-                width={145}
-                height={145}
-                className=" w-[145px] h-[145px] border-2  border-[#005DAD] rounded-full"
-                src={doctorprof}
-                alt="doctor-prof"
-              />
+              <div className=" relative w-full justify-center items-center flex">
+                <Image
+                  width={145}
+                  height={145}
+                  className=" w-[145px] h-[145px] border-2  border-[#005DAD] rounded-full"
+                  src={doctorprof}
+                  alt="doctor-prof"
+                />{" "}
+                <RxCross2
+                  onClick={() => setIsAddDoctorModal(false)}
+                  className=" cursor-pointer absolute left-1 top-1 "
+                />
+              </div>
+
               <div className=" flex flex-col  gap-5">
                 <h2 className=" text-[22px]">بهرام میزایی</h2>
                 <h2 className=" text-[#757575]">زنان زایمان</h2>
@@ -52,8 +52,7 @@ function EmptyReservModal({setIsEmptyModal}) {
                 پیشنهاد میکنم
               </h2>
               <h2 className=" flex items-center justify-center gap-1">
-                <Image src={star} alt="star" width={18} />
-                5
+                <Image src={star} alt="star" width={18} />5
               </h2>
             </div>
           </div>

@@ -17,17 +17,11 @@ function VisitTypeSelectionModal({
   setIsVisitSelectModal,
 }) {
   const handleCloseModal = () => {
-    setIsVisitSelectModal("");
+    setIsVisitSelectModal(false);
   };
   return (
-    <div
-      onClick={handleCloseModal}
-      className=" w-screen h-screen top-0 z-50 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]"
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className=" w-[448px] h-[325px] flex flex-col justify-center gap-5 items-center bg-white rounded-xl"
-      >
+    <div className=" w-screen h-screen top-0 z-50 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]">
+      <div className=" w-[448px] h-[325px] flex flex-col justify-center gap-5 items-center bg-white rounded-xl">
         <div className=" w-full  items-end flex justify-end px-2 -mb-10">
           <RxCross2
             onClick={handleCloseModal}

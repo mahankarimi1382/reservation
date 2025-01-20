@@ -26,7 +26,6 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
   };
   return (
     <div
-      onClick={closeModal}
       className=" z-50 fixed top-0 right-0 w-screen h-screen flex justify-center items-center"
     >
       {isValidateModal ? (
@@ -37,10 +36,7 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
           closeModal={closeModal}
         />
       ) : (
-        <div
-          onClick={(e) => e.stopPropagation()}
-          className=" py-2 w-[394px] gap-5     bg-white flex flex-col justify-between rounded"
-        >
+        <div className=" py-2 w-[394px] gap-5     bg-white flex flex-col justify-between rounded">
           <div className=" w-full flex px-1 justify-end">
             <RxCross2
               onClick={closeModal}
@@ -105,8 +101,7 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
           <div className=" flex w-full justify-center items-center">
             <button
               onClick={() => {
-                signup(setIsLoading, data,setIsValidateModal);
-                ;
+                signup(setIsLoading, data, setIsValidateModal);
               }}
               disabled={!nationalCode && !phoneNumber && !password && !fullname}
               className={

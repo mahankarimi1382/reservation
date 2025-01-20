@@ -18,11 +18,9 @@ function SelfOrAnotherModal({ setModal }) {
   };
   return (
     <div
-      onClick={closeModal}
       className=" z-20  w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]"
     >
       <div
-        onClick={(e) => e.stopPropagation()}
         className=" py-2 w-[450px] h-[224px] rounded-xl bg-white flex flex-col gap-3 "
       >
         <div className=" w-full flex px-1 justify-end">

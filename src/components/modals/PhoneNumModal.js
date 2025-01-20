@@ -27,7 +27,6 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
 
   return (
     <div
-      onClick={(e) => e.stopPropagation()}
       className=" py-2 w-[394px] gap-5 bg-white flex flex-col justify-between rounded"
     >
       <div className=" w-full flex px-1 justify-end">

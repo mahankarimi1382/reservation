@@ -65,7 +65,6 @@ function ValidateModal({
   };
   return (
     <div
-      onClick={(e) => e.stopPropagation()}
       className=" py-4 w-[394px] h-[326px] bg-white flex flex-col justify-between rounded"
     >
       <div className=" w-full flex px-1 justify-end">

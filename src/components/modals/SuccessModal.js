@@ -10,12 +10,10 @@ function SuccessModal({ setIsSuccessModal }) {
   };
   return (
     <div
-      onClick={handleClose}
       className=" w-screen z-10 h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]"
     >
       <Confetti  numberOfPieces={200} gravity={0.05} />
       <div
-        onClick={(e) => e.stopPropagation()}
         className=" w-[450px] h-[282px] bg-white flex flex-col justify-between py-2 px-2 pb-5  items-center rounded-2xl"
       >
         <div className=" w-full flex justify-end items-end">

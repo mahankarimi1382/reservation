@@ -14,7 +14,6 @@ function LoginModal({ setIsModal }) {
 
   return (
     <div
-      onClick={closeModal}
       className=" z-50 fixed top-0 right-0 w-screen h-screen bg-[rgba(0,0,0,0.6)] flex justify-center items-center"
     >
       {isPhoneNumModal && (

@@ -16,11 +16,9 @@ function OpinionModal({ setIsNazarModal, setIsSuccessModal }) {
   };
   return (
     <div
-      onClick={closeModal}
       className="   w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]"
     >
       <div
-        onClick={(e) => e.stopPropagation()}
         className="  w-[700px] min-h-[75%] pb-6 p-3 rounded-xl bg-white border flex justify-center gap-3 items-center flex-col shadow-md"
       >
         <div className=" w-full flex justify-end">

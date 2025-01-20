@@ -99,13 +99,9 @@ function ReservDateAndTimeModal({ setIsReservModal }) {
     setIsReservModal(false);
   };
   return (
-    <div
-      onClick={handleCloseModal}
-      className="   w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]"
-    >
+    <div className="   w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]">
       {isSelfOrAnother && <SelfOrAnotherModal />}
       <div
-        onClick={(e) => e.stopPropagation()}
         className={`${
           hours
             ? " w-[40%] h-[90%] transition-all  flex flex-col p-5 gap-5 bg-white rounded-2xl "
@@ -114,7 +110,10 @@ function ReservDateAndTimeModal({ setIsReservModal }) {
       >
         <div className=" w-full flex items-center justify-between">
           <h2 className=" text-xl">انتخاب نوبت حضوری</h2>
-          <RxCross2 className=" text-xl text-[#94989E]" />
+          <RxCross2
+            onClick={handleCloseModal}
+            className=" cursor-pointer text-xl text-[#94989E]"
+          />
         </div>
         <div className=" flex items-center gap-4">
           <Image
