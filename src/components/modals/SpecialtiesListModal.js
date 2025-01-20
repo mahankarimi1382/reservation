@@ -9,6 +9,7 @@ import dentist from "../../../public/Pics/Specialties/dentist-icon.png";
 import Image from "next/image";
 import { CiSearch } from "react-icons/ci";
 import { get_specialties } from "@/api/ApiCalling";
+import { RxCross2 } from "react-icons/rx";
 
 function SpecialtiesListModal({ setIsSpecialtiesModal }) {
   const [categorys, setCategorys] = useState([]);
@@ -28,14 +29,12 @@ function SpecialtiesListModal({ setIsSpecialtiesModal }) {
     setIsSpecialtiesModal(false);
   };
   return (
-    <div
-      onClick={handleCloseModal}
-      className=" w-screen h-screen top-0 justify-center items-center flex z-50 right-0 fixed bg-[rgba(0,0,0,0.6)]"
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className=" w-[60%] h-[550px] bg-white rounded-xl p-5 gap-5 flex flex-col"
-      >
+    <div className=" w-screen h-screen top-0 justify-center items-center flex z-50 right-0 fixed bg-[rgba(0,0,0,0.6)]">
+      <div className=" relative w-[60%] h-[550px] bg-white rounded-xl p-5 gap-5 flex flex-col">
+        <RxCross2
+          className=" absolute top-1 left-1 cursor-pointer"
+          onClick={handleCloseModal}
+        />
         <div className=" flex h-[96px] bg-white items-center border rounded-lg px-10 border-[#005DAD]">
           <CiSearch className=" text-[#C0C0C0] text-3xl" />
           <input

@@ -451,27 +451,8 @@ export const BurgerMenuButt = () => {
     </div>
   );
 };
-export const AddSpecialtiesButt = () => {
-  const [isAddSpecialtiesModal, setIsAddSpecialtiesModal] = useState(false);
-  return (
-    <div>
-      {isAddSpecialtiesModal && (
-        <SubmitSpecialtiesModal
-          setIsAddSpecialtiesModal={setIsAddSpecialtiesModal}
-        />
-      )}
-      <button
-        onClick={() => setIsAddSpecialtiesModal(true)}
-        className=" flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
-      >
-        <GoPlus className=" text-2xl" />
-        افزودن تخصص
-      </button>
-    </div>
-  );
-};
-export const AddDoctorButt = () => {
-  const [isAddDoctorModal, setIsAddDoctorModal] = useState(false);
+
+export const AddDoctorButt = ({isAddDoctorModal, setIsAddDoctorModal}) => {
   return (
     <div>
       {isAddDoctorModal && (
@@ -487,18 +468,21 @@ export const AddDoctorButt = () => {
     </div>
   );
 };
-export const EditSpecialistButt = ({ item }) => {
-  const [isEditSpecialtiesModal, setIsEditSpecialtiesModal] = useState(false);
+export const EditSpecialistButt = ({
+  isEditSpecialModal,
+  setIsEditSpecialModal,
+  item,
+}) => {
   return (
     <div>
-      {isEditSpecialtiesModal && (
+      {isEditSpecialModal && (
         <SubmitSpecialtiesModal
           item={item}
-          setIsAddSpecialtiesModal={setIsEditSpecialtiesModal}
+          setIsAddSpecialModal={setIsEditSpecialModal}
         />
       )}
       <button
-        onClick={() => setIsEditSpecialtiesModal(true)}
+        onClick={() => setIsEditSpecialModal(true)}
         className=" gap-2 border rounded-lg px-5 p-1 flex justify-center items-center bg-[#F2FEF8] border-[#1F7168] text-[#1F7168]"
       >
         <CiEdit className=" font-bold text-2xl" />

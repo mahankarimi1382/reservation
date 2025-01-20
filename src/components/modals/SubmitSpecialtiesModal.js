@@ -7,7 +7,7 @@ import { SyncLoader } from "react-spinners";
 import { MdDeleteForever } from "react-icons/md";
 import { RxCross1, RxCross2 } from "react-icons/rx";
 
-function SubmitSpecialtiesModal({ setIsAddSpecialtiesModal, item }) {
+function SubmitSpecialtiesModal({ setIsAddSpecialModal, item, setItem }) {
   console.log(item);
   const { userName } = nationalCodeStorage();
   const [specialName, setSpecialName] = useState(item ? item.name : "");
@@ -40,7 +40,7 @@ function SubmitSpecialtiesModal({ setIsAddSpecialtiesModal, item }) {
         <div className=" relative w-full justify-center items-center flex">
           <Image src={logo} alt="logo" width={67} />
           <RxCross2
-            onClick={() => setIsAddSpecialtiesModal(false)}
+            onClick={() => setIsAddSpecialModal(false)}
             className=" cursor-pointer absolute left-1 top-1 "
           />
         </div>
@@ -91,11 +91,12 @@ function SubmitSpecialtiesModal({ setIsAddSpecialtiesModal, item }) {
           </div>
         </div>
         <button
-          onClick={() =>
+          onClick={() => {
+            setItem();
             item
-              ? edit_specialties(data, setIsLoading, setIsAddSpecialtiesModal)
-              : add_specialties(data, setIsLoading, setIsAddSpecialtiesModal)
-          }
+              ? edit_specialties(data, setIsLoading, setIsAddSpecialModal)
+              : add_specialties(data, setIsLoading, setIsAddSpecialModal);
+          }}
           className=" flex justify-center items-center min-h-10 w-1/3 gap-2 rounded-lg bg-[#005DAD] text-white"
         >
           {isLoading ? <SyncLoader color="white" size={10} /> : "ثبت"}

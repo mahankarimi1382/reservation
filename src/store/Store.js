@@ -31,19 +31,7 @@ export const fullNameStorage = create(
     }
   )
 );
-export const MovaqatiDoctorStorage = create(
-  persist(
-    (set) => ({
-      doctors: [],
-      setDoctors: (data) =>
-        set((state) => ({ doctors: [...state.doctors, data] })),
-    }),
-    {
-      name: "doctors",
-      storage: createJSONStorage(() => sessionStorage),
-    }
-  )
-);
+
 export const smeIdStorage = create(
   persist(
     (set) => ({

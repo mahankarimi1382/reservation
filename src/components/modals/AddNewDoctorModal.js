@@ -8,7 +8,8 @@ import {
   SpecialtiesSelectInput,
 } from "../Inputs/Input";
 import { add_doctor } from "@/api/ApiCalling";
-import { MovaqatiDoctorStorage, smeIdStorage } from "@/store/Store";
+import { smeIdStorage } from "@/store/Store";
+import { RxCross2 } from "react-icons/rx";
 function AddNewDoctorModal({ setIsAddDoctorModal }) {
   const { smeId } = smeIdStorage();
   const [cities, setCities] = useState([]);
@@ -18,8 +19,6 @@ function AddNewDoctorModal({ setIsAddDoctorModal }) {
   const [specialistId, setSpecialistId] = useState("1");
   const [codeNezam, setCodeNezam] = useState("");
   const [mobile, setMobile] = useState("");
-  const { setDoctors, doctors } = MovaqatiDoctorStorage();
-  console.log("doctors",doctors);
   const data = {
     metadata: {
       userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -37,15 +36,15 @@ function AddNewDoctorModal({ setIsAddDoctorModal }) {
     smeProfileId: smeId,
   };
   return (
-    <div
-      onClick={() => setIsAddDoctorModal(false)}
-      className=" z-20  w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]"
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className=" w-1/2 h-[95%] gap-4 rounded-xl p-3 bg-white flex flex-col items-center"
-      >
-        <Image src={logo} alt="logo" width={100} />
+    <div className=" z-20  w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]">
+      <div className=" w-1/2 h-[95%] gap-4 rounded-xl p-3 bg-white flex flex-col items-center">
+        <div className=" relative w-full justify-center items-center flex">
+          <Image src={logo} alt="logo" width={67} />
+          <RxCross2
+            onClick={() => setIsAddDoctorModal(false)}
+            className=" cursor-pointer absolute left-1 top-1 "
+          />
+        </div>
         <div className=" flex items-start justify-start w-full">
           <h5 className=" text-xl">
             لطفا فرم زیر را با توجه به{" "}
@@ -106,7 +105,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal }) {
         </div>
         <button
           onClick={() => {
-            add_doctor(data, setIsAddDoctorModal, setDoctors);
+            add_doctor(data, setIsAddDoctorModal);
           }}
           className=" w-1/2 flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
         >

@@ -140,11 +140,7 @@ export const create_sme_profile = (Name, nationalCode, token, setSmeId) => {
       console.log(err);
     });
 };
-export const add_specialties = (
-  data,
-  setIsLoading,
-  setIsAddSpecialtiesModal
-) => {
+export const add_specialties = (data, setIsLoading, setIsAddSpecialModal) => {
   setIsLoading(true);
   console.log(data);
   axiosConfig
@@ -153,8 +149,7 @@ export const add_specialties = (
       setIsLoading(false);
       console.log(res);
       success("تخصص با موفقیت ثبت شد");
-      setIsAddSpecialtiesModal(false);
-      window.location.reload();
+      setIsAddSpecialModal(false);
     })
     .catch((err) => {
       console.log(err);
@@ -181,7 +176,7 @@ export const get_specialties = async (url) => {
     return null;
   }
 };
-export const delete_specialties = async (id, route) => {
+export const delete_specialties = async (id, setSpecialist) => {
   console.log(id);
   try {
     const response = await axiosConfig.delete("Specialist/delete-specialist", {
@@ -193,8 +188,13 @@ export const delete_specialties = async (id, route) => {
         id: id,
       },
     });
+    const url = "Specialist/read-specialists";
+
+    const data = await get_specialties(url);
+    if (data) {
+      setSpecialist(data);
+    }
     console.log(response);
-    window.location.reload();
   } catch (error) {
     console.log(error);
   }
@@ -227,9 +227,7 @@ export const read_city = (id, setCities) => {
       console.log(err);
     });
 };
-export const add_doctor = (data, setIsAddDoctorModal, setDoctors) => {
-  setDoctors(data);
-
+export const add_doctor = (data, setIsAddDoctorModal) => {
   console.log(data);
   axiosConfig
     .post("Doctor/create-doctor", data)
@@ -283,11 +281,7 @@ export const upload_file = (file, token, setFileId, setIsLoading) => {
       console.log(err);
     });
 };
-export const edit_specialties = (
-  data,
-  setIsLoading,
-  setIsAddSpecialtiesModal
-) => {
+export const edit_specialties = (data, setIsLoading, setIsAddSpecialModal) => {
   setIsLoading(true);
   console.log(data);
   axiosConfig
@@ -296,8 +290,7 @@ export const edit_specialties = (
       setIsLoading(false);
       console.log(res);
       success("تخصص با موفقیت ویرایش شد");
-      setIsAddSpecialtiesModal(false);
-      window.location.reload();
+      setIsAddSpecialModal(false);
     })
     .catch((err) => {
       console.log(err);
@@ -312,4 +305,52 @@ export const edit_specialties = (
         Eror();
       }
     });
+};
+export const get_doctors = async (url) => {
+  try {
+    const response = await axiosConfig.get(url);
+    const doctors = response.data.result.list;
+    console.log(doctors);
+    return doctors;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+export const delete_doctor = async (id, setDoctors) => {
+  console.log(id);
+  try {
+    const response = await axiosConfig.delete("Doctor/delete-Doctor", {
+      data: {
+        metadata: {
+          userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          userName: "0200013076",
+        },
+        id: id,
+      },
+    });
+    const url = "Doctor/read-all-doctors";
+
+    const data = await get_doctors(url);
+    if (data) {
+      setDoctors(data);
+    }
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const get_specialties_by_id = async (id) => {
+  try {
+    const response = await axiosConfig.get(
+      `Specialist/read-specialist?SpecialistId=${id}`
+    );
+    const specialist = response.data.result.data.name;
+    console.log(specialist);
+    return specialist;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
 };

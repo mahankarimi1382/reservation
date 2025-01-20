@@ -1,134 +1,150 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import abbas from "../../../public/Pics/abbas.png";
 import star from "../../../public/Pics/star.png";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
-
+import doctor_icon from "../../../public/Pics/doctor-icon.jpg";
 import Image from "next/image";
 import Link from "next/link";
+import { get_doctors, get_specialties_by_id } from "@/api/ApiCalling";
 function DoctorsSection() {
-  const doctors = [
-    {
-      id: 1,
-      name: "عباس",
-      family: "میر احمدی",
-      ability: "قلب و عروق",
-      razi: 558,
-      raziPercent: 87,
-      rate: 4.7,
-      address: "بیمارستان میلاد",
-      tags: [
-        { id: 1, text: "جراحی قلب" },
-        { id: 2, text: "آنجوگرافی" },
-        { id: 3, text: "تست ورزش" },
-      ],
-    },
-    {
-      id: 2,
-      name: "عباس",
-      family: "میر احمدی",
-      ability: "قلب و عروق",
-      razi: 558,
-      raziPercent: 87,
-      rate: 4.7,
-      address: "بیمارستان میلاد",
-      tags: [
-        { id: 1, text: "جراحی قلب" },
-        { id: 2, text: "آنجوگرافی" },
-        { id: 3, text: "تست ورزش" },
-      ],
-    },
-    {
-      id: 3,
-      name: "عباس",
-      family: "میر احمدی",
-      ability: "قلب و عروق",
-      razi: 558,
-      raziPercent: 87,
-      rate: 4.7,
-      address: "بیمارستان میلاد",
-      tags: [
-        { id: 1, text: "جراحی قلب" },
-        { id: 2, text: "آنجوگرافی" },
-        { id: 3, text: "تست ورزش" },
-      ],
-    },
-    {
-      id: 4,
-      name: "عباس",
-      family: "میر احمدی",
-      ability: "قلب و عروق",
-      razi: 558,
-      raziPercent: 87,
-      rate: 4.7,
-      address: "بیمارستان میلاد",
-      tags: [
-        { id: 1, text: "جراحی قلب" },
-        { id: 2, text: "آنجوگرافی" },
-        { id: 3, text: "تست ورزش" },
-      ],
-    },
-    {
-      id: 5,
-      name: "عباس",
-      family: "میر احمدی",
-      ability: "قلب و عروق",
-      razi: 558,
-      raziPercent: 87,
-      rate: 4.7,
-      address: "بیمارستان میلاد",
-      tags: [
-        { id: 1, text: "جراحی قلب" },
-        { id: 2, text: "آنجوگرافی" },
-        { id: 3, text: "تست ورزش" },
-      ],
-    },
-    {
-      id: 6,
-      name: "عباس",
-      family: "میر احمدی",
-      ability: "قلب و عروق",
-      razi: 558,
-      raziPercent: 87,
-      rate: 4.7,
-      address: "بیمارستان میلاد",
-      tags: [
-        { id: 1, text: "جراحی قلب" },
-        { id: 2, text: "آنجوگرافی" },
-        { id: 3, text: "تست ورزش" },
-      ],
-    },
-    {
-      id: 7,
-      name: "عباس",
-      family: "میر احمدی",
-      ability: "قلب و عروق",
-      razi: 558,
-      raziPercent: 87,
-      rate: 4.7,
-      address: "بیمارستان میلاد",
-      tags: [
-        { id: 1, text: "جراحی قلب" },
-        { id: 2, text: "آنجوگرافی" },
-        { id: 3, text: "تست ورزش" },
-      ],
-    },
-    {
-      id: 8,
-      name: "عباس",
-      family: "میر احمدی",
-      ability: "قلب و عروق",
-      razi: 558,
-      raziPercent: 87,
-      rate: 4.7,
-      address: "بیمارستان میلاد",
-      tags: [
-        { id: 1, text: "جراحی قلب" },
-        { id: 2, text: "آنجوگرافی" },
-        { id: 3, text: "تست ورزش" },
-      ],
-    },
-  ];
+  const [doctors, setDoctors] = useState([]);
+
+  console.log(doctors);
+  useEffect(() => {
+    const url = "Doctor/read-all-doctors";
+
+    const fetchData = async () => {
+      const data = await get_doctors(url);
+      if (data) {
+        setDoctors(data);
+      }
+    };
+    fetchData();
+  }, []);
+  // const doctors = [
+  //   {
+  //     id: 1,
+  //     name: "عباس",
+  //     family: "میر احمدی",
+  //     ability: "قلب و عروق",
+  //     razi: 558,
+  //     raziPercent: 87,
+  //     rate: 4.7,
+  //     address: "بیمارستان میلاد",
+  //     tags: [
+  //       { id: 1, text: "جراحی قلب" },
+  //       { id: 2, text: "آنجوگرافی" },
+  //       { id: 3, text: "تست ورزش" },
+  //     ],
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "عباس",
+  //     family: "میر احمدی",
+  //     ability: "قلب و عروق",
+  //     razi: 558,
+  //     raziPercent: 87,
+  //     rate: 4.7,
+  //     address: "بیمارستان میلاد",
+  //     tags: [
+  //       { id: 1, text: "جراحی قلب" },
+  //       { id: 2, text: "آنجوگرافی" },
+  //       { id: 3, text: "تست ورزش" },
+  //     ],
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "عباس",
+  //     family: "میر احمدی",
+  //     ability: "قلب و عروق",
+  //     razi: 558,
+  //     raziPercent: 87,
+  //     rate: 4.7,
+  //     address: "بیمارستان میلاد",
+  //     tags: [
+  //       { id: 1, text: "جراحی قلب" },
+  //       { id: 2, text: "آنجوگرافی" },
+  //       { id: 3, text: "تست ورزش" },
+  //     ],
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "عباس",
+  //     family: "میر احمدی",
+  //     ability: "قلب و عروق",
+  //     razi: 558,
+  //     raziPercent: 87,
+  //     rate: 4.7,
+  //     address: "بیمارستان میلاد",
+  //     tags: [
+  //       { id: 1, text: "جراحی قلب" },
+  //       { id: 2, text: "آنجوگرافی" },
+  //       { id: 3, text: "تست ورزش" },
+  //     ],
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "عباس",
+  //     family: "میر احمدی",
+  //     ability: "قلب و عروق",
+  //     razi: 558,
+  //     raziPercent: 87,
+  //     rate: 4.7,
+  //     address: "بیمارستان میلاد",
+  //     tags: [
+  //       { id: 1, text: "جراحی قلب" },
+  //       { id: 2, text: "آنجوگرافی" },
+  //       { id: 3, text: "تست ورزش" },
+  //     ],
+  //   },
+  //   {
+  //     id: 6,
+  //     name: "عباس",
+  //     family: "میر احمدی",
+  //     ability: "قلب و عروق",
+  //     razi: 558,
+  //     raziPercent: 87,
+  //     rate: 4.7,
+  //     address: "بیمارستان میلاد",
+  //     tags: [
+  //       { id: 1, text: "جراحی قلب" },
+  //       { id: 2, text: "آنجوگرافی" },
+  //       { id: 3, text: "تست ورزش" },
+  //     ],
+  //   },
+  //   {
+  //     id: 7,
+  //     name: "عباس",
+  //     family: "میر احمدی",
+  //     ability: "قلب و عروق",
+  //     razi: 558,
+  //     raziPercent: 87,
+  //     rate: 4.7,
+  //     address: "بیمارستان میلاد",
+  //     tags: [
+  //       { id: 1, text: "جراحی قلب" },
+  //       { id: 2, text: "آنجوگرافی" },
+  //       { id: 3, text: "تست ورزش" },
+  //     ],
+  //   },
+  //   {
+  //     id: 8,
+  //     name: "عباس",
+  //     family: "میر احمدی",
+  //     ability: "قلب و عروق",
+  //     razi: 558,
+  //     raziPercent: 87,
+  //     rate: 4.7,
+  //     address: "بیمارستان میلاد",
+  //     tags: [
+  //       { id: 1, text: "جراحی قلب" },
+  //       { id: 2, text: "آنجوگرافی" },
+  //       { id: 3, text: "تست ورزش" },
+  //     ],
+  //   },
+  // ];
   return (
     <div className=" w-full flex flex-col items-center justify-center">
       <div className=" lg:mt-20 mt-5 flex justify-between w-11/12">
@@ -136,7 +152,10 @@ function DoctorsSection() {
           <span className=" text-[#005DAD] ">پزشکان</span>
           ویزیت فوری
         </h2>
-        <Link href="/doctors" className=" text-[#005DAD] flex items-center gap-1 text-[12px] lg:text-[16px]">
+        <Link
+          href="/doctors"
+          className=" text-[#005DAD] flex items-center gap-1 text-[12px] lg:text-[16px]"
+        >
           مشاهده همه
           <IoIosArrowBack />
         </Link>
@@ -151,14 +170,14 @@ function DoctorsSection() {
               <Image
                 alt="doctot-img"
                 className=" object-cover w-[86px] h-[86px]   lg:w-[133px] lg:h-[133px] rounded-full"
-                src={abbas}
+                src={doctor_icon}
               />
               <div className=" flex w-full lg:px-5 justify-between items-center">
                 <h2 className=" lg:text-[16px] lg:font-semibold">
-                  {items.name} {items.family}
+                  {items.doctorName} {items.doctorFamily}
                 </h2>
                 <div className=" flex items-center justify-center">
-                  <h2 className=" font-medium text-[12px]">{items.rate}</h2>
+                  <h2 className=" font-medium text-[12px]">0</h2>
                   <Image
                     alt="star-icon"
                     className=" lg:w-[18px] w-4 h-4 lg:h-[18px]"
@@ -167,12 +186,12 @@ function DoctorsSection() {
                 </div>
               </div>
               <h2 className=" text-gray-400 text-[14px] lg:font-semibold lg:px-5 w-full">
-                متخصص {items.ability}
+                تخصص: {get_specialties_by_id(items.specialistId)}
               </h2>
               <h2 className=" text-[#1F7168] text-[14px] lg:font-semibold w-full lg:px-5">
-                ({items.raziPercent}%) {items.razi} بیمار راضی
+                (0) 0 بیمار راضی{" "}
               </h2>
-              <div className=" flex w-full justify-center lg:px-5 gap-5">
+              {/* <div className=" flex w-full justify-center lg:px-5 gap-5">
                 {items.tags.map((item2) => {
                   return (
                     <h2
@@ -183,7 +202,7 @@ function DoctorsSection() {
                     </h2>
                   );
                 })}
-              </div>
+              </div> */}
               <button className=" hover:bg-[#005DAD] hover:text-white transition-all flex justify-center items-center gap-2 text-sm lg:text-base lg:w-2/3 text-[#005DAD] rounded-lg p-1 lg:p-2 border-2 border-[#005DAD]">
                 نوبت بگیرید
                 <MdArrowBackIosNew />
