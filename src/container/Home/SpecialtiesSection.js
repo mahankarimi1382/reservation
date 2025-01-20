@@ -10,7 +10,7 @@ function SpecialtiesSection() {
           های دکتر رزرو
         </h2>
       </div>
-      <div className=" pl-3 w-full flex lg:w-[80%] lg:-mr-28 items-center">
+      <div className="  lg:ml-10 xl:ml-0 justify-center pl-3 w-full flex lg:w-[90%] xl:w-[80%] items-center">
         <SwipperSection />
         <SpecialtiesSectionButton />
       </div>

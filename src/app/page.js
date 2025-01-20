@@ -18,9 +18,9 @@ import SupportModal from "@/components/modals/SupportModal";
 import EventSection from "@/components/EventSection";
 export default function Home() {
   return (
-    <div dir="rtl">
+    <div dir="rtl" className=" pb-5">
       <EventSection />
-      <div className=" lg:rounded-bl-[300px] rounded-bl-[80px] w-full h-[291px] md:h-[400px] lg:h-[600px]  flex flex-col justify-start gap-20  bg-[#C2E2FF]">
+      <div className=" lg:rounded-bl-[300px] justify-start gap-16 rounded-bl-[80px] w-full h-[291px]  md:h-[400px] lg:h-[500px] xl:h-[600px]  flex flex-col pt-5   bg-[#C2E2FF]">
         <Navbar />
         <MainSearchBar />
       </div>

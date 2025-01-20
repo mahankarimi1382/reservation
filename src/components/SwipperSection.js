@@ -26,7 +26,7 @@ function SwipperSection() {
       <div>
         {categorys.map((item) => {
           return (
-            <SwiperSlide key={item.id} className=" py-2 md:p-3 lg:p-[25px]">
+            <SwiperSlide key={item.id} className=" py-2 md:p-3 xl:p-[25px]">
               <div
                 key={item.id}
                 className=" group  hover:shadow-lg w-[95px] h-[120px] md:w-[100px] md:h-[130px]  hover:-mt-3 transition-all shadow-red-600  hover:shadow-[#6991b4] lg:w-[131px] lg:h-[170px] flex flex-col justify-evenly items-center rounded-xl border border-[#DBD7D7]"
@@ -76,6 +76,11 @@ function SwipperSection() {
           spaceBetween: 40,
         },
         1024: {
+          slidesPerView: 4,
+          spaceBetween: 0,
+          dragClass: "scrollbar-drag",
+        },
+        1280: {
           slidesPerView: 6,
           spaceBetween: -20,
           dragClass: "scrollbar-drag",

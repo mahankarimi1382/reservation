@@ -6,9 +6,9 @@ import { NavLinks } from "./Links/Links";
 
 function Navbar() {
   return (
-    <div className="vazir  w-full mt-5 lg:mt-0  px-5 h-36 flex justify-between items-center">
-      <div className=" hidden lg:flex items-start text-[18px] font-medium  justify-center gap-10 ">
-        <Image className=" -mt-7" alt="logo" width={150} src={logo} />
+    <div className="vazir  w-full  px-5  flex justify-between items-center">
+      <div className=" hidden lg:flex items-center xl:text-[18px] lg:text-sm font-medium gap-5 justify-center xl:gap-10 ">
+        <Image className=" xl:w-[150px] lg:w-[100px]" alt="logo" width={150} src={logo} />
         <NavLinks title="خانه" href="/" />
         <NavLinks title="تخصص ها" href="/Specialties" />
         <NavLinks title="مراکز درمانی" href="/medical-centers" />

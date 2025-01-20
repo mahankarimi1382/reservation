@@ -53,7 +53,7 @@ export const LoginButton = () => {
       {!fullName && (
         <button
           onClick={() => router.push("medicalCentersLogin")}
-          className=" lg:-mt-12 lg:flex hidden shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2  justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
+          className=" lg:flex hidden shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2  justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
         >
           ثبت نام | ورود مرکز درمانی{" "}
         </button>
@@ -62,7 +62,7 @@ export const LoginButton = () => {
       {!fullName && (
         <button
           onClick={() => router.push("doctorLogin")}
-          className=" lg:-mt-12 lg:flex hidden  shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2 justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
+          className=" lg:flex hidden  shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2 justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
         >
           ثبت نام | ورود پزشکان
         </button>
@@ -76,7 +76,7 @@ export const LoginButton = () => {
               }
             : openModal
         }
-        className=" lg:-mt-12 relative cursor-pointer bg-white shadow-xl px-2 text-[12px] lg:text-[14px] lg:p-2 p-1 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
+        className=" relative cursor-pointer bg-white shadow-xl px-2 text-[12px] lg:text-[14px] lg:p-2 p-1 lg:px-2 flex justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
       >
         {fullName ? (
           <h5
@@ -452,7 +452,7 @@ export const BurgerMenuButt = () => {
   );
 };
 
-export const AddDoctorButt = ({isAddDoctorModal, setIsAddDoctorModal}) => {
+export const AddDoctorButt = ({ isAddDoctorModal, setIsAddDoctorModal }) => {
   return (
     <div>
       {isAddDoctorModal && (
