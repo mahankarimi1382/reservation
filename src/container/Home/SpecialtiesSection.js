@@ -1,5 +1,4 @@
 import React from "react";
-import heart from "../../../public/Pics/Specialties/heart-icon.png";
 import SwipperSection from "../../components/SwipperSection";
 import { SpecialtiesSectionButton } from "@/components/Buttons/Button";
 function SpecialtiesSection() {
@@ -12,7 +11,7 @@ function SpecialtiesSection() {
         </h2>
       </div>
       <div className=" pl-3 w-full flex lg:w-[80%] lg:-mr-28 items-center">
-        <SwipperSection icon={heart} />
+        <SwipperSection />
         <SpecialtiesSectionButton />
       </div>
     </div>
