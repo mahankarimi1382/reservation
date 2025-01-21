@@ -9,7 +9,9 @@
   font-family: "mainfont";
   background-color: none;
 }
-
+.MuiPaginationItem-icon {
+  visibility: hidden;
+}
 .file-input::file-selector-button {
   display: none;
 }

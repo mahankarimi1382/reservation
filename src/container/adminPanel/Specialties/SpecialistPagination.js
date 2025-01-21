@@ -1,11 +1,20 @@
 "use client";
 import { delete_specialties } from "@/api/ApiCalling";
+import { Pagination } from "@mui/material";
 import React, { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { HiOutlineTrash } from "react-icons/hi2";
 
-const SpecialistPagination = ({ items, setIsAddSpecialModal, setItem,setSpecialist }) => {
+const SpecialistPagination = ({
+  items,
+  setIsAddSpecialModal,
+  setItem,
+  setSpecialist,
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const handleChange = (event, value) => {
+    setCurrentPage(value);
+  };
   const itemsPerPage = 10;
   const totalPages = Math.ceil(items.length / itemsPerPage);
 
@@ -54,41 +63,14 @@ const SpecialistPagination = ({ items, setIsAddSpecialModal, setItem,setSpeciali
           </div>
         );
       })}
-
-      {/* دکمه‌های صفحه‌بندی */}
-      <div className=" mt-5 w-full flex justify-center items-center gap-5">
-        <button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-        >
-          صفحه قبلی
-        </button>
-        <div>
-          {pageNumbers.map((number) => (
-            <button
-              className=" rounded-full"
-              key={number}
-              onClick={() => setCurrentPage(number)}
-              style={{
-                margin: "0 2px",
-                padding: "5px 10px",
-                backgroundColor: currentPage === number ? "lightblue" : "white",
-              }}
-            >
-              {number}
-            </button>
-          ))}
-        </div>
-        <button
-          onClick={() =>
-            setCurrentPage((prev) =>
-              Math.min(prev + 1, Math.ceil(items.length / itemsPerPage))
-            )
-          }
-          disabled={currentPage === Math.ceil(items.length / itemsPerPage)}
-        >
-          صفحه بعدی
-        </button>
+      <div className=" w-full flex justify-center items-center mt-5">
+        {/* دکمه‌های صفحه‌بندی */}
+        <Pagination
+          onChange={handleChange}
+          page={currentPage}
+          count={totalPages}
+          color="primary"
+        />
       </div>
     </div>
   );
