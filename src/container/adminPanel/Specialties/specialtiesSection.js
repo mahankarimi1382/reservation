@@ -1,15 +1,12 @@
 "use client";
-import { delete_specialties, get_specialties } from "@/api/ApiCalling";
+import { get_specialties } from "@/api/ApiCalling";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { HiOutlineTrash } from "react-icons/hi2";
 import { TiArrowSortedDown } from "react-icons/ti";
-import { EditSpecialistButt } from "@/components/Buttons/Button";
 import { SelectFilter } from "@/components/Inputs/Input";
-import { AddSpecialtiesButt } from "@/components/Buttons/Button";
 import { GoPlus } from "react-icons/go";
 import SubmitSpecialtiesModal from "@/components/modals/SubmitSpecialtiesModal";
-import { CiEdit } from "react-icons/ci";
+import SpecialistPagination from "./SpecialistPagination";
 
 function SpecialtiesPanelSection() {
   const [specialist, setSpecialist] = useState([]);
@@ -67,48 +64,12 @@ function SpecialtiesPanelSection() {
             <TiArrowSortedDown />
           </h4>
         </div>
-
-        {specialist.map((item) => {
-          return (
-            <div
-              className=" border flex py-3 rounded-lg bg-white shadow-md"
-              key={item.id}
-            >
-              <div className=" w-1/4 flex justify-center items-center">
-                <img src={item.logoFile} width={47} height={47} alt="logo" />
-              </div>
-              <h4 className=" w-1/4 flex justify-center items-center text-[#3F444D] text-lg">
-                {item.name}
-              </h4>
-              <div className=" gap-2 w-1/2 flex justify-center items-center text-[#3F444D] text-lg">
-                <button
-                  onClick={() => {
-                    delete_specialties(item.id, setSpecialist);
-                  }}
-                  className=" gap-2 border rounded-lg px-5 p-1 flex justify-center items-center bg-[#EED4D7] border-[#C30505] text-[#C30505]"
-                >
-                  <HiOutlineTrash />
-                  حذف
-                </button>
-                <button
-                  onClick={() => {
-                    setItem(item);
-                    setIsAddSpecialModal(true);
-                  }}
-                  className=" gap-2 border rounded-lg px-5 p-1 flex justify-center items-center bg-[#F2FEF8] border-[#1F7168] text-[#1F7168]"
-                >
-                  <CiEdit className=" font-bold text-2xl" />
-                  ویرایش
-                </button>
-                {/* <EditSpecialistButt
-                  isEditSpecialModal={isEditSpecialModal}
-                  setIsEditSpecialModal={setIsEditSpecialModal}
-                  item={item}
-                /> */}
-              </div>
-            </div>
-          );
-        })}
+        <SpecialistPagination
+          setSpecialist={setSpecialist}
+          setItem={setItem}
+          setIsAddSpecialModal={setIsAddSpecialModal}
+          items={specialist}
+        />
       </div>
     </div>
   );

@@ -155,8 +155,9 @@ export const add_specialties = (data, setIsLoading, setIsAddSpecialModal) => {
       console.log(err);
       setIsLoading(false);
       if (
+        err.response.data.message &&
         err.response.data.message.message ==
-        "حجم فایل برای ذخیره در بیس64 زیاد است !"
+          "حجم فایل برای ذخیره در بیس64 زیاد است !"
       ) {
         Eror("حجم فایل بیش از حد مجاز است");
       } else {
