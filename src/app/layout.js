@@ -2,7 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 
 const myFont = localFont({
-  src: "../../public/fonts/IRANYekanMobileFN.ttf",
+  src: "../../public/fonts/IRANYekanMobileFN Medium.ttf",
   display: "swap",
 });
 export const metadata = {

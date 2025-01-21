@@ -109,24 +109,24 @@ function page() {
         </div>
         <div className=" gap-3 flex flex-col w-[80%] rounded-lg border shadow-md p-4 bg-white">
           <div className=" py-2 w-full flex rounded-lg bg-[#F4F4F4]">
-            <h4 className=" w-[16%] flex justify-center items-center text-[#3F444D] ">
-              عکس پزشک
+            <h4 className=" primary w-[16%] flex justify-center items-center text-[#3F444D] ">
+              مراکز درمانی
               <TiArrowSortedDown />
             </h4>
 
             <h4 className=" w-[16%] flex justify-center items-center text-[#3F444D] ">
-              نام پزشک <TiArrowSortedDown />
+              نام مرکز <TiArrowSortedDown />
             </h4>
             <h4 className=" w-[16%] flex justify-center items-center text-[#3F444D] ">
-              کد نظام پزشکی
+              کد سیام
+              <TiArrowSortedDown />
+            </h4>
+            <h4 className=" w-[16%] font-medium flex justify-center items-center text-[#3F444D]">
+              تعداد پزشکان مرکز
               <TiArrowSortedDown />
             </h4>
             <h4 className=" w-[16%] flex justify-center items-center text-[#3F444D]">
-              تخصص
-              <TiArrowSortedDown />
-            </h4>
-            <h4 className=" w-[16%] flex justify-center items-center text-[#3F444D]">
-              تاریخ بارگذاری
+              بیمه
               <TiArrowSortedDown />
             </h4>
           </div>
