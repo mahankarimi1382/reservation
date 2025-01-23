@@ -7,23 +7,37 @@ import {
   ProvinceSelectInput,
   SpecialtiesSelectInput,
 } from "../Inputs/Input";
-import { add_doctor } from "@/api/ApiCalling";
+import { add_doctor, edit_doctors } from "@/api/ApiCalling";
 import { smeIdStorage } from "@/store/Store";
 import { RxCross2 } from "react-icons/rx";
-function AddNewDoctorModal({ setIsAddDoctorModal }) {
+import { SyncLoader } from "react-spinners";
+function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
+  const [isLoading, setIsLoading] = useState(false);
   const { smeId } = smeIdStorage();
   const [cities, setCities] = useState([]);
-  const [doctorName, setDoctorName] = useState("");
-  const [doctorFamily, setDoctorFamily] = useState("");
-  const [nationalId, setnationalId] = useState("");
-  const [specialistId, setSpecialistId] = useState("1");
-  const [codeNezam, setCodeNezam] = useState("");
-  const [mobile, setMobile] = useState("");
+  const [doctorName, setDoctorName] = useState(
+    doctorItems ? doctorItems.doctorName : ""
+  );
+  const [doctorFamily, setDoctorFamily] = useState(
+    doctorItems ? doctorItems.doctorFamily : ""
+  );
+  const [nationalId, setnationalId] = useState(
+    doctorItems ? doctorItems.nationalId : ""
+  );
+  const [specialistId, setSpecialistId] = useState(
+    doctorItems ? doctorItems.specialistId : "1"
+  );
+  const [codeNezam, setCodeNezam] = useState(
+    doctorItems ? doctorItems.codeNezam : ""
+  );
+  const [mobile, setMobile] = useState(doctorItems ? doctorItems.mobile : "");
+
   const data = {
     metadata: {
       userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       userName: "0200013076",
     },
+    id: doctorItems && doctorItems.id,
     doctorName,
     doctorFamily,
     nationalId,
@@ -56,6 +70,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal }) {
           <div className=" w-[40%] flex gap-2 flex-col items-start">
             <h5>نام</h5>
             <input
+              value={doctorName}
               onChange={(e) => setDoctorName(e.target.value)}
               className=" border border-[#636972] rounded-lg p-2 w-full"
             />
@@ -63,6 +78,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal }) {
           <div className=" w-[40%] flex gap-2 flex-col items-start ">
             <h5>نام خانوادگی</h5>
             <input
+              value={doctorFamily}
               onChange={(e) => setDoctorFamily(e.target.value)}
               className=" border border-[#636972] rounded-lg p-2 w-full "
             />
@@ -77,6 +93,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal }) {
           <div className=" w-[40%] flex gap-2 flex-col items-start">
             <h5>کد نظام پزشکی</h5>
             <input
+              value={codeNezam}
               onChange={(e) => setCodeNezam(e.target.value)}
               className=" border w-full border-[#636972] rounded-lg p-2"
             />
@@ -84,6 +101,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal }) {
           <div className=" w-[40%] flex gap-2 flex-col items-start">
             <h5>کد ملی</h5>
             <input
+              value={nationalId}
               onChange={(e) => setnationalId(e.target.value)}
               className=" border w-full border-[#636972] rounded-lg p-2"
             />
@@ -91,13 +109,17 @@ function AddNewDoctorModal({ setIsAddDoctorModal }) {
           <div className=" w-[40%] flex gap-2 flex-col items-start">
             <h5>شماره همراه</h5>
             <input
+              value={mobile}
               onChange={(e) => setMobile(e.target.value)}
               className=" border w-full border-[#636972] rounded-lg p-2"
             />
           </div>
           <ProvinceSelectInput setCities={setCities} />
           <CitySelectInput cities={cities} />
-          <SpecialtiesSelectInput setSpecialistId={setSpecialistId} />
+          <SpecialtiesSelectInput
+            specialistId={specialistId}
+            setSpecialistId={setSpecialistId}
+          />
           <div className=" w-[40%] flex gap-2 flex-col items-start">
             <h5>آدرس مطب</h5>
             <input className=" border w-full border-[#636972] rounded-lg p-2" />
@@ -105,11 +127,14 @@ function AddNewDoctorModal({ setIsAddDoctorModal }) {
         </div>
         <button
           onClick={() => {
-            add_doctor(data, setIsAddDoctorModal);
+            doctorItems
+              ? edit_doctors(data, setIsLoading, setIsAddDoctorModal)
+              : add_doctor(data, setIsLoading, setIsAddDoctorModal);
+            setIsLoading(true);
           }}
           className=" w-1/2 flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
         >
-          ثبت
+          {isLoading ? <SyncLoader color="white" size={10} /> : "ثبت"}
         </button>
       </div>
     </div>

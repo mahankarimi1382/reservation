@@ -18,7 +18,7 @@ function MainSearchBar() {
         <Image
           alt="icon"
           width={50}
-          className=" lg:hidden absolute -right-5"
+          className=" lg:hidden absolute right-2"
           src={heroArrow}
         />{" "}
         <Image
@@ -29,7 +29,7 @@ function MainSearchBar() {
         />
         <Image
           width={30}
-          className=" lg:hidden absolute  -right-12 top-10"
+          className=" lg:hidden absolute -right-2 xs:-right-5 w-[20px] xs:w-[30px] top-10"
           src={heroPerson}
           alt="icon"
         />

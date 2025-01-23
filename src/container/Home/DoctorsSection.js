@@ -7,144 +7,22 @@ import { IoIosArrowBack } from "react-icons/io";
 import doctor_icon from "../../../public/Pics/doctor-icon.jpg";
 import Image from "next/image";
 import Link from "next/link";
-import { get_doctors, get_specialties_by_id } from "@/api/ApiCalling";
+import {
+  get_doctors_by_special_id,
+  get_specialties_by_id,
+} from "@/api/ApiCalling";
 function DoctorsSection() {
   const [doctors, setDoctors] = useState([]);
-
-  console.log(doctors);
+  const fetchData = async () => {
+    const data = await get_doctors_by_special_id();
+    if (data) {
+      setDoctors(data);
+    }
+  };
   useEffect(() => {
-    const url = "Doctor/read-all-doctors";
-
-    const fetchData = async () => {
-      const data = await get_doctors(url);
-      if (data) {
-        setDoctors(data);
-      }
-    };
     fetchData();
   }, []);
-  // const doctors = [
-  //   {
-  //     id: 1,
-  //     name: "عباس",
-  //     family: "میر احمدی",
-  //     ability: "قلب و عروق",
-  //     razi: 558,
-  //     raziPercent: 87,
-  //     rate: 4.7,
-  //     address: "بیمارستان میلاد",
-  //     tags: [
-  //       { id: 1, text: "جراحی قلب" },
-  //       { id: 2, text: "آنجوگرافی" },
-  //       { id: 3, text: "تست ورزش" },
-  //     ],
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "عباس",
-  //     family: "میر احمدی",
-  //     ability: "قلب و عروق",
-  //     razi: 558,
-  //     raziPercent: 87,
-  //     rate: 4.7,
-  //     address: "بیمارستان میلاد",
-  //     tags: [
-  //       { id: 1, text: "جراحی قلب" },
-  //       { id: 2, text: "آنجوگرافی" },
-  //       { id: 3, text: "تست ورزش" },
-  //     ],
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "عباس",
-  //     family: "میر احمدی",
-  //     ability: "قلب و عروق",
-  //     razi: 558,
-  //     raziPercent: 87,
-  //     rate: 4.7,
-  //     address: "بیمارستان میلاد",
-  //     tags: [
-  //       { id: 1, text: "جراحی قلب" },
-  //       { id: 2, text: "آنجوگرافی" },
-  //       { id: 3, text: "تست ورزش" },
-  //     ],
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "عباس",
-  //     family: "میر احمدی",
-  //     ability: "قلب و عروق",
-  //     razi: 558,
-  //     raziPercent: 87,
-  //     rate: 4.7,
-  //     address: "بیمارستان میلاد",
-  //     tags: [
-  //       { id: 1, text: "جراحی قلب" },
-  //       { id: 2, text: "آنجوگرافی" },
-  //       { id: 3, text: "تست ورزش" },
-  //     ],
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "عباس",
-  //     family: "میر احمدی",
-  //     ability: "قلب و عروق",
-  //     razi: 558,
-  //     raziPercent: 87,
-  //     rate: 4.7,
-  //     address: "بیمارستان میلاد",
-  //     tags: [
-  //       { id: 1, text: "جراحی قلب" },
-  //       { id: 2, text: "آنجوگرافی" },
-  //       { id: 3, text: "تست ورزش" },
-  //     ],
-  //   },
-  //   {
-  //     id: 6,
-  //     name: "عباس",
-  //     family: "میر احمدی",
-  //     ability: "قلب و عروق",
-  //     razi: 558,
-  //     raziPercent: 87,
-  //     rate: 4.7,
-  //     address: "بیمارستان میلاد",
-  //     tags: [
-  //       { id: 1, text: "جراحی قلب" },
-  //       { id: 2, text: "آنجوگرافی" },
-  //       { id: 3, text: "تست ورزش" },
-  //     ],
-  //   },
-  //   {
-  //     id: 7,
-  //     name: "عباس",
-  //     family: "میر احمدی",
-  //     ability: "قلب و عروق",
-  //     razi: 558,
-  //     raziPercent: 87,
-  //     rate: 4.7,
-  //     address: "بیمارستان میلاد",
-  //     tags: [
-  //       { id: 1, text: "جراحی قلب" },
-  //       { id: 2, text: "آنجوگرافی" },
-  //       { id: 3, text: "تست ورزش" },
-  //     ],
-  //   },
-  //   {
-  //     id: 8,
-  //     name: "عباس",
-  //     family: "میر احمدی",
-  //     ability: "قلب و عروق",
-  //     razi: 558,
-  //     raziPercent: 87,
-  //     rate: 4.7,
-  //     address: "بیمارستان میلاد",
-  //     tags: [
-  //       { id: 1, text: "جراحی قلب" },
-  //       { id: 2, text: "آنجوگرافی" },
-  //       { id: 3, text: "تست ورزش" },
-  //     ],
-  //   },
-  // ];
+
   return (
     <div className=" w-full flex flex-col items-center justify-center">
       <div className=" lg:mt-20 mt-5 flex justify-between w-11/12">
@@ -153,7 +31,7 @@ function DoctorsSection() {
           ویزیت فوری
         </h2>
         <Link
-          href="/doctors"
+          href="/doctors-page"
           className=" text-[#005DAD] flex items-center gap-1 text-[12px] lg:text-[16px]"
         >
           مشاهده همه

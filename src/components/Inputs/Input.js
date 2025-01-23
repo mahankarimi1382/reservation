@@ -177,7 +177,7 @@ export const ProvinceSelectInput = ({ setCities }) => {
     </div>
   );
 };
-export const SpecialtiesSelectInput = ({ setSpecialistId }) => {
+export const SpecialtiesSelectInput = ({ specialistId, setSpecialistId }) => {
   const [specialist, setSpecialist] = useState([]);
   console.log(specialist);
   useEffect(() => {
@@ -196,6 +196,7 @@ export const SpecialtiesSelectInput = ({ setSpecialistId }) => {
     <div className=" w-[40%] flex gap-2 flex-col items-start">
       <h5>تخصص</h5>
       <select
+        value={specialistId}
         onChange={(e) => setSpecialistId(e.target.value)}
         className=" border w-full border-[#636972] rounded-lg p-2"
       >

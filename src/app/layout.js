@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import Config from "@/components/Config";
 
 const myFont = localFont({
   src: "../../public/fonts/IRANYekanMobileFN Medium.ttf",
@@ -13,7 +14,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${myFont.className}`}>{children}</body>
+      <body className={`${myFont.className}`}>
+        <Config>{children}</Config>
+      </body>
     </html>
   );
 }

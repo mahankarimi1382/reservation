@@ -36,12 +36,12 @@ import SubmitSpecialtiesModal from "../modals/SubmitSpecialtiesModal";
 import AddNewDoctorModal from "../modals/AddNewDoctorModal";
 import VisitTypeSelectionModal from "../modals/VisitTypeSelectionModal";
 import Link from "next/link";
+import AddTurnModal from "../modals/AddTurnModal";
 
 export const LoginButton = () => {
   const { fullName, setFullName } = fullNameStorage();
   const { removeSmeId, smeId } = smeIdStorage();
   const [isHover, setIsHover] = useState(false);
-  console.log(smeId);
   const router = useRouter();
   const [isModal, setIsModal] = useState(false);
   const openModal = () => {
@@ -487,6 +487,20 @@ export const EditSpecialistButt = ({
       >
         <CiEdit className=" font-bold text-2xl" />
         ویرایش
+      </button>
+    </div>
+  );
+};
+export const AddTurnButt = ({ isAddTurn, setIsAddTurn }) => {
+  return (
+    <div>
+      {isAddTurn && <AddTurnModal setIsAddTurn={setIsAddTurn} />}
+      <button
+        onClick={() => setIsAddTurn(true)}
+        className=" flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
+      >
+        <GoPlus className=" text-2xl" />
+        ثبت نوبت
       </button>
     </div>
   );

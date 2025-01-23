@@ -170,7 +170,6 @@ export const get_specialties = async (url) => {
   try {
     const response = await axiosConfig.get(url);
     const specialties = response.data.result.list;
-    console.log(specialties);
     return specialties;
   } catch (error) {
     console.error("Error fetching specialties:", error);
@@ -228,7 +227,7 @@ export const read_city = (id, setCities) => {
       console.log(err);
     });
 };
-export const add_doctor = (data, setIsAddDoctorModal) => {
+export const add_doctor = (data, setIsLoading, setIsAddDoctorModal) => {
   console.log(data);
   axiosConfig
     .post("Doctor/create-doctor", data)
@@ -236,9 +235,11 @@ export const add_doctor = (data, setIsAddDoctorModal) => {
       console.log(res);
       success("پزشک با موفقیت ثبت شد");
       setIsAddDoctorModal(false);
+      setIsLoading(false);
     })
     .catch((err) => {
       console.log(err);
+      setIsLoading(false);
     });
 };
 export const add_article = (data, setLoading) => {
@@ -348,10 +349,97 @@ export const get_specialties_by_id = async (id) => {
       `Specialist/read-specialist?SpecialistId=${id}`
     );
     const specialist = response.data.result.data.name;
-    console.log(specialist);
+    // console.log(specialist);
     return specialist;
   } catch (error) {
     console.error("Error fetching specialties:", error);
     return null;
+  }
+};
+export const get_doctors_by_special_id = async (id) => {
+  try {
+    const response = await axiosConfig.get(
+      `Doctor/read-doctors-byspeciality?SpecialistId=1133`
+    );
+    const doctors = response.data.result.list;
+    return doctors;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+export const edit_doctors = (data, setIsLoading, setIsAddDoctorModal) => {
+  console.log(data);
+  axiosConfig
+    .put("Doctor/update-doctor", data)
+    .then((res) => {
+      setIsLoading(false);
+      console.log(res);
+      success("دکتر با موفقیت ویرایش شد");
+      setIsAddDoctorModal(false);
+    })
+    .catch((err) => {
+      console.log(err);
+      setIsLoading(false);
+      if (
+        err.response.data.message &&
+        err.response.data.message.message ==
+          "حجم فایل برای ذخیره در بیس64 زیاد است !"
+      ) {
+        Eror("حجم فایل بیش از حد مجاز است");
+      } else {
+        Eror();
+      }
+    });
+};
+export const add_patient = (data, setIsLoading, setIsAddTurn) => {
+  console.log(data);
+  axiosConfig
+    .post("Patient/create-patient", data)
+    .then((res) => {
+      console.log(res);
+      setIsLoading(false);
+      setIsAddTurn(false);
+      success("بیمار با موفقیت ثبت شد");
+    })
+    .catch((err) => {
+      Eror();
+      console.log(err);
+      setIsLoading(false);
+    });
+};
+
+export const get_patients = async (url) => {
+  try {
+    const response = await axiosConfig.get(url);
+    const patients = response.data.result.list;
+    console.log(patients);
+    return patients;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+export const delete_patient = async (id, setPatients) => {
+  console.log(id);
+  try {
+    const response = await axiosConfig.delete("Patient/delete-patient", {
+      data: {
+        metadata: {
+          userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          userName: "0200013076",
+        },
+        id: id,
+      },
+    });
+    const url = "Patient/read-all-patients";
+
+    const data = await get_patients(url);
+    if (data) {
+      setPatients(data);
+    }
+    console.log(response);
+  } catch (error) {
+    console.log(error);
   }
 };
