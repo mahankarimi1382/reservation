@@ -11,6 +11,7 @@ import { add_doctor, edit_doctors } from "@/api/ApiCalling";
 import { smeIdStorage } from "@/store/Store";
 import { RxCross2 } from "react-icons/rx";
 import { SyncLoader } from "react-spinners";
+import { ErrorHandler } from "@/utils/ErrorHandler";
 function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
   const [isLoading, setIsLoading] = useState(false);
   const { smeId } = smeIdStorage();
@@ -25,7 +26,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
     doctorItems ? doctorItems.nationalId : ""
   );
   const [specialistId, setSpecialistId] = useState(
-    doctorItems ? doctorItems.specialistId : "1"
+    doctorItems ? doctorItems.specialistId : ""
   );
   const [codeNezam, setCodeNezam] = useState(
     doctorItems ? doctorItems.codeNezam : ""
@@ -86,6 +87,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
           <div className=" flex w-[40%] gap-2 flex-col items-start">
             <h5>جنسیت</h5>
             <select className=" border border-[#636972] rounded-lg p-2 w-full">
+              <option></option>
               <option>مرد</option>
               <option>زن</option>
             </select>
@@ -114,8 +116,12 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
               className=" border w-full border-[#636972] rounded-lg p-2"
             />
           </div>
-          <ProvinceSelectInput setCities={setCities} />
-          <CitySelectInput cities={cities} />
+          <div className=" w-[40%]">
+            <ProvinceSelectInput setCities={setCities} />
+          </div>
+          <div className="w-[40%]">
+            <CitySelectInput cities={cities} />
+          </div>
           <SpecialtiesSelectInput
             specialistId={specialistId}
             setSpecialistId={setSpecialistId}
@@ -127,10 +133,21 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
         </div>
         <button
           onClick={() => {
-            doctorItems
-              ? edit_doctors(data, setIsLoading, setIsAddDoctorModal)
-              : add_doctor(data, setIsLoading, setIsAddDoctorModal);
-            setIsLoading(true);
+            if (
+              doctorName &&
+              doctorFamily &&
+              nationalId &&
+              specialistId &&
+              codeNezam &&
+              mobile
+            ) {
+              doctorItems
+                ? edit_doctors(data, setIsLoading, setIsAddDoctorModal)
+                : add_doctor(data, setIsLoading, setIsAddDoctorModal);
+              setIsLoading(true);
+            } else {
+              ErrorHandler("empty value");
+            }
           }}
           className=" w-1/2 flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
         >

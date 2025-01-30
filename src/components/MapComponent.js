@@ -13,8 +13,6 @@ export default function MapComponent() {
     new nmp_mapboxgl.Marker({ color: "#005DAD" })
       .setLngLat([51.4055941, 35.758954])
       .addTo(neshanMap);
-
-
   };
 
   useEffect(() => {
@@ -27,12 +25,14 @@ export default function MapComponent() {
         center: [51.4055941, 35.758954],
         minZoom: 2,
         maxZoom: 21,
+
         trackResize: true,
         mapKey: "web.3c1e919c4bbd46549db529eb9dd0b31b",
         poi: false,
         traffic: false,
         mapTypeControllerOptions: {
           show: false,
+          
         },
       });
     }

@@ -3,14 +3,15 @@ import { SelectFilter } from "@/components/Inputs/Input";
 import AdminPanelMenu from "@/container/adminPanel/AdminPanelMenu";
 import Image from "next/image";
 import React from "react";
-import excel_icon from "../../../../public/Pics/excelIcon.png";
-import printer from "../../../../public/Pics/printer.png";
+import excel_icon from "../../../../../public/Pics/excelIcon.png";
+import printer from "../../../../../public/Pics/printer.png";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { RateCounter } from "@/utils/RateCounter";
 import { HiOutlineTrash } from "react-icons/hi2";
 import { IoEyeOutline } from "react-icons/io5";
-import bahram from "../../../../public/Pics/bahramMirzayi.png";
+import bahram from "../../../../../public/Pics/bahramMirzayi.png";
 import { CiEdit } from "react-icons/ci";
+import { AddMedicalCenterButt } from "@/components/Buttons/Button";
 
 function page() {
   const fakeData = [
@@ -97,15 +98,18 @@ function page() {
           <SelectFilter title="محل ویزیت" />
           <SelectFilter title="ساعت" />
         </div>
-        <div className=" gap-2 flex justify-end w-[80%] items-center">
-          <button className=" border rounded-lg px-3 p-1 gap-2 text-[#185B37] border-[#185B37] flex">
-            <Image src={excel_icon} alt=" icon" width={24} />
-            خروجی اکسل
-          </button>
-          <button className=" border rounded-lg px-3 p-1 gap-2 text-[#3F444D] border-[#3F444D] flex">
-            <Image src={printer} alt=" icon" width={24} />
-            چاپ اطلاعات{" "}
-          </button>
+        <div className=" gap-1 flex-col flex items-end w-[80%] justify-end">
+          <AddMedicalCenterButt />
+          <div className=" gap-2 flex justify-end w-[80%] items-center">
+            <button className=" border rounded-lg px-3 p-1 gap-2 text-[#185B37] border-[#185B37] flex">
+              <Image src={excel_icon} alt=" icon" width={24} />
+              خروجی اکسل
+            </button>
+            <button className=" border rounded-lg px-3 p-1 gap-2 text-[#3F444D] border-[#3F444D] flex">
+              <Image src={printer} alt=" icon" width={24} />
+              چاپ اطلاعات{" "}
+            </button>
+          </div>
         </div>
         <div className=" gap-3 flex flex-col w-[80%] rounded-lg border shadow-md p-4 bg-white">
           <div className=" py-2 w-full flex rounded-lg bg-[#F4F4F4]">

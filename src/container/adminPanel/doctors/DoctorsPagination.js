@@ -4,13 +4,17 @@ import { FaEdit } from "react-icons/fa";
 import { Pagination } from "@mui/material";
 import React, { useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
-import AddNewDoctorModal from "@/components/modals/AddNewDoctorModal";
 import { delete_doctor } from "@/api/ApiCalling";
 
-const DoctorsPagination = ({ items,setDoctors }) => {
-  const [isEditDoctor, setIsEditDoctor] = useState(false);
+const DoctorsPagination = ({
+  setDoctorItems,
+  items,
+  setIsAddDoctorModal,
+  setDoctors,
+}) => {
+  // const [isEditDoctor, setIsEditDoctor] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [doctorItems, setDoctorItems] = useState({});
+  // const [doctorItems, setDoctorItems] = useState({});
   const itemsPerPage = 10;
   const handleChange = (event, value) => {
     setCurrentPage(value);
@@ -25,13 +29,6 @@ const DoctorsPagination = ({ items,setDoctors }) => {
 
   return (
     <div>
-      {isEditDoctor && (
-        <AddNewDoctorModal
-          setIsAddDoctorModal={setIsEditDoctor}
-          doctorItems={doctorItems}
-
-        />
-      )}
       {currentItems.map((item) => {
         return (
           <div
@@ -45,7 +42,7 @@ const DoctorsPagination = ({ items,setDoctors }) => {
               />
               <FaEdit
                 onClick={() => {
-                  setIsEditDoctor(true);
+                  setIsAddDoctorModal(true);
                   setDoctorItems(item);
                 }}
                 className="  text-[#3F444D]  transition-all cursor-pointer hover:text-green-600"

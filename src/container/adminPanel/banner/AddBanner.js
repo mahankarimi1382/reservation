@@ -5,7 +5,7 @@ import { FcOk } from "react-icons/fc";
 
 import UploadingInputContainer from "@/container/doctor-panel/doctor-info/UploadingInputContainer";
 import { smeIdStorage } from "@/store/Store";
-import { add_article, upload_file } from "@/api/ApiCalling";
+import { add_article, create_ads, upload_file } from "@/api/ApiCalling";
 import { ToastContainer } from "react-toastify";
 import { SyncLoader } from "react-spinners";
 import Cookies from "js-cookie";
@@ -15,7 +15,8 @@ import { Switch } from "@mui/material";
 function AddBanner() {
   const token = Cookies.get("token");
 
-  const [coverFileId, setCoverFileFileId] = useState("");
+  const [bannerFileId, setBannerFileId] = useState("");
+  console.log(bannerFileId);
   const [articleFileId, setArticleFileId] = useState("");
   const [loading, setLoading] = useState(false);
   const { smeId } = smeIdStorage();
@@ -25,33 +26,34 @@ function AddBanner() {
   const [articleTypeId, setArticleTypeId] = useState("");
   const [link, setLink] = useState("");
   const [authors, setAuthors] = useState("");
+  console.log(smeId);
   const data = {
     metadata: {
       userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       userName: "string",
     },
     title,
-    desc,
-    shortDesc,
-    articleTypeId,
-    link,
-    drrFileId: articleFileId,
-    authors,
+    headLine: "string",
+    description: desc,
+    photo: bannerFileId,
     smeProfileId: smeId,
   };
   return (
     <div className=" w-full gap-4 flex flex-col">
       <h5 className=" font-semibold">بنر</h5>
       <UploadingInputContainer
-        fileId={coverFileId}
-        setFileId={setCoverFileFileId}
+        fileId={bannerFileId}
+        setFileId={setBannerFileId}
       />
 
       <h5 className=" font-semibold">عنوان بنر</h5>
-      <input className=" h-32 p-4 resize-none border rounded-2xl" />
+      <input
+        onChange={(e) => setTitle(e.target.value)}
+        className=" h-32 p-4 resize-none border rounded-2xl"
+      />
       <h5 className=" font-semibold">توضیحات بنر</h5>
       <textarea
-        value={desc}
+        // value={desc}
         onChange={(e) => setDesc(e.target.value)}
         className=" h-52 bg-[#F5F5F5] p-4 resize-none border rounded-2xl"
         placeholder="پزشک گرامی لطفا مقاله را اینجا بگذارید ( کپی کنید سپس اینجا پیست کنید )"
@@ -75,7 +77,7 @@ function AddBanner() {
       </div>
       <div className=" w-full flex justify-between items-center">
         <div className=" w-[48%] flex flex-col  gap-2">
-          <h5 className=" font-semibold"> الویت نمایش</h5>
+          <h5 className=" font-semibold"> اولویت نمایش</h5>
           <select className=" w-full  p-2 rounded-lg border">
             <option></option>
           </select>
@@ -83,14 +85,20 @@ function AddBanner() {
         <div className=" w-[48%] flex flex-col  gap-2">
           <h5 className=" font-semibold"> جایگاه بنر</h5>
           <select className=" w-full  p-2 rounded-lg border">
-            <option></option>
+            <option>صفحه اول</option>
           </select>
         </div>
       </div>
-      <button className=" mt-5 m-auto bg-[#005DAD] text-white w-1/2 p-2 rounded-lg">
-        {false ? <SyncLoader color="white" size={10} /> : "ثبت بنر"}
+      <button
+        disabled={loading}
+        onClick={() => {
+          create_ads(data, setLoading);
+          setLoading(true);
+        }}
+        className=" mt-5 m-auto bg-[#005DAD] text-white w-1/2 p-2 rounded-lg"
+      >
+        {loading ? <SyncLoader color="white" size={10} /> : "ثبت بنر"}
       </button>
-      <ToastContainer />
     </div>
   );
 }

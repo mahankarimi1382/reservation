@@ -135,11 +135,11 @@ export const SelectFilter = ({ title }) => {
     </select>
   );
 };
-export const CitySelectInput = ({ cities }) => {
+export const CitySelectInput = ({ cities, hiddentitle }) => {
   console.log(cities);
   return (
-    <div className=" w-[40%] flex gap-2 flex-col items-start">
-      <h5>شهر</h5>
+    <div className="  flex gap-2 flex-col items-start">
+      {!hiddentitle && <h5>شهر</h5>}
       <select className=" border w-full border-[#636972] rounded-lg p-2">
         {cities.map((item) => {
           return <option key={item.id}>{item.cityName}</option>;
@@ -148,7 +148,7 @@ export const CitySelectInput = ({ cities }) => {
     </div>
   );
 };
-export const ProvinceSelectInput = ({ setCities }) => {
+export const ProvinceSelectInput = ({ setCities, hiddentitle }) => {
   const [provinces, setProvinces] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -160,12 +160,13 @@ export const ProvinceSelectInput = ({ setCities }) => {
     fetchData();
   }, []);
   return (
-    <div className=" w-[40%] flex gap-2 flex-col items-start">
-      <h5>استان</h5>
+    <div className=" flex gap-2 flex-col items-start">
+      {!hiddentitle && <h5>استان</h5>}
       <select
         onChange={(e) => read_city(e.target.value, setCities)}
         className=" border w-full border-[#636972] rounded-lg p-2"
       >
+        <option></option>
         {provinces.map((item) => {
           return (
             <option key={item.id} value={item.value}>
@@ -200,10 +201,41 @@ export const SpecialtiesSelectInput = ({ specialistId, setSpecialistId }) => {
         onChange={(e) => setSpecialistId(e.target.value)}
         className=" border w-full border-[#636972] rounded-lg p-2"
       >
+        <option></option>
         {specialist.map((item) => {
           return (
             <option value={item.id} key={item.id}>
               {item.name}
+            </option>
+          );
+        })}
+      </select>
+    </div>
+  );
+};
+export const ClinicSelectInput = ({ setType }) => {
+  const [clinicTypes, setClinicTypes] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await get_province();
+      if (data) {
+        setProvinces(data);
+      }
+    };
+    fetchData();
+  }, []);
+  return (
+    <div className=" flex gap-2 flex-col items-start">
+      {!hiddentitle && <h5>استان</h5>}
+      <select
+        onChange={(e) => read_city(e.target.value, setCities)}
+        className=" border w-full border-[#636972] rounded-lg p-2"
+      >
+        <option></option>
+        {provinces.map((item) => {
+          return (
+            <option key={item.id} value={item.value}>
+              {item.label}
             </option>
           );
         })}

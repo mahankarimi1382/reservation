@@ -1,6 +1,7 @@
 import { Eror, success } from "@/components/ToastAlerts";
 import { axiosConfig } from "./axiosConfig";
 import axios from "axios";
+import { ErrorHandler } from "@/utils/ErrorHandler";
 
 export const signup = (setIsLoading, data, setIsValidateModal) => {
   setIsLoading(true);
@@ -197,6 +198,7 @@ export const delete_specialties = async (id, setSpecialist) => {
     console.log(response);
   } catch (error) {
     console.log(error);
+    Eror("امکان حذف این تخصص وجود ندارد");
   }
 };
 export const get_province = async () => {
@@ -381,15 +383,6 @@ export const edit_doctors = (data, setIsLoading, setIsAddDoctorModal) => {
     .catch((err) => {
       console.log(err);
       setIsLoading(false);
-      if (
-        err.response.data.message &&
-        err.response.data.message.message ==
-          "حجم فایل برای ذخیره در بیس64 زیاد است !"
-      ) {
-        Eror("حجم فایل بیش از حد مجاز است");
-      } else {
-        Eror();
-      }
     });
 };
 export const add_patient = (data, setIsLoading, setIsAddTurn) => {
@@ -442,4 +435,32 @@ export const delete_patient = async (id, setPatients) => {
   } catch (error) {
     console.log(error);
   }
+};
+export const create_ads = (data, setLoading) => {
+  console.log(data);
+  axiosConfig
+    .post("Ads/create-ads", data)
+    .then((res) => {
+      setLoading(false);
+      console.log(res);
+      success("بنر با موفقیت ثبت شد");
+    })
+    .catch((err) => {
+      setLoading(false);
+      console.log(err);
+    });
+};
+export const add_medical_center = (data, setLoading) => {
+  console.log(data);
+  axiosConfig
+    .post("Clinic/create-Clinic", data)
+    .then((res) => {
+      setLoading(false);
+      console.log(res);
+      success("کلینیک با موفقیت ثبت شد");
+    })
+    .catch((err) => {
+      setLoading(false);
+      console.log(err);
+    });
 };

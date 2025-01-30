@@ -37,6 +37,9 @@ import AddNewDoctorModal from "../modals/AddNewDoctorModal";
 import VisitTypeSelectionModal from "../modals/VisitTypeSelectionModal";
 import Link from "next/link";
 import AddTurnModal from "../modals/AddTurnModal";
+import MedicalFormModal from "../modals/MedicalFormModal";
+import dynamic from "next/dynamic";
+
 
 export const LoginButton = () => {
   const { fullName, setFullName } = fullNameStorage();
@@ -452,14 +455,25 @@ export const BurgerMenuButt = () => {
   );
 };
 
-export const AddDoctorButt = ({ isAddDoctorModal, setIsAddDoctorModal }) => {
+export const AddDoctorButt = ({
+  setDoctorItems,
+  doctorItems,
+  isAddDoctorModal,
+  setIsAddDoctorModal,
+}) => {
   return (
     <div>
       {isAddDoctorModal && (
-        <AddNewDoctorModal setIsAddDoctorModal={setIsAddDoctorModal} />
+        <AddNewDoctorModal
+          doctorItems={doctorItems}
+          setIsAddDoctorModal={setIsAddDoctorModal}
+        />
       )}
       <button
-        onClick={() => setIsAddDoctorModal(true)}
+        onClick={() => {
+          setIsAddDoctorModal(true);
+          setDoctorItems();
+        }}
         className=" flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
       >
         <GoPlus className=" text-2xl" />
@@ -501,6 +515,46 @@ export const AddTurnButt = ({ isAddTurn, setIsAddTurn }) => {
       >
         <GoPlus className=" text-2xl" />
         ثبت نوبت
+      </button>
+    </div>
+  );
+};
+export const MedicalCenterSignUpButt = () => {
+  const [isMedicalCenterForm, setIsMedicalCenterForm] = useState(false);
+  return (
+    <div>
+      {isMedicalCenterForm && (
+        <MedicalFormModal
+          setIsMedicalCenterForm={setIsMedicalCenterForm}
+        />
+      )}
+      <button
+        onClick={() => setIsMedicalCenterForm(true)}
+        href="medicalCentersLogin/loginForm"
+        className=" text-lg flex justify-center items-center gap-3 px-16 p-2 text-white bg-[#005DAD] rounded-lg"
+      >
+        عضویت مراکز درمانی
+        <IoIosArrowBack />
+      </button>
+    </div>
+  );
+};
+export const AddMedicalCenterButt = () => {
+  const [isMedicalCenterForm, setIsMedicalCenterForm] = useState(false);
+
+  return (
+    <div>
+      {isMedicalCenterForm && (
+        <MedicalFormModal
+          setIsMedicalCenterForm={setIsMedicalCenterForm}
+        />
+      )}
+      <button
+        onClick={() => setIsMedicalCenterForm(true)}
+        className=" flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
+      >
+        <GoPlus className=" text-2xl" />
+        افزودن مرکز درمانی
       </button>
     </div>
   );

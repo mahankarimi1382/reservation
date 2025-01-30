@@ -7,6 +7,7 @@ import dashboard_icon from "../../../public/Pics/Adminpanelmenu-icon/dashboard-i
 import {
   AdminPanelimageSetting_action,
   AdminPanelLink,
+  AdminPanelMeeicalcenters_action,
   AdminPanelreport_action,
   AdminPanelsupport_action,
 } from "@/components/Links/Links";
@@ -108,11 +109,10 @@ function AdminPanelMenu() {
         blackIcon={usersaccess_icon_black}
         href="/adminPanel/useraccess"
       />{" "}
-      <AdminPanelLink
+      <AdminPanelMeeicalcenters_action
         title="مراکز درمانی"
         icon={medicalcenters_icon}
         blackIcon={medicalcenters_icon_black}
-        href="/adminPanel/medicalcenters"
       />{" "}
     </div>
   );

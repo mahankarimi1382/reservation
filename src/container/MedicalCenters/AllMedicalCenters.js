@@ -99,7 +99,7 @@ function AllMedicalCenters() {
             </div>
             <hr className=" mx-5" />
             <div className=" w-full justify-end  flex">
-              <Link href="medicalCenters/1" className=" text-white flex rounded-xl justify-center items-center bg-[#005DAD] p-2">
+              <Link href="medical-centers/1" className=" text-white flex rounded-xl justify-center items-center bg-[#005DAD] p-2">
                 نوبت بگیرید
                 <IoIosArrowRoundBack className=" text-2xl" />
               </Link>

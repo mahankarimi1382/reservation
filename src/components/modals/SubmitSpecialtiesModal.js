@@ -6,6 +6,8 @@ import { nationalCodeStorage } from "@/store/Store";
 import { SyncLoader } from "react-spinners";
 import { MdDeleteForever } from "react-icons/md";
 import { RxCross1, RxCross2 } from "react-icons/rx";
+import { ErrorHandler } from "@/utils/ErrorHandler";
+import { Eror } from "../ToastAlerts";
 
 function SubmitSpecialtiesModal({ setIsAddSpecialModal, item, setItem }) {
   console.log(item);
@@ -92,10 +94,14 @@ function SubmitSpecialtiesModal({ setIsAddSpecialModal, item, setItem }) {
         </div>
         <button
           onClick={() => {
-            setItem();
-            item
-              ? edit_specialties(data, setIsLoading, setIsAddSpecialModal)
-              : add_specialties(data, setIsLoading, setIsAddSpecialModal);
+            if (specialName && maxa && image) {
+              setItem();
+              item
+                ? edit_specialties(data, setIsLoading, setIsAddSpecialModal)
+                : add_specialties(data, setIsLoading, setIsAddSpecialModal);
+            } else {
+              ErrorHandler("empty value");
+            }
           }}
           className=" flex justify-center items-center min-h-10 w-1/3 gap-2 rounded-lg bg-[#005DAD] text-white"
         >

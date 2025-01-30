@@ -11,7 +11,8 @@ import { SelectFilter } from "@/components/Inputs/Input";
 import DoctorsPagination from "./DoctorsPagination";
 function DoctorsSection() {
   const [isAddDoctorModal, setIsAddDoctorModal] = useState(false);
-
+  const [doctorItems, setDoctorItems] = useState({});
+  console.log(doctorItems);
   const [doctors, setDoctors] = useState([]);
   useEffect(() => {
     const url = "Doctor/read-all-doctors";
@@ -42,6 +43,8 @@ function DoctorsSection() {
         چاپ اطلاعات{" "}
       </button> */}
         <AddDoctorButt
+          setDoctorItems={setDoctorItems}
+          doctorItems={doctorItems}
           isAddDoctorModal={isAddDoctorModal}
           setIsAddDoctorModal={setIsAddDoctorModal}
         />
@@ -65,7 +68,12 @@ function DoctorsSection() {
             کد ملی <TiArrowSortedDown />
           </h4>
         </div>
-        <DoctorsPagination items={doctors} setDoctors={setDoctors} />
+        <DoctorsPagination
+          setDoctorItems={setDoctorItems}
+          items={doctors}
+          setIsAddDoctorModal={setIsAddDoctorModal}
+          setDoctors={setDoctors}
+        />
       </div>
     </div>
   );

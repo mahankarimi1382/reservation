@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import Config from "@/components/Config";
+import { ToastContainer } from "react-toastify";
 
 const myFont = localFont({
   src: "../../public/fonts/IRANYekanMobileFN Medium.ttf",
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${myFont.className}`}>
         <Config>{children}</Config>
+        <ToastContainer />
       </body>
     </html>
   );
