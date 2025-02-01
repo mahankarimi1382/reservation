@@ -32,7 +32,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
     doctorItems ? doctorItems.codeNezam : ""
   );
   const [mobile, setMobile] = useState(doctorItems ? doctorItems.mobile : "");
-
+  const [cityId, setCityId] = useState(1);
   const data = {
     metadata: {
       userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -120,7 +120,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
             <ProvinceSelectInput setCities={setCities} />
           </div>
           <div className="w-[40%]">
-            <CitySelectInput cities={cities} />
+            <CitySelectInput setCityId={setCityId} cities={cities} />
           </div>
           <SpecialtiesSelectInput
             specialistId={specialistId}

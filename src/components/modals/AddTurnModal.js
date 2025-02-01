@@ -19,10 +19,12 @@ function AddTurnModal({ setIsAddTurn }) {
   const [patientPhone, setPatientPhone] = useState("");
 
   const { smeId } = smeIdStorage();
+  console.log(smeId);
   const data = {
     metadata: {
       userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       userName: "string",
+      smeProfileId: smeId,
     },
     patientName,
     patientFamily,
@@ -111,7 +113,7 @@ function AddTurnModal({ setIsAddTurn }) {
             </div>
             <div className=" flex items-center gap-5">
               <ProvinceSelectInput setCities={setCities} />
-              <CitySelectInput cities={cities} />
+              <CitySelectInput setCityId={setCityId} cities={cities} />
             </div>
           </div>
           <div className=" flex flex-col gap-2">

@@ -10,7 +10,6 @@ import excel_icon from "../../../public/Pics/excelIcon.png";
 import { MdDeleteForever } from "react-icons/md";
 function PatientsSection() {
   const [isAddTurn, setIsAddTurn] = useState(false);
-
   const [patients, setPatients] = useState([]);
   console.log(patients);
   useEffect(() => {

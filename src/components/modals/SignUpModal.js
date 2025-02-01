@@ -6,8 +6,12 @@ import ValidateModal from "./ValidateModal";
 import { SyncLoader } from "react-spinners";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { signup } from "@/api/ApiCalling";
+import { fullNameStorage, myStore, nationalCodeStorage } from "@/store/Store";
 
 function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
+  const { setToken } = myStore();
+  const { setUserName } = nationalCodeStorage();
+  const { setFullName } = fullNameStorage();
   const [isLoading, setIsLoading] = useState(false);
   const [nationalCode, setNationalCode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -101,7 +105,7 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
           <div className=" flex w-full justify-center items-center">
             <button
               onClick={() => {
-                signup(setIsLoading, data, setIsValidateModal);
+                signup(setIsLoading, data, setIsValidateModal,setToken,setUserName,setFullName);
               }}
               disabled={!nationalCode && !phoneNumber && !password && !fullname}
               className={

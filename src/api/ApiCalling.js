@@ -2,8 +2,15 @@ import { Eror, success } from "@/components/ToastAlerts";
 import { axiosConfig } from "./axiosConfig";
 import axios from "axios";
 import { ErrorHandler } from "@/utils/ErrorHandler";
-
-export const signup = (setIsLoading, data, setIsValidateModal) => {
+// 5189505261
+export const signup = (
+  setIsLoading,
+  data,
+  setIsValidateModal,
+  setToken,
+  setUserName,
+  setFullName
+) => {
   setIsLoading(true);
   console.log(data);
   axiosConfig
@@ -12,6 +19,9 @@ export const signup = (setIsLoading, data, setIsValidateModal) => {
       console.log(res);
       success(`کد تایید به شماره ی ${data.phoneNumber} پیامک شد`);
       setIsValidateModal(true);
+      setToken(res.data.result.token);
+      setFullName(res.data.result.userFullname);
+      setUserName(data.userName);
     })
     .catch((err) => {
       setIsLoading(false);
@@ -39,8 +49,8 @@ export const signin = (
   setFullName,
   setToken,
   closeModal,
-  setSmeId,
-  setUserName
+  setUserName,
+  setSmeId
 ) => {
   console.log(data.userName);
   setIsLoading(true);
@@ -50,15 +60,16 @@ export const signin = (
       setIsLoading(false);
       console.log(res);
       console.log(res.data);
-      let name = res.data.result.userFullname;
       let token = res.data.result.token;
+      let name = res.data.result.userFullname;
       let nationalCode = data.userName;
+      let smeId = res.data.result.smeprofileId;
       setUserName(nationalCode);
+      setSmeId(smeId);
       setToken(token);
       setFullName(name);
       success(`${name} خوش آمدید`);
       closeModal();
-      create_sme_profile(name, nationalCode, token, setSmeId);
     })
     .catch((err) => {
       console.log(err);
@@ -71,19 +82,33 @@ export const signin = (
     });
 };
 export const activating_registarion = (
-  data,
+  code,
+  phoneNumber,
   setIsWrongCode,
   setIsLoading,
-  closeModal
+  closeModal,
+  setSmeId,
+  token,
+  fullName,
+  userName
 ) => {
   setIsLoading(true);
-
   axiosConfig
-    .post(`Authentication/activating-registration`, data)
+    .post(`Authentication/activating-registration`, {
+      metadata: {
+        userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        userName: userName,
+      },
+      mobile: phoneNumber,
+      activationCode: code,
+    })
     .then((res) => {
       console.log(res);
       success("ورود موفق");
       closeModal();
+      let name = fullName;
+      let nationalCode = userName;
+      create_sme_profile(name, nationalCode, token, setSmeId);
     })
     .catch((err) => {
       setIsLoading(false);
@@ -93,7 +118,7 @@ export const activating_registarion = (
       console.log(err.response.data.message);
     });
 };
-export const create_sme_profile = (Name, nationalCode, token, setSmeId) => {
+export const create_sme_profile = (name, nationalCode, token, setSmeId) => {
   axios
     .post(
       "https://myapi.dadehavaran.com:8040/API/v1/SmeProfile/create-sme-profile",
@@ -102,7 +127,7 @@ export const create_sme_profile = (Name, nationalCode, token, setSmeId) => {
           userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
           userName: nationalCode,
         },
-        smeName: Name,
+        smeName: name,
         nationalCode: nationalCode,
         businessCode: "",
         managerName: "",
@@ -462,5 +487,21 @@ export const add_medical_center = (data, setLoading) => {
     .catch((err) => {
       setLoading(false);
       console.log(err);
+      Eror();
+    });
+};
+export const add_Office = (data, setLoading) => {
+  console.log(data);
+  axiosConfig
+    .post("Office/create-Office", data)
+    .then((res) => {
+      setLoading(false);
+      console.log(res);
+      success("مطب با موفقیت ثبت شد");
+    })
+    .catch((err) => {
+      setLoading(false);
+      console.log(err);
+      Eror();
     });
 };

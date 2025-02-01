@@ -16,7 +16,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${myFont.className}`}>
-        <Config>{children}</Config>
+        {children}
+        {/* <Config></Config> */}
         <ToastContainer />
       </body>
     </html>

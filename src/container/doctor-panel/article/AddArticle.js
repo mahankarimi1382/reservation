@@ -71,7 +71,7 @@ function AddArticle() {
         className=" w-[270px] p-2 border rounded-lg"
       />
       <div className=" flex  items-center gap-2">
-        <h5 className=" font-semibold">6 ) بارگذاری مقاله</h5>
+        <h5 className=" font-semibold">6 ) بارگذاری فایل</h5>
         {articleTypeId == 3 && (
           <div>{articleFileId ? <FcOk /> : <FcHighPriority />}</div>
         )}

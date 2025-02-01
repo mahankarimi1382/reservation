@@ -6,6 +6,7 @@ import Timer from "../Timer";
 import { Eror, success } from "../ToastAlerts";
 import { SyncLoader } from "react-spinners";
 import { activating_registarion } from "@/api/ApiCalling";
+import { fullNameStorage, myStore, nationalCodeStorage, smeIdStorage } from "@/store/Store";
 
 function ValidateModal({
   closeModal,
@@ -13,6 +14,10 @@ function ValidateModal({
   nationalCode,
   setIsValidateModal,
 }) {
+  const { setSmeId } = smeIdStorage();
+  const { token } = myStore();
+  const { userName } = nationalCodeStorage();
+  const { fullName } = fullNameStorage();
   const [inputs, setInputs] = useState({
     input1: "",
     input2: "",
@@ -44,7 +49,8 @@ function ValidateModal({
       const allInputs = { ...inputs, [name]: value };
       const code = Object.values(allInputs).join("");
       setActivationCode(code);
-      activating_registarion(data, setIsWrongCode, setIsLoading,closeModal);
+      console.log(code)
+      activating_registarion(code,phoneNumber, setIsWrongCode, setIsLoading, closeModal,setSmeId,token,fullName,userName);
     }
   };
 
@@ -64,9 +70,7 @@ function ValidateModal({
       ارسال شد`);
   };
   return (
-    <div
-      className=" py-4 w-[394px] h-[326px] bg-white flex flex-col justify-between rounded"
-    >
+    <div className=" py-4 w-[394px] h-[326px] bg-white flex flex-col justify-between rounded">
       <div className=" w-full flex px-1 justify-end">
         <RxCross2
           onClick={closeModal}

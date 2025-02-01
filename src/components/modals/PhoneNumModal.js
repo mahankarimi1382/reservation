@@ -11,6 +11,7 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
   const [password, setPassword] = useState("");
   const { setToken } = myStore();
   const { setSmeId } = smeIdStorage();
+
   const { setUserName } = nationalCodeStorage();
   const { setFullName } = fullNameStorage();
   const data = {
@@ -67,8 +68,8 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
               setFullName,
               setToken,
               closeModal,
-              setSmeId,
-              setUserName
+              setUserName,
+              setSmeId
             )
           }
           disabled={!nationalCode || !password}

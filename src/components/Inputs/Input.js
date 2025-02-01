@@ -135,14 +135,22 @@ export const SelectFilter = ({ title }) => {
     </select>
   );
 };
-export const CitySelectInput = ({ cities, hiddentitle }) => {
+export const CitySelectInput = ({ setCityId, cities, hiddentitle }) => {
   console.log(cities);
   return (
     <div className="  flex gap-2 flex-col items-start">
       {!hiddentitle && <h5>شهر</h5>}
-      <select className=" border w-full border-[#636972] rounded-lg p-2">
+      <select
+        onChange={(e) => setCityId(e.target.value)}
+        className=" border w-full border-[#636972] rounded-lg p-2"
+      >
+        <option value={0}>
+          {cities.length !== 0
+            ? "شهر را انتخاب کنید"
+            : "ابتدا استان را انتخاب کنید"}
+        </option>
         {cities.map((item) => {
-          return <option key={item.id}>{item.cityName}</option>;
+          return <option value={item.id} key={item.id}>{item.cityName}</option>;
         })}
       </select>
     </div>
@@ -163,10 +171,18 @@ export const ProvinceSelectInput = ({ setCities, hiddentitle }) => {
     <div className=" flex gap-2 flex-col items-start">
       {!hiddentitle && <h5>استان</h5>}
       <select
-        onChange={(e) => read_city(e.target.value, setCities)}
+        onChange={(e) => {
+          console.log(e.target.value);
+          if (e.target.value) {
+            read_city(e.target.value, setCities);
+          } else {
+            setCities([]);
+            console.log("annn");
+          }
+        }}
         className=" border w-full border-[#636972] rounded-lg p-2"
       >
-        <option></option>
+        <option value={0}>استان را انتخاب کنید</option>
         {provinces.map((item) => {
           return (
             <option key={item.id} value={item.value}>
