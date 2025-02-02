@@ -24,26 +24,23 @@ export const signup = (setIsLoading, data, setIsValidateModal) => {
 };
 export const signin = (
   setIsLoading,
-  data,
+  data2,
   setFullName,
   setToken,
   closeModal,
-  setUserName,
   setSmeId
 ) => {
-  console.log(data.userName);
+  console.log(data2)
   setIsLoading(true);
   axiosConfig
-    .put("Authentication/sign-in", data)
+    .put("Authentication/sign-in", data2)
     .then((res) => {
       setIsLoading(false);
       console.log(res);
       console.log(res.data);
       let token = res.data.result.token;
       let name = res.data.result.userFullname;
-      let nationalCode = data.userName;
       let smeId = res.data.result.smeprofileId;
-      setUserName(nationalCode);
       setSmeId(smeId);
       setToken(token);
       setFullName(name);

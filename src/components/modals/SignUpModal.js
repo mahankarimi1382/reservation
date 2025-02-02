@@ -6,7 +6,6 @@ import ValidateModal from "./ValidateModal";
 import { SyncLoader } from "react-spinners";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { signup } from "@/api/ApiCalling";
-import { fullNameStorage, myStore, nationalCodeStorage } from "@/store/Store";
 import { Eror } from "../ToastAlerts";
 
 function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {

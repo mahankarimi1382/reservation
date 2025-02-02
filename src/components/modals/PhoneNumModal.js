@@ -3,10 +3,13 @@ import ModalLogo from "../../../public/Pics/ModalLogo.png";
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
 import { SyncLoader } from "react-spinners";
-import { myStore } from "@/store/Store";
+import { fullNameStorage, myStore, smeIdStorage } from "@/store/Store";
 import { signin, signup } from "@/api/ApiCalling";
 import ValidateModal from "./ValidateModal";
 function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
+  const { setToken } = myStore();
+  const { setFullName } = fullNameStorage();
+  const { setSmeId } = smeIdStorage();
   const [isValidateModal, setIsValidateModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [phoneNum, setPhoneNum] = useState("");
@@ -23,7 +26,16 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
     phoneNumber: "string",
     fullname: "string",
   };
-
+  const data2 = {
+    metadata: {
+      userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      userName: "string",
+      smeProfileId: 0,
+    },
+    userName: nationalCode,
+    password: password,
+    isPersistent: true,
+  };
   const buttRef = useRef();
 
   return isValidateModal ? (
@@ -63,6 +75,7 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
         <div className=" relative w-full justify-center flex items-center">
           <h2 className="absolute bg-white px-2 right-8 -top-3">کد ملی</h2>
           <input
+            dir="ltr"
             value={nationalCode}
             onChange={(e) => setNationalCode(e.target.value)}
             className=" px-3 border-2 border-black rounded h-[48px] w-11/12"
@@ -72,6 +85,7 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
         <div className=" relative w-full justify-center flex items-center">
           <h2 className="absolute bg-white px-2 right-8 -top-3">شماره همراه</h2>
           <input
+            dir="ltr"
             value={phoneNum}
             onChange={(e) => setPhoneNum(e.target.value)}
             className=" px-3 border-2 border-black rounded h-[48px] w-11/12"
@@ -83,6 +97,8 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
         <div className=" relative w-full justify-center flex items-center">
           <h2 className=" absolute bg-white px-2 right-8 -top-3">رمز عبور</h2>
           <input
+            dir="ltr"
+            type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className=" px-3 border-2 border-black rounded h-[48px] w-11/12"
@@ -92,7 +108,18 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
       <div className=" flex w-full justify-center items-center">
         <button
           ref={buttRef}
-          onClick={() => signup(setIsLoading, data, setIsValidateModal)}
+          onClick={() => {
+            loginByPass
+              ? signin(
+                  setIsLoading,
+                  data2,
+                  setFullName,
+                  setToken,
+                  closeModal,
+                  setSmeId
+                )
+              : signup(setIsLoading, data, setIsValidateModal);
+          }}
           disabled={
             loginByPass ? !nationalCode || !password : phoneNum.length < 11
           }
