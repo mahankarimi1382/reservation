@@ -7,31 +7,50 @@ import { SyncLoader } from "react-spinners";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { signup } from "@/api/ApiCalling";
 import { fullNameStorage, myStore, nationalCodeStorage } from "@/store/Store";
+import { Eror } from "../ToastAlerts";
 
 function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
-  const { setToken } = myStore();
-  const { setUserName } = nationalCodeStorage();
-  const { setFullName } = fullNameStorage();
   const [isLoading, setIsLoading] = useState(false);
   const [nationalCode, setNationalCode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [fullname, setFullname] = useState("");
+  const handleClickSignUp = () => {
+    setIsLoading(true);
+
+    if (!validatePassword(password)) {
+      setIsLoading(false);
+      Eror("گذرواژه باید شامل حروف بزرگ انگلیسی و عدد باشد");
+    } else if (phoneNumber.length < 11) {
+      setIsLoading(false);
+      Eror("شماره تلفن باید 11 رقم باشد");
+    } else {
+      signup(setIsLoading, data, setIsValidateModal);
+    }
+  };
+  const validatePassword = (password) => {
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasPersianChars = /[آ-ی]/.test(password);
+
+    if (!hasUpperCase || !hasNumber || hasPersianChars) {
+      return false;
+    }
+    return true;
+  };
   const data = {
     metadata: {
       userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       userName: nationalCode,
     },
 
-    userName: nationalCode,
-    password,
-    phoneNumber,
-    fullname,
+    userName: phoneNumber,
+    password:"string",
+    phoneNumber:"string",
+    fullname:"string",
   };
   return (
-    <div
-      className=" z-50 fixed top-0 right-0 w-screen h-screen flex justify-center items-center"
-    >
+    <div className=" z-50 fixed top-0 right-0 w-screen h-screen flex justify-center items-center">
       {isValidateModal ? (
         <ValidateModal
           setIsValidateModal={setIsValidateModal}
@@ -104,9 +123,7 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
           </div>
           <div className=" flex w-full justify-center items-center">
             <button
-              onClick={() => {
-                signup(setIsLoading, data, setIsValidateModal,setToken,setUserName,setFullName);
-              }}
+              onClick={handleClickSignUp}
               disabled={!nationalCode && !phoneNumber && !password && !fullname}
               className={
                 nationalCode && phoneNumber && password && fullname

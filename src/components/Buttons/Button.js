@@ -88,7 +88,7 @@ export const LoginButton = () => {
             className=" w-full justify-center items-center gap-2 flex"
           >
             <IoPersonCircleSharp className=" text-xl" />
-            {fullName}
+            {fullName!="string"?fullName:"کاربر مهمان"}
           </h5>
         ) : (
           <h5 className=" w-full flex justify-center gap-1">

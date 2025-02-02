@@ -3,33 +3,38 @@ import ModalLogo from "../../../public/Pics/ModalLogo.png";
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
 import { SyncLoader } from "react-spinners";
-import { myStore, fullNameStorage, smeIdStorage, nationalCodeStorage } from "@/store/Store";
-import { signin } from "@/api/ApiCalling";
+import { myStore } from "@/store/Store";
+import { signin, signup } from "@/api/ApiCalling";
+import ValidateModal from "./ValidateModal";
 function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
+  const [isValidateModal, setIsValidateModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [phoneNum, setPhoneNum] = useState("");
+  const [loginByPass, setLoginBypass] = useState(false);
   const [nationalCode, setNationalCode] = useState("");
   const [password, setPassword] = useState("");
-  const { setToken } = myStore();
-  const { setSmeId } = smeIdStorage();
-
-  const { setUserName } = nationalCodeStorage();
-  const { setFullName } = fullNameStorage();
   const data = {
     metadata: {
       userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      userName: nationalCode,
+      userName: "string",
     },
-    userName: nationalCode,
-    password,
-    isPersistent: true,
+    userName: phoneNum ? phoneNum : "string",
+    password: password ? password : "string",
+    phoneNumber: "string",
+    fullname: "string",
   };
 
   const buttRef = useRef();
 
-  return (
-    <div
-      className=" py-2 w-[394px] gap-5 bg-white flex flex-col justify-between rounded"
-    >
+  return isValidateModal ? (
+    <ValidateModal
+      setIsValidateModal={setIsValidateModal}
+      phoneNumber={phoneNum}
+      nationalCode={nationalCode}
+      closeModal={closeModal}
+    />
+  ) : (
+    <div className=" py-2 w-[394px] gap-5 bg-white flex flex-col justify-between rounded">
       <div className=" w-full flex px-1 justify-end">
         <RxCross2
           onClick={closeModal}
@@ -39,40 +44,58 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
       <div className=" w-full flex justify-center items-center -mt-8">
         <Image src={ModalLogo} alt="Logo" width={67} />
       </div>
-      <h2 className=" flex justify-center items-center w-full">ورود</h2>
+      <div className=" flex justify-center gap-2 items-center w-full">
+        <button
+          onClick={() => setLoginBypass(false)}
+          className={!loginByPass && " text-[#005DAD]"}
+        >
+          ورود با شماره
+        </button>
+        |
+        <button
+          className={loginByPass && " text-[#005DAD]"}
+          onClick={() => setLoginBypass(true)}
+        >
+          ورود با رمز ثابت
+        </button>
+      </div>
+      {loginByPass ? (
+        <div className=" relative w-full justify-center flex items-center">
+          <h2 className="absolute bg-white px-2 right-8 -top-3">کد ملی</h2>
+          <input
+            value={nationalCode}
+            onChange={(e) => setNationalCode(e.target.value)}
+            className=" px-3 border-2 border-black rounded h-[48px] w-11/12"
+          />
+        </div>
+      ) : (
+        <div className=" relative w-full justify-center flex items-center">
+          <h2 className="absolute bg-white px-2 right-8 -top-3">شماره همراه</h2>
+          <input
+            value={phoneNum}
+            onChange={(e) => setPhoneNum(e.target.value)}
+            className=" px-3 border-2 border-black rounded h-[48px] w-11/12"
+          />
+        </div>
+      )}
 
-      <div className=" w-full justify-center flex items-center">
-        <h2 className=" absolute bg-white mb-12 px-2 ml-60">کد ملی</h2>
-        <input
-          value={nationalCode}
-          onChange={(e) => setNationalCode(e.target.value)}
-          className=" px-3 border-2 border-black rounded h-[48px] w-11/12"
-        />
-      </div>
-      <div className=" w-full justify-center flex items-center">
-        <h2 className=" absolute bg-white mb-12 px-2 ml-60">رمز عبور</h2>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className=" px-3 border-2 border-black rounded h-[48px] w-11/12"
-        />
-      </div>
+      {loginByPass && (
+        <div className=" relative w-full justify-center flex items-center">
+          <h2 className=" absolute bg-white px-2 right-8 -top-3">رمز عبور</h2>
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className=" px-3 border-2 border-black rounded h-[48px] w-11/12"
+          />
+        </div>
+      )}
       <div className=" flex w-full justify-center items-center">
         <button
           ref={buttRef}
-          onClick={() =>
-            signin(
-              setIsLoading,
-              data,
-              setFullName,
-              setToken,
-              closeModal,
-              setUserName,
-              setSmeId
-            )
+          onClick={() => signup(setIsLoading, data, setIsValidateModal)}
+          disabled={
+            loginByPass ? !nationalCode || !password : phoneNum.length < 11
           }
-          disabled={!nationalCode || !password}
           className=" text-xl w-11/12 h-[48px] rounded bg-[#005DAD] text-white disabled:bg-[#EDEDED] disabled:text-[#CBCBCB]"
         >
           {isLoading ? <SyncLoader color="white" size={10} /> : "ادامه"}
@@ -83,18 +106,20 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
         <span className=" cursor-pointer text-[#005DAD]">قوانین و مقررات</span>
         است.
       </h2>
-      <h5 className=" text-xs gap-1 flex w-full justify-center items-center">
-        حساب کاربری ندارید؟
-        <button
-          onClick={() => {
-            setIsPhoneNuumModal(false);
-            setIsSignupModal(true);
-          }}
-          className="text-[#005DAD]"
-        >
-          ثبت نام کنید
-        </button>
-      </h5>
+      {loginByPass && (
+        <h5 className=" text-xs gap-1 flex w-full justify-center items-center">
+          حساب کاربری ندارید؟
+          <button
+            onClick={() => {
+              setIsPhoneNuumModal(false);
+              setIsSignupModal(true);
+            }}
+            className="text-[#005DAD]"
+          >
+            ثبت نام کنید
+          </button>
+        </h5>
+      )}
     </div>
   );
 }

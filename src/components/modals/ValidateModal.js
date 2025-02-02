@@ -5,8 +5,11 @@ import { RxCross2 } from "react-icons/rx";
 import Timer from "../Timer";
 import { Eror, success } from "../ToastAlerts";
 import { SyncLoader } from "react-spinners";
-import { activating_registarion } from "@/api/ApiCalling";
-import { fullNameStorage, myStore, nationalCodeStorage, smeIdStorage } from "@/store/Store";
+import { activating_registarion, sendCodeAgain } from "@/api/ApiCalling";
+import {
+  fullNameStorage,
+  myStore,
+} from "@/store/Store";
 
 function ValidateModal({
   closeModal,
@@ -14,10 +17,8 @@ function ValidateModal({
   nationalCode,
   setIsValidateModal,
 }) {
-  const { setSmeId } = smeIdStorage();
-  const { token } = myStore();
-  const { userName } = nationalCodeStorage();
-  const { fullName } = fullNameStorage();
+  const { setToken } = myStore();
+  const { setFullName } = fullNameStorage();
   const [inputs, setInputs] = useState({
     input1: "",
     input2: "",
@@ -49,8 +50,16 @@ function ValidateModal({
       const allInputs = { ...inputs, [name]: value };
       const code = Object.values(allInputs).join("");
       setActivationCode(code);
-      console.log(code)
-      activating_registarion(code,phoneNumber, setIsWrongCode, setIsLoading, closeModal,setSmeId,token,fullName,userName);
+      console.log(code);
+      activating_registarion(
+        code,
+        phoneNumber,
+        setIsWrongCode,
+        setIsLoading,
+        closeModal,
+        setToken,
+        setFullName,
+      );
     }
   };
 
@@ -65,8 +74,9 @@ function ValidateModal({
   };
   const sendAgain = () => {
     setIsSendAgain(true);
+    sendCodeAgain(phoneNumber);
     success(`کد تایید مجددا به شماره 
-      ${phoneNum}
+      ${phoneNumber}
       ارسال شد`);
   };
   return (

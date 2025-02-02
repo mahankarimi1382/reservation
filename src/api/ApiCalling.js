@@ -2,45 +2,24 @@ import { Eror, success } from "@/components/ToastAlerts";
 import { axiosConfig } from "./axiosConfig";
 import axios from "axios";
 import { ErrorHandler } from "@/utils/ErrorHandler";
-// 5189505261
-export const signup = (
-  setIsLoading,
-  data,
-  setIsValidateModal,
-  setToken,
-  setUserName,
-  setFullName
-) => {
+export const signup = (setIsLoading, data, setIsValidateModal) => {
   setIsLoading(true);
   console.log(data);
   axiosConfig
     .post("Authentication/sign-up", data)
     .then((res) => {
       console.log(res);
-      success(`کد تایید به شماره ی ${data.phoneNumber} پیامک شد`);
+      if (data.userName != "string") {
+        success(`کد تایید به شماره ی ${data.userName} پیامک شد`);
+      } else {
+        success(`کد تایید به شماره ی ${data.phoneNumber} پیامک شد`);
+      }
       setIsValidateModal(true);
-      setToken(res.data.result.token);
-      setFullName(res.data.result.userFullname);
-      setUserName(data.userName);
+      setIsLoading(false);
     })
     .catch((err) => {
       setIsLoading(false);
-      console.log(err.response);
-      if (
-        err.response.data.message &&
-        err.response.data.message.message ===
-          "نام کاربری یا شماره تلفن صحیح نمیباشد ."
-      ) {
-        Eror(err.response.data.message.message);
-      } else if (
-        err.response.data.message &&
-        err.response.data.message.message ==
-          `نام کاربری ${data.userName} قبلا توسط شخص دیگری انتخاب شده است`
-      ) {
-        Eror(err.response.data.message.message);
-      } else if (err.response.data.code == 500) {
-        Eror("گذرواژه باید شامل حروف بزرگ و عدد باشد");
-      }
+      console.log(err);
     });
 };
 export const signin = (
@@ -87,17 +66,15 @@ export const activating_registarion = (
   setIsWrongCode,
   setIsLoading,
   closeModal,
-  setSmeId,
-  token,
-  fullName,
-  userName
+  setToken,
+  setFullName
 ) => {
   setIsLoading(true);
   axiosConfig
     .post(`Authentication/activating-registration`, {
       metadata: {
         userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        userName: userName,
+        userName: "string",
       },
       mobile: phoneNumber,
       activationCode: code,
@@ -106,16 +83,13 @@ export const activating_registarion = (
       console.log(res);
       success("ورود موفق");
       closeModal();
-      let name = fullName;
-      let nationalCode = userName;
-      create_sme_profile(name, nationalCode, token, setSmeId);
+      setFullName(res.data.result.userFullname);
+      setToken(res.data.result.token);
     })
     .catch((err) => {
       setIsLoading(false);
       Eror("کد وارد شده صحیح نمی باشد");
       setIsWrongCode(true);
-
-      console.log(err.response.data.message);
     });
 };
 export const create_sme_profile = (name, nationalCode, token, setSmeId) => {
@@ -501,6 +475,24 @@ export const add_Office = (data, setLoading) => {
     })
     .catch((err) => {
       setLoading(false);
+      console.log(err);
+      Eror();
+    });
+};
+export const sendCodeAgain = (phoneNumber) => {
+  axiosConfig
+    .post("Authentication/generate-registration-code", {
+      metadata: {
+        userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        userName: "string",
+        smeProfileId: 0,
+      },
+      mobile: phoneNumber,
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
       console.log(err);
       Eror();
     });
