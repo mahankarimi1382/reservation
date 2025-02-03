@@ -334,7 +334,7 @@ export const delete_doctor = async (id, setDoctors, closeModal) => {
       setDoctors(data);
     }
     closeModal();
-    success("پزشک با موفقیت حذف شد")
+    success("پزشک با موفقیت حذف شد");
     console.log(response);
   } catch (error) {
     console.log(error);
@@ -493,4 +493,52 @@ export const sendCodeAgain = (phoneNumber) => {
       console.log(err);
       Eror();
     });
+};
+export const get_ads = async (url) => {
+  try {
+    const response = await axiosConfig.get(url);
+    const banners = response.data.result.list;
+    console.log(banners);
+    return banners;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+export const delete_ads = async (id, setBanners, closeModal) => {
+  console.log(id);
+  try {
+    const response = await axiosConfig.delete("Ads/delete-ads", {
+      data: {
+        metadata: {
+          userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          userName: "string",
+        },
+        id: id,
+      },
+    });
+    const url = "Ads/read-smeprofile-ads?SmeProfileId=6";
+
+    const data = await get_ads(url);
+    if (data) {
+      setBanners(data);
+    }
+    closeModal();
+    console.log(response);
+    success("بنر با موفقیت حذف شد");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const read_files = async (url) => {
+  try {
+    const response = await axiosConfig.get(url);
+    const file = response.data;
+    console.log(file);
+    return file;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
 };

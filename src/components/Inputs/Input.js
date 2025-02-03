@@ -125,8 +125,22 @@ export const CitySelect = () => {
     </select>
   );
 };
-export const SelectFilter = ({ title }) => {
-  return (
+export const SelectFilter = ({ title, options, setVal }) => {
+  return options ? (
+    <select
+      onChange={(e) => setVal(e.target.value)}
+      className=" w-[200px] text-[#AAAAAA] h-10 rounded-lg border-2 bg-white border-[rgba(219,215,215,0.44)]"
+    >
+      <option>{title}</option>
+      {options.map((item) => {
+        return (
+          <option key={item.id} value={item.value}>
+            {item.name}
+          </option>
+        );
+      })}
+    </select>
+  ) : (
     <select className=" w-[200px] text-[#AAAAAA] h-10 rounded-lg border-2 bg-white border-[rgba(219,215,215,0.44)]">
       <option>{title}</option>
       <option>تهران</option>
@@ -150,7 +164,11 @@ export const CitySelectInput = ({ setCityId, cities, hiddentitle }) => {
             : "ابتدا استان را انتخاب کنید"}
         </option>
         {cities.map((item) => {
-          return <option value={item.id} key={item.id}>{item.cityName}</option>;
+          return (
+            <option value={item.id} key={item.id}>
+              {item.cityName}
+            </option>
+          );
         })}
       </select>
     </div>

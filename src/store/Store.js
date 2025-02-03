@@ -17,6 +17,8 @@ export const myStore = create((set) => ({
     console.log(token);
     set(() => ({ token: token }));
   },
+  selectedBaner: {},
+  setSelectedBaner: (item) => set(() => ({ selectedBaner: item })),
 }));
 
 export const fullNameStorage = create(

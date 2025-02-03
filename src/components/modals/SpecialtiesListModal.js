@@ -8,6 +8,7 @@ import LoadingComponent from "../LoadingComponent";
 
 function SpecialtiesListModal({ setIsSpecialtiesModal }) {
   const [categorys, setCategorys] = useState([]);
+  console.log(categorys);
   const [loading, setLoading] = useState(true);
   const url = "Specialist/read-specialists";
   const fetchData = async () => {
@@ -45,7 +46,7 @@ function SpecialtiesListModal({ setIsSpecialtiesModal }) {
                 className="  group cursor-pointer  hover:shadow-lg w-[123px] h-[123px]  hover:-mt-3 transition-all shadow-red-600  hover:shadow-[#6991b4] lg:w-[123px] lg:h-[123px] flex flex-col justify-evenly items-center rounded-xl border border-[#DBD7D7]"
               >
                 <div className=" bg-[#eaeaea] transition-all group-hover:bg-[#6eb6f6] rounded-full w-[55px] h-[55px] flex justify-center items-center ">
-                  <Image alt="icon" width={42} src={heart} />
+                  <Image alt="icon" width={42} height={42} src={item.logoFile} />
                 </div>
                 <h2 className=" text-center text-[10px] font-semibold lg:font-medium lg:text-[12px]">
                   {item.name}

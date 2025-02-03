@@ -11,7 +11,6 @@ import { SyncLoader } from "react-spinners";
 import Cookies from "js-cookie";
 import FileUploaderInput from "../doctor-info/FileUploaderInput";
 function AddArticle() {
-  const token = Cookies.get("token");
 
   const [coverFileId, setCoverFileFileId] = useState("");
   const [articleFileId, setArticleFileId] = useState("");

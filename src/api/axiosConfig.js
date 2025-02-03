@@ -40,9 +40,9 @@ axiosConfig.interceptors.response.use(
     ) {
       Eror("حجم فایل بیش از حد مجاز است");
     } 
-    // else if (err.response && err.response.data.message.message) {
-    //   Eror(err.response.data.message.message);
-    // }
+    else if (err.response && err.response.data.message.message) {
+      Eror(err.response.data.message.message);
+    }
     return Promise.reject(err);
   }
 );

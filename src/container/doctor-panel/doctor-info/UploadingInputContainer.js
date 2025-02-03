@@ -1,12 +1,12 @@
-"use client"
+"use client";
 import { upload_file } from "@/api/ApiCalling";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import React, { useState } from "react";
 import { ClipLoader } from "react-spinners";
 
-function UploadingInputContainer({ setFileId, fileId }) {
-  const [preview, setPreview] = useState(null);
+function UploadingInputContainer({ setFileId, fileId, }) {
+  const [preview, setPreview] = useState(null );
 
   const token = Cookies.get("token");
   const [file, setFile] = useState(null);

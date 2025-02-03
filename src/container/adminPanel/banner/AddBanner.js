@@ -1,32 +1,38 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FcHighPriority } from "react-icons/fc";
 import { FcOk } from "react-icons/fc";
-
 import UploadingInputContainer from "@/container/doctor-panel/doctor-info/UploadingInputContainer";
-import { smeIdStorage } from "@/store/Store";
-import { add_article, create_ads, upload_file } from "@/api/ApiCalling";
-import { ToastContainer } from "react-toastify";
+import { create_ads, read_files } from "@/api/ApiCalling";
 import { SyncLoader } from "react-spinners";
-import Cookies from "js-cookie";
-import FileUploaderInput from "@/container/doctor-panel/doctor-info/FileUploaderInput";
+
 import DatePickerComponent from "@/components/DatePickerComponent";
 import { Switch } from "@mui/material";
+import { Eror } from "@/components/ToastAlerts";
+import { myStore } from "@/store/Store";
+import Image from "next/image";
 function AddBanner() {
-  const token = Cookies.get("token");
+  // useEffect(() => {
+  //   const url = `FileManagement/read-file?Id=3cbe8a72-bcbb-437e-8ed1-16171dd529a5`;
 
+  //   const fetchData = async () => {
+  //     const data = await read_files(url);
+  //     if (data) {
+  //       setPrevPreviw(data);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+  const { selectedBaner } = myStore();
+  console.log(selectedBaner);
+  // const [prevPreviw, setPrevPreviw] = useState(null);
+  const [banerPosition, setBanerPosition] = useState(4);
   const [bannerFileId, setBannerFileId] = useState("");
   console.log(bannerFileId);
-  const [articleFileId, setArticleFileId] = useState("");
   const [loading, setLoading] = useState(false);
-  const { smeId } = smeIdStorage();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [shortDesc, setShortDesc] = useState("");
-  const [articleTypeId, setArticleTypeId] = useState("");
-  const [link, setLink] = useState("");
   const [authors, setAuthors] = useState("");
-  console.log(smeId);
   const data = {
     metadata: {
       userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -36,18 +42,22 @@ function AddBanner() {
     headLine: "string",
     description: desc,
     photo: bannerFileId,
-    smeProfileId: smeId,
+    smeProfileId: banerPosition,
   };
   return (
     <div className=" w-full gap-4 flex flex-col">
-      <h5 className=" font-semibold">بنر</h5>
+      <div className=" flex  items-center gap-2">
+        <h5 className=" font-semibold">بنر</h5>
+        <div>{bannerFileId ? <FcOk /> : <FcHighPriority />}</div>
+      </div>
+      {/* {prevPreviw && <Image src={prevPreviw} width={100} height={100} alt="" />} */}
       <UploadingInputContainer
         fileId={bannerFileId}
         setFileId={setBannerFileId}
       />
 
       <h5 className=" font-semibold">عنوان بنر</h5>
-      <input
+      <textarea
         onChange={(e) => setTitle(e.target.value)}
         className=" h-32 p-4 resize-none border rounded-2xl"
       />
@@ -56,7 +66,6 @@ function AddBanner() {
         // value={desc}
         onChange={(e) => setDesc(e.target.value)}
         className=" h-52 bg-[#F5F5F5] p-4 resize-none border rounded-2xl"
-        placeholder="پزشک گرامی لطفا مقاله را اینجا بگذارید ( کپی کنید سپس اینجا پیست کنید )"
       />
       <h5 className=" font-semibold">لینک مقصد</h5>
       <input
@@ -84,16 +93,27 @@ function AddBanner() {
         </div>
         <div className=" w-[48%] flex flex-col  gap-2">
           <h5 className=" font-semibold"> جایگاه بنر</h5>
-          <select className=" w-full  p-2 rounded-lg border">
-            <option>صفحه اول</option>
+          <select
+            onChange={(e) => setBanerPosition(e.target.value)}
+            className=" w-full  p-2 rounded-lg border"
+          >
+            <option value={4}>صفحه لندینگ اصلی</option>
+            <option value={5}>صفحه لندینگ دندانپزشک</option>
+            <option value={6}>صفحه اول روانپزشک</option>
           </select>
         </div>
       </div>
       <button
         disabled={loading}
         onClick={() => {
-          create_ads(data, setLoading);
-          setLoading(true);
+          if (!bannerFileId) {
+            Eror("لطفا فایل بنر را آپلود کنید");
+          } else if (!title) {
+            Eror("وارد کردن عنوان بنر الزامیست");
+          } else {
+            create_ads(data, setLoading);
+            setLoading(true);
+          }
         }}
         className=" mt-5 m-auto bg-[#005DAD] text-white w-1/2 p-2 rounded-lg"
       >
