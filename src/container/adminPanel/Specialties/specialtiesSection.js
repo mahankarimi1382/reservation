@@ -11,6 +11,7 @@ import SpecialistPagination from "./SpecialistPagination";
 function SpecialtiesPanelSection() {
   const [specialist, setSpecialist] = useState([]);
   const [isAddSpecialModal, setIsAddSpecialModal] = useState(false);
+
   const [item, setItem] = useState(null);
 
   console.log(specialist);
@@ -65,6 +66,7 @@ function SpecialtiesPanelSection() {
           </h4>
         </div>
         <SpecialistPagination
+
           setSpecialist={setSpecialist}
           setItem={setItem}
           setIsAddSpecialModal={setIsAddSpecialModal}

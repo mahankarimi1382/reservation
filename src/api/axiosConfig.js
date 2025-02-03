@@ -31,21 +31,18 @@ axiosConfig.interceptors.response.use(
   },
   (err) => {
     console.log(err);
-    if (
-      err.response.data.message &&
-      err.response.data.message.message ===
-        "نام کاربری یا شماره تلفن صحیح نمیباشد ."
-    ) {
-      Eror(err.response.data.message.message);
+    if (err.message == "Network Error") {
+      Eror("خطا در برقراری ارتباط !");
     } else if (
-      err.response.data.message &&
+      err.response &&
       err.response.data.message.message ==
-        `نام کاربری ${data.userName} قبلا توسط شخص دیگری انتخاب شده است`
+        "حجم فایل برای ذخیره در بیس64 زیاد است !"
     ) {
-      Eror(err.response.data.message.message);
-    } else if (err.response.data.code == 500) {
-      Eror("گذرواژه باید شامل حروف بزرگ و عدد باشد");
-    }
+      Eror("حجم فایل بیش از حد مجاز است");
+    } 
+    // else if (err.response && err.response.data.message.message) {
+    //   Eror(err.response.data.message.message);
+    // }
     return Promise.reject(err);
   }
 );

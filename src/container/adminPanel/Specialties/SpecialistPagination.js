@@ -1,16 +1,21 @@
 "use client";
 import { delete_specialties } from "@/api/ApiCalling";
+import DeletingModal from "@/components/modals/DeletingModal";
 import { Pagination } from "@mui/material";
 import React, { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { HiOutlineTrash } from "react-icons/hi2";
 
 const SpecialistPagination = ({
+  setSpecialist,
   items,
   setIsAddSpecialModal,
   setItem,
-  setSpecialist,
 }) => {
+  const [isDeletingModal, setIsDeletingModal] = useState(false);
+
+  const [selectedItem, setSelectedItem] = useState({});
+  console.log(selectedItem);
   const [currentPage, setCurrentPage] = useState(1);
   const handleChange = (event, value) => {
     setCurrentPage(value);
@@ -27,6 +32,15 @@ const SpecialistPagination = ({
   }
   return (
     <div>
+      {isDeletingModal && (
+        <DeletingModal
+          DeletingFn={delete_specialties}
+          setList={setSpecialist}
+          id={selectedItem.id}
+          name={selectedItem.name}
+          closeModal={() => setIsDeletingModal(false)}
+        />
+      )}
       {currentItems.map((item) => {
         return (
           <div
@@ -42,7 +56,8 @@ const SpecialistPagination = ({
             <div className=" gap-2 w-1/2 flex justify-center items-center text-[#3F444D] text-lg">
               <button
                 onClick={() => {
-                  delete_specialties(item.id, setSpecialist);
+                  setSelectedItem(item);
+                  setIsDeletingModal(true);
                 }}
                 className=" gap-2 border rounded-lg px-5 p-1 flex justify-center items-center bg-[#EED4D7] border-[#C30505] text-[#C30505]"
               >

@@ -11,7 +11,7 @@
   background-color: none;
 }
 .MuiPaginationItem-icon {
-  visibility: hidden;
+  display: none !important;
 }
 .file-input::file-selector-button {
   display: none;

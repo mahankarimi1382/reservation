@@ -149,7 +149,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
               ErrorHandler("empty value");
             }
           }}
-          className=" w-1/2 flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
+          className=" w-1/2 flex justify-center h-10 items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
         >
           {isLoading ? <SyncLoader color="white" size={10} /> : "ثبت"}
         </button>

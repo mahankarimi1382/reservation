@@ -43,10 +43,10 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
       userName: nationalCode,
     },
 
-    userName: phoneNumber,
-    password:"string",
-    phoneNumber:"string",
-    fullname:"string",
+    userName: nationalCode,
+    password,
+    phoneNumber,
+    fullname,
   };
   return (
     <div className=" z-50 fixed top-0 right-0 w-screen h-screen flex justify-center items-center">

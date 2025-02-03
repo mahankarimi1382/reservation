@@ -9,6 +9,7 @@ import { activating_registarion, sendCodeAgain } from "@/api/ApiCalling";
 import {
   fullNameStorage,
   myStore,
+  smeIdStorage,
 } from "@/store/Store";
 
 function ValidateModal({
@@ -17,6 +18,7 @@ function ValidateModal({
   nationalCode,
   setIsValidateModal,
 }) {
+  const {setSmeId}=smeIdStorage()
   const { setToken } = myStore();
   const { setFullName } = fullNameStorage();
   const [inputs, setInputs] = useState({
@@ -59,6 +61,7 @@ function ValidateModal({
         closeModal,
         setToken,
         setFullName,
+        setSmeId
       );
     }
   };

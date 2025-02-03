@@ -5,6 +5,7 @@ import { Pagination } from "@mui/material";
 import React, { useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { delete_doctor } from "@/api/ApiCalling";
+import DeletingModal from "@/components/modals/DeletingModal";
 
 const DoctorsPagination = ({
   setDoctorItems,
@@ -12,23 +13,31 @@ const DoctorsPagination = ({
   setIsAddDoctorModal,
   setDoctors,
 }) => {
-  // const [isEditDoctor, setIsEditDoctor] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  // const [doctorItems, setDoctorItems] = useState({});
+  const [selectedItem, setSelectedItem] = useState({});
+  console.log(selectedItem);
+  const [isDeletingModal, setIsDeletingModal] = useState(false);
   const itemsPerPage = 10;
   const handleChange = (event, value) => {
     setCurrentPage(value);
   };
-  // محاسبه تعداد کل صفحات
   const totalPages = Math.ceil(items.length / itemsPerPage);
 
-  // محاسبه آیتم‌هایی که باید نمایش داده شوند
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div>
+      {isDeletingModal && (
+        <DeletingModal
+        DeletingFn={delete_doctor}
+          id={selectedItem.id}
+          name={selectedItem.doctorName+" "+selectedItem.doctorFamily}
+          setList={setDoctors}
+          closeModal={() => setIsDeletingModal(false)}
+        />
+      )}
       {currentItems.map((item) => {
         return (
           <div
@@ -37,7 +46,10 @@ const DoctorsPagination = ({
           >
             <div className=" flex w-[5%] justify-center items-center gap-1 text-lg">
               <MdDeleteForever
-                onClick={() => delete_doctor(item.id, setDoctors)}
+                onClick={() => {
+                  setSelectedItem(item);
+                  setIsDeletingModal(true);
+                }}
                 className="  text-[#3F444D]  transition-all cursor-pointer hover:text-red-600"
               />
               <FaEdit
@@ -78,7 +90,6 @@ const DoctorsPagination = ({
         );
       })}
 
-      {/* دکمه‌های صفحه‌بندی */}
       <div className=" mt-5  w-full flex justify-center items-center">
         <Pagination
           onChange={handleChange}

@@ -9,7 +9,7 @@ export const signup = (setIsLoading, data, setIsValidateModal) => {
     .post("Authentication/sign-up", data)
     .then((res) => {
       console.log(res);
-      if (data.userName != "string") {
+      if (data.phoneNumber == "string") {
         success(`کد تایید به شماره ی ${data.userName} پیامک شد`);
       } else {
         success(`کد تایید به شماره ی ${data.phoneNumber} پیامک شد`);
@@ -30,7 +30,7 @@ export const signin = (
   closeModal,
   setSmeId
 ) => {
-  console.log(data2)
+  console.log(data2);
   setIsLoading(true);
   axiosConfig
     .put("Authentication/sign-in", data2)
@@ -64,7 +64,8 @@ export const activating_registarion = (
   setIsLoading,
   closeModal,
   setToken,
-  setFullName
+  setFullName,
+  setSmeId
 ) => {
   setIsLoading(true);
   axiosConfig
@@ -82,6 +83,10 @@ export const activating_registarion = (
       closeModal();
       setFullName(res.data.result.userFullname);
       setToken(res.data.result.token);
+      if (res.data.result.userFullname != "string") {
+        let name = res.data.result.userFullname;
+        setSmeId(create_sme_profile(name, token));
+      }
     })
     .catch((err) => {
       setIsLoading(false);
@@ -89,17 +94,17 @@ export const activating_registarion = (
       setIsWrongCode(true);
     });
 };
-export const create_sme_profile = (name, nationalCode, token, setSmeId) => {
+export const create_sme_profile = (name, token) => {
   axios
     .post(
       "https://myapi.dadehavaran.com:8040/API/v1/SmeProfile/create-sme-profile",
       {
         metadata: {
           userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-          userName: nationalCode,
+          userName: "",
         },
         smeName: name,
-        nationalCode: nationalCode,
+        nationalCode: "",
         businessCode: "",
         managerName: "",
         registerNumber: "",
@@ -131,7 +136,7 @@ export const create_sme_profile = (name, nationalCode, token, setSmeId) => {
     .then((res) => {
       console.log(res);
       console.log(res.data.result.id);
-      setSmeId(res.data.result.id);
+      return res.data.result.id;
     })
     .catch((err) => {
       console.log(err);
@@ -151,15 +156,6 @@ export const add_specialties = (data, setIsLoading, setIsAddSpecialModal) => {
     .catch((err) => {
       console.log(err);
       setIsLoading(false);
-      if (
-        err.response.data.message &&
-        err.response.data.message.message ==
-          "حجم فایل برای ذخیره در بیس64 زیاد است !"
-      ) {
-        Eror("حجم فایل بیش از حد مجاز است");
-      } else {
-        Eror();
-      }
     });
 };
 
@@ -173,7 +169,7 @@ export const get_specialties = async (url) => {
     return null;
   }
 };
-export const delete_specialties = async (id, setSpecialist) => {
+export const delete_specialties = async (id, setList, closeModal) => {
   console.log(id);
   try {
     const response = await axiosConfig.delete("Specialist/delete-specialist", {
@@ -189,8 +185,10 @@ export const delete_specialties = async (id, setSpecialist) => {
 
     const data = await get_specialties(url);
     if (data) {
-      setSpecialist(data);
+      setList(data);
     }
+    success("تخصص با موفقیت حذف شد");
+    closeModal();
     console.log(response);
   } catch (error) {
     console.log(error);
@@ -317,7 +315,7 @@ export const get_doctors = async (url) => {
     return null;
   }
 };
-export const delete_doctor = async (id, setDoctors) => {
+export const delete_doctor = async (id, setDoctors, closeModal) => {
   console.log(id);
   try {
     const response = await axiosConfig.delete("Doctor/delete-Doctor", {
@@ -335,6 +333,8 @@ export const delete_doctor = async (id, setDoctors) => {
     if (data) {
       setDoctors(data);
     }
+    closeModal();
+    success("پزشک با موفقیت حذف شد")
     console.log(response);
   } catch (error) {
     console.log(error);
