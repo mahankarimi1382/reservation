@@ -1,5 +1,10 @@
 "use client";
-import { delete_doctor, get_doctors } from "@/api/ApiCalling";
+import {
+  delete_doctor,
+  get_doctors,
+  search_doctors,
+  search_doctors_list,
+} from "@/api/ApiCalling";
 import React, { useEffect, useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { AddDoctorButt } from "@/components/Buttons/Button";
@@ -9,29 +14,75 @@ import Image from "next/image";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { SelectFilter } from "@/components/Inputs/Input";
 import DoctorsPagination from "./DoctorsPagination";
+import SearchSpecialites from "@/container/Doctors/SearchSpecialites";
+import { CiSearch } from "react-icons/ci";
+import LoadingComponent from "@/components/LoadingComponent";
 function DoctorsSection() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [name, setName] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [isAddDoctorModal, setIsAddDoctorModal] = useState(false);
   const [doctorItems, setDoctorItems] = useState({});
-  console.log(doctorItems);
   const [doctors, setDoctors] = useState([]);
-  useEffect(() => {
-    const url = "Doctor/read-all-doctors";
+  const getDoctors = async (name) => {
+    const data = await search_doctors_list(name, currentPage);
+    if (data) {
+      console.log(data);
+      setDoctors(data.list);
+      setIsLoading(false);
 
-    const fetchData = async () => {
-      const data = await get_doctors(url);
-      if (data) {
-        setDoctors(data);
-      }
-    };
-    fetchData();
-  }, [isAddDoctorModal]);
+      let number = data.totalRecords / 10;
+      let totalpages = Math.ceil(number);
+      setTotalPages(totalpages);
+    }
+  };
+
+  const handleSearchDoctors = async (name) => {
+    if (name.length >= 2) {
+      setIsLoading(true);
+      getDoctors(name);
+      setName(name);
+    } else if (name.length == 0) {
+      setIsLoading(true);
+      getDoctors(name);
+      setName(name);
+      setName(name);
+    }
+  };
+  console.log(doctorItems);
+  useEffect(() => {
+    getDoctors(name);
+    setIsLoading(true);
+  }, [currentPage]);
+  // useEffect(() => {
+  //   const url = "Doctor/read-all-doctors";
+
+  //   const fetchData = async () => {
+  //     const data = await search_doctors();
+  //     if (data) {
+  //       setDoctors(data);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [isAddDoctorModal]);
   return (
     <div className=" gap-10 mt-20 w-full flex flex-col items-center ">
-      <div className=" flex w-[80%]  gap-5 items-center">
-        <SelectFilter title="نام پزشک" />
-        <SelectFilter title="نام مرکز درمانی" />
-        <SelectFilter title="تخصص" />
-        <SelectFilter title="نوع ویزیت" />
+      <div className=" flex flex-col w-[80%] gap-4 ">
+        <div className=" flex w-full gap-5 items-center">
+          <label className=" px-2  border-2 w-1/3 bg-white rounded-lg flex items-center">
+            <CiSearch className=" text-2xl" />
+            <input
+              onChange={(e) => {
+                let name = e.target.value;
+                handleSearchDoctors(name);
+              }}
+              className=" outline-none w-full p-2 rounded-lg"
+              placeholder="جستجو در دکتر ها "
+            />
+          </label>
+          <SelectFilter title="تخصص" />
+        </div>
       </div>
       <div className=" gap-2 flex justify-end w-[80%] items-center">
         <button className=" border rounded-lg px-3 p-1 gap-2 text-[#185B37] border-[#185B37] flex">
@@ -49,7 +100,9 @@ function DoctorsSection() {
           setIsAddDoctorModal={setIsAddDoctorModal}
         />
       </div>
-      <div className=" gap-3 flex flex-col w-[85%] rounded-lg border shadow-md p-4 bg-white">
+      <div className=" relative gap-3 flex flex-col min-h-[70%] w-[85%] rounded-lg border shadow-md p-4 bg-white">
+        {isLoading && <LoadingComponent />}
+
         <div className=" py-2 w-full flex rounded-lg bg-[#F4F4F4]">
           <span className=" w-[5%]" />
           <h4 className=" w-[14%] flex justify-center  items-center text-[#3F444D] text-lg">
@@ -69,8 +122,11 @@ function DoctorsSection() {
           </h4>
         </div>
         <DoctorsPagination
+          doctors={doctors}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalPages={totalPages}
           setDoctorItems={setDoctorItems}
-          items={doctors}
           setIsAddDoctorModal={setIsAddDoctorModal}
           setDoctors={setDoctors}
         />

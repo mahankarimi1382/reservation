@@ -1,6 +1,5 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import Config from "@/components/Config";
 import { ToastContainer } from "react-toastify";
 
 const myFont = localFont({
@@ -17,7 +16,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${myFont.className}`}>
         {children}
-        {/* <Config></Config> */}
         <ToastContainer />
       </body>
     </html>

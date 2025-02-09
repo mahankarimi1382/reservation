@@ -6,39 +6,37 @@ import React, { useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { delete_doctor } from "@/api/ApiCalling";
 import DeletingModal from "@/components/modals/DeletingModal";
+import { TreatMentCenterButt } from "@/components/Buttons/Button";
 
 const DoctorsPagination = ({
+  doctors,
+  currentPage,
+  setCurrentPage,
+  totalPages,
   setDoctorItems,
-  items,
   setIsAddDoctorModal,
   setDoctors,
 }) => {
-  const [currentPage, setCurrentPage] = useState(1);
   const [selectedItem, setSelectedItem] = useState({});
   console.log(selectedItem);
   const [isDeletingModal, setIsDeletingModal] = useState(false);
-  const itemsPerPage = 10;
   const handleChange = (event, value) => {
     setCurrentPage(value);
   };
-  const totalPages = Math.ceil(items.length / itemsPerPage);
-
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = items.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div>
       {isDeletingModal && (
         <DeletingModal
-        DeletingFn={delete_doctor}
+          DeletingFn={delete_doctor}
           id={selectedItem.id}
-          name={selectedItem.doctorName+" "+selectedItem.doctorFamily}
+          name={selectedItem.doctorName + " " + selectedItem.doctorFamily}
           setList={setDoctors}
           closeModal={() => setIsDeletingModal(false)}
         />
       )}
-      {currentItems.map((item) => {
+      {doctors.map((item) => {
+        console.log(item.smeProfile.doctors[0]);
         return (
           <div
             className=" border flex py-3 items-center rounded-lg bg-white shadow-md"
@@ -61,16 +59,17 @@ const DoctorsPagination = ({
               />
             </div>
             <h4 className=" w-[14%] flex justify-center items-center text-[#3F444D] text-lg">
-              {item.doctorName} {item.doctorFamily}
+              {item.smeProfile.doctors[0].doctorName}{" "}
+              {item.smeProfile.doctors[0].doctorFamily}
             </h4>
             <h4 className=" w-[14%] flex justify-center items-center text-[#3F444D] text-lg">
               مطب
             </h4>
             <h4 className=" w-[14%] flex justify-center items-center text-[#3F444D] text-lg">
-              {item.codeNezam}
+              {item.smeProfile.doctors[0].codeNezam}
             </h4>
             <h4 className=" w-[14%] flex justify-center items-center text-[#3F444D] text-lg">
-              {item.nationalId}
+              {item.smeProfile.doctors[0].nationalId}
             </h4>
             <div className=" w-[38%] flex justify-center items-center gap-1">
               <button className=" p-1 bg-[rgba(31,113,104,0.08)] border border-[#399086C9] text-[#399086C9] rounded-lg text-sm">
@@ -79,9 +78,10 @@ const DoctorsPagination = ({
               <button className=" p-1 bg-[rgba(247,79,115,0.21)] border border-[#921A34] text-[#921A34] rounded-lg text-sm">
                 هزینه زیرساخت
               </button>
-              <button className=" p-1 bg-[rgba(83,102,248,0.12)] border border-[#5366F8] text-[#5366F8] rounded-lg text-sm">
-                مشاهده وضعیت اکانت
-              </button>
+              <TreatMentCenterButt
+                name={item.doctorName + " " + item.doctorFamily}
+                id={item.id}
+              />
               <button className=" p-1 bg-[#DBEDFF] border border-[#005DAD] text-[#005DAD] rounded-lg text-sm">
                 مشاهده جزئیات{" "}
               </button>

@@ -11,6 +11,7 @@ import DatePicker from "./DatePicker";
 import { NobatButton } from "@/components/Buttons/Button";
 import { SerchDropDowns } from "@/components/Inputs/Input";
 import SearchBimehSection from "./SearchBimehSection";
+import DatePickerComponent from "@/components/DatePickerComponent";
 
 const Specialties = [
   { id: 1, caption: "جراحی مغز و اعصاب" },
@@ -35,7 +36,7 @@ function FilterDoctors() {
         فیلتر پیشرفته
       </h2>
       <SerchDropDowns details={Specialties} title="نام بیماری را جستجو کنید" />
-      <h2 className=" text-[16px]">روش نوبت گیری رو انتخاب کنید</h2>
+      <h2 className=" text-[16px]">روش ویزیت رو انتخاب کنید</h2>
       <div className=" flex justify-between">
         <NobatButton type="آنلاین" />
         <NobatButton type="حضوری" />

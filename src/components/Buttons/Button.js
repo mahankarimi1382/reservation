@@ -39,7 +39,8 @@ import Link from "next/link";
 import AddTurnModal from "../modals/AddTurnModal";
 import MedicalFormModal from "../modals/MedicalFormModal";
 import dynamic from "next/dynamic";
-
+import TreatmentCenterModal from "../modals/TreatmentCenterModal";
+import AddTreatmentModal from "../modals/AddTreatmentModal";
 
 export const LoginButton = () => {
   const { fullName, setFullName } = fullNameStorage();
@@ -88,7 +89,7 @@ export const LoginButton = () => {
             className=" w-full justify-center items-center gap-2 flex"
           >
             <IoPersonCircleSharp className=" text-xl" />
-            {fullName!="string"?fullName:"کاربر مهمان"}
+            {fullName != "string" ? fullName : "کاربر مهمان"}
           </h5>
         ) : (
           <h5 className=" w-full flex justify-center gap-1">
@@ -524,9 +525,7 @@ export const MedicalCenterSignUpButt = () => {
   return (
     <div>
       {isMedicalCenterForm && (
-        <MedicalFormModal
-          setIsMedicalCenterForm={setIsMedicalCenterForm}
-        />
+        <MedicalFormModal setIsMedicalCenterForm={setIsMedicalCenterForm} />
       )}
       <button
         onClick={() => setIsMedicalCenterForm(true)}
@@ -539,15 +538,14 @@ export const MedicalCenterSignUpButt = () => {
     </div>
   );
 };
-export const AddMedicalCenterButt = () => {
-  const [isMedicalCenterForm, setIsMedicalCenterForm] = useState(false);
-
+export const AddMedicalCenterButt = ({
+  isMedicalCenterForm,
+  setIsMedicalCenterForm,
+}) => {
   return (
     <div>
       {isMedicalCenterForm && (
-        <MedicalFormModal
-          setIsMedicalCenterForm={setIsMedicalCenterForm}
-        />
+        <MedicalFormModal setIsMedicalCenterForm={setIsMedicalCenterForm} />
       )}
       <button
         onClick={() => setIsMedicalCenterForm(true)}
@@ -555,6 +553,53 @@ export const AddMedicalCenterButt = () => {
       >
         <GoPlus className=" text-2xl" />
         افزودن مرکز درمانی
+      </button>
+    </div>
+  );
+};
+export const TreatMentCenterButt = ({ id, name }) => {
+  const [isTreatmentCenter, setIsTreatmentCenter] = useState(false);
+
+  return (
+    <div>
+      {isTreatmentCenter && (
+        <TreatmentCenterModal
+          name={name}
+          id={id}
+          setIsTreatmentCenter={setIsTreatmentCenter}
+        />
+      )}
+      <button
+        onClick={() => setIsTreatmentCenter(true)}
+        className=" p-1 bg-[rgba(83,102,248,0.12)] border border-[#5366F8] text-[#5366F8] rounded-lg text-sm"
+      >
+        {/* مشاهده وضعیت اکانت */}
+        تخصیص مرکز درمانی
+      </button>
+    </div>
+  );
+};
+export const AddTreatmentButt = ({
+  id,
+  isAddTreatmentModal,
+  setIsAddTreatmentModal,
+}) => {
+  return (
+    <div>
+      {isAddTreatmentModal && (
+        <AddTreatmentModal
+          id={id}
+          closeModal={() => setIsAddTreatmentModal(false)}
+        />
+      )}
+      <button
+        onClick={() => {
+          setIsAddTreatmentModal(true);
+        }}
+        className=" flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
+      >
+        افزودن بیشتر
+        <GoPlus className=" text-2xl" />
       </button>
     </div>
   );

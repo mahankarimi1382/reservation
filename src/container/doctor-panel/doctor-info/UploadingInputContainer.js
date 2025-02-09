@@ -75,7 +75,7 @@ function UploadingInputContainer({ setFileId, fileId, }) {
                 <ClipLoader size={20} speedMultiplier={0.5} color="white" />
               </div>
             ) : (
-              "ثبت فایل"
+              "ثبت نهایی فایل"
             )}
           </button>
         )}

@@ -50,11 +50,6 @@ export const signin = (
     .catch((err) => {
       console.log(err);
       setIsLoading(false);
-      if (err.message === "Network Error") {
-        Eror("خطا در برقراری ارتباط !");
-      } else {
-        Eror("نام کاربری یا کلمه عبور اشتباه است !");
-      }
     });
 };
 export const activating_registarion = (
@@ -446,7 +441,11 @@ export const create_ads = (data, setLoading) => {
       console.log(err);
     });
 };
-export const add_medical_center = (data, setLoading) => {
+export const add_medical_center = (
+  data,
+  setLoading,
+  setIsMedicalCenterForm
+) => {
   console.log(data);
   axiosConfig
     .post("Clinic/create-Clinic", data)
@@ -454,6 +453,7 @@ export const add_medical_center = (data, setLoading) => {
       setLoading(false);
       console.log(res);
       success("کلینیک با موفقیت ثبت شد");
+      setIsMedicalCenterForm(false);
     })
     .catch((err) => {
       setLoading(false);
@@ -461,7 +461,7 @@ export const add_medical_center = (data, setLoading) => {
       Eror();
     });
 };
-export const add_Office = (data, setLoading) => {
+export const add_Office = (data, setLoading, setIsMedicalCenterForm) => {
   console.log(data);
   axiosConfig
     .post("Office/create-Office", data)
@@ -469,6 +469,7 @@ export const add_Office = (data, setLoading) => {
       setLoading(false);
       console.log(res);
       success("مطب با موفقیت ثبت شد");
+      setIsMedicalCenterForm(false);
     })
     .catch((err) => {
       setLoading(false);
@@ -540,5 +541,135 @@ export const read_files = async (url) => {
   } catch (error) {
     console.error("Error fetching specialties:", error);
     return null;
+  }
+};
+export const search_doctors = async (name, currentPage) => {
+  try {
+    const response = await axiosConfig.get(
+      `https://myapi.dadehavaran.com:8040/api/v1/Doctor/search-doctors?DoctorName=${name}&pagesize=10&pageNumber=${currentPage}`
+    );
+    const doctors = response.data.result;
+    console.log(doctors);
+    return doctors;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+export const get_clinics = async () => {
+  try {
+    const response = await axiosConfig.get("Clinic/read-Clinics");
+    const data = response;
+    console.log(data);
+    return data.data.result.list;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+export const get_offices = async () => {
+  try {
+    const response = await axiosConfig.get("Office/read-Offices");
+    const data = response;
+    console.log(data);
+    return data.data.result.list;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+export const search_doctors_list = async (name = "", currentPage) => {
+  console.log("name" + name);
+  try {
+    const response = await axiosConfig.get(
+      `Doctor/search-list-doctors?DoctorName=${name}&pagesize=10&pageNumber=${currentPage}`
+    );
+    const doctors = response.data.result;
+    console.log(doctors);
+    return doctors;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+export const get_doctor_treatmentCenter = async (id) => {
+  try {
+    const response = await axiosConfig.get(
+      `DoctorTreatmentCenter/read-DoctorTreatmentCenterByDoctorId?Id=${id}`
+    );
+    const treatmentCenter = response.data.result.list;
+    console.log(treatmentCenter);
+    return treatmentCenter;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+export const create_doctor_treatment = (
+  data,
+  setIsLoading,
+  closeModal,
+  message
+) => {
+  axiosConfig
+    .post("/DoctorTreatmentCenter/create-DoctorTreatmentCenter", data)
+    .then((res) => {
+      setIsLoading(false);
+      console.log(res);
+      success(message);
+      closeModal();
+    })
+    .catch((err) => {
+      setIsLoading(false);
+      console.log(err);
+    });
+};
+
+export const delete_office = async (id, setMedicalCenters, closeModal) => {
+  try {
+    const response = await axiosConfig.delete("Office/delete-Office", {
+      data: {
+        metadata: {
+          userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          userName: "string",
+          smeProfileId: 0,
+        },
+        id,
+      },
+    });
+
+    const data = await get_offices();
+    if (data) {
+      setMedicalCenters(data);
+    }
+    closeModal();
+    console.log(response);
+    success("مطب با موفقیت حذف شد");
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const delete_clinic = async (id, setMedicalCenters, closeModal) => {
+  try {
+    const response = await axiosConfig.delete("Clinic/delete-Clinic", {
+      data: {
+        metadata: {
+          userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          userName: "string",
+          smeProfileId: 0,
+        },
+        id,
+      },
+    });
+
+    const data = await get_clinics();
+    if (data) {
+      setMedicalCenters(data);
+    }
+    closeModal();
+    console.log(response);
+    success("مرکز درمانی با موفقیت حذف شد");
+  } catch (error) {
+    console.log(error);
   }
 };

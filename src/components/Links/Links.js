@@ -687,7 +687,7 @@ export const AdminPanelMeeicalcenters_action = (props) => {
           href="/adminPanel/medicalcenters/clinics"
         >
           <IoIosArrowDown className=" text-xs rotate-90" />
-          کلینیک ها
+          درمانگاه , بیمارستان
         </Link>
         <Link
           className={` transition-opacity flex pr-2 gap-2 py-4 rounded-lg items-center   w-full text-[#005DAD] ${

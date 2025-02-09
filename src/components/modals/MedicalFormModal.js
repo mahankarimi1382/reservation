@@ -11,6 +11,8 @@ import { SyncLoader } from "react-spinners";
 import dynamic from "next/dynamic";
 import { ToastContainer } from "react-toastify";
 import { usePathname } from "next/navigation";
+import { Phone } from "@mui/icons-material";
+import { Eror } from "../ToastAlerts";
 const MapTest = dynamic(() => import("../../components/MapTest"), {
   ssr: false,
 });
@@ -26,10 +28,11 @@ const MedicalFormModal = ({ type, setIsMedicalCenterForm }) => {
   const [address, setAddress] = useState("");
   const [siamCode, setSiamCode] = useState("");
   const [phone, setPhone] = useState("");
+
   const [cityId, setCityId] = useState("1");
   const [desc, setDesc] = useState("");
   const [clinicTypeId, setClinicTypeId] = useState(0);
-  const [officeTypeId, setOfficeTypeId] = useState(1)
+  const [officeTypeId, setOfficeTypeId] = useState(1);
   const data = {
     metadata: {
       userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -56,7 +59,7 @@ const MedicalFormModal = ({ type, setIsMedicalCenterForm }) => {
     geolon: position ? position[0] : 0,
     geolat: position ? position[1] : 0,
     phone,
-    cityId: 1,
+    cityId,
     postalCode: siamCode,
     officeTypeId,
   };
@@ -72,7 +75,7 @@ const MedicalFormModal = ({ type, setIsMedicalCenterForm }) => {
         />
         <div className="customScroll overflow-auto max-h-full  w-[80%] p-5 gap-4 flex flex-col">
           <h3 className=" flex text-2xl items-center gap-2">
-            {isoffice ? "درخواست عضویت مطب در" : "درخواست کلینیک  در"}
+            {isoffice ? "درخواست عضویت مطب در" : "درخواست ثبت مرکز درمانی  در"}
             <span className=" text-[#005DAD]">دکتر رزرو</span>
           </h3>
           <div className=" flex flex-col gap-3">
@@ -82,7 +85,7 @@ const MedicalFormModal = ({ type, setIsMedicalCenterForm }) => {
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="firstName"
                 >
-                  {isoffice ? "نام مطب" : "نام کلینیک "}
+                  {isoffice ? "نام مطب" : "نام مرکز درمانی "}
                 </label>
                 <input
                   type="text"
@@ -209,8 +212,8 @@ const MedicalFormModal = ({ type, setIsMedicalCenterForm }) => {
                 <input
                   type="text"
                   className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                 />
               </div>
             )}
@@ -237,11 +240,43 @@ const MedicalFormModal = ({ type, setIsMedicalCenterForm }) => {
 
             <button
               onClick={() => {
-                setLoading(true);
-                if (isoffice) {
-                  add_Office(data2, setLoading);
+                if (
+                  isoffice &&
+                  !isVirtual &&
+                  cityId &&
+                  officeTypeId &&
+                  name &&
+                  address &&
+                  phone &&
+                  siamCode
+                ) {
+                  console.log(isoffice);
+                  setLoading(true);
+                  console.log("first");
+                  add_Office(data2, setLoading,setIsMedicalCenterForm);
+                } else if (
+                  isoffice &&
+                  isVirtual &&
+                  officeTypeId &&
+                  name &&
+                  phone
+                ) {
+                  setLoading(true);
+                  console.log("dahd");
+                  add_Office(data2, setLoading, setIsMedicalCenterForm);
+                } else if (
+                  cityId &&
+                  clinicTypeId &&
+                  name &&
+                  address &&
+                  phone &&
+                  siamCode
+                ) {
+                  console.log("medical");
+                  add_medical_center(data, setLoading, setIsMedicalCenterForm);
+                  setLoading(true);
                 } else {
-                  add_medical_center(data, setLoading);
+                  Eror("لطفا اطلاعات را کامل وارد کنید");
                 }
               }}
               className=" w-1/3 bg-[#005DAD] text-white py-3 px-4 rounded-lg"
@@ -258,7 +293,7 @@ const MedicalFormModal = ({ type, setIsMedicalCenterForm }) => {
           src={type === "doctor" ? LoginFormImage : MedicalCenterFormImage}
         />
       </div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </div>
   );
 };
