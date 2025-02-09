@@ -50,6 +50,7 @@ function DoctorsSection() {
       setName(name);
     }
   };
+
   console.log(doctorItems);
   useEffect(() => {
     getDoctors(name);
@@ -122,6 +123,7 @@ function DoctorsSection() {
           </h4>
         </div>
         <DoctorsPagination
+          isLoading={isLoading}
           doctors={doctors}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
