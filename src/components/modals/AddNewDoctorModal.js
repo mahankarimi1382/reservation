@@ -12,6 +12,7 @@ import { smeIdStorage } from "@/store/Store";
 import { RxCross2 } from "react-icons/rx";
 import { SyncLoader } from "react-spinners";
 import { ErrorHandler } from "@/utils/ErrorHandler";
+import { Eror } from "../ToastAlerts";
 function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
   const [isLoading, setIsLoading] = useState(false);
   const { smeId } = smeIdStorage();
@@ -32,23 +33,42 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
     doctorItems ? doctorItems.codeNezam : ""
   );
   const [mobile, setMobile] = useState(doctorItems ? doctorItems.mobile : "");
-  const [cityId, setCityId] = useState(1);
+  const [cityId, setCityId] = useState("");
   const data = {
     metadata: {
       userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      userName: "0200013076",
+      userName: "string",
+      smeProfileId: smeId,
     },
     id: doctorItems && doctorItems.id,
     doctorName,
     doctorFamily,
     nationalId,
-    specialistId,
     codeNezam,
+    specialistId,
     docExperiance: "string",
     docInstaLink: "string",
     mobile,
     desc: "string",
     smeProfileId: smeId,
+  };
+  const handleclick = () => {
+    if (!doctorName) {
+      Eror("نام دکتر را وارد کنید");
+    } else if (!doctorFamily) {
+      Eror("نام خانوادگی دکتر را وارد کنید");
+    } else if (!codeNezam) {
+      Eror("وارد کردن کد نظام پزشکی اجباریست");
+    } else if (!cityId) {
+      Eror("شهر را وارد کنید");
+    } else if (!specialistId) {
+      Eror("تخصص را انتخاب کنید");
+    } else {
+      doctorItems
+        ? edit_doctors(data, setIsLoading, setIsAddDoctorModal)
+        : add_doctor(data, setIsLoading, setIsAddDoctorModal);
+      setIsLoading(true);
+    }
   };
   return (
     <div className=" z-20  w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]">
@@ -132,23 +152,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
           </div>
         </div>
         <button
-          onClick={() => {
-            if (
-              doctorName &&
-              doctorFamily &&
-              nationalId &&
-              specialistId &&
-              codeNezam &&
-              mobile
-            ) {
-              doctorItems
-                ? edit_doctors(data, setIsLoading, setIsAddDoctorModal)
-                : add_doctor(data, setIsLoading, setIsAddDoctorModal);
-              setIsLoading(true);
-            } else {
-              ErrorHandler("empty value");
-            }
-          }}
+          onClick={handleclick}
           className=" w-1/2 flex justify-center h-10 items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
         >
           {isLoading ? <SyncLoader color="white" size={10} /> : "ثبت"}

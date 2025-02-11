@@ -29,6 +29,7 @@ const DoctorsPagination = ({
     <div className=" w-full h-full">
       {isDeletingModal && (
         <DeletingModal
+        currentPage={currentPage}
           DeletingFn={delete_doctor}
           id={selectedItem.id}
           name={selectedItem.doctorName + " " + selectedItem.doctorFamily}

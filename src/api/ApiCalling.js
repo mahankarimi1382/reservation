@@ -310,8 +310,15 @@ export const get_doctors = async (url) => {
     return null;
   }
 };
-export const delete_doctor = async (id, setDoctors, closeModal) => {
+export const delete_doctor = async (
+  id,
+  setDoctors,
+  closeModal,
+  setIsLoading,
+  currentPage
+) => {
   console.log(id);
+  setIsLoading(true);
   try {
     const response = await axiosConfig.delete("Doctor/delete-Doctor", {
       data: {
@@ -324,11 +331,12 @@ export const delete_doctor = async (id, setDoctors, closeModal) => {
     });
     const url = "Doctor/read-all-doctors";
 
-    const data = await get_doctors(url);
+    const data = await search_doctors_list(currentPage);
     if (data) {
       setDoctors(data);
     }
     closeModal();
+    setIsLoading(false);
     success("پزشک با موفقیت حذف شد");
     console.log(response);
   } catch (error) {
@@ -543,10 +551,11 @@ export const read_files = async (url) => {
     return null;
   }
 };
-export const search_doctors = async (name, currentPage) => {
+export const search_doctors = async (data) => {
+  console.log(data);
   try {
     const response = await axiosConfig.get(
-      `https://myapi.dadehavaran.com:8040/api/v1/Doctor/search-doctors?DoctorName=${name}&pagesize=10&pageNumber=${currentPage}`
+      `Doctor/search-doctors?DoctorName=${data.name}&pagesize=${data.pagesize}&pageNumber=${data.currentPage}&specialistIds=${data.specialistId}&ProvinceId=${data.provinceId}&CityId=${data.cityId}`
     );
     const doctors = response.data.result;
     console.log(doctors);
@@ -649,7 +658,13 @@ export const delete_office = async (id, setMedicalCenters, closeModal) => {
     console.log(error);
   }
 };
-export const delete_clinic = async (id, setMedicalCenters, closeModal) => {
+export const delete_clinic = async (
+  id,
+  setMedicalCenters,
+  closeModal,
+  setIsLoading
+) => {
+  setIsLoading(true);
   try {
     const response = await axiosConfig.delete("Clinic/delete-Clinic", {
       data: {
@@ -668,7 +683,41 @@ export const delete_clinic = async (id, setMedicalCenters, closeModal) => {
     }
     closeModal();
     console.log(response);
+    setIsLoading(false);
     success("مرکز درمانی با موفقیت حذف شد");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const delete_doctor_treatment = async (
+  id,
+  setTreatmenCenters,
+  closeModal
+) => {
+  console.log(id);
+  try {
+    const response = await axiosConfig.delete(
+      "DoctorTreatmentCenter/delete-DoctorTreatmentCenter",
+      {
+        data: {
+          metadata: {
+            userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            userName: "string",
+            smeProfileId: 0,
+          },
+          id,
+        },
+      }
+    );
+
+    const data = await get_doctor_treatmentCenter(id);
+    if (data) {
+      setTreatmenCenters(data);
+    }
+    closeModal();
+    console.log(response);
+    success("مرکز درمانی دکتر با موفقیت حذف شد");
   } catch (error) {
     console.log(error);
   }

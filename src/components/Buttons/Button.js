@@ -269,7 +269,7 @@ export const EmtyReservButt = ({ docDetail }) => {
     </div>
   );
 };
-export const MatabShowButt = ({ locs }) => {
+export const MatabShowButt = ({ items }) => {
   const [isMatadShow, setIsMatadShow] = useState(false);
   const [unicId, setUnicId] = useState();
   const handleSeeMatab = (id) => {
@@ -281,28 +281,31 @@ export const MatabShowButt = ({ locs }) => {
       <div className="flex gap-4">
         <h2 className=" text-[18px] flex items-center">نشانی :</h2>
 
-        {locs.map((item) => {
-          return (
-            <button
-              key={item.id}
-              onClick={() => handleSeeMatab(item.id)}
-              className={
-                isMatadShow && item.id === unicId
-                  ? "gap-1 p-2 flex items-center border transition-colors text-[#005dad] bg-[rgba(176,218,255,0.2)] rounded-xl"
-                  : "gap-1 p-2 flex items-center border transition-colors z-10 rounded-xl"
-              }
-            >
-              {item.loc}
-              <IoIosArrowDown
-                className={` ${
+        {items &&
+          items.map((item) => {
+            return (
+              <button
+                key={item.id}
+                onClick={() => handleSeeMatab(item.id)}
+                className={
                   isMatadShow && item.id === unicId
-                    ? "rotate-180 text-[#005dad] "
-                    : "text-[#757575]"
-                } transition-all    duration-300 text-xl `}
-              />
-            </button>
-          );
-        })}
+                    ? "gap-1 p-2 flex items-center border transition-colors text-[#005dad] bg-[rgba(176,218,255,0.2)] rounded-xl"
+                    : "gap-1 p-2 flex items-center border transition-colors z-10 rounded-xl"
+                }
+              >
+                {item.office && item.office.name}
+                {item.clinic && item.clinic.name}
+
+                <IoIosArrowDown
+                  className={` ${
+                    isMatadShow && item.id === unicId
+                      ? "rotate-180 text-[#005dad] "
+                      : "text-[#757575]"
+                  } transition-all    duration-300 text-xl `}
+                />
+              </button>
+            );
+          })}
       </div>
 
       <h2

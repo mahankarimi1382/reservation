@@ -1,5 +1,8 @@
 "use client";
-import { get_doctor_treatmentCenter } from "@/api/ApiCalling";
+import {
+  delete_doctor_treatment,
+  get_doctor_treatmentCenter,
+} from "@/api/ApiCalling";
 import React, { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import ModalLogo from "../../../public/Pics/ModalLogo.png";
@@ -7,10 +10,13 @@ import Image from "next/image";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { AddTreatmentButt } from "../Buttons/Button";
+import DeletingModal from "./DeletingModal";
 
 function TreatmentCenterModal({ setIsTreatmentCenter, id, name }) {
   const [isAddTreatmentModal, setIsAddTreatmentModal] = useState(false);
-
+  const [isDeleteModal, setIsDeleteModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState({});
+  console.log(selectedItem);
   const [treatmentCenters, setTreatmenCenters] = useState([]);
   console.log(treatmentCenters);
   const getTreatMent = async () => {
@@ -29,6 +35,15 @@ function TreatmentCenterModal({ setIsTreatmentCenter, id, name }) {
   };
   return (
     <div className=" w-screen z-10 h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]">
+      {isDeleteModal && (
+        <DeletingModal
+          DeletingFn={delete_doctor_treatment}
+          id={selectedItem.officeId || selectedItem.clinicId}
+          name={selectedItem.officeName || selectedItem.clinicName}
+          setList={setTreatmenCenters}
+          closeModal={() => setIsDeleteModal(false)}
+        />
+      )}
       <div className=" w-[450px] h-2/3 bg-white flex flex-col justify-between py-2 px-2 pb-5  items-center rounded-2xl">
         <div className=" relative w-full h-full gap-2 flex items-center flex-col">
           <RxCross2
@@ -68,7 +83,13 @@ function TreatmentCenterModal({ setIsTreatmentCenter, id, name }) {
                     </h5>
                     <div className=" w-1/3 flex justify-end items-center gap-5 ">
                       <FaEdit className=" text-green-400 hover:text-green-600 transition-all" />
-                      <MdDelete className=" text-red-400 hover:text-red-600 transition-all" />
+                      <MdDelete
+                        onClick={() => {
+                          setSelectedItem(item);
+                          setIsDeleteModal(true);
+                        }}
+                        className=" text-red-400 hover:text-red-600 transition-all"
+                      />
                     </div>
                   </div>
                 );

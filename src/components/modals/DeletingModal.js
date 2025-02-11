@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import ModalLogo from "../../../public/Pics/ModalLogo.png";
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
+import { SyncLoader } from "react-spinners";
 
 function DeletingModal(props) {
+  const [isLoading, setIsLoading] = useState(false);
+  console.log(props);
   return (
     <div className=" w-screen z-10 h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]">
       <div className=" relative w-1/3 h-1/3 bg-white flex flex-col justify-center py-2 px-2 pb-5  items-center rounded-2xl">
@@ -27,11 +30,11 @@ function DeletingModal(props) {
           <div className=" flex w-full justify-center items-center gap-3">
             <button
               onClick={() => {
-                props.DeletingFn(props.id, props.setList, props.closeModal);
+                props.DeletingFn(props.id, props.setList, props.closeModal,setIsLoading,props.currentPage);
               }}
               className=" w-1/4 p-2 rounded-lg text-white bg-[#005DAD]"
             >
-              بله
+              {isLoading ? <SyncLoader color="white" size={10} /> : "بله"}
             </button>
             <button
               onClick={props.closeModal}
