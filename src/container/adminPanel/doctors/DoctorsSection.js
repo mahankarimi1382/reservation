@@ -32,6 +32,7 @@ function DoctorsSection() {
       setDoctors(data.list);
       setIsLoading(false);
 
+      
       let number = data.totalRecords / 10;
       let totalpages = Math.ceil(number);
       setTotalPages(totalpages);

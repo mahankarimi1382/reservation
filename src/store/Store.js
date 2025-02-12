@@ -19,6 +19,13 @@ export const myStore = create((set) => ({
   },
   selectedBaner: {},
   setSelectedBaner: (item) => set(() => ({ selectedBaner: item })),
+  isSerchDoctorLoading: false,
+  setIsSerchDoctorLoading: (bool) =>
+    set(() => ({ isSerchDoctorLoading: bool })),
+  specialistIdSearch: "",
+  setSpecialistIdSearch: (id) => set(() => ({ specialistIdSearch: id })),
+  currentPageDoctorSearch:1,
+  setCurrentPageDoctorSearch:(page)=>set(()=>({currentPageDoctorSearch:page}))
 }));
 
 export const fullNameStorage = create(

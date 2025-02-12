@@ -1,10 +1,88 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoLocationOutline } from "react-icons/io5";
 import { CgSortAz } from "react-icons/cg";
-import AllDoctorsCard from "../../components/AllDoctorsCard";
-
+import Image from "next/image";
+import doctorprof from "../../../public/Pics/abbas.png";
+import star from "../../../public/Pics/star.png";
+import hospital from "../../../public/Pics/hospital.png";
+import monitor from "../../../public/Pics/monitor-mobbile.png";
+import { AiFillLike } from "react-icons/ai";
+import { IoIosArrowRoundBack } from "react-icons/io";
+import LoadingComponent from "@/components/LoadingComponent";
+import {
+  EmtyReservButt,
+  MatabShowButt,
+  SeeDoctorNazaratButt,
+} from "@/components/Buttons/Button";
+import Link from "next/link";
+import { Pagination } from "@mui/material";
+import { get_specialties_by_id, search_doctors } from "@/api/ApiCalling";
+import { myStore } from "@/store/Store";
 function DoctorsPaginate() {
+  const { isSerchDoctorLoading, setIsSerchDoctorLoading } = myStore();
+  const { specialistIdSearch, setSpecialistIdSearch } = myStore();
+  const { currentPageDoctorSearch, setCurrentPageDoctorSearch } = myStore();
+  const [name, setName] = useState("");
+  const [provinceId, setProvinceId] = useState("");
+  const [cityId, setCityId] = useState("");
+  const [totalPages, setTotalPages] = useState("");
+  const [doctors, setDoctors] = useState([]);
+  const [filtredBoxes, setFiltredBoxes] = useState([]);
+  const handleSearchDoctors = (name) => {
+    if (name.length >= 2) {
+      setIsSerchDoctorLoading(true);
+      getDoctors(name);
+      setName(name);
+      setCurrentPageDoctorSearch(1);
+    } else if (name.length == 0) {
+      setIsSerchDoctorLoading(true);
+      getDoctors(name);
+      setName(name);
+      setName(name);
+      setCurrentPageDoctorSearch(1);
+    }
+  };
+  const handleFiltredBoxes = async (item) => {
+    console.log(item);
+    let specialties = (await get_specialties_by_id(item.specialistId)) || "";
+    let data = [{ id: item.id, specialties: specialties }];
+    setFiltredBoxes(data);
+  };
+
+  const getDoctors = async (name) => {
+    let data = {
+      name: name || "",
+      pagesize: 3,
+      currentPage: currentPageDoctorSearch || "",
+      specialistId: specialistIdSearch || "",
+      provinceId: provinceId || "",
+      cityId: cityId || "",
+    };
+    const result = await search_doctors(data);
+    if (result) {
+      console.log(result);
+      setDoctors(result.list);
+      setIsSerchDoctorLoading(false);
+      handleFiltredBoxes(data);
+      let number = result.totalRecords / 3;
+      let totalpages = Math.ceil(number);
+      setTotalPages(totalpages);
+    }
+  };
+
+  useEffect(() => {
+    getDoctors(name);
+    setIsSerchDoctorLoading(true);
+  }, [currentPageDoctorSearch, specialistIdSearch]);
+  const handleChange = (event, value) => {
+    setCurrentPageDoctorSearch(value);
+  };
+  const handleRemoveItem = (id) => {
+    setFiltredBoxes(filtredBoxes.filter((item) => item.id !== id));
+    setSpecialistIdSearch("");
+  };
   return (
     <div className=" w-[900px] flex flex-col items-center justify-center gap-10">
       <div className=" w-full bg-gray-500 rounded-xl h-20"></div>
@@ -14,6 +92,7 @@ function DoctorsPaginate() {
           <CiSearch className=" text-[#919191] text-3xl" />
 
           <input
+            onChange={(e) => handleSearchDoctors(e.target.value)}
             className=" text-sm outline-none h-full w-[80%]"
             placeholder="جستجو پزشک،درمانگر،کلینیک..."
           />
@@ -33,7 +112,111 @@ function DoctorsPaginate() {
         <button className=" text-[#858585]">نزدیک ترین نوبت</button>
         <button className=" text-[#858585]">کم ترین معطلی در مطب</button>
       </div>
-      <AllDoctorsCard />
+      <div className=" w-full justify-center items-center flex flex-col gap-10">
+        <div className=" w-full">
+          {filtredBoxes.map((item) => {
+            return (
+              <button
+                onClick={() => handleRemoveItem(item.id)}
+                key={item.id}
+                className="whitespace-nowrap overflow-hidden text-ellipsis min-w-[100px] h-[40px] m-[5px] px-[10px]"
+              >
+                {item.specialties}
+              </button>
+            );
+          })}
+        </div>
+        {isSerchDoctorLoading && <LoadingComponent />}
+        {doctors.map((item) => {
+          return (
+            <div
+              key={item.id}
+              className=" rounded-2xl px-10 gap-6 flex flex-col w-full bg-white pb-2 min-h-[400px]"
+            >
+              <div className="flex justify-between  border-[#CBCBCB] border-b py-7">
+                <div className=" w-1/2  flex items-center justify-start gap-5">
+                  <Image
+                    width={90}
+                    height={90}
+                    className=" w-[90px] h-[90px] border-2  border-[#005DAD] rounded-full"
+                    src={doctorprof}
+                    alt="doctor-prof"
+                  />
+                  <div className=" flex flex-col gap-5">
+                    <h2 className=" text-[22px]">
+                      {item.doctorName} {item.doctorFamily}
+                    </h2>
+                    <h2 className=" text-[#757575]">{item.specialist}</h2>
+                  </div>
+                </div>
+                <div className=" flex flex-col items-start justify-center gap-2 ">
+                  <div className=" flex gap-1">
+                    {Array.from({ length: 5 }).map((_, index) => {
+                      return (
+                        <div key={index}>
+                          <Image width={22} alt="" src={star} />
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <h2 className="  rounded flex items-center justify-center gap-1 text-[#1F7168]">
+                    <AiFillLike className=" text-lg" />
+                    {item.recomend}
+                  </h2>
+                  <SeeDoctorNazaratButt />
+                </div>
+              </div>
+              <h2 className=" text-lg">
+                خدمات :<span className=" text-[#7E7E7E]">{item.skills}</span>
+              </h2>
+              <div className=" flex gap-5 text-lg">
+                <h2>روش نوبت دهی : </h2>
+                <h2 className=" flex gap-2">
+                  <Image width={24} src={monitor} alt="monitor-icon" />
+                  ویزیت آنلاین
+                </h2>
+
+                <h2 className=" flex gap-2">
+                  <Image width={24} src={hospital} alt="monitor-icon" />
+                  ویزیت حضوری
+                </h2>
+              </div>
+
+              <div className=" w-full flex gap-4">
+                <MatabShowButt items={item.doctorTreatmentCenterList} />
+              </div>
+
+              {/* <div className=" flex gap-3 text-lg pb-5 border-b">
+              <Image src={barezvijegi} alt="icon" width={24} />
+              <h2> ویژگی های بارز پزشک :</h2>
+              {item.charecter.map((item2) => {
+                return (
+                  <h2 className="text-[#1F7168]" key={item2.id}>
+                    {item2.caption}
+                  </h2>
+                );
+              })}
+            </div> */}
+              <div className=" -mt-3 flex justify-between">
+                <EmtyReservButt docDetail={item} />
+                <Link
+                  href={`/doctors/${item.id}`}
+                  className=" flex justify-center p-2 px-4 rounded-md text-white items-center bg-[#005DAD] "
+                >
+                  نوبت بگیرید
+                  <IoIosArrowRoundBack className=" text-2xl" />
+                </Link>
+              </div>
+            </div>
+          );
+        })}
+        <Pagination
+          onChange={handleChange}
+          page={currentPageDoctorSearch}
+          count={totalPages}
+          color="primary"
+        />
+      </div>
     </div>
   );
 }

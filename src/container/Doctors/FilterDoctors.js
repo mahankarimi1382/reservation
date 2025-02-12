@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import filterIcon from "../../../public/Pics/filter.png";
 import Image from "next/image";
 import MyLocMap from "../../../public/Pics/myLocMap.png";
@@ -12,6 +13,7 @@ import { NobatButton } from "@/components/Buttons/Button";
 import { SerchDropDowns } from "@/components/Inputs/Input";
 import SearchBimehSection from "./SearchBimehSection";
 import DatePickerComponent from "@/components/DatePickerComponent";
+import { get_specialties } from "@/api/ApiCalling";
 
 const Specialties = [
   { id: 1, caption: "جراحی مغز و اعصاب" },
@@ -29,6 +31,7 @@ const Specialties = [
   { id: 13, caption: "جراحی مغز و اعصاب" },
 ];
 function FilterDoctors() {
+
   return (
     <div className=" flex flex-col gap-[30px] p-5 w-[411px] rounded-xl transition-all min-h-[1164px] bg-white">
       <h2 className=" flex items-center gap-2 text-[20px]">

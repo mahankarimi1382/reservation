@@ -270,27 +270,45 @@ export const EmtyReservButt = ({ docDetail }) => {
   );
 };
 export const MatabShowButt = ({ items }) => {
+  const [address, setAddress] = useState("");
+
+  const handleAddres = (item) => {
+    if (item.clinic) {
+      return item.clinic.address || "";
+    } else if (item.office) {
+      return item.office.address || "";
+    } else {
+      return "";
+    }
+  };
+
+  console.log(items);
   const [isMatadShow, setIsMatadShow] = useState(false);
   const [unicId, setUnicId] = useState();
-  const handleSeeMatab = (id) => {
+  const handleSeeMatab = (item) => {
+    let id = item.id;
+    let address = handleAddres(item);
     setUnicId(id);
     setIsMatadShow(!isMatadShow);
+    setAddress(address);
   };
   return (
-    <div className=" flex flex-col">
-      <div className="flex gap-4">
-        <h2 className=" text-[18px] flex items-center">نشانی :</h2>
+    <div className=" flex w-full flex-col">
+      <div className="flex items-center gap-4 w-full whitespace-nowrap no-scrollbar overflow-auto flex-nowrap">
+        <h2 className=" text-[18px] flex whitespace-nowrap items-center">
+          نشانی :
+        </h2>
 
         {items &&
           items.map((item) => {
             return (
               <button
                 key={item.id}
-                onClick={() => handleSeeMatab(item.id)}
+                onClick={() => handleSeeMatab(item)}
                 className={
                   isMatadShow && item.id === unicId
                     ? "gap-1 p-2 flex items-center border transition-colors text-[#005dad] bg-[rgba(176,218,255,0.2)] rounded-xl"
-                    : "gap-1 p-2 flex items-center border transition-colors z-10 rounded-xl"
+                    : "gap-1 p-2 flex items-center border whitespace-nowrap transition-colors z-10 rounded-xl"
                 }
               >
                 {item.office && item.office.name}
@@ -313,7 +331,7 @@ export const MatabShowButt = ({ items }) => {
           isMatadShow ? " opacity-100" : " opacity-0 -mt-8 z-0"
         } transition-all  text-[#005DAD]`}
       >
-        نشانی مطب ونک: میدان ونک,خیابان صانعیو, ساختمان پزشکان,طبقه اول
+        نشانی : {address}
       </h2>
     </div>
   );

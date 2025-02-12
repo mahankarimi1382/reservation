@@ -46,39 +46,41 @@ function VisitTypeSelectionModal({
           <h2>لطفا نوع ویزیت حضوری را انتخاب کنید</h2>
         )}
         <div className=" w-full">
-          <FormControl className=" w-full ">
+          <FormControl className=" w-full flex ">
             {isVisitSelectModal === "آنلاین" ? (
               <RadioGroup
                 className=" flex justify-center gap-3 flex-row items-center"
                 aria-labelledby="demo-controlled-radio-buttons-group"
                 name="controlled-radio-buttons-group"
               >
-                <div className=" border-2 rounded-xl pl-2   flex justify-center items-center gap-2">
-                  <FormControlLabel
-                    className=" mr-0 "
-                    value="online"
-                    control={<Radio className=" text-3xl" />}
-                  />
-                  <Image width={16} alt="icon" src={matniminimal} />
-                  متنی
-                </div>
-                <div className=" border-2 rounded-xl pl-2  flex justify-center items-center gap-2">
-                  <FormControlLabel
-                    className=" mr-0 "
-                    value="tasviri"
-                    control={<Radio />}
-                  />
-                  <Image src={tasviriminimal} alt="icon" width={16} />
-                  تصویری
-                </div>
-                <div className=" border-2 rounded-xl pl-2  flex justify-center items-center gap-2">
-                  <FormControlLabel
-                    className=" mr-0 "
-                    value="sotti"
-                    control={<Radio />}
-                  />
-                  <Image src={sotiminimal} alt="icon" width={16} />
-                  صوتی
+                <div className=" w-full flex justify-center items-center gap-2">
+                  <div className=" border-2 rounded-xl pl-2   flex justify-center items-center gap-2">
+                    <FormControlLabel
+                      className=" mr-0 "
+                      value="online"
+                      control={<Radio className=" text-3xl" />}
+                    />
+                    <Image width={16} alt="icon" src={matniminimal} />
+                    متنی
+                  </div>
+                  <div className=" border-2 rounded-xl pl-2  flex justify-center items-center gap-2">
+                    <FormControlLabel
+                      className=" mr-0 "
+                      value="tasviri"
+                      control={<Radio />}
+                    />
+                    <Image src={tasviriminimal} alt="icon" width={16} />
+                    تصویری
+                  </div>
+                  <div className=" border-2 rounded-xl pl-2  flex justify-center items-center gap-2">
+                    <FormControlLabel
+                      className=" mr-0 "
+                      value="sotti"
+                      control={<Radio />}
+                    />
+                    <Image src={sotiminimal} alt="icon" width={16} />
+                    صوتی
+                  </div>
                 </div>
               </RadioGroup>
             ) : (
@@ -87,23 +89,25 @@ function VisitTypeSelectionModal({
                 aria-labelledby="demo-controlled-radio-buttons-group"
                 name="controlled-radio-buttons-group"
               >
-                <div className=" border-2 rounded-xl pl-2   flex justify-center items-center gap-2">
-                  <FormControlLabel
-                    className=" mr-0 "
-                    value="online"
-                    control={<Radio className=" text-3xl" />}
-                  />
-                  <Image width={16} alt="icon" src={matabMinimal} />
-                  مطب
-                </div>
-                <div className=" border-2 rounded-xl pl-2  flex justify-center items-center gap-2">
-                  <FormControlLabel
-                    className=" mr-0 "
-                    value="tasviri"
-                    control={<Radio />}
-                  />
-                  <Image src={hospitalMinimal} alt="icon" width={16} />
-                  بیمارستان
+                <div className=" w-full flex justify-center items-center gap-2">
+                  <div className=" border-2 rounded-xl pl-2   flex justify-center items-center gap-2">
+                    <FormControlLabel
+                      className=" mr-0 "
+                      value="online"
+                      control={<Radio className=" text-3xl" />}
+                    />
+                    <Image width={16} alt="icon" src={matabMinimal} />
+                    مطب
+                  </div>
+                  <div className=" border-2 rounded-xl pl-2  flex justify-center items-center gap-2">
+                    <FormControlLabel
+                      className=" mr-0 "
+                      value="tasviri"
+                      control={<Radio />}
+                    />
+                    <Image src={hospitalMinimal} alt="icon" width={16} />
+                    بیمارستان
+                  </div>
                 </div>
               </RadioGroup>
             )}
