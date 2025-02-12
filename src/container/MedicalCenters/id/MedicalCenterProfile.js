@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 import React from "react";
 import karenLogo from "../../../../public/Pics/karenLogo.png";
@@ -9,8 +9,18 @@ import taminejtemaei from "../../../../public/Pics/taminejtemaei.png";
 import gooshiPezeshki from "../../../../public/Pics/gooshiPezeshki.png";
 import { IoLocationOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
-import AllDoctorsCard from "../../../components/AllDoctorsCard";
+
 import MapComponent from "@/components/MapComponent";
+import LoadingComponent from "@/components/LoadingComponent";
+import { AiFillLike } from "react-icons/ai";
+import {
+  EmtyReservButt,
+  MatabShowButt,
+  SeeDoctorNazaratButt,
+} from "@/components/Buttons/Button";
+import Link from "next/link";
+import { IoIosArrowRoundBack } from "react-icons/io";
+import { Pagination } from "@mui/material";
 
 function MedicalCenterProfile() {
   return (
@@ -135,7 +145,112 @@ function MedicalCenterProfile() {
                 placeholder="جستجو پزشک،تخصص..."
               />
             </div>
-            <AllDoctorsCard loc={false} />
+            <div className=" w-full justify-center items-center flex flex-col gap-10">
+              <div className=" w-full">
+                {filtredBoxes.map((item) => {
+                  return (
+                    <button
+                      onClick={() => handleRemoveItem(item.id)}
+                      key={item.id}
+                      className="whitespace-nowrap overflow-hidden text-ellipsis min-w-[100px] h-[40px] m-[5px] px-[10px]"
+                    >
+                      {item.specialties}
+                    </button>
+                  );
+                })}
+              </div>
+              {isSerchDoctorLoading && <LoadingComponent />}
+              {doctors.map((item) => {
+                return (
+                  <div
+                    key={item.id}
+                    className=" rounded-2xl px-10 gap-6 flex flex-col w-full bg-white pb-2 min-h-[400px]"
+                  >
+                    <div className="flex justify-between  border-[#CBCBCB] border-b py-7">
+                      <div className=" w-1/2  flex items-center justify-start gap-5">
+                        <Image
+                          width={90}
+                          height={90}
+                          className=" w-[90px] h-[90px] border-2  border-[#005DAD] rounded-full"
+                          src={doctorprof}
+                          alt="doctor-prof"
+                        />
+                        <div className=" flex flex-col gap-5">
+                          <h2 className=" text-[22px]">
+                            {item.doctorName} {item.doctorFamily}
+                          </h2>
+                          <h2 className=" text-[#757575]">{item.specialist}</h2>
+                        </div>
+                      </div>
+                      <div className=" flex flex-col items-start justify-center gap-2 ">
+                        <div className=" flex gap-1">
+                          {Array.from({ length: 5 }).map((_, index) => {
+                            return (
+                              <div key={index}>
+                                <Image width={22} alt="" src={star} />
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <h2 className="  rounded flex items-center justify-center gap-1 text-[#1F7168]">
+                          <AiFillLike className=" text-lg" />
+                          {item.recomend}
+                        </h2>
+                        <SeeDoctorNazaratButt />
+                      </div>
+                    </div>
+                    <h2 className=" text-lg">
+                      خدمات :
+                      <span className=" text-[#7E7E7E]">{item.skills}</span>
+                    </h2>
+                    <div className=" flex gap-5 text-lg">
+                      <h2>روش نوبت دهی : </h2>
+                      <h2 className=" flex gap-2">
+                        <Image width={24} src={monitor} alt="monitor-icon" />
+                        ویزیت آنلاین
+                      </h2>
+
+                      <h2 className=" flex gap-2">
+                        <Image width={24} src={hospital} alt="monitor-icon" />
+                        ویزیت حضوری
+                      </h2>
+                    </div>
+
+                    <div className=" w-full flex gap-4">
+                      <MatabShowButt items={item.doctorTreatmentCenterList} />
+                    </div>
+
+                    {/* <div className=" flex gap-3 text-lg pb-5 border-b">
+              <Image src={barezvijegi} alt="icon" width={24} />
+              <h2> ویژگی های بارز پزشک :</h2>
+              {item.charecter.map((item2) => {
+                return (
+                  <h2 className="text-[#1F7168]" key={item2.id}>
+                    {item2.caption}
+                  </h2>
+                );
+              })}
+            </div> */}
+                    <div className=" -mt-3 flex justify-between">
+                      <EmtyReservButt docDetail={item} />
+                      <Link
+                        href={`/doctors/${item.id}`}
+                        className=" flex justify-center p-2 px-4 rounded-md text-white items-center bg-[#005DAD] "
+                      >
+                        نوبت بگیرید
+                        <IoIosArrowRoundBack className=" text-2xl" />
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
+              <Pagination
+                onChange={handleChange}
+                page={currentPageDoctorSearch}
+                count={totalPages}
+                color="primary"
+              />
+            </div>
           </div>
         </div>
       </div>
