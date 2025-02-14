@@ -5,9 +5,10 @@ import { CiSearch } from "react-icons/ci";
 import { myStore } from "@/store/Store";
 import { get_province, get_specialties, read_city } from "@/api/ApiCalling";
 
-export const SerchDropDowns = (props) => {
-  const { currentPageDoctorSearch, setCurrentPageDoctorSearch } = myStore();
-
+export const SerchDropDowns = () => {
+  const { setCurrentPageDoctorSearch } = myStore();
+  const { setSpecialistSearch, specialistSearch } = myStore();
+  console.log(specialistSearch);
   const [specialties, setSpecialties] = useState([]);
   const [filtredArr, setFiltredArr] = useState([]);
   const [inputVal, setInputVal] = useState("");
@@ -37,18 +38,15 @@ export const SerchDropDowns = (props) => {
   }, []);
 
   const [isSearching, setIsSearching] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
-  const { setSpecialistIdSearch } = myStore();
-  const handleSelectOption = (option, id) => {
+  // const [selectedOption, setSelectedOption] = useState("");
+  const handleSelectOption = (name, id) => {
     setIsSearching(false);
-    setSelectedOption(option);
     setInputVal("");
-    setSpecialistIdSearch(id);
-    setCurrentPageDoctorSearch(1)
+    setSpecialistSearch(name, id);
+    setCurrentPageDoctorSearch(1);
   };
   return (
     <div className=" flex flex-col gap-3">
-      <h2 className=" text-xl">{props.title}</h2>
       <div
         onClick={() => setIsSearching(!isSearching)}
         className=" px-2 border shadow-[0_1px_15px_-5px_rgba(0,0,0,0.3)] flex justify-center items-center  rounded-xl w-full"
@@ -57,7 +55,11 @@ export const SerchDropDowns = (props) => {
         <input
           value={inputVal}
           onChange={handleInputChange}
-          placeholder={selectedOption ? selectedOption : props.title}
+          placeholder={
+            specialistSearch.name
+              ? specialistSearch.name
+              : "نام بیماری را جستجو کنید"
+          }
           className=" outline-none h-[54px] w-full rounded-xl"
         />
         <IoIosArrowDown
@@ -94,7 +96,10 @@ export const SerchDropDowns = (props) => {
           <div className=" transition-all mr-2 duration-300  w-[95%] h-0 overflow-auto customScroll flex flex-col">
             {filtredArr.map((item) => {
               return (
-                <div className=" border-b mx-2 p-1 flex items-center" key={item.id}>
+                <div
+                  className=" border-b mx-2 p-1 flex items-center"
+                  key={item.id}
+                >
                   <h5> {item.name}</h5>
                 </div>
               );

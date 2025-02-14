@@ -722,3 +722,15 @@ export const delete_doctor_treatment = async (
     console.log(error);
   }
 };
+
+export const read_office_type = async () => {
+  try {
+    const response = await axiosConfig.get("OfficeType/read-OfficeTypes");
+    const data = response.data.result.list;
+    console.log("OfficeType", data);
+    return data;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};

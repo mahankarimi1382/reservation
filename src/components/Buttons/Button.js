@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CiEdit, CiLogin } from "react-icons/ci";
 import Image from "next/image";
 import screenIcon from "../../../public/Pics/mirroring-screen.png";
@@ -41,6 +41,7 @@ import MedicalFormModal from "../modals/MedicalFormModal";
 import dynamic from "next/dynamic";
 import TreatmentCenterModal from "../modals/TreatmentCenterModal";
 import AddTreatmentModal from "../modals/AddTreatmentModal";
+import { read_office_type } from "@/api/ApiCalling";
 
 export const LoginButton = () => {
   const { fullName, setFullName } = fullNameStorage();
@@ -296,7 +297,7 @@ export const MatabShowButt = ({ items }) => {
     <div className=" flex w-full flex-col">
       <div className="flex items-center gap-4 w-full whitespace-nowrap no-scrollbar overflow-auto flex-nowrap">
         <h2 className=" text-[18px] flex whitespace-nowrap items-center">
-          نشانی :
+          نشانی:
         </h2>
 
         {items &&

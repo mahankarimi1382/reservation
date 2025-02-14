@@ -20,9 +20,10 @@ import Link from "next/link";
 import { Pagination } from "@mui/material";
 import { get_specialties_by_id, search_doctors } from "@/api/ApiCalling";
 import { myStore } from "@/store/Store";
+import { RxCross2 } from "react-icons/rx";
 function DoctorsPaginate() {
   const { isSerchDoctorLoading, setIsSerchDoctorLoading } = myStore();
-  const { specialistIdSearch, setSpecialistIdSearch } = myStore();
+  const { specialistSearch, setSpecialistSearch } = myStore();
   const { currentPageDoctorSearch, setCurrentPageDoctorSearch } = myStore();
   const [name, setName] = useState("");
   const [provinceId, setProvinceId] = useState("");
@@ -30,6 +31,13 @@ function DoctorsPaginate() {
   const [totalPages, setTotalPages] = useState("");
   const [doctors, setDoctors] = useState([]);
   const [filtredBoxes, setFiltredBoxes] = useState([]);
+  let boxItems = [
+    {
+      id: 1,
+      caption: specialistSearch.name,
+    },
+  ];
+  console.log(filtredBoxes);
   const handleSearchDoctors = (name) => {
     if (name.length >= 2) {
       setIsSerchDoctorLoading(true);
@@ -44,11 +52,8 @@ function DoctorsPaginate() {
       setCurrentPageDoctorSearch(1);
     }
   };
-  const handleFiltredBoxes = async (item) => {
-    console.log(item);
-    let specialties = (await get_specialties_by_id(item.specialistId)) || "";
-    let data = [{ id: item.id, specialties: specialties }];
-    setFiltredBoxes(data);
+  const handleFiltredBoxes = () => {
+    setFiltredBoxes(boxItems);
   };
 
   const getDoctors = async (name) => {
@@ -56,7 +61,7 @@ function DoctorsPaginate() {
       name: name || "",
       pagesize: 3,
       currentPage: currentPageDoctorSearch || "",
-      specialistId: specialistIdSearch || "",
+      specialistId: specialistSearch.id || "",
       provinceId: provinceId || "",
       cityId: cityId || "",
     };
@@ -65,7 +70,7 @@ function DoctorsPaginate() {
       console.log(result);
       setDoctors(result.list);
       setIsSerchDoctorLoading(false);
-      handleFiltredBoxes(data);
+      handleFiltredBoxes();
       let number = result.totalRecords / 3;
       let totalpages = Math.ceil(number);
       setTotalPages(totalpages);
@@ -75,13 +80,13 @@ function DoctorsPaginate() {
   useEffect(() => {
     getDoctors(name);
     setIsSerchDoctorLoading(true);
-  }, [currentPageDoctorSearch, specialistIdSearch]);
+  }, [currentPageDoctorSearch, specialistSearch]);
   const handleChange = (event, value) => {
     setCurrentPageDoctorSearch(value);
   };
-  const handleRemoveItem = (id) => {
-    setFiltredBoxes(filtredBoxes.filter((item) => item.id !== id));
-    setSpecialistIdSearch("");
+  const handleRemoveItem = (name) => {
+    setFiltredBoxes(filtredBoxes.filter((item) => item !== name));
+    setSpecialistSearch("");
   };
   return (
     <div className=" w-[900px] flex flex-col items-center justify-center gap-10">
@@ -114,18 +119,23 @@ function DoctorsPaginate() {
       </div>
       <div className=" w-full justify-center items-center flex flex-col gap-10">
         <div className=" w-full">
-          {filtredBoxes.map((item) => {
+          {filtredBoxes.map((item, index) => {
+            console.log(item.caption)
             return (
-              <button
-                onClick={() => handleRemoveItem(item.id)}
-                key={item.id}
-                className="whitespace-nowrap overflow-hidden text-ellipsis min-w-[100px] h-[40px] m-[5px] px-[10px]"
-              >
-                {item.specialties}
-              </button>
+              item.caption && (
+                <button
+                  onClick={() => handleRemoveItem(item)}
+                  key={index}
+                  className="whitespace-nowrap flex items-center gap-1 bg-[rgba(31,113,104,0.08)] border border-[#399086C9] text-[#399086C9] rounded-full text-xs overflow-hidden text-ellipsis p-2"
+                >
+                  <RxCross2 className="text-[#399086C9]" />
+                  {item.caption}
+                </button>
+              )
             );
           })}
         </div>
+
         {isSerchDoctorLoading && <LoadingComponent />}
         {doctors.map((item) => {
           return (

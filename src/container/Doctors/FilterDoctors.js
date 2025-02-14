@@ -15,21 +15,6 @@ import SearchBimehSection from "./SearchBimehSection";
 import DatePickerComponent from "@/components/DatePickerComponent";
 import { get_specialties } from "@/api/ApiCalling";
 
-const Specialties = [
-  { id: 1, caption: "جراحی مغز و اعصاب" },
-  { id: 2, caption: "خون، سرطان و آنکولوژی" },
-  { id: 3, caption: "اطفال، کودکان و نوزادان" },
-  { id: 4, caption: "کلیه و مجاری ادراری" },
-  { id: 5, caption: "آزمایشگاه و تصویر برداری" },
-  { id: 6, caption: "ریه و دستگاه تنفسی" },
-  { id: 7, caption: "جراحی مغز و اعصاب" },
-  { id: 8, caption: "جراحی مغز و اعصاب" },
-  { id: 9, caption: "جراحی مغز و اعصاب" },
-  { id: 10, caption: "جراحی مغز و اعصاب" },
-  { id: 11, caption: "جراحی مغز و اعصاب" },
-  { id: 12, caption: "جراحی مغز و اعصاب" },
-  { id: 13, caption: "جراحی مغز و اعصاب" },
-];
 function FilterDoctors() {
 
   return (
@@ -38,7 +23,7 @@ function FilterDoctors() {
         <Image width={28} src={filterIcon} alt="icon" />
         فیلتر پیشرفته
       </h2>
-      <SerchDropDowns details={Specialties} title="نام بیماری را جستجو کنید" />
+      <SerchDropDowns />
       <h2 className=" text-[16px]">روش ویزیت رو انتخاب کنید</h2>
       <div className=" flex justify-between">
         <NobatButton type="آنلاین" />

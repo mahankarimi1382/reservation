@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../../public/Pics/logo-doctor.png";
 import { RxCross2 } from "react-icons/rx";
 import Radio from "@mui/material/Radio";
@@ -11,13 +11,38 @@ import sotiminimal from "../../../public/Pics/sotiMinimal.png";
 import tasviriminimal from "../../../public/Pics/tasviriMinimal.png";
 import hospitalMinimal from "../../../public/Pics/hospitalMinimal.png";
 import matabMinimal from "../../../public/Pics/matabMinimal.png";
+import { read_office_type } from "@/api/ApiCalling";
 
 function VisitTypeSelectionModal({
   isVisitSelectModal,
   setIsVisitSelectModal,
 }) {
+  const [officeType, setOfficeType] = useState([]);
+  console.log(officeType);
+  const getOfficeType = async () => {
+    const result = await read_office_type();
+    console.log(result);
+    if (result) {
+      console.log(result);
+      let filtred = result.filter((item) => item.type != "حضوری");
+
+      setOfficeType(filtred);
+    }
+  };
+  useEffect(() => {
+    getOfficeType();
+  }, []);
   const handleCloseModal = () => {
     setIsVisitSelectModal(false);
+  };
+  const typeImageHandler = (type) => {
+    if (type == "پیامرسان") {
+      return <Image width={16} alt="icon" src={matniminimal} />;
+    } else if (type == "تلفنی") {
+      return <Image width={16} alt="icon" src={sotiminimal} />;
+    } else if (type == "تصویری") {
+      return <Image width={16} alt="icon" src={tasviriminimal} />;
+    }
   };
   return (
     <div className=" w-screen h-screen top-0 z-50 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]">
@@ -54,33 +79,26 @@ function VisitTypeSelectionModal({
                 name="controlled-radio-buttons-group"
               >
                 <div className=" w-full flex justify-center items-center gap-2">
-                  <div className=" border-2 rounded-xl pl-2   flex justify-center items-center gap-2">
-                    <FormControlLabel
-                      className=" mr-0 "
-                      value="online"
-                      control={<Radio className=" text-3xl" />}
-                    />
-                    <Image width={16} alt="icon" src={matniminimal} />
-                    متنی
-                  </div>
-                  <div className=" border-2 rounded-xl pl-2  flex justify-center items-center gap-2">
-                    <FormControlLabel
-                      className=" mr-0 "
-                      value="tasviri"
-                      control={<Radio />}
-                    />
-                    <Image src={tasviriminimal} alt="icon" width={16} />
-                    تصویری
-                  </div>
-                  <div className=" border-2 rounded-xl pl-2  flex justify-center items-center gap-2">
-                    <FormControlLabel
-                      className=" mr-0 "
-                      value="sotti"
-                      control={<Radio />}
-                    />
-                    <Image src={sotiminimal} alt="icon" width={16} />
-                    صوتی
-                  </div>
+                  {officeType.length != 0 ? (
+                    officeType.map((item) => {
+                      return (
+                        <div
+                          key={item.id}
+                          className=" border-2 rounded-xl pl-2   flex justify-center items-center gap-2"
+                        >
+                          <FormControlLabel
+                            className=" mr-0 "
+                            value={item.id}
+                            control={<Radio className=" text-3xl" />}
+                          />
+                          {typeImageHandler(item.type)}
+                          {item.type}
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
+                  )}
                 </div>
               </RadioGroup>
             ) : (
