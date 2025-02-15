@@ -555,7 +555,7 @@ export const search_doctors = async (data) => {
   console.log(data);
   try {
     const response = await axiosConfig.get(
-      `Doctor/search-doctors?DoctorName=${data.name}&pagesize=${data.pagesize}&pageNumber=${data.currentPage}&specialistIds=${data.specialistId}&ProvinceId=${data.provinceId}&CityId=${data.cityId}`
+      `Doctor/search-doctors?DoctorName=${data.name}&pagesize=${data.pagesize}&pageNumber=${data.currentPage}&specialistIds=${data.specialistId}&ProvinceId=${data.provinceId}&CityId=${data.cityId}&BimehTakmili=${data.BimehTakmili}&BimeAsli=${data.BimeAsli}&JustOnline=${data.JustOnline}&HasTurn=${data.HasTurn}&AcceptInsurance=${data.AcceptInsurance}&Gender=${data.Gender}&Sdate=${data.Sdate}&Edate=${data.Edate}&OnlineTypeId=${data.OnlineTypeId}&OfficeOrClinicHozoori=${data.OfficeOrClinicHozoori}`
     );
     const doctors = response.data.result;
     console.log(doctors);

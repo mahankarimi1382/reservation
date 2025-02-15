@@ -1,34 +1,30 @@
-import { SerchDropDowns } from "@/components/Inputs/Input";
+import { SerchDropDowns, SerchDropDownsbimeh } from "@/components/Inputs/Input";
+import { myStore } from "@/store/Store";
 import React from "react";
 
 function SearchBimehSection() {
-  const Specialties = [
-    { id: 1, caption: "جراحی مغز و اعصاب" },
-    { id: 2, caption: "خون، سرطان و آنکولوژی" },
-    { id: 3, caption: "اطفال، کودکان و نوزادان" },
-    { id: 4, caption: "کلیه و مجاری ادراری" },
-    { id: 5, caption: "آزمایشگاه و تصویر برداری" },
-    { id: 6, caption: "ریه و دستگاه تنفسی" },
-    { id: 7, caption: "جراحی مغز و اعصاب" },
-    { id: 7, caption: "جراحی مغز و اعصاب" },
-    { id: 7, caption: "جراحی مغز و اعصاب" },
-    { id: 7, caption: "جراحی مغز و اعصاب" },
-    { id: 7, caption: "جراحی مغز و اعصاب" },
-    { id: 7, caption: "جراحی مغز و اعصاب" },
-    { id: 7, caption: "جراحی مغز و اعصاب" },
+  const { setBimehTakmili, setBimeAsli, bimehTakmili } = myStore();
+  console.log(bimehTakmili);
+  const takmili = [
+    { id: 1, name: "بیمه دی" },
+    { id: 2, name: "بیمه البرز" },
+  ];
+  const paye = [
+    { id: 1, name: "بیمه تامین اجتماعی" },
+    { id: 2, name: "بیمه نیروهای مسلح" },
   ];
   return (
     <div className=" min-h-[261px] p-2 py-5 rounded-xl bg-white border shadow-md">
       <h2 className=" text-xl">بیمه :</h2>
-      <SerchDropDowns
-        details={Specialties}
+      <SerchDropDownsbimeh
+        fn={setBimehTakmili}
+        details={takmili}
         title="بیمه تکمیلی :"
-        placeholder="جستجو بیمه تکمیلی"
       />
-      <SerchDropDowns
-        details={Specialties}
+      <SerchDropDownsbimeh
+        fn={setBimeAsli}
+        details={paye}
         title="بیمه پایه :"
-        placeholder="جستجو بیمه پایه"
       />
     </div>
   );

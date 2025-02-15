@@ -11,6 +11,37 @@ export const myStore = create((set) => ({
   setIsSpecialtiesClick: () =>
     set((state) => ({ isSpecialtiesClick: !state.isSpecialtiesClick })),
 
+  bimehTakmili: "",
+  setBimehTakmili: (value) => set(() => ({ bimehTakmili: value })),
+
+  bimeAsli: "",
+  setBimeAsli: (value) => set(() => ({ bimeAsli: value })),
+
+  justOnline: "",
+  setJustOnline: (value) => set(() => ({ justOnline: value })),
+
+  hasTurn: "",
+  setHasTurn: (value) => set(() => ({ hasTurn: value })),
+
+  acceptInsurance: "",
+  setAcceptInsurance: (value) => set(() => ({ acceptInsurance: value })),
+
+  gender: "",
+  setGender: (value) => set(() => ({ gender: value })),
+
+  sDate: "",
+  setSDate: (value) => set(() => ({ sDate: value })),
+
+  eDate: "",
+  setEDate: (value) => set(() => ({ eDate: value })),
+
+  onlineTypeId: "",
+  setOnlineTypeId: (value) => set(() => ({ onlineTypeId: value })),
+
+  officeOrClinicHozoori: "",
+  setOfficeOrClinicHozoori: (value) =>
+    set(() => ({ officeOrClinicHozoori: value })),
+
   token: Cookies.get("token"),
   setToken: (token) => {
     Cookies.set("token", token);

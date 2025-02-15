@@ -314,3 +314,88 @@ export const ClinicSelectInput = ({ setType }) => {
     </div>
   );
 };
+export const SerchDropDownsbimeh = ({ details, title, fn }) => {
+  const { setCurrentPageDoctorSearch } = myStore();
+  const [filtredArr, setFiltredArr] = useState(details);
+  const [inputVal, setInputVal] = useState("");
+  console.log(filtredArr);
+  const handleInputChange = (event) => {
+    filterArray(event.target.value);
+    setInputVal(event.target.value);
+  };
+  const filterArray = (value) => {
+    const filtered = details.filter((item) =>
+      item.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setFiltredArr(filtered);
+  };
+
+  const [isSearching, setIsSearching] = useState(false);
+  const handleSelectOption = (name, id) => {
+    setIsSearching(false);
+    setInputVal("");
+    setCurrentPageDoctorSearch(1);
+    fn(name);
+  };
+  return (
+    <div className=" flex flex-col gap-3">
+      <h5>{title}</h5>
+      <div
+        onClick={() => setIsSearching(!isSearching)}
+        className=" px-2 border shadow-[0_1px_15px_-5px_rgba(0,0,0,0.3)] flex justify-center items-center  rounded-xl w-full"
+      >
+        <CiSearch className=" text-4xl text-[#005DAD]" />
+        <input
+          value={inputVal}
+          onChange={handleInputChange}
+          placeholder={"نام بیمه را جستجو کنید"}
+          className=" outline-none h-[54px] w-full rounded-xl"
+        />
+        <IoIosArrowDown
+          className={` ${
+            isSearching && "rotate-180"
+          } transition-all   duration-300 text-xl text-[#858585]`}
+        />
+      </div>
+      <div className="bg-white shadow-lg rounded-xl">
+        {isSearching ? (
+          <div className="  mt-6 mr-2  p-2 transition-all duration-500 w-[95%] h-52 overflow-auto customScroll flex flex-col">
+            {filtredArr.length != 0 ? (
+              filtredArr.map((item) => {
+                return (
+                  <div
+                    className=" hover:text-[#005dad]  p-1 border-b mx-2 flex items-center"
+                    key={item.id}
+                  >
+                    <button
+                      onClick={() => handleSelectOption(item.name, item.id)}
+                    >
+                      {item.name}
+                    </button>
+                  </div>
+                );
+              })
+            ) : (
+              <div className=" w-full flex justify-center items-center">
+                نتیجه ای یافت نشد
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className=" transition-all mr-2 duration-300  w-[95%] h-0 overflow-auto customScroll flex flex-col">
+            {filtredArr.map((item) => {
+              return (
+                <div
+                  className=" border-b mx-2 p-1 flex items-center"
+                  key={item.id}
+                >
+                  <h5> {item.name}</h5>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};

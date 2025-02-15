@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoLocationOutline } from "react-icons/io5";
 import { CgSortAz } from "react-icons/cg";
@@ -18,12 +18,38 @@ import {
 } from "@/components/Buttons/Button";
 import Link from "next/link";
 import { Pagination } from "@mui/material";
-import { get_specialties_by_id, search_doctors } from "@/api/ApiCalling";
+import { search_doctors } from "@/api/ApiCalling";
 import { myStore } from "@/store/Store";
 import { RxCross2 } from "react-icons/rx";
 function DoctorsPaginate() {
   const { isSerchDoctorLoading, setIsSerchDoctorLoading } = myStore();
-  const { specialistSearch, setSpecialistSearch } = myStore();
+  const {
+    bimehTakmili,
+    bimeAsli,
+    justOnline,
+    hasTurn,
+    acceptInsurance,
+    gender,
+    sDate,
+    eDate,
+    onlineTypeId,
+    officeOrClinicHozoori,
+  } = myStore();
+
+  const {
+    setBimehTakmili,
+    specialistSearch,
+    setSpecialistSearch,
+    setBimeAsli,
+    setJustOnline,
+    setHasTurn,
+    setAcceptInsurance,
+    setGender,
+    setSDate,
+    setEDate,
+    setOnlineTypeId,
+    setOfficeOrClinicHozoori,
+  } = myStore();
   const { currentPageDoctorSearch, setCurrentPageDoctorSearch } = myStore();
   const [name, setName] = useState("");
   const [provinceId, setProvinceId] = useState("");
@@ -35,8 +61,20 @@ function DoctorsPaginate() {
     {
       id: 1,
       caption: specialistSearch.name,
+      type: "specialties",
+    },
+    {
+      id: 2,
+      caption: bimeAsli,
+      type: "bimeAsli",
+    },
+    {
+      id: 3,
+      caption: bimehTakmili,
+      type: "bimeTakmili",
     },
   ];
+  console.log("box items ", boxItems);
   console.log(filtredBoxes);
   const handleSearchDoctors = (name) => {
     if (name.length >= 2) {
@@ -64,6 +102,16 @@ function DoctorsPaginate() {
       specialistId: specialistSearch.id || "",
       provinceId: provinceId || "",
       cityId: cityId || "",
+      BimehTakmili: bimehTakmili || "",
+      BimeAsli: bimeAsli || "",
+      JustOnline: justOnline || "",
+      HasTurn: hasTurn || "",
+      AcceptInsurance: acceptInsurance || "",
+      Gender: gender || "",
+      Sdate: sDate || "",
+      Edate: eDate || "",
+      OnlineTypeId: onlineTypeId || "",
+      OfficeOrClinicHozoori: officeOrClinicHozoori || "",
     };
     const result = await search_doctors(data);
     if (result) {
@@ -76,17 +124,36 @@ function DoctorsPaginate() {
       setTotalPages(totalpages);
     }
   };
-
   useEffect(() => {
     getDoctors(name);
     setIsSerchDoctorLoading(true);
-  }, [currentPageDoctorSearch, specialistSearch]);
+  }, [
+    currentPageDoctorSearch,
+    specialistSearch,
+    bimehTakmili,
+    bimeAsli,
+    justOnline,
+    hasTurn,
+    acceptInsurance,
+    gender,
+    sDate,
+    eDate,
+    onlineTypeId,
+    officeOrClinicHozoori,
+  ]);
   const handleChange = (event, value) => {
     setCurrentPageDoctorSearch(value);
   };
-  const handleRemoveItem = (name) => {
-    setFiltredBoxes(filtredBoxes.filter((item) => item !== name));
-    setSpecialistSearch("");
+  const handleRemoveItem = (type) => {
+    if (type == "specialties") {
+      setSpecialistSearch("");
+    } else if (type == "bimeAsli") {
+      setBimeAsli("");
+    } else if (type == "bimeTakmili") {
+      setBimehTakmili("");
+    } else {
+      console.log(type);
+    }
   };
   return (
     <div className=" w-[900px] flex flex-col items-center justify-center gap-10">
@@ -118,13 +185,13 @@ function DoctorsPaginate() {
         <button className=" text-[#858585]">کم ترین معطلی در مطب</button>
       </div>
       <div className=" w-full justify-center items-center flex flex-col gap-10">
-        <div className=" w-full">
+        <div className=" w-full flex justify-start items-center gap-2">
           {filtredBoxes.map((item, index) => {
-            console.log(item.caption)
+            console.log(item.caption);
             return (
               item.caption && (
                 <button
-                  onClick={() => handleRemoveItem(item)}
+                  onClick={() => handleRemoveItem(item.type)}
                   key={index}
                   className="whitespace-nowrap flex items-center gap-1 bg-[rgba(31,113,104,0.08)] border border-[#399086C9] text-[#399086C9] rounded-full text-xs overflow-hidden text-ellipsis p-2"
                 >

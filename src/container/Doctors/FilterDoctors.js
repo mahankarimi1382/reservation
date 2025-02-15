@@ -14,9 +14,41 @@ import { SerchDropDowns } from "@/components/Inputs/Input";
 import SearchBimehSection from "./SearchBimehSection";
 import DatePickerComponent from "@/components/DatePickerComponent";
 import { get_specialties } from "@/api/ApiCalling";
+import { myStore } from "@/store/Store";
+
+// bimehTakmili: "",
+// setBimehTakmili: (value) => set(() => ({ bimehTakmili: value })),
+
+// bimeAsli: "",
+// setBimeAsli: (value) => set(() => ({ bimeAsli: value })),
+
+// justOnline: "",
+// setJustOnline: (value) => set(() => ({ justOnline: value })),
+
+// hasTurn: "",
+// setHasTurn: (value) => set(() => ({ hasTurn: value })),
+
+// acceptInsurance: "",
+// setAcceptInsurance: (value) => set(() => ({ acceptInsurance: value })),
+
+// gender: "",
+// setGender: (value) => set(() => ({ gender: value })),
+
+// sDate: "",
+// setSDate: (value) => set(() => ({ sDate: value })),
+
+// eDate: "",
+// setEDate: (value) => set(() => ({ eDate: value })),
+
+// onlineTypeId: "",
+// setOnlineTypeId: (value) => set(() => ({ onlineTypeId: value })),
+
+// officeOrClinicHozoori: "",
+// setOfficeOrClinicHozoori: (value) =>
+//   set(() => ({ officeOrClinicHozoori: value })),
 
 function FilterDoctors() {
-
+  const { setBimehTakmili } = myStore();
   return (
     <div className=" flex flex-col gap-[30px] p-5 w-[411px] rounded-xl transition-all min-h-[1164px] bg-white">
       <h2 className=" flex items-center gap-2 text-[20px]">
