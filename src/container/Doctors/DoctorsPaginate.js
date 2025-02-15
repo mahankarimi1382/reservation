@@ -113,6 +113,16 @@ function DoctorsPaginate() {
       caption: cityId.label,
       type: "city",
     },
+    {
+      id: 8,
+      caption: justOnline && "فقط پزشکان آنلاین",
+      type: "justOnline",
+    },
+    {
+      id: 9,
+      caption: acceptInsurance && "فقط پزشکانی که بیمه قبول میکنند",
+      type: "acceptInsurance",
+    },
   ];
 
   const handleSearchDoctors = (name) => {
@@ -206,8 +216,12 @@ function DoctorsPaginate() {
       setProvinceId("");
     } else if (type == "city") {
       setCityId("");
+    } else if (type == "justOnline") {
+      setJustOnline("");
     } else if (type == "gender") {
       setGender("");
+    } else if (type == "acceptInsurance") {
+      setAcceptInsurance("");
     } else {
       console.log(type);
     }

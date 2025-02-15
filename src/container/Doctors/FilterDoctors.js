@@ -126,6 +126,12 @@ function FilterDoctors({ hidden, setIsFilterClickMobile }) {
           </FormGroup>
         </div>
       </div>
+      <button
+        onClick={() => setIsFilterClickMobile(false)}
+        className=" lg:hidden rounded-lg text-sm p-2 text-white bg-[#005DAD]"
+      >
+        اعمال فیلتر ها
+      </button>
     </div>
   );
 }

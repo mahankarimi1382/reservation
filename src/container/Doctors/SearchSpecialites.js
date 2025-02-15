@@ -105,10 +105,11 @@ function SearchSpecialites() {
           })}
         </div>
         <button
+          disabled={!specialistIDval}
           onClick={handleSubmit}
-          className=" bg-[#005DAD] text-white w-[80%] rounded-xl p-2 mt-2"
+          className=" disabled:bg-slate-300 lg: bg-[#005DAD] text-white w-[80%] rounded-xl p-2 mt-2"
         >
-          جستجو
+          تایید
         </button>
       </div>
     </div>
