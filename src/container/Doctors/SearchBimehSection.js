@@ -4,7 +4,6 @@ import React from "react";
 
 function SearchBimehSection() {
   const { setBimehTakmili, setBimeAsli, bimehTakmili } = myStore();
-  console.log(bimehTakmili);
   const takmili = [
     { id: 1, name: "بیمه دی" },
     { id: 2, name: "بیمه البرز" },

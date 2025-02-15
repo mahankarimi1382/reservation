@@ -15,6 +15,7 @@ import SearchBimehSection from "./SearchBimehSection";
 import DatePickerComponent from "@/components/DatePickerComponent";
 import { get_specialties } from "@/api/ApiCalling";
 import { myStore } from "@/store/Store";
+import { RxCross2 } from "react-icons/rx";
 
 // bimehTakmili: "",
 // setBimehTakmili: (value) => set(() => ({ bimehTakmili: value })),
@@ -47,17 +48,40 @@ import { myStore } from "@/store/Store";
 // setOfficeOrClinicHozoori: (value) =>
 //   set(() => ({ officeOrClinicHozoori: value })),
 
-function FilterDoctors() {
-  const { setBimehTakmili } = myStore();
+function FilterDoctors({ hidden, setIsFilterClickMobile }) {
+  const {
+    setJustOnline,
+    setAcceptInsurance,
+    setHasTurn,
+    hasTurn,
+    setCurrentPageDoctorSearch,
+    acceptInsurance,
+    justOnline,
+  } = myStore();
   return (
-    <div className=" flex flex-col gap-[30px] p-5 w-[411px] rounded-xl transition-all min-h-[1164px] bg-white">
-      <h2 className=" flex items-center gap-2 text-[20px]">
-        <Image width={28} src={filterIcon} alt="icon" />
-        فیلتر پیشرفته
-      </h2>
+    <div
+      className={` ${
+        hidden && "hidden"
+      }  lg:flex w-full flex  flex-col gap-5 lg:gap-[30px] p-2 lg:p-5 xl:w-[411px] lg:w-1/3 rounded-xl transition-all min-h-[1164px] bg-white`}
+    >
+      <div className=" flex justify-between items-center">
+        <h2 className=" flex items-center gap-2 text-sm lg:text-[20px]">
+          <Image
+            width={28}
+            className=" lg:w-[28px] w-[22px]"
+            src={filterIcon}
+            alt="icon"
+          />
+          فیلتر پیشرفته
+        </h2>
+        <RxCross2
+          onClick={() => setIsFilterClickMobile(false)}
+          className=" flex lg:hidden"
+        />
+      </div>
       <SerchDropDowns />
-      <h2 className=" text-[16px]">روش ویزیت رو انتخاب کنید</h2>
-      <div className=" flex justify-between">
+      <h2 className=" text-sm lg:text-[16px]">روش ویزیت رو انتخاب کنید</h2>
+      <div className="  w-full flex justify-center gap-5 lg:justify-between">
         <NobatButton type="آنلاین" />
         <NobatButton type="حضوری" />
       </div>
@@ -71,18 +95,33 @@ function FilterDoctors() {
       <DatePicker />
       <div className=" flex w-full justify-center items-center">
         <div className=" w-full h-[168px] flex flex-col justify-center px-5 border shadow-md rounded-2xl">
-          <FormGroup>
-            <div className=" flex items-center justify-between">
+          <FormGroup
+            onChange={(e) => {
+              if (e.target.value == "justOnline") {
+                setJustOnline(!justOnline);
+                setCurrentPageDoctorSearch(1);
+              } else if (e.target.value == "justHasTurn") {
+                // setHasTurn(!hasTurn);
+              } else if (e.target.value == "JustAcceptInsurance") {
+                setAcceptInsurance(!acceptInsurance);
+                setCurrentPageDoctorSearch(1);
+              }
+            }}
+          >
+            <div className=" xl:text-base text-sm flex items-center justify-between">
               <h2>فقط پزشکان آنلاین</h2>
-              <FormControlLabel control={<Switch />} />
+              <FormControlLabel value="justOnline" control={<Switch />} />
             </div>
-            <div className=" flex items-center justify-between">
+            <div className=" xl:text-base text-sm flex items-center justify-between">
               <h2>فقط پزشکان دارای نوبت باز</h2>
-              <FormControlLabel control={<Switch />} />
+              <FormControlLabel value="justHasTurn" control={<Switch />} />
             </div>
-            <div className=" flex items-center justify-between">
+            <div className=" xl:text-base text-sm flex items-center justify-between">
               <h2>فقط پزشکانی که بیمه قبول می کنند</h2>
-              <FormControlLabel control={<Switch />} />
+              <FormControlLabel
+                value="JustAcceptInsurance"
+                control={<Switch />}
+              />
             </div>
           </FormGroup>
         </div>

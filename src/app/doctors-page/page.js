@@ -9,9 +9,9 @@ function page() {
       <div className=" border border-b shadow">
         <Navbar />
       </div>
-      <div className=" w-full flex items-center justify-center  bg-[#f5f5f5]">
-        <div className=" my-10 justify-between items-start w-[90%] flex ">
-          <FilterDoctors />
+      <div className=" w-full  flex items-center  justify-center  bg-[#f5f5f5]">
+        <div className=" lg:my-10 justify-center xl:gap-20 gap-10  items-start w-full lg:w-[90%] flex ">
+          <FilterDoctors hidden={true} />
           <DoctorsPaginate />
         </div>
       </div>

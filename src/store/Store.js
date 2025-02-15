@@ -17,13 +17,13 @@ export const myStore = create((set) => ({
   bimeAsli: "",
   setBimeAsli: (value) => set(() => ({ bimeAsli: value })),
 
-  justOnline: "",
+  justOnline: false,
   setJustOnline: (value) => set(() => ({ justOnline: value })),
 
-  hasTurn: "",
+  hasTurn: false,
   setHasTurn: (value) => set(() => ({ hasTurn: value })),
 
-  acceptInsurance: "",
+  acceptInsurance: false,
   setAcceptInsurance: (value) => set(() => ({ acceptInsurance: value })),
 
   gender: "",
@@ -38,7 +38,21 @@ export const myStore = create((set) => ({
   onlineTypeId: "",
   setOnlineTypeId: (value) => set(() => ({ onlineTypeId: value })),
 
+  cityId: "",
+  setCityId: (value) => set(() => ({ cityId: value })),
+
+  provinceId: "",
+  setProvinceId: (value) => set(() => ({ provinceId: value })),
+
+  provinceNameSearchBox: "",
+  setProvinceNameSearchBox: (value) =>
+    set(() => ({ provinceNameSearchBox: value })),
+
+  cityNameSeacrhBox: "",
+  setCityNameSeacrhBox: (value) => set(() => ({ cityNameSeacrhBox: value })),
+
   officeOrClinicHozoori: "",
+
   setOfficeOrClinicHozoori: (value) =>
     set(() => ({ officeOrClinicHozoori: value })),
 

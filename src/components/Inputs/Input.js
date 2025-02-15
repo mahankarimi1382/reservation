@@ -8,11 +8,9 @@ import { get_province, get_specialties, read_city } from "@/api/ApiCalling";
 export const SerchDropDowns = () => {
   const { setCurrentPageDoctorSearch } = myStore();
   const { setSpecialistSearch, specialistSearch } = myStore();
-  console.log(specialistSearch);
   const [specialties, setSpecialties] = useState([]);
   const [filtredArr, setFiltredArr] = useState([]);
   const [inputVal, setInputVal] = useState("");
-  console.log(filtredArr);
   const [loading, setLoading] = useState(false);
   const handleInputChange = (event) => {
     filterArray(event.target.value);
@@ -186,13 +184,28 @@ export const SelectFilter = ({ title, options, setVal }) => {
     </select>
   );
 };
-export const CitySelectInput = ({ setCityId, cities, hiddentitle }) => {
-  console.log(cities);
+export const CitySelectInput = ({
+  setCityId,
+  cities,
+  hiddentitle,
+  fromFilter,
+}) => {
   return (
-    <div className="  flex gap-2 flex-col items-start">
+    <div className=" lg:text-base text-xs  flex gap-2 flex-col items-start">
       {!hiddentitle && <h5>شهر</h5>}
       <select
-        onChange={(e) => setCityId(e.target.value)}
+        onChange={(e) => {
+          console.log(e.target.value);
+          if (e.target.value) {
+            setCityId({
+              id: e.target.value,
+              label:
+                e.target.options[e.target.selectedIndex].getAttribute(
+                  "data-name"
+                ),
+            });
+          }
+        }}
         className=" border w-full border-[#636972] rounded-lg p-2"
       >
         <option value={0}>
@@ -200,9 +213,12 @@ export const CitySelectInput = ({ setCityId, cities, hiddentitle }) => {
             ? "شهر را انتخاب کنید"
             : "ابتدا استان را انتخاب کنید"}
         </option>
+        {fromFilter && (
+          <option value={null}>{cities.length !== 0 && "همه ی شهر ها"}</option>
+        )}
         {cities.map((item) => {
           return (
-            <option value={item.id} key={item.id}>
+            <option data-name={item.cityName} value={item.id} key={item.id}>
               {item.cityName}
             </option>
           );
@@ -211,7 +227,11 @@ export const CitySelectInput = ({ setCityId, cities, hiddentitle }) => {
     </div>
   );
 };
-export const ProvinceSelectInput = ({ setCities, hiddentitle }) => {
+export const ProvinceSelectInput = ({
+  setCities,
+  hiddentitle,
+  setProvince = () => console.log("first"),
+}) => {
   const [provinces, setProvinces] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -223,16 +243,22 @@ export const ProvinceSelectInput = ({ setCities, hiddentitle }) => {
     fetchData();
   }, []);
   return (
-    <div className=" flex gap-2 flex-col items-start">
+    <div className=" flex lg:text-base text-xs gap-2 flex-col items-start">
       {!hiddentitle && <h5>استان</h5>}
       <select
         onChange={(e) => {
           console.log(e.target.value);
           if (e.target.value) {
             read_city(e.target.value, setCities);
+            setProvince({
+              id: e.target.value,
+              label:
+                e.target.options[e.target.selectedIndex].getAttribute(
+                  "data-name"
+                ),
+            });
           } else {
             setCities([]);
-            console.log("annn");
           }
         }}
         className=" border w-full border-[#636972] rounded-lg p-2"
@@ -240,7 +266,7 @@ export const ProvinceSelectInput = ({ setCities, hiddentitle }) => {
         <option value={0}>استان را انتخاب کنید</option>
         {provinces.map((item) => {
           return (
-            <option key={item.id} value={item.value}>
+            <option data-name={item.label} key={item.id} value={item.value}>
               {item.label}
             </option>
           );
@@ -318,7 +344,6 @@ export const SerchDropDownsbimeh = ({ details, title, fn }) => {
   const { setCurrentPageDoctorSearch } = myStore();
   const [filtredArr, setFiltredArr] = useState(details);
   const [inputVal, setInputVal] = useState("");
-  console.log(filtredArr);
   const handleInputChange = (event) => {
     filterArray(event.target.value);
     setInputVal(event.target.value);

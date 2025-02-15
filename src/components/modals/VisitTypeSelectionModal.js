@@ -12,11 +12,15 @@ import tasviriminimal from "../../../public/Pics/tasviriMinimal.png";
 import hospitalMinimal from "../../../public/Pics/hospitalMinimal.png";
 import matabMinimal from "../../../public/Pics/matabMinimal.png";
 import { read_office_type } from "@/api/ApiCalling";
+import TailwindLoader from "@/utils/TailwindLoader";
+import { myStore } from "@/store/Store";
 
 function VisitTypeSelectionModal({
   isVisitSelectModal,
   setIsVisitSelectModal,
 }) {
+  const [id, setId] = useState("");
+  const { setOnlineTypeId, setCurrentPageDoctorSearch } = myStore();
   const [officeType, setOfficeType] = useState([]);
   console.log(officeType);
   const getOfficeType = async () => {
@@ -74,6 +78,9 @@ function VisitTypeSelectionModal({
           <FormControl className=" w-full flex ">
             {isVisitSelectModal === "آنلاین" ? (
               <RadioGroup
+                onChange={(e) => {
+                  setId(e.target.value);
+                }}
                 className=" flex justify-center gap-3 flex-row items-center"
                 aria-labelledby="demo-controlled-radio-buttons-group"
                 name="controlled-radio-buttons-group"
@@ -97,12 +104,13 @@ function VisitTypeSelectionModal({
                       );
                     })
                   ) : (
-                    <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
+                    <TailwindLoader />
                   )}
                 </div>
               </RadioGroup>
             ) : (
               <RadioGroup
+                onChange={(e) => setId(e.target.value)}
                 className=" flex justify-center gap-3 flex-row items-center"
                 aria-labelledby="demo-controlled-radio-buttons-group"
                 name="controlled-radio-buttons-group"
@@ -111,7 +119,7 @@ function VisitTypeSelectionModal({
                   <div className=" border-2 rounded-xl pl-2   flex justify-center items-center gap-2">
                     <FormControlLabel
                       className=" mr-0 "
-                      value="online"
+                      value="1"
                       control={<Radio className=" text-3xl" />}
                     />
                     <Image width={16} alt="icon" src={matabMinimal} />
@@ -120,7 +128,7 @@ function VisitTypeSelectionModal({
                   <div className=" border-2 rounded-xl pl-2  flex justify-center items-center gap-2">
                     <FormControlLabel
                       className=" mr-0 "
-                      value="tasviri"
+                      value=""
                       control={<Radio />}
                     />
                     <Image src={hospitalMinimal} alt="icon" width={16} />
@@ -131,7 +139,15 @@ function VisitTypeSelectionModal({
             )}
           </FormControl>
         </div>
-        <button className=" bg-[#005DAD] text-white text-xl px-16 p-2 rounded-xl">
+        <button
+          disabled={!id}
+          onClick={() => {
+            setOnlineTypeId(id);
+            handleCloseModal();
+            setCurrentPageDoctorSearch(1);
+          }}
+          className=" disabled:bg-slate-400 bg-[#005DAD] text-white text-xl px-16 p-2 rounded-xl"
+        >
           جستجو
         </button>
       </div>

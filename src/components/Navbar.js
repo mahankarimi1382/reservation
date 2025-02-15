@@ -5,7 +5,7 @@ import { NavLinks } from "./Links/Links";
 
 function Navbar() {
   return (
-    <div className="vazir  w-full  px-5  flex justify-between items-center">
+    <div className="vazir  w-full py-2  px-5  flex justify-between items-center">
       <div className=" hidden lg:flex items-center xl:text-[18px] lg:text-sm font-medium gap-5 justify-center xl:gap-10 ">
         <Image className=" xl:w-[150px] lg:w-[100px]" alt="logo" width={150} src={logo} />
         <NavLinks title="خانه" href="/" />

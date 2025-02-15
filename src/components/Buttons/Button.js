@@ -5,7 +5,7 @@ import Image from "next/image";
 import screenIcon from "../../../public/Pics/mirroring-screen.png";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { IoIosMore } from "react-icons/io";
-import { IoEyeOutline } from "react-icons/io5";
+import { IoEyeOutline, IoLocationOutline } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
 import { FiEdit3 } from "react-icons/fi";
 import { LuLayoutDashboard } from "react-icons/lu";
@@ -42,6 +42,7 @@ import dynamic from "next/dynamic";
 import TreatmentCenterModal from "../modals/TreatmentCenterModal";
 import AddTreatmentModal from "../modals/AddTreatmentModal";
 import { read_office_type } from "@/api/ApiCalling";
+import CitySelectModal from "../modals/CitySelectModal";
 
 export const LoginButton = () => {
   const { fullName, setFullName } = fullNameStorage();
@@ -139,7 +140,7 @@ export const NobatButton = (props) => {
     setIsVisitSelectModal(type);
   };
   return (
-    <div className=" flex justify-between px-2 w-[171px] h-[54px] border shadow-[0_1px_15px_-5px_rgba(0,0,0,0.3)] rounded-xl">
+    <div className=" flex justify-between px-2 xl:w-[171px] h-[54px] border shadow-[0_1px_15px_-5px_rgba(0,0,0,0.3)] rounded-xl">
       {isVisitSelectModal && (
         <VisitTypeSelectionModal
           isVisitSelectModal={isVisitSelectModal}
@@ -147,13 +148,13 @@ export const NobatButton = (props) => {
         />
       )}
 
-      <button className=" font-semibold gap-1 flex justify-center items-center">
+      <button className=" text-base xl:font-semibold gap-1 flex justify-center items-center">
         <Image src={screenIcon} width={24} alt="" />
         {props.type}
       </button>
       <button
         onClick={() => handleOpenModal(props.type)}
-        className=" text-sm text-[#005DAD]"
+        className=" text-xs xl:text-sm text-[#005DAD]"
       >
         بیشتر...
       </button>
@@ -237,7 +238,7 @@ export const SeeDoctorNazaratButt = () => {
       {isNazarModal && <SeeNazarModal setIsNazarModal={setIsNazarModal} />}
       <button
         onClick={handleOpenModal}
-        className=" text-[#005DAD] flex justify-center items-center gap-1 text-sm"
+        className=" text-[#005DAD] flex justify-center items-center lg:gap-1 whitespace-nowrap text-[8px] lg:text-sm"
       >
         <IoEyeOutline />
         مشاهده نظرات پزشک
@@ -283,7 +284,6 @@ export const MatabShowButt = ({ items }) => {
     }
   };
 
-  console.log(items);
   const [isMatadShow, setIsMatadShow] = useState(false);
   const [unicId, setUnicId] = useState();
   const handleSeeMatab = (item) => {
@@ -294,8 +294,8 @@ export const MatabShowButt = ({ items }) => {
     setAddress(address);
   };
   return (
-    <div className=" flex w-full flex-col">
-      <div className="flex items-center gap-4 w-full whitespace-nowrap no-scrollbar overflow-auto flex-nowrap">
+    <div className=" flex max-w-full flex-col">
+      <div className="flex items-center gap-2 lg:gap-4 max-w-full overflow-auto xl:flex-nowrap flex-wrap">
         <h2 className=" text-[18px] flex whitespace-nowrap items-center">
           نشانی:
         </h2>
@@ -308,8 +308,8 @@ export const MatabShowButt = ({ items }) => {
                 onClick={() => handleSeeMatab(item)}
                 className={
                   isMatadShow && item.id === unicId
-                    ? "gap-1 p-2 flex items-center border transition-colors text-[#005dad] bg-[rgba(176,218,255,0.2)] rounded-xl"
-                    : "gap-1 p-2 flex items-center border whitespace-nowrap transition-colors z-10 rounded-xl"
+                    ? "gap-1 lg:p-2 p-1 text-xs lg:text-base flex items-center border transition-colors text-[#005dad] bg-[rgba(176,218,255,0.2)] rounded-xl"
+                    : "gap-1 lg:p-2 p-1 text-xs lg:text-base flex items-center border whitespace-nowrap transition-colors z-10 rounded-xl"
                 }
               >
                 {item.office && item.office.name}
@@ -622,6 +622,25 @@ export const AddTreatmentButt = ({
       >
         افزودن بیشتر
         <GoPlus className=" text-2xl" />
+      </button>
+    </div>
+  );
+};
+export const CitySelectButtSearchingDoctors = () => {
+  const [isCitySelectModal, setIsCitySelectModal] = useState(false);
+  return (
+    <div className=" flex justify-center items-center gap-1">
+      {isCitySelectModal && (
+        <CitySelectModal closeModal={() => setIsCitySelectModal(false)} />
+      )}
+      <button
+        className=" flex justify-center items-center"
+        onClick={() => setIsCitySelectModal(true)}
+      >
+        <IoLocationOutline className="  text-lg text-[#005DAD]" />
+        <p className=" hidden lg:flex text-[12px] text-[#005DAD] font-medium">
+          انتخاب شهر
+        </p>
       </button>
     </div>
   );
