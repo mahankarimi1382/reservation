@@ -49,11 +49,11 @@ function SpecialtiesListModal({ setIsSpecialtiesModal }) {
           onClick={handleCloseModal}
         />
         <div className=" flex bg-white items-center border rounded-lg px-2 lg:px-10 border-[#005DAD]">
-          <CiSearch className=" text-[#C0C0C0] text-xs lg:text-3xl" />
+          <CiSearch className=" text-[#C0C0C0] text-xl lg:text-3xl" />
           <input
             onChange={handleInputChange}
             placeholder={`جستجو تخصص از بین ${categorys.length} تخصص`}
-            className=" w-full outline-none py-2 bg-white  text-xl  "
+            className=" w-full outline-none py-2 bg-white text-xs  lg:text-xl  "
           />
         </div>
         <div className=" pb-2 rounded-xl  flex flex-wrap gap-8 justify-center pt-3 items-center customScroll rounded-r-xl overflow-auto">
