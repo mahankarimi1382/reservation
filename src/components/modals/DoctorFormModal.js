@@ -2,15 +2,19 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import LoginFormImage from "../../../public/Pics/doctorLoginFormImg.png";
-import MedicalCenterFormImage from "../../../public/Pics/MedicalCenterFormImage.png";
 
-import { CitySelectInput, ProvinceSelectInput } from "../Inputs/Input";
+import {
+  CitySelectInput,
+  ProvinceSelectInput,
+  SpecialtiesSelectInput,
+} from "../Inputs/Input";
 import { RxCross2 } from "react-icons/rx";
-import { add_medical_center } from "@/api/ApiCalling";
 import { SyncLoader } from "react-spinners";
-const DoctorFormModal = ({ type, setIsMedicalCenterForm }) => {
+const DoctorFormModal = ({ closeModal, fromSignup }) => {
   const [loading, setLoading] = useState(false);
   const [cities, setCities] = useState([]);
+  const [cityId, setCityId] = useState("");
+  const [specialistId, setSpecialistId] = useState("");
   const [medicalformData, setMedicalFormData] = useState({
     name: "",
     address: "",
@@ -54,20 +58,21 @@ const DoctorFormModal = ({ type, setIsMedicalCenterForm }) => {
     >
       <div className=" relative overflow-hidden bg-white w-2/3 flex rounded-lg  items-center max-h-[90%]">
         <RxCross2
-          onClick={() => setIsMedicalCenterForm(false)}
+          onClick={closeModal}
           className=" absolute z-50 left-1 top-1 cursor-pointer"
         />
         <div className="  w-[80%] p-5 gap-4 flex flex-col">
           <h3 className=" flex text-2xl items-center gap-2">
-            {type === "doctor"
-              ? "درخواست عضویت پزشکان در "
-              : "درخواست عضویت مرکز درمانی در "}
+            درخواست عضویت پزشکان در
             <span className=" text-[#005DAD]">دکتر رزرو</span>
           </h3>
-          {/* <h4 className=" text-xl">
-            لطفا فرم زیر را پر کنید همکاران ما در اسرع وقت با شما تماس خواهند
-            گرفت.
-          </h4> */}
+          {fromSignup && (
+            <h4 className=" text-xl">
+              لطفا فرم زیر را پر کنید همکاران ما در اسرع وقت با شما تماس خواهند
+              گرفت.
+            </h4>
+          )}
+
           <form className=" flex flex-col gap-3" onSubmit={handleSubmit}>
             <div className=" flex gap-8 ">
               <div className=" w-1/2 flex flex-col ">
@@ -75,7 +80,7 @@ const DoctorFormModal = ({ type, setIsMedicalCenterForm }) => {
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="firstName"
                 >
-                  {type === "doctor" ? "نام" : "نام مرکز درمانی "}
+                  نام
                 </label>
                 <input
                   id="firstName"
@@ -92,7 +97,7 @@ const DoctorFormModal = ({ type, setIsMedicalCenterForm }) => {
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="lastName"
                 >
-                  {type === "doctor" ? "نام خانوادگی" : "نوع مرکز درمانی "}
+                  نام خانوادگی
                 </label>
                 <input
                   id="lastName"
@@ -111,183 +116,48 @@ const DoctorFormModal = ({ type, setIsMedicalCenterForm }) => {
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="gender"
                 >
-                  {type === "doctor" ? "جنسیت" : "کد سیام "}
+                  جنسیت
                 </label>
-                {type === "doctor" ? (
-                  <select
-                    id="gender"
-                    name="gender"
-                    className="w-full px-3 py-[10px] border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">انتخاب کنید</option>
-                    <option value="male">مرد</option>
-                    <option value="female">زن</option>
-                  </select>
-                ) : (
-                  <input
-                    id="siamCode"
-                    name="siamCode"
-                    type="text"
-                    className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    value={medicalformData.siamCode}
-                    onChange={handleChange}
-                    required
-                  />
-                )}
+
+                <select
+                  id="gender"
+                  name="gender"
+                  className="w-full px-3 py-[10px] border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">انتخاب کنید</option>
+                  <option value="male">مرد</option>
+                  <option value="female">زن</option>
+                </select>
               </div>
               <div className="w-1/2 flex flex-col ">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="medicalCode"
                 >
-                  {type === "doctor" ? "کد نظام پزشکی" : "استان"}
+                  کد نظام پزشکی
                 </label>
-                {type === "doctor" ? (
-                  <input
-                    id="medicalCode"
-                    name="medicalCode"
-                    type="text"
-                    className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    value={medicalformData.medicalCode}
-                    onChange={handleChange}
-                    required
-                  />
-                ) : (
-                  <ProvinceSelectInput setCities={setCities} hiddentitle />
-                )}
+
+                <input
+                  id="medicalCode"
+                  name="medicalCode"
+                  type="text"
+                  className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={medicalformData.medicalCode}
+                  onChange={handleChange}
+                  required
+                />
               </div>
             </div>
-            {type === "doctor" && (
-              <div className=" flex gap-8 ">
-                <div className=" w-1/2 flex flex-col ">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    htmlFor="gender"
-                  >
-                    کد ملی
-                  </label>
-                  <input
-                    id="clinicAddress"
-                    name="clinicAddress"
-                    type="text"
-                    className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    value={medicalformData.clinicAddress}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="w-1/2 flex flex-col ">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    htmlFor="clinicAddress"
-                  >
-                    شماره همراه
-                  </label>
-                  <input
-                    id="clinicAddress"
-                    name="clinicAddress"
-                    type="text"
-                    className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    value={medicalformData.clinicAddress}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-            )}
+
             <div className=" flex gap-8 ">
               <div className=" w-1/2 flex flex-col ">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="gender"
                 >
-                  {type === "doctor" ? "استان" : "شهر"}
-                </label>
-                {type === "doctor" ? (
-                  <ProvinceSelectInput hiddentitle setCities={setCities} />
-                ) : (
-                  <CitySelectInput hiddentitle cities={cities} />
-                )}
-              </div>
-              <div className="w-1/2 flex flex-col ">
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="gender"
-                >
-                  {type === "doctor" ? "شهر" : "شماره همراه"}
-                </label>
-                {type === "doctor" ? (
-                  <select
-                    id="gender"
-                    name="gender"
-                    className="w-full px-3 py-[10px] border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">انتخاب کنید</option>
-                    <option value="male">مرد</option>
-                    <option value="female">زن</option>
-                  </select>
-                ) : (
-                  <input
-                    id="clinicAddress"
-                    name="clinicAddress"
-                    type="text"
-                    className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    value={medicalformData.clinicAddress}
-                    onChange={handleChange}
-                    required
-                  />
-                )}
-              </div>
-            </div>
-            {type === "doctor" ? (
-              <div className=" flex gap-8 ">
-                <div className=" w-1/2 flex flex-col ">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    htmlFor="gender"
-                  >
-                    تخصص
-                  </label>
-                  <select
-                    id="gender"
-                    name="gender"
-                    className="w-full px-3 py-[10px] border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">انتخاب کنید</option>
-                    <option value="male">مرد</option>
-                    <option value="female">زن</option>
-                  </select>
-                </div>
-                <div className="w-1/2 flex flex-col ">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    htmlFor="clinicAddress"
-                  >
-                    آدرس مطب
-                  </label>
-                  <input
-                    id="clinicAddress"
-                    name="clinicAddress"
-                    type="text"
-                    className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className=" w-full flex flex-col ">
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="clinicAddress"
-                >
-                  آدرس مرکز درمانی
+                  کد ملی
                 </label>
                 <input
                   id="clinicAddress"
@@ -299,7 +169,65 @@ const DoctorFormModal = ({ type, setIsMedicalCenterForm }) => {
                   required
                 />
               </div>
-            )}
+              <div className="w-1/2 flex flex-col ">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="clinicAddress"
+                >
+                  شماره همراه
+                </label>
+                <input
+                  id="clinicAddress"
+                  name="clinicAddress"
+                  type="text"
+                  className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={medicalformData.clinicAddress}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className=" flex gap-8 ">
+              <div className=" w-1/2 flex flex-col ">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="gender"
+                >
+                  استان
+                </label>
+
+                <ProvinceSelectInput hiddentitle setCities={setCities} />
+              </div>
+              <div className="w-1/2 flex flex-col ">
+                <CitySelectInput setCityId={setCityId} cities={cities} />
+              </div>
+            </div>
+
+            <div className=" flex gap-8 ">
+              <div className=" w-1/2 flex flex-col ">
+                <SpecialtiesSelectInput
+                  specialistId={specialistId}
+                  setSpecialistId={setSpecialistId}
+                />
+              </div>
+              <div className="w-1/2 flex flex-col ">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="clinicAddress"
+                >
+                  آدرس مطب
+                </label>
+                <input
+                  id="clinicAddress"
+                  name="clinicAddress"
+                  type="text"
+                  className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
 
             <div className="">
               <label
@@ -319,9 +247,7 @@ const DoctorFormModal = ({ type, setIsMedicalCenterForm }) => {
             </div>
             <button
               onClick={() => {
-                type == "doctor"
-                  ? console.log("first")
-                  : add_medical_center(data, setLoading);
+                console.log("first");
               }}
               className=" w-1/3 bg-[#005DAD] hover:bg-blue-700 text-white py-3 px-4 rounded-lg"
               type="submit"
@@ -336,9 +262,9 @@ const DoctorFormModal = ({ type, setIsMedicalCenterForm }) => {
         </div>
         <Image
           className=" object-cover "
-          width={type === "doctor" ? 380 : 440}
+          width={380}
           alt="image"
-          src={type === "doctor" ? LoginFormImage : MedicalCenterFormImage}
+          src={LoginFormImage}
         />
       </div>
     </div>

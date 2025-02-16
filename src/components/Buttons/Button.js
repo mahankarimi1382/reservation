@@ -43,6 +43,7 @@ import TreatmentCenterModal from "../modals/TreatmentCenterModal";
 import AddTreatmentModal from "../modals/AddTreatmentModal";
 import { read_office_type } from "@/api/ApiCalling";
 import CitySelectModal from "../modals/CitySelectModal";
+import DoctorFormModal from "../modals/DoctorFormModal";
 
 export const LoginButton = () => {
   const { fullName, setFullName } = fullNameStorage();
@@ -67,7 +68,7 @@ export const LoginButton = () => {
 
       {!fullName && (
         <button
-          onClick={() => router.push("doctorLogin")}
+          onClick={() => router.push("doctor-login")}
           className=" lg:flex hidden  shadow-xl text-[12px] lg:text-[14px] lg:p-2 p-1 px-2 lg:px-2 justify-center items-center gap-1 text-[#004D8F] rounded-lg border border-[#004D8F]"
         >
           ثبت نام | ورود پزشکان
@@ -215,7 +216,7 @@ export const SpecialtiesSectionButton = () => {
       )}
       <div
         onClick={handleOpenModal}
-        className=" w-[95px] h-[120px] md:w-[100px] md:h-[130px] group lg:-mr-20  bg-[#eaeaea] hover:bg-[#63a2da] hover:shadow-lg hover:border-none hover:-mt-2 transition-all hover:shadow-[#c2eeff] min-w-[104px] lg:w-[131px] lg:h-[170px] flex flex-col justify-evenly items-center rounded-xl border border-[#DBD7D7]"
+        className=" w-[95px] h-[120px] md:w-[100px] md:h-[130px] group lg:-mr-20  bg-[#eaeaea] lg:hover:bg-[#63a2da] lg:hover:shadow-lg hover:border-none lg:hover:-mt-2 transition-all lg:hover:shadow-[#c2eeff] min-w-[104px] lg:w-[131px] lg:h-[170px] flex flex-col justify-evenly items-center rounded-xl border border-[#DBD7D7]"
       >
         <div className=" bg-white rounded-full w-[77px] h-[77px] flex justify-center items-center ">
           <IoIosMore className=" group-hover:text-[#336692] text-3xl" />
@@ -641,6 +642,39 @@ export const CitySelectButtSearchingDoctors = () => {
         <p className=" hidden lg:flex text-[12px] text-[#005DAD] font-medium">
           انتخاب شهر
         </p>
+      </button>
+    </div>
+  );
+};
+export const MedicalCenterLoginButt = () => {
+  const [isModal, setIsModal] = useState(false);
+
+  return (
+    <div>
+      {isModal && <LoginModal setIsModal={setIsModal} />}
+
+      <button
+        onClick={() => setIsModal(true)}
+        className=" text-lg flex justify-center items-center gap-3 px-16 p-2 border-2 border-[#005DAD] text-[#005DAD] rounded-lg"
+      >
+        ورود مرکز درمانی
+        <IoIosArrowBack />
+      </button>
+    </div>
+  );
+};
+export const DoctorsSignUpButt = () => {
+  const [isModal, setIsModal] = useState(false);
+  return (
+    <div>
+      {isModal && <DoctorFormModal closeModal={() => setIsModal(false)} />}
+      <button
+        onClick={() => setIsModal(true)}
+        href="medicalCentersLogin/loginForm"
+        className=" text-lg flex justify-center items-center gap-3 px-16 p-2 text-white bg-[#005DAD] rounded-lg"
+      >
+        عضویت پزشک
+        <IoIosArrowBack />
       </button>
     </div>
   );

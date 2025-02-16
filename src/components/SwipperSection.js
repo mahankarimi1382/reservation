@@ -6,29 +6,42 @@ import { Scrollbar, Autoplay } from "swiper/modules";
 import "swiper/css/scrollbar";
 import Image from "next/image";
 import { get_specialties } from "@/api/ApiCalling";
+import { useRouter } from "next/navigation";
+import { myStore } from "@/store/Store";
+import LoadingComponent from "./LoadingComponent";
 function SwipperSection() {
+  const { setSpecialistSearch } = myStore();
+  const router = useRouter();
   const [categorys, setCategorys] = useState([]);
+  const [loading, setLoading] = useState(true);
   const url = "Specialist/read-specialists";
 
   const fetchData = async () => {
     const data = await get_specialties(url);
     if (data) {
       setCategorys(data);
+      setLoading(false);
     }
   };
   useEffect(() => {
+    setLoading(true);
     fetchData();
   }, []);
 
   const mappingCategoryFn = () => {
     return (
       <div>
+        {loading && <LoadingComponent />}
         {categorys.map((item) => {
           return (
             <SwiperSlide key={item.id} className="  py-2 md:p-3 xl:p-[25px]">
-              <div
+              <button
+                onClick={() => {
+                  router.push("doctors-page");
+                  setSpecialistSearch(item.name, item.id);
+                }}
                 key={item.id}
-                className=" group text-[10px] md:font-semibold font-light  hover:shadow-lg w-[95px] h-[120px] md:w-[100px] md:h-[130px]  hover:-mt-3 transition-all shadow-red-600  hover:shadow-[#6991b4] lg:w-[131px] lg:h-[170px] flex flex-col justify-evenly items-center rounded-xl border border-[#DBD7D7]"
+                className=" group text-[10px] md:font-semibold font-light  lg:hover:shadow-lg w-[95px] h-[120px] md:w-[100px] md:h-[130px]  lg:hover:-mt-3 transition-all shadow-red-600  lg:hover:shadow-[#6991b4] lg:w-[131px] lg:h-[170px] flex flex-col justify-evenly items-center rounded-xl border border-[#DBD7D7]"
               >
                 <div className=" bg-[#eaeaea]  transition-all group-hover:bg-[#6eb6f6] rounded-full w-[77px] h-[77px] flex justify-center items-center ">
                   <img alt="icon" width={51} height={51} src={item.logoFile} />
@@ -36,7 +49,7 @@ function SwipperSection() {
                 <h2 className="  text-center lg:font-medium lg:text-[12px]">
                   {item.name}
                 </h2>
-              </div>
+              </button>
             </SwiperSlide>
           );
         })}

@@ -9,7 +9,10 @@ import trendupicon from "../../../public/Pics/trend-up-icon.png";
 import timeIcon from "../../../public/Pics/time-icon.png";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import { MedicalCenterSignUpButt } from "@/components/Buttons/Button";
+import {
+  MedicalCenterLoginButt,
+  MedicalCenterSignUpButt,
+} from "@/components/Buttons/Button";
 const cards = [
   {
     id: 1,
@@ -58,7 +61,10 @@ function page() {
               ساخته می شود و بیماران میتوانند در زمان جست و جوی نام شما نوبت خود
               را نیز خریداری کنند.
             </p>
-            <MedicalCenterSignUpButt />
+            <div className=" flex justify-center items-center gap-10">
+              <MedicalCenterSignUpButt />
+              <MedicalCenterLoginButt />
+            </div>
           </div>
         </div>
         <h2 className=" text-2xl">خدمات دکتر رزرو برای مراکز درمانی</h2>

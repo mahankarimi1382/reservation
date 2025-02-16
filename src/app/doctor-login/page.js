@@ -8,7 +8,11 @@ import trendDownIcon from "../../../public/Pics/trend-down-icon.png";
 import volumeIcon from "../../../public/Pics/trend-down-icon.png";
 import monitorIcon from "../../../public/Pics/monitor-mobbile.png";
 import Footer from "@/components/Footer";
-import { DoctorLoginButt } from "@/components/Buttons/Button";
+import {
+  DoctorLoginButt,
+  DoctorsSignUpButt,
+} from "@/components/Buttons/Button";
+import Link from "next/link";
 const cards = [
   {
     id: 1,
@@ -58,10 +62,14 @@ function page() {
               را نیز خریداری کنند.
             </p>
             <div className=" w-full flex items-center gap-10">
-              <button className=" text-lg flex justify-center items-center gap-3 px-16 p-2 text-white bg-[#005DAD] rounded-lg">
+              {/* <Link
+                href="doctor-login/signup-form"
+                className=" text-lg flex justify-center items-center gap-3 px-16 p-2 text-white bg-[#005DAD] rounded-lg"
+              >
                 عضویت پزشکان
                 <IoIosArrowBack />
-              </button>
+              </Link> */}
+              <DoctorsSignUpButt />
               <DoctorLoginButt />
             </div>
           </div>

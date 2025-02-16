@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <div dir="rtl" className=" pb-5">
       <EventSection />
-      <div className=" lg:rounded-bl-[300px] justify-start gap-16 rounded-bl-[80px] w-full h-[291px]  md:h-[400px] lg:h-[500px] xl:h-[600px]  flex flex-col pt-5   bg-[#C2E2FF]">
+      <div className=" lg:rounded-bl-[300px] justify-start gap-16 rounded-bl-[80px] w-full h-[291px]  md:h-[400px] lg:h-[500px] xl:h-[600px]  flex flex-col lg:pt-5   bg-[#C2E2FF]">
         <Navbar />
         <MainSearchBar />
       </div>

@@ -214,7 +214,7 @@ export const CitySelectInput = ({
             : "ابتدا استان را انتخاب کنید"}
         </option>
         {fromFilter && (
-          <option value={null}>{cities.length !== 0 && "همه ی شهر ها"}</option>
+          <option data-name="همه ی شهر ها" value="">{cities.length !== 0 && "همه ی شهر ها"}</option>
         )}
         {cities.map((item) => {
           return (
@@ -291,7 +291,7 @@ export const SpecialtiesSelectInput = ({ specialistId, setSpecialistId }) => {
     fetchData();
   }, []);
   return (
-    <div className=" w-[40%] flex gap-2 flex-col items-start">
+    <div className=" min:w-[40%] w-full flex gap-2 flex-col items-start">
       <h5>تخصص</h5>
       <select
         value={specialistId}

@@ -357,10 +357,10 @@ export const get_specialties_by_id = async (id) => {
     return null;
   }
 };
-export const get_doctors_by_special_id = async (id) => {
+export const get_doctors_by_special_id = async () => {
   try {
     const response = await axiosConfig.get(
-      `Doctor/read-doctors-byspeciality?SpecialistId=1133`
+      `Doctor/read-doctors-byspeciality?SpecialistId=1128`
     );
     const doctors = response.data.result.list;
     return doctors;

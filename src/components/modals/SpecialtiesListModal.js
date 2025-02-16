@@ -5,8 +5,12 @@ import { CiSearch } from "react-icons/ci";
 import { get_specialties } from "@/api/ApiCalling";
 import { RxCross2 } from "react-icons/rx";
 import LoadingComponent from "../LoadingComponent";
+import { useRouter } from "next/navigation";
+import { myStore } from "@/store/Store";
 
 function SpecialtiesListModal({ setIsSpecialtiesModal }) {
+  const router = useRouter();
+  const { setSpecialistSearch } = myStore();
   const [inputValue, setInputValue] = useState("");
   const [categorys, setCategorys] = useState([]);
   const [filtredArr, setFiltredArr] = useState([]);
@@ -39,13 +43,13 @@ function SpecialtiesListModal({ setIsSpecialtiesModal }) {
   };
   return (
     <div className=" w-screen h-screen top-0 justify-center items-center flex z-50 right-0 fixed bg-[rgba(0,0,0,0.6)]">
-      <div className=" relative w-[60%] h-[550px] bg-white rounded-xl py-5 p-2 gap-5 flex flex-col">
+      <div className=" relative w-[60%] min-w-80 min-h-[550px] max-h-[550px] bg-white rounded-xl py-5 p-2 gap-5 flex flex-col">
         <RxCross2
           className=" z-50 absolute top-1 left-1 cursor-pointer"
           onClick={handleCloseModal}
         />
-        <div className=" flex bg-white items-center border rounded-lg px-10 border-[#005DAD]">
-          <CiSearch className=" text-[#C0C0C0] text-3xl" />
+        <div className=" flex bg-white items-center border rounded-lg px-2 lg:px-10 border-[#005DAD]">
+          <CiSearch className=" text-[#C0C0C0] text-xs lg:text-3xl" />
           <input
             onChange={handleInputChange}
             placeholder={`جستجو تخصص از بین ${categorys.length} تخصص`}
@@ -55,7 +59,11 @@ function SpecialtiesListModal({ setIsSpecialtiesModal }) {
         <div className=" pb-2 rounded-xl  flex flex-wrap gap-8 justify-center pt-3 items-center customScroll rounded-r-xl overflow-auto">
           {filtredArr.map((item) => {
             return (
-              <div
+              <button
+                onClick={() => {
+                  router.push("doctors-page");
+                  setSpecialistSearch(item.name, item.id);
+                }}
                 key={item.id}
                 className="  group cursor-pointer  hover:shadow-lg w-[123px] h-[123px]  hover:-mt-3 transition-all shadow-red-600  hover:shadow-[#6991b4] lg:w-[123px] lg:h-[123px] flex flex-col justify-evenly items-center rounded-xl border border-[#DBD7D7]"
               >
@@ -70,7 +78,7 @@ function SpecialtiesListModal({ setIsSpecialtiesModal }) {
                 <h2 className=" text-center text-[10px] font-semibold lg:font-medium lg:text-[12px]">
                   {item.name}
                 </h2>
-              </div>
+              </button>
             );
           })}
         </div>

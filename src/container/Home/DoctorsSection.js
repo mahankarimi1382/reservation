@@ -1,27 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import abbas from "../../../public/Pics/abbas.png";
 import star from "../../../public/Pics/star.png";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
 import doctor_icon from "../../../public/Pics/doctor-icon.jpg";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  get_doctors_by_special_id,
-  get_specialties_by_id,
-} from "@/api/ApiCalling";
+import {} from "@/api/ApiCalling";
 function DoctorsSection() {
-  const [doctors, setDoctors] = useState([]);
-  const fetchData = async () => {
-    const data = await get_doctors_by_special_id();
-    if (data) {
-      setDoctors(data);
-    }
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const [doctors, setDoctors] = useState([1]);
 
   return (
     <div className=" w-full flex flex-col items-center justify-center">
@@ -52,7 +39,7 @@ function DoctorsSection() {
               />
               <div className=" flex w-full lg:px-5 justify-between items-center">
                 <h2 className=" lg:text-[16px] lg:font-semibold">
-                  {items.doctorName} {items.doctorFamily}
+                  سعید کلانتری
                 </h2>
                 <div className=" flex items-center justify-center">
                   <h2 className=" font-medium text-[12px]">0</h2>
@@ -64,7 +51,7 @@ function DoctorsSection() {
                 </div>
               </div>
               <h2 className=" text-gray-400 text-[14px] lg:font-semibold lg:px-5 w-full">
-                تخصص: {get_specialties_by_id(items.specialistId)}
+                تخصص: عمومی
               </h2>
               <h2 className=" text-[#1F7168] text-[14px] lg:font-semibold w-full lg:px-5">
                 (0) 0 بیمار راضی{" "}

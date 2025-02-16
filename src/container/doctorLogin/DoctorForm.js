@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import LoginFormImage from "../../../public/Pics/doctorLoginFormImg.png";
+import Link from "next/link";
 const DoctorForm = ({ type }) => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -347,7 +348,12 @@ const DoctorForm = ({ type }) => {
             </button>
             <p className=" -mt-3 ">
               قبلا ثبت نام کرده اید؟
-              <span className=" text-[#005DAD] cursor-pointer">ورود</span>
+              <Link
+                href={type == "doctor" && "/doctor-login"}
+                className=" text-[#005DAD] cursor-pointer"
+              >
+                ورود
+              </Link>
             </p>
           </form>
         </div>

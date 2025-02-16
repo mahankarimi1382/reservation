@@ -16,7 +16,7 @@ import { Eror } from "../ToastAlerts";
 const MapTest = dynamic(() => import("../../components/MapTest"), {
   ssr: false,
 });
-const MedicalFormModal = ({ type, setIsMedicalCenterForm }) => {
+const MedicalFormModal = ({ setIsMedicalCenterForm }) => {
   const pathName = usePathname();
   console.log(pathName);
   const isoffice = pathName === "/adminPanel/medicalcenters/offices";
@@ -99,7 +99,7 @@ const MedicalFormModal = ({ type, setIsMedicalCenterForm }) => {
                   className="block text-gray-700 text-sm font-bold mb-2"
                   htmlFor="lastName"
                 >
-                  {isoffice ? "نوع مطب" : "نوع کلینیک "}
+                  {isoffice ? "نوع مطب" : "نوع مرکز درمانی "}
                 </label>
                 {isoffice ? (
                   <select
@@ -124,7 +124,7 @@ const MedicalFormModal = ({ type, setIsMedicalCenterForm }) => {
                     onChange={(e) => setClinicTypeId(e.target.value)}
                     className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
-                    <option value={null}>انتخاب نوع کلینیک</option>
+                    <option value={null}>انتخاب نوع مرکز درمانی</option>
                     <option value={1}>بیمارستان دولتی</option>
                     <option value={2}>بیمارستان خصوصی</option>
                     <option value={3}>درمانگاه خصوصی</option>
@@ -195,7 +195,7 @@ const MedicalFormModal = ({ type, setIsMedicalCenterForm }) => {
             {!isVirtual ? (
               <div className=" w-full flex flex-col ">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
-                  {isoffice ? "آدرس مطب" : "آدرس کلینیک"}
+                  {isoffice ? "آدرس مطب" : "آدرس مرکز درمانی"}
                 </label>
                 <input
                   type="text"
@@ -288,9 +288,9 @@ const MedicalFormModal = ({ type, setIsMedicalCenterForm }) => {
         </div>
         <Image
           className=" object-cover "
-          width={type === "doctor" ? 380 : 440}
+          width={440}
           alt="image"
-          src={type === "doctor" ? LoginFormImage : MedicalCenterFormImage}
+          src={ MedicalCenterFormImage}
         />
       </div>
       {/* <ToastContainer /> */}
