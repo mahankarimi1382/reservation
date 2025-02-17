@@ -164,7 +164,13 @@ export const get_specialties = async (url) => {
     return null;
   }
 };
-export const delete_specialties = async (id, setList, closeModal) => {
+export const delete_specialties = async (
+  id,
+  setList,
+  closeModal,
+  setIsLoading,
+  specialist
+) => {
   console.log(id);
   try {
     const response = await axiosConfig.delete("Specialist/delete-specialist", {
@@ -176,17 +182,15 @@ export const delete_specialties = async (id, setList, closeModal) => {
         id: id,
       },
     });
-    const url = "Specialist/read-specialists";
-
-    const data = await get_specialties(url);
-    if (data) {
-      setList(data);
-    }
+    const newList = specialist.filter((item) => item.id != id);
+    setList(newList);
+    setIsLoading(false);
     success("تخصص با موفقیت حذف شد");
     closeModal();
     console.log(response);
   } catch (error) {
     console.log(error);
+    setIsLoading(false);
     Eror("امکان حذف این تخصص وجود ندارد");
   }
 };
@@ -315,7 +319,7 @@ export const delete_doctor = async (
   setDoctors,
   closeModal,
   setIsLoading,
-  currentPage
+  doctors
 ) => {
   console.log(id);
   setIsLoading(true);
@@ -330,11 +334,8 @@ export const delete_doctor = async (
       },
     });
     const url = "Doctor/read-all-doctors";
-
-    const data = await search_doctors_list(currentPage);
-    if (data) {
-      setDoctors(data);
-    }
+    const newList = doctors.filter((item) => item.id !== id);
+    setDoctors(newList);
     closeModal();
     setIsLoading(false);
     success("پزشک با موفقیت حذف شد");
@@ -733,4 +734,77 @@ export const read_office_type = async () => {
     console.error("Error fetching specialties:", error);
     return null;
   }
+};
+export const create_sme_profile_for_doctor = (
+  data,
+  token,
+  setIsLoading,
+  setIsAddDoctorModal
+) => {
+  console.log(data);
+  axios
+    .post(
+      "https://myapi.dadehavaran.com:8040/API/v1/SmeProfile/create-sme-profile",
+      {
+        metadata: {
+          userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          userName: "",
+        },
+        smeName: `${data.doctorName + " " + data.doctorFamily}`,
+        nationalCode: "",
+        businessCode: "",
+        managerName: "",
+        registerNumber: "",
+        economyCode: "",
+        permitNo: "",
+        managerPhoneNumber: "",
+        managerEmail: "",
+        aboutUs: "",
+        tellNumber: "",
+        activitySubject: "",
+        smeEmail: "",
+        smeWebsite: "",
+        address: "",
+        status: true,
+        cityId: 1,
+        smeType: 1,
+        industrialParkId: 1,
+        logo: "",
+        headerpic: "",
+        postalcode: "",
+        smeRankId: 2,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res);
+      console.log(res.data.result.id);
+      let smeid = res.data.result.id;
+      let data2 = {
+        metadata: {
+          userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          userName: "string",
+          smeProfileId: 0,
+        },
+        doctorName: data.doctorName,
+        doctorFamily: data.doctorFamily,
+        nationalId: data.nationalId,
+        codeNezam: data.codeNezam,
+        specialistId: data.specialistId,
+        docExperiance: "string",
+        docInstaLink: "string",
+        mobile: data.mobile,
+        desc: data.desc,
+        smeProfileId: smeid,
+        gender: data.gender,
+      };
+      add_doctor(data2, setIsLoading, setIsAddDoctorModal);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };

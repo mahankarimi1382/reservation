@@ -30,7 +30,13 @@ function DeletingModal(props) {
           <div className=" flex w-full justify-center items-center gap-3">
             <button
               onClick={() => {
-                props.DeletingFn(props.id, props.setList, props.closeModal,setIsLoading,props.currentPage);
+                props.DeletingFn(
+                  props.id,
+                  props.setList,
+                  props.closeModal,
+                  setIsLoading,
+                  props.list
+                );
               }}
               className=" w-1/4 p-2 rounded-lg text-white bg-[#005DAD]"
             >

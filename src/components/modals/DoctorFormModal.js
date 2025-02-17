@@ -10,47 +10,67 @@ import {
 } from "../Inputs/Input";
 import { RxCross2 } from "react-icons/rx";
 import { SyncLoader } from "react-spinners";
-const DoctorFormModal = ({ closeModal, fromSignup }) => {
-  const [loading, setLoading] = useState(false);
-  const [cities, setCities] = useState([]);
+import {
+  add_doctor,
+  create_sme_profile,
+  create_sme_profile_for_doctor,
+} from "@/api/ApiCalling";
+import Cookies from "js-cookie";
+import { smeIdStorage } from "@/store/Store";
+const DoctorFormModal = ({ setIsAddDoctorModal, fromSignup }) => {
   const [cityId, setCityId] = useState("");
+  console.log(cityId);
+  console.log(cityId.id);
   const [specialistId, setSpecialistId] = useState("");
-  const [medicalformData, setMedicalFormData] = useState({
+  console.log(specialistId);
+  const { smeId } = smeIdStorage();
+
+  const [doctorformData, setDoctorFormData] = useState({
     name: "",
-    address: "",
+    lastName: "",
     gender: "",
-    medicalCode: "",
-    siamCode: "",
-    contactNumber: "",
+    codeNezam: "",
     nationalCode: "",
-    city: "",
-    specialty: "",
-    clinicAddress: "",
-    comments: "",
+    phone: "",
+    address: "",
+    desc: "",
   });
+  const data = {
+    doctorName: doctorformData.name,
+    doctorFamily: doctorformData.lastName,
+    nationalId: doctorformData.nationalCode,
+    codeNezam: doctorformData.codeNezam,
+    specialistId: specialistId,
+    mobile: doctorformData.phone,
+    city: cityId.id,
+    desc: doctorformData.desc,
+    gender: doctorformData.gender,
+  };
+
+  const token = Cookies.get("token");
+  console.log("smeID", smeId);
+  const [isloading, setIsLoading] = useState(false);
+  const [cities, setCities] = useState([]);
 
   const handleChange = (e) => {
-    setMedicalFormData({ ...medicalformData, [e.target.name]: e.target.value });
+    setDoctorFormData({ ...doctorformData, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (smeId) {
+      setIsLoading(true);
+      add_doctor(doctorformData, setIsLoading);
+    } else {
+      setIsLoading(true);
+      create_sme_profile_for_doctor(
+        data,
+        token,
+        setIsLoading,
+        setIsAddDoctorModal
+      );
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-  const data = {
-    metadata: {
-      userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      userName: "string",
-    },
-    name: "golbarg",
-    address: "oonja",
-    geolon: 0,
-    geolat: 0,
-    phone: "09305485308",
-    cityId: 1,
-    siamCode: "100",
-    desc: "klklmklmhjhj",
-    clinicTypeId: 1,
-  };
   return (
     <div
       dir="rtl"
@@ -58,7 +78,7 @@ const DoctorFormModal = ({ closeModal, fromSignup }) => {
     >
       <div className=" relative overflow-hidden bg-white w-2/3 flex rounded-lg  items-center max-h-[90%]">
         <RxCross2
-          onClick={closeModal}
+          onClick={() => setIsAddDoctorModal(false)}
           className=" absolute z-50 left-1 top-1 cursor-pointer"
         />
         <div className="  w-[80%] p-5 gap-4 flex flex-col">
@@ -83,11 +103,11 @@ const DoctorFormModal = ({ closeModal, fromSignup }) => {
                   نام
                 </label>
                 <input
-                  id="firstName"
-                  name="firstName"
+                  id="name"
+                  name="name"
                   type="text"
                   className="w-full px-3 py-2 border-[#636972] border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  value={medicalformData.name}
+                  value={doctorformData.name}
                   onChange={handleChange}
                   required
                 />
@@ -104,7 +124,7 @@ const DoctorFormModal = ({ closeModal, fromSignup }) => {
                   name="lastName"
                   type="text"
                   className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  value={medicalformData.lastName}
+                  value={doctorformData.lastName}
                   onChange={handleChange}
                   required
                 />
@@ -126,9 +146,9 @@ const DoctorFormModal = ({ closeModal, fromSignup }) => {
                   onChange={handleChange}
                   required
                 >
-                  <option value="">انتخاب کنید</option>
-                  <option value="male">مرد</option>
-                  <option value="female">زن</option>
+                  <option value={null}>انتخاب کنید</option>
+                  <option value={true}>مرد</option>
+                  <option value={false}>زن</option>
                 </select>
               </div>
               <div className="w-1/2 flex flex-col ">
@@ -140,11 +160,11 @@ const DoctorFormModal = ({ closeModal, fromSignup }) => {
                 </label>
 
                 <input
-                  id="medicalCode"
-                  name="medicalCode"
+                  id="codeNezam"
+                  name="codeNezam"
                   type="text"
                   className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  value={medicalformData.medicalCode}
+                  value={doctorformData.codeNezam}
                   onChange={handleChange}
                   required
                 />
@@ -160,11 +180,11 @@ const DoctorFormModal = ({ closeModal, fromSignup }) => {
                   کد ملی
                 </label>
                 <input
-                  id="clinicAddress"
-                  name="clinicAddress"
+                  id="nationalCode"
+                  name="nationalCode"
                   type="text"
                   className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  value={medicalformData.clinicAddress}
+                  value={doctorformData.nationalCode}
                   onChange={handleChange}
                   required
                 />
@@ -177,11 +197,11 @@ const DoctorFormModal = ({ closeModal, fromSignup }) => {
                   شماره همراه
                 </label>
                 <input
-                  id="clinicAddress"
-                  name="clinicAddress"
+                  id="phone"
+                  name="phone"
                   type="text"
                   className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  value={medicalformData.clinicAddress}
+                  value={doctorformData.phone}
                   onChange={handleChange}
                   required
                 />
@@ -219,9 +239,10 @@ const DoctorFormModal = ({ closeModal, fromSignup }) => {
                   آدرس مطب
                 </label>
                 <input
-                  id="clinicAddress"
-                  name="clinicAddress"
+                  id="address"
+                  name="address"
                   type="text"
+                  value={doctorformData.address}
                   className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   onChange={handleChange}
                   required
@@ -237,22 +258,23 @@ const DoctorFormModal = ({ closeModal, fromSignup }) => {
                 توضیحات
               </label>
               <textarea
-                id="comments"
-                name="comments"
+                id="desc"
+                name="desc"
                 className="w-full  px-3 resize-none h-14 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={medicalformData.comments}
+                value={doctorformData.desc}
                 onChange={handleChange}
                 rows="4"
               />
             </div>
             <button
-              onClick={() => {
-                console.log("first");
-              }}
               className=" w-1/3 bg-[#005DAD] hover:bg-blue-700 text-white py-3 px-4 rounded-lg"
               type="submit"
             >
-              {loading ? <SyncLoader color="white" size={10} /> : "ثبت درخواست"}
+              {isloading ? (
+                <SyncLoader color="white" size={10} />
+              ) : (
+                "ثبت درخواست"
+              )}
             </button>
             {/* <p className=" -mt-3 ">
               قبلا ثبت نام کرده اید؟

@@ -7,12 +7,17 @@ import { SelectFilter } from "@/components/Inputs/Input";
 import { GoPlus } from "react-icons/go";
 import SubmitSpecialtiesModal from "@/components/modals/SubmitSpecialtiesModal";
 import SpecialistPagination from "./SpecialistPagination";
+import LoadingComponent from "@/components/LoadingComponent";
+import { myStore } from "@/store/Store";
 
 function SpecialtiesPanelSection() {
+  const { setIsSerchDoctorLoading, isSerchDoctorLoading } = myStore();
   const [specialist, setSpecialist] = useState([]);
   const [isAddSpecialModal, setIsAddSpecialModal] = useState(false);
+  const [filtredArr, setFiltredArr] = useState([]);
 
   const [item, setItem] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   console.log(specialist);
   const url = "Specialist/read-specialists";
@@ -21,14 +26,28 @@ function SpecialtiesPanelSection() {
     const data = await get_specialties(url);
     if (data) {
       setSpecialist(data);
+      setFiltredArr(data);
+
+      setIsSerchDoctorLoading(false);
     }
   };
   useEffect(() => {
     fetchData();
+    setIsSerchDoctorLoading(true);
   }, [isAddSpecialModal]);
-
+  const handleInputChange = (event) => {
+    setCurrentPage(1);
+    filterArray(event.target.value);
+  };
+  const filterArray = (value) => {
+    const filtered = specialist.filter((item) =>
+      item.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setFiltredArr(filtered);
+  };
   return (
     <div className=" gap-10 mt-20 w-full flex flex-col items-center ">
+      {isSerchDoctorLoading && <LoadingComponent />}
       {isAddSpecialModal && (
         <SubmitSpecialtiesModal
           setIsAddSpecialModal={setIsAddSpecialModal}
@@ -38,7 +57,11 @@ function SpecialtiesPanelSection() {
       )}
 
       <div className=" w-[80%] flex justify-between">
-        <SelectFilter title="تخصص" />
+        <input
+          onChange={handleInputChange}
+          placeholder="جستجو تخصص "
+          className=" w-1/2 outline-none py-2 bg-white text-xs  lg:text-xl  "
+        />
         <button
           onClick={() => {
             setIsAddSpecialModal(true);
@@ -66,11 +89,13 @@ function SpecialtiesPanelSection() {
           </h4>
         </div>
         <SpecialistPagination
-
-          setSpecialist={setSpecialist}
+          setSpecialist={setFiltredArr}
           setItem={setItem}
           setIsAddSpecialModal={setIsAddSpecialModal}
-          items={specialist}
+          items={filtredArr}
+          specialist={filtredArr}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
         />
       </div>
     </div>

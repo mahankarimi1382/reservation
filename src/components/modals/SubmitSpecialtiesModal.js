@@ -16,6 +16,7 @@ function SubmitSpecialtiesModal({ setIsAddSpecialModal, item, setItem }) {
   const [maxa, setMaxa] = useState(item ? item.maxa : "");
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState(item ? item.logoFile : null);
+  console.log(image)
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {

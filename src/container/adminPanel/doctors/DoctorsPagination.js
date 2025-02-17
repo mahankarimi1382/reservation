@@ -29,16 +29,18 @@ const DoctorsPagination = ({
     <div className=" w-full h-full">
       {isDeletingModal && (
         <DeletingModal
-        currentPage={currentPage}
           DeletingFn={delete_doctor}
           id={selectedItem.id}
           name={selectedItem.doctorName + " " + selectedItem.doctorFamily}
           setList={setDoctors}
+          list={doctors}
           closeModal={() => setIsDeletingModal(false)}
         />
       )}
       {doctors.length == 0 && !isLoading ? (
-        <div className=" w-full h-full justify-center items-center flex text-3xl text-slate-500">نتیجه ای یافت نشد</div>
+        <div className=" w-full h-full justify-center items-center flex text-3xl text-slate-500">
+          نتیجه ای یافت نشد
+        </div>
       ) : (
         doctors.map((item) => {
           console.log(item.smeProfile.doctors[0]);

@@ -11,12 +11,14 @@ const SpecialistPagination = ({
   items,
   setIsAddSpecialModal,
   setItem,
+  specialist,
+  currentPage,
+  setCurrentPage,
 }) => {
   const [isDeletingModal, setIsDeletingModal] = useState(false);
 
   const [selectedItem, setSelectedItem] = useState({});
   console.log(selectedItem);
-  const [currentPage, setCurrentPage] = useState(1);
   const handleChange = (event, value) => {
     setCurrentPage(value);
   };
@@ -39,6 +41,7 @@ const SpecialistPagination = ({
           id={selectedItem.id}
           name={selectedItem.name}
           closeModal={() => setIsDeletingModal(false)}
+          list={specialist}
         />
       )}
       {currentItems.map((item) => {

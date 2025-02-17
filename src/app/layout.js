@@ -19,7 +19,5 @@ export default function RootLayout({ children }) {
         <ToastContainer />
       </body>
     </html>
-    
   );
-
 }

@@ -44,6 +44,7 @@ import AddTreatmentModal from "../modals/AddTreatmentModal";
 import { read_office_type } from "@/api/ApiCalling";
 import CitySelectModal from "../modals/CitySelectModal";
 import DoctorFormModal from "../modals/DoctorFormModal";
+import { success } from "../ToastAlerts";
 
 export const LoginButton = () => {
   const { fullName, setFullName } = fullNameStorage();
@@ -664,12 +665,23 @@ export const MedicalCenterLoginButt = () => {
   );
 };
 export const DoctorsSignUpButt = () => {
+  const token = Cookies.get("token");
+
   const [isModal, setIsModal] = useState(false);
+  const [isLoginModal, setIsLoginModal] = useState(false);
   return (
     <div>
-      {isModal && <DoctorFormModal closeModal={() => setIsModal(false)} />}
+      {isLoginModal && <LoginModal setIsModal={setIsLoginModal} />}
+      {isModal && <DoctorFormModal setIsAddDoctorModal={setIsModal} />}
       <button
-        onClick={() => setIsModal(true)}
+        onClick={() => {
+          if (token) {
+            setIsModal(true);
+          } else {
+            setIsLoginModal(true);
+            success("پزشک گرامی لطفا در ابتدا لاگین کنید");
+          }
+        }}
         href="medicalCentersLogin/loginForm"
         className=" text-lg flex justify-center items-center gap-3 px-16 p-2 text-white bg-[#005DAD] rounded-lg"
       >
