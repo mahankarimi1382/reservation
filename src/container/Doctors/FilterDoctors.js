@@ -58,6 +58,7 @@ function FilterDoctors({ hidden, setIsFilterClickMobile }) {
     acceptInsurance,
     justOnline,
   } = myStore();
+
   return (
     <div
       className={` ${
@@ -110,7 +111,11 @@ function FilterDoctors({ hidden, setIsFilterClickMobile }) {
           >
             <div className=" xl:text-base text-sm flex items-center justify-between">
               <h2>فقط پزشکان آنلاین</h2>
-              <FormControlLabel value="justOnline" control={<Switch />} />
+              <FormControlLabel
+                checked={justOnline}
+                value="justOnline"
+                control={<Switch />}
+              />
             </div>
             <div className=" xl:text-base text-sm flex items-center justify-between">
               <h2>فقط پزشکان دارای نوبت باز</h2>
@@ -119,6 +124,7 @@ function FilterDoctors({ hidden, setIsFilterClickMobile }) {
             <div className=" xl:text-base text-sm flex items-center justify-between">
               <h2>فقط پزشکانی که بیمه قبول می کنند</h2>
               <FormControlLabel
+                checked={acceptInsurance}
                 value="JustAcceptInsurance"
                 control={<Switch />}
               />
