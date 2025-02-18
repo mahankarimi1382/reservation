@@ -7,7 +7,6 @@ import { CitySelectInput, ProvinceSelectInput } from "../Inputs/Input";
 import { smeIdStorage } from "@/store/Store";
 import { add_patient } from "@/api/ApiCalling";
 import { SyncLoader } from "react-spinners";
-import { ToastContainer } from "react-toastify";
 
 function AddTurnModal({ setIsAddTurn }) {
   const [cities, setCities] = useState([]);

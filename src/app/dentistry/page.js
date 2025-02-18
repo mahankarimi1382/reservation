@@ -4,7 +4,6 @@ import Footer from "@/components/Footer";
 import QuestionsSection from "@/container/Home/QuestionsSection";
 import SamaneSection from "@/container/Home/SamaneSection";
 import UserOpinions from "@/container/Home/UserOpinions";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MainSearchBar from "@/components/MainSearchBar";
 import SpecialtiesSection_dentist from "@/container/dentistry/SpecialtiesSection_dentist";
@@ -33,7 +32,6 @@ export default function Dentist() {
       <MagezineSection_dentist />
       <Footer />
       <PhoneMenu />
-      <ToastContainer />
     </div>
   );
 }

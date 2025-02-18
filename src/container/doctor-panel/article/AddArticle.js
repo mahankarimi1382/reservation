@@ -6,7 +6,6 @@ import { FcOk } from "react-icons/fc";
 import UploadingInputContainer from "@/container/doctor-panel/doctor-info/UploadingInputContainer";
 import { smeIdStorage } from "@/store/Store";
 import { add_article, upload_file } from "@/api/ApiCalling";
-import { ToastContainer } from "react-toastify";
 import { SyncLoader } from "react-spinners";
 import Cookies from "js-cookie";
 import FileUploaderInput from "../doctor-info/FileUploaderInput";
@@ -112,7 +111,6 @@ function AddArticle() {
           {loading ? <SyncLoader color="white" size={10} /> : "ثبت مقاله"}
         </button>
       </div>
-      <ToastContainer />
     </div>
   );
 }

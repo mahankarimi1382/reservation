@@ -1,7 +1,6 @@
 import AdminPanelMenu from "@/container/adminPanel/AdminPanelMenu";
 import React from "react";
 
-import { ToastContainer } from "react-toastify";
 import DoctorsSection from "@/container/adminPanel/doctors/DoctorsSection";
 function page() {
   return (
@@ -10,7 +9,6 @@ function page() {
 
       <DoctorsSection />
 
-      <ToastContainer />
     </div>
   );
 }

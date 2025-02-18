@@ -9,7 +9,6 @@ import { RxCross2 } from "react-icons/rx";
 import { add_medical_center, add_Office } from "@/api/ApiCalling";
 import { SyncLoader } from "react-spinners";
 import dynamic from "next/dynamic";
-import { ToastContainer } from "react-toastify";
 import { usePathname } from "next/navigation";
 import { Phone } from "@mui/icons-material";
 import { Eror } from "../ToastAlerts";
@@ -293,7 +292,6 @@ const MedicalFormModal = ({ setIsMedicalCenterForm }) => {
           src={ MedicalCenterFormImage}
         />
       </div>
-      {/* <ToastContainer /> */}
     </div>
   );
 };

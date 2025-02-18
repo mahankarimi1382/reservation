@@ -11,7 +11,6 @@ import QuestionsSection from "@/container/Home/QuestionsSection";
 import SamaneSection from "@/container/Home/SamaneSection";
 import SpecialtiesSection from "@/container/Home/SpecialtiesSection";
 import UserOpinions from "@/container/Home/UserOpinions";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MainSearchBar from "@/components/MainSearchBar";
 import SupportModal from "@/components/modals/SupportModal";
@@ -36,7 +35,6 @@ export default function Home() {
       <MagezineSection />
       <Footer />
       {/* <PhoneMenu /> */}
-      <ToastContainer />
       <SupportModal />
     </div>
   );
