@@ -43,7 +43,6 @@ const DoctorsPagination = ({
         </div>
       ) : (
         doctors.map((item) => {
-          console.log(item.smeProfile.doctors[0]);
           return (
             <div
               className=" border flex py-3 items-center rounded-lg bg-white shadow-md"

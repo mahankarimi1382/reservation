@@ -12,7 +12,10 @@ import excel_icon from "../../../../public/Pics/excelIcon.png";
 import Image from "next/image";
 
 import { TiArrowSortedDown } from "react-icons/ti";
-import { SelectFilter } from "@/components/Inputs/Input";
+import {
+  SelectFilter,
+  SpecialtiesSelectInput,
+} from "@/components/Inputs/Input";
 import DoctorsPagination from "./DoctorsPagination";
 import SearchSpecialites from "@/container/Doctors/SearchSpecialites";
 import { CiSearch } from "react-icons/ci";
@@ -25,14 +28,15 @@ function DoctorsSection() {
   const [isAddDoctorModal, setIsAddDoctorModal] = useState(false);
   const [doctorItems, setDoctorItems] = useState({});
   const [doctors, setDoctors] = useState([]);
+  const [specialistId, setSpecialistId] = useState("");
+  console.log(specialistId);
   const getDoctors = async (name) => {
-    const data = await search_doctors_list(name, currentPage);
+    const data = await search_doctors_list(name, currentPage, specialistId);
     if (data) {
       console.log(data);
       setDoctors(data.list);
       setIsLoading(false);
 
-      
       let number = data.totalRecords / 10;
       let totalpages = Math.ceil(number);
       setTotalPages(totalpages);
@@ -44,11 +48,13 @@ function DoctorsSection() {
       setIsLoading(true);
       getDoctors(name);
       setName(name);
+      setCurrentPage(1);
     } else if (name.length == 0) {
       setIsLoading(true);
       getDoctors(name);
       setName(name);
       setName(name);
+      setCurrentPage(1);
     }
   };
 
@@ -56,7 +62,7 @@ function DoctorsSection() {
   useEffect(() => {
     getDoctors(name);
     setIsLoading(true);
-  }, [currentPage]);
+  }, [currentPage, isAddDoctorModal, specialistId]);
   // useEffect(() => {
   //   const url = "Doctor/read-all-doctors";
 
@@ -83,7 +89,13 @@ function DoctorsSection() {
               placeholder="جستجو در دکتر ها "
             />
           </label>
-          <SelectFilter title="تخصص" />
+          <div className=" w-[20%]">
+            <SpecialtiesSelectInput
+              specialistId={specialistId}
+              setSpecialistId={setSpecialistId}
+              hiddenTitle
+            />
+          </div>
         </div>
       </div>
       <div className=" gap-2 flex justify-end w-[80%] items-center">
@@ -102,7 +114,7 @@ function DoctorsSection() {
           setIsAddDoctorModal={setIsAddDoctorModal}
         />
       </div>
-      <div className=" relative gap-3 flex flex-col min-h-[70%] w-[85%] rounded-lg border shadow-md p-4 bg-white">
+      <div className=" relative gap-3 flex flex-col w-[85%] rounded-lg border shadow-md p-4 bg-white">
         {isLoading && <LoadingComponent />}
 
         <div className=" py-2 w-full flex rounded-lg bg-[#F4F4F4]">

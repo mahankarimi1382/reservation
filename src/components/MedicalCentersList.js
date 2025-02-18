@@ -2,7 +2,12 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { TiArrowSortedDown } from "react-icons/ti";
-import { delete_clinic, delete_office, get_clinics, get_offices } from "@/api/ApiCalling";
+import {
+  delete_clinic,
+  delete_office,
+  get_clinics,
+  get_offices,
+} from "@/api/ApiCalling";
 
 import { Pagination } from "@mui/material";
 import { MdDeleteForever } from "react-icons/md";
@@ -63,13 +68,14 @@ function MedicalCentersList({ type }) {
       <div className=" flex w-[80%]  gap-5 items-center">
         <DatePickerComponent title="از تاریخ" />
         <DatePickerComponent title="تا تاریخ" />
-        <SelectFilter title="نظر" />
+        {/* <SelectFilter title="نظر" />
         <SelectFilter title="نوع ویزیت" />
         <SelectFilter title="محل ویزیت" />
-        <SelectFilter title="ساعت" />
+        <SelectFilter title="ساعت" /> */}
       </div>
       <div className=" gap-1 flex-col flex items-end w-[80%] justify-end">
         <AddMedicalCenterButt
+          isOffice={type == "office" ? true : false}
           isMedicalCenterForm={isMedicalCenterForm}
           setIsMedicalCenterForm={setIsMedicalCenterForm}
         />

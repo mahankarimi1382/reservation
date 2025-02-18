@@ -30,7 +30,7 @@ function AddTurnModal({ setIsAddTurn }) {
     nationalId,
     birthNumber: 0,
     birthDate: "",
-    cityId,
+    cityId:cityId.id,
     geolat: 0,
     geolon: 0,
     patientPhone,

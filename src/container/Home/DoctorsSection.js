@@ -26,10 +26,10 @@ function DoctorsSection() {
         </Link>
       </div>
       <div className=" lg:mt-10 mt-5 flex gap-12 no-scrollbar overflow-x-auto w-11/12">
-        {doctors.map((items) => {
+        {doctors.map((items,index) => {
           return (
             <div
-              key={items.id}
+              key={index}
               className=" px-2 lg:px-0 flex lg:gap-5 gap-2 flex-col justify-center items-center rounded-xl border-2 min-w-[215px] lg:min-w-[310px] h-[266px] lg:h-[399px]"
             >
               <Image

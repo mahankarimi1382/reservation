@@ -17,6 +17,7 @@ const MapTest = dynamic(() => import("../../components/MapTest"), {
 });
 const MedicalFormModal = ({ setIsMedicalCenterForm }) => {
   const pathName = usePathname();
+
   console.log(pathName);
   const isoffice = pathName === "/adminPanel/medicalcenters/offices";
   const [isVirtual, setIsVirtual] = useState(false);
@@ -42,7 +43,7 @@ const MedicalFormModal = ({ setIsMedicalCenterForm }) => {
     geolon: position[0],
     geolat: position[1],
     phone,
-    cityId,
+    cityId: cityId.id || 1,
     siamCode,
     desc,
     clinicTypeId,
@@ -58,9 +59,36 @@ const MedicalFormModal = ({ setIsMedicalCenterForm }) => {
     geolon: position ? position[0] : 0,
     geolat: position ? position[1] : 0,
     phone,
-    cityId,
+    cityId: cityId.id || 1,
     postalCode: siamCode,
     officeTypeId,
+  };
+  const handleSubmit = () => {
+    if (
+      isoffice &&
+      !isVirtual &&
+      cityId &&
+      officeTypeId &&
+      name &&
+      address &&
+      phone &&
+      siamCode
+    ) {
+      console.log(isoffice);
+      setLoading(true);
+      console.log("first");
+      add_Office(data2, setLoading, setIsMedicalCenterForm);
+    } else if (isoffice && isVirtual && officeTypeId && name && phone) {
+      setLoading(true);
+      console.log("dahd");
+      add_Office(data2, setLoading, setIsMedicalCenterForm);
+    } else if (cityId && clinicTypeId && name && address && phone && siamCode) {
+      console.log("medical");
+      add_medical_center(data, setLoading, setIsMedicalCenterForm);
+      setLoading(true);
+    } else {
+      Eror("لطفا اطلاعات را کامل وارد کنید");
+    }
   };
   return (
     <div
@@ -238,46 +266,7 @@ const MedicalFormModal = ({ setIsMedicalCenterForm }) => {
             )}
 
             <button
-              onClick={() => {
-                if (
-                  isoffice &&
-                  !isVirtual &&
-                  cityId &&
-                  officeTypeId &&
-                  name &&
-                  address &&
-                  phone &&
-                  siamCode
-                ) {
-                  console.log(isoffice);
-                  setLoading(true);
-                  console.log("first");
-                  add_Office(data2, setLoading,setIsMedicalCenterForm);
-                } else if (
-                  isoffice &&
-                  isVirtual &&
-                  officeTypeId &&
-                  name &&
-                  phone
-                ) {
-                  setLoading(true);
-                  console.log("dahd");
-                  add_Office(data2, setLoading, setIsMedicalCenterForm);
-                } else if (
-                  cityId &&
-                  clinicTypeId &&
-                  name &&
-                  address &&
-                  phone &&
-                  siamCode
-                ) {
-                  console.log("medical");
-                  add_medical_center(data, setLoading, setIsMedicalCenterForm);
-                  setLoading(true);
-                } else {
-                  Eror("لطفا اطلاعات را کامل وارد کنید");
-                }
-              }}
+              onClick={handleSubmit}
               className=" w-1/3 bg-[#005DAD] text-white py-3 px-4 rounded-lg"
               type="submit"
             >
@@ -289,7 +278,7 @@ const MedicalFormModal = ({ setIsMedicalCenterForm }) => {
           className=" object-cover "
           width={440}
           alt="image"
-          src={ MedicalCenterFormImage}
+          src={MedicalCenterFormImage}
         />
       </div>
     </div>

@@ -45,6 +45,10 @@ const DoctorFormModal = ({ setIsAddDoctorModal, fromSignup }) => {
     city: cityId.id,
     desc: doctorformData.desc,
     gender: doctorformData.gender,
+    docExperiance: "string",
+    docInstaLink: "string",
+    smeProfileId: smeId||"",
+
   };
 
   const token = Cookies.get("token");
@@ -58,8 +62,9 @@ const DoctorFormModal = ({ setIsAddDoctorModal, fromSignup }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (smeId) {
+      console.log("first");
       setIsLoading(true);
-      add_doctor(doctorformData, setIsLoading);
+      add_doctor(data, setIsLoading, setIsAddDoctorModal);
     } else {
       setIsLoading(true);
       create_sme_profile_for_doctor(

@@ -461,7 +461,7 @@ export const add_medical_center = (
     .then((res) => {
       setLoading(false);
       console.log(res);
-      success("کلینیک با موفقیت ثبت شد");
+      success("مرکز درمانی با موفقیت ثبت شد");
       setIsMedicalCenterForm(false);
     })
     .catch((err) => {
@@ -588,11 +588,15 @@ export const get_offices = async () => {
     return null;
   }
 };
-export const search_doctors_list = async (name = "", currentPage) => {
+export const search_doctors_list = async (
+  name = "",
+  currentPage,
+  specialistId
+) => {
   console.log("name" + name);
   try {
     const response = await axiosConfig.get(
-      `Doctor/search-list-doctors?DoctorName=${name}&pagesize=10&pageNumber=${currentPage}`
+      `Doctor/search-list-doctors?DoctorName=${name}&pagesize=10&pageNumber=${currentPage}&specialist=${specialistId}`
     );
     const doctors = response.data.result;
     console.log(doctors);

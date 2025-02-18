@@ -545,14 +545,34 @@ export const AddTurnButt = ({ isAddTurn, setIsAddTurn }) => {
   );
 };
 export const MedicalCenterSignUpButt = () => {
+  const token = Cookies.get("token");
+
+  // const [isModal, setIsModal] = useState(false);
+  // return (
+  //   <div>
+  //     {isModal && <DoctorFormModal setIsAddDoctorModal={setIsModal} />}
+  //     <button
+  //       onClick={() => {
+
   const [isMedicalCenterForm, setIsMedicalCenterForm] = useState(false);
+  const [isLoginModal, setIsLoginModal] = useState(false);
+
   return (
     <div>
       {isMedicalCenterForm && (
         <MedicalFormModal setIsMedicalCenterForm={setIsMedicalCenterForm} />
       )}
+      {isLoginModal && <LoginModal setIsModal={setIsLoginModal} />}
+
       <button
-        onClick={() => setIsMedicalCenterForm(true)}
+        onClick={() => {
+          if (token) {
+            setIsMedicalCenterForm(true);
+          } else {
+            setIsLoginModal(true);
+            success(" لطفا در ابتدا لاگین کنید");
+          }
+        }}
         href="medicalCentersLogin/loginForm"
         className=" text-lg flex justify-center items-center gap-3 px-16 p-2 text-white bg-[#005DAD] rounded-lg"
       >
@@ -563,6 +583,7 @@ export const MedicalCenterSignUpButt = () => {
   );
 };
 export const AddMedicalCenterButt = ({
+  isOffice,
   isMedicalCenterForm,
   setIsMedicalCenterForm,
 }) => {
@@ -576,7 +597,8 @@ export const AddMedicalCenterButt = ({
         className=" flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
       >
         <GoPlus className=" text-2xl" />
-        افزودن مرکز درمانی
+        
+        {isOffice?"افزودن مطب":"افزودن مرکز درمانی"}
       </button>
     </div>
   );

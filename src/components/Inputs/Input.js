@@ -214,7 +214,9 @@ export const CitySelectInput = ({
             : "ابتدا استان را انتخاب کنید"}
         </option>
         {fromFilter && (
-          <option data-name="همه ی شهر ها" value="">{cities.length !== 0 && "همه ی شهر ها"}</option>
+          <option data-name="همه ی شهر ها" value="">
+            {cities.length !== 0 && "همه ی شهر ها"}
+          </option>
         )}
         {cities.map((item) => {
           return (
@@ -275,7 +277,11 @@ export const ProvinceSelectInput = ({
     </div>
   );
 };
-export const SpecialtiesSelectInput = ({ specialistId, setSpecialistId }) => {
+export const SpecialtiesSelectInput = ({
+  specialistId,
+  setSpecialistId,
+  hiddenTitle,
+}) => {
   const [specialist, setSpecialist] = useState([]);
   console.log(specialist);
   useEffect(() => {
@@ -292,13 +298,14 @@ export const SpecialtiesSelectInput = ({ specialistId, setSpecialistId }) => {
   }, []);
   return (
     <div className=" min:w-[40%] w-full flex gap-2 flex-col items-start">
-      <h5>تخصص</h5>
+      {!hiddenTitle && <h5>تخصص</h5>}
+
       <select
         value={specialistId}
         onChange={(e) => setSpecialistId(e.target.value)}
         className=" border w-full border-[#636972] rounded-lg p-2"
       >
-        <option></option>
+        <option>{hiddenTitle&&"تخصص"}</option>
         {specialist.map((item) => {
           return (
             <option value={item.id} key={item.id}>

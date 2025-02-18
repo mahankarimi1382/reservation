@@ -142,10 +142,12 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
           <div className="w-[40%]">
             <CitySelectInput setCityId={setCityId} cities={cities} />
           </div>
-          <SpecialtiesSelectInput
-            specialistId={specialistId}
-            setSpecialistId={setSpecialistId}
-          />
+          <div className=" w-[40%]">
+            <SpecialtiesSelectInput
+              specialistId={specialistId}
+              setSpecialistId={setSpecialistId}
+            />
+          </div>
           <div className=" w-[40%] flex gap-2 flex-col items-start">
             <h5>آدرس مطب</h5>
             <input className=" border w-full border-[#636972] rounded-lg p-2" />
