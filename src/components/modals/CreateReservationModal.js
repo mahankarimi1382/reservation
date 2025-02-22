@@ -7,18 +7,23 @@ import setting from "../../../public/Pics/doctorPanel/setting.png";
 import { Calendar } from "react-multi-date-picker";
 import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
+import moment from "moment-jalaali";
 import TimeInput from "../TimeInput";
 import { smeIdStorage } from "@/store/Store";
 import { create_Reservation } from "@/api/ApiCalling";
-function CreateReservationModal({ closeModal, TreatmentId }) {
+import { SyncLoader } from "react-spinners";
+
+function CreateReservationModal({ closeModal, TreatmentId = 5 }) {
+  const [isLoading, setIsLoading] = useState(false);
   const { smeId } = smeIdStorage();
   const [reservationDate, setReservationDate] = useState("");
   const [cancleTimeDuration, setCancleTimeDuration] = useState(0);
   const [reservationTime, setReservationTime] = useState("");
-  const [visitCostId, setVisitCostId] = useState(1);
+  const [visitCostId, setVisitCostId] = useState(2);
   const [totalTurnCount, setTotalTurnCount] = useState(0);
   const [numberofturnsinlimit, setNumberofturnsinlimit] = useState(0);
   const [timeofturnsinlimit, setTimeofturnsinlimit] = useState(0);
+
   const data = {
     metadata: {
       userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -34,6 +39,9 @@ function CreateReservationModal({ closeModal, TreatmentId }) {
     numberofturnsinlimit: parseInt(numberofturnsinlimit),
     timeofturnsinlimit: parseInt(timeofturnsinlimit),
   };
+
+  const today = new Date();
+
   return (
     <div className=" z-20  w-screen h-screen top-0 justify-center items-center flex right-0 fixed ">
       <div className=" relative w-[70%] h-[90%] p-3 pb-10 bg-white rounded-xl">
@@ -44,7 +52,15 @@ function CreateReservationModal({ closeModal, TreatmentId }) {
         <div className=" w-full h-full flex justify-center gap-5 items-center">
           <div className=" flex flex-col gap-5">
             <Calendar
-              onChange={(date) => setReservationDate(date.format())}
+              onChange={(date) => {
+                moment.loadPersian({ usePersianDigits: false });
+                const formattedDate = moment(date.toDate()).format(
+                  "jYYYY/jMM/jDD"
+                );
+                console.log(formattedDate);
+                setReservationDate(formattedDate);
+              }}
+              minDate={today}
               className="rmdp-prime-admin relative flex justify-center items-center"
               calendar={persian}
               locale={persian_fa}
@@ -89,10 +105,6 @@ function CreateReservationModal({ closeModal, TreatmentId }) {
                     className=" shadow-md text-center p-0 outline-none w-[81px] h-[38px] rounded-lg border-[#005DAD] border"
                   />
                 </div>
-                {/* <div className=" flex items-center justify-between">
-                  <h4>تا ساعت:</h4>
-                  <input className=" shadow-md text-center p-0 outline-none w-[81px] h-[38px] rounded-lg border-[#005DAD] border" />
-                </div> */}
               </div>
             </div>
             <hr className="border-2 rounded-xl" />
@@ -112,11 +124,17 @@ function CreateReservationModal({ closeModal, TreatmentId }) {
                   انصراف
                 </button>
                 <button
-                  onKeyDown={(e) => e.stopPropagation()}
-                  onClick={() => create_Reservation(data)}
+                  onClick={() => {
+                    setIsLoading(true);
+                    create_Reservation(data, setIsLoading, closeModal);
+                  }}
                   className=" bg-[#005DAD] text-white  p-3 w-1/3 rounded-lg"
                 >
-                  ثبت تغییرات
+                  {isLoading ? (
+                    <SyncLoader color="white" size={10} />
+                  ) : (
+                    "ثبت تغییرات"
+                  )}
                 </button>
               </div>
             </div>

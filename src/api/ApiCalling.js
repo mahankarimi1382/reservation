@@ -812,14 +812,18 @@ export const create_sme_profile_for_doctor = (
       console.log(err);
     });
 };
-export const create_Reservation = (data) => {
+export const create_Reservation = (data, setIsLoading, closeModal) => {
   console.log(data);
   axiosConfig
     .post("/Reservation/create-reservation", data)
     .then((res) => {
       console.log(res);
+      success("نوبت با موفقیت ثبت شد");
+      setIsLoading(false);
+      closeModal();
     })
     .catch((err) => {
       console.log(err);
+      setIsLoading(false);
     });
 };
