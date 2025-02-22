@@ -240,7 +240,7 @@ export const SeeDoctorNazaratButt = () => {
       {isNazarModal && <SeeNazarModal setIsNazarModal={setIsNazarModal} />}
       <button
         onClick={handleOpenModal}
-        className=" text-[#005DAD] flex justify-center items-center lg:gap-1 whitespace-nowrap text-[8px] lg:text-sm"
+        className=" text-[#005DAD] flex justify-center items-center lg:gap-1 whitespace-nowrap text-[12px] lg:text-sm"
       >
         <IoEyeOutline />
         مشاهده نظرات پزشک

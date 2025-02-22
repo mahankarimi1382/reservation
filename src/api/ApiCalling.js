@@ -812,3 +812,14 @@ export const create_sme_profile_for_doctor = (
       console.log(err);
     });
 };
+export const create_Reservation = (data) => {
+  console.log(data);
+  axiosConfig
+    .post("/Reservation/create-reservation", data)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

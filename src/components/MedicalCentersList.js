@@ -18,10 +18,12 @@ import printer from "../../public/Pics/printer.png";
 import DatePickerComponent from "@/components/DatePickerComponent";
 import { SelectFilter } from "@/components/Inputs/Input";
 import { AddMedicalCenterButt } from "@/components/Buttons/Button";
+import SeeReservsModal from "./modals/SeeReservsModal";
 function MedicalCentersList({ type }) {
   const [medicalCenters, setMedicalCenters] = useState([]);
   const [isMedicalCenterForm, setIsMedicalCenterForm] = useState(false);
-
+  const [isSeeReservsModal, setIsSeeReservsModal] = useState(false);
+  const [selectedMedical, setSelectedMedical] = useState({});
   console.log(medicalCenters);
   const getMedicalCenters = async () => {
     const data = await get_clinics();
@@ -66,6 +68,12 @@ function MedicalCentersList({ type }) {
   return (
     <div className=" gap-10 mt-20 w-full flex flex-col items-center ">
       <div className=" flex w-[80%]  gap-5 items-center">
+        {isSeeReservsModal && (
+          <SeeReservsModal
+            closeModal={() => setIsSeeReservsModal(false)}
+            selectedMedical={selectedMedical}
+          />
+        )}
         <DatePickerComponent title="از تاریخ" />
         <DatePickerComponent title="تا تاریخ" />
         {/* <SelectFilter title="نظر" />
@@ -104,31 +112,32 @@ function MedicalCentersList({ type }) {
         )}
         <div className=" py-2 w-full flex rounded-lg bg-[#F4F4F4]">
           <span className="w-[5%]" />
-          <h4 className=" primary w-[16%] flex justify-center items-center text-[#3F444D] ">
+          <h4 className=" primary w-[14%] flex justify-center items-center text-[#3F444D] ">
             {type == "office" ? "مطب" : "مراکز درمانی"}
 
             <TiArrowSortedDown />
           </h4>
 
-          <h4 className=" w-[16%] flex justify-center items-center text-[#3F444D] ">
+          <h4 className=" w-[14%] flex justify-center items-center text-[#3F444D] ">
             {type == "office" ? "نام مطب" : "نام مرکز "}
             <TiArrowSortedDown />
           </h4>
-          <h4 className=" w-[16%] flex justify-center items-center text-[#3F444D] ">
+          <h4 className=" w-[14%] flex justify-center items-center text-[#3F444D] ">
             {type == "office" ? "کد پستی" : "کد سیام"}
 
             <TiArrowSortedDown />
           </h4>
-          <h4 className=" w-[16%] font-medium flex justify-center items-center text-[#3F444D]">
+          <h4 className=" w-[14%] font-medium flex justify-center items-center text-[#3F444D]">
             {type == "office" ? "تعداد پزشکان مطب" : "تعداد پزشکان مرکز"}
 
             <TiArrowSortedDown />
           </h4>
-          <h4 className=" w-[16%] flex justify-center items-center text-[#3F444D]">
+          <h4 className=" w-[14%] flex justify-center items-center text-[#3F444D]">
             {type == "office" ? "نوع مطب" : "نوع مرکز"}
 
             <TiArrowSortedDown />
           </h4>
+          <span className="w-[25%]" />
         </div>
         {currentItems.map((item) => {
           return (
@@ -152,7 +161,7 @@ function MedicalCentersList({ type }) {
                   className="  text-[#3F444D]  transition-all cursor-pointer hover:text-green-600"
                 />
               </div>
-              <div className=" w-[16%] flex justify-center items-center text-[#3F444D] ">
+              <div className=" w-[14%] flex justify-center items-center text-[#3F444D] ">
                 <Image
                   src={""}
                   alt="image"
@@ -160,23 +169,34 @@ function MedicalCentersList({ type }) {
                   className=" rounded-full border border-[#005DAD]"
                 />
               </div>
-              <h4 className=" w-[16%] flex justify-center items-center text-[#3F444D] ">
+              <h4 className=" w-[14%] flex justify-center items-center text-[#3F444D] ">
                 {type == "office" ? item.name : item.clinicName}
               </h4>
-              <h4 className=" w-[16%] flex justify-center items-center text-[#3F444D] ">
+              <h4 className=" w-[14%] flex justify-center items-center text-[#3F444D] ">
                 {type == "office" ? item.postalCode : item.siamCode}
               </h4>
-              <h4 className=" text-[#005DAD] w-[16%] flex justify-center items-center ">
+              <h4 className=" text-[#005DAD] w-[14%] flex justify-center items-center ">
                 0
               </h4>
-              <h4 className=" text-[#005DAD] w-[16%] flex justify-center items-center ">
+              <h4 className=" text-[#005DAD] w-[14%] flex justify-center items-center ">
                 {type == "office" ? item.officeTypeName : item.clinicTypeName}
 
                 {}
               </h4>
-              <button className=" gap-2 border rounded-lg px-5 p-1 flex justify-center items-center bg-[#DBEDFF] border-[#005DAD] text-[#005DAD]">
-                مشاهده جزئیات
-              </button>
+              <div className=" flex justify-center gap-2 items-center w-[25%]">
+                <button className=" gap-2 border rounded-lg p-1 flex justify-center items-center bg-[#DBEDFF] border-[#005DAD] text-[#005DAD]">
+                  مشاهده جزئیات
+                </button>
+                <button
+                  onClick={() => {
+                    setSelectedMedical(item);
+                    setIsSeeReservsModal(true);
+                  }}
+                  className=" gap-2 border rounded-lg  p-1 flex justify-center items-center bg-[#F2FEF8] border-[#1F7168] text-[#1F7168]"
+                >
+                  مشاهده نوبت ها
+                </button>
+              </div>
             </div>
           );
         })}

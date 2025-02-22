@@ -16,6 +16,16 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
   const [loginByPass, setLoginBypass] = useState(false);
   const [nationalCode, setNationalCode] = useState("");
   const [password, setPassword] = useState("");
+  const handleSubmit = () => {
+    loginByPass
+      ? signin(setIsLoading, data2, setFullName, setToken, closeModal, setSmeId)
+      : signup(setIsLoading, data, setIsValidateModal);
+  };
+  const handleKeyDown = (e) => {
+    if (e.key == "Enter" && phoneNum.length >= 11) {
+      handleSubmit();
+    }
+  };
   const data = {
     metadata: {
       userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -46,7 +56,10 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
       closeModal={closeModal}
     />
   ) : (
-    <div className=" py-2 w-[394px] gap-5 bg-white flex flex-col justify-between rounded">
+    <div
+      onKeyDown={handleKeyDown}
+      className=" py-2 w-[394px] gap-5 bg-white flex flex-col justify-between rounded"
+    >
       <div className=" w-full flex px-1 justify-end">
         <RxCross2
           onClick={closeModal}
@@ -108,18 +121,7 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
       <div className=" flex w-full justify-center items-center">
         <button
           ref={buttRef}
-          onClick={() => {
-            loginByPass
-              ? signin(
-                  setIsLoading,
-                  data2,
-                  setFullName,
-                  setToken,
-                  closeModal,
-                  setSmeId
-                )
-              : signup(setIsLoading, data, setIsValidateModal);
-          }}
+          onClick={handleSubmit}
           disabled={
             loginByPass ? !nationalCode || !password : phoneNum.length < 11
           }

@@ -14,6 +14,7 @@ import { SyncLoader } from "react-spinners";
 import { ErrorHandler } from "@/utils/ErrorHandler";
 import { Eror } from "../ToastAlerts";
 function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
+  console.log(doctorItems);
   const [isLoading, setIsLoading] = useState(false);
   const { smeId } = smeIdStorage();
   const [cities, setCities] = useState([]);
@@ -27,10 +28,11 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
     doctorItems ? doctorItems.nationalId : ""
   );
   const [specialistId, setSpecialistId] = useState(
-    doctorItems ? doctorItems.specialistId : ""
+    doctorItems ? doctorItems.smeProfile.doctors[0].specialist.id : ""
   );
+  console.log(specialistId);
   const [codeNezam, setCodeNezam] = useState(
-    doctorItems ? doctorItems.codeNezam : ""
+    doctorItems ? doctorItems.smeProfile.doctors[0].codeNezam : ""
   );
   const [mobile, setMobile] = useState(doctorItems ? doctorItems.mobile : "");
   const [cityId, setCityId] = useState("");

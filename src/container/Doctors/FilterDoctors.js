@@ -17,47 +17,73 @@ import { get_specialties } from "@/api/ApiCalling";
 import { myStore } from "@/store/Store";
 import { RxCross2 } from "react-icons/rx";
 
-// bimehTakmili: "",
-// setBimehTakmili: (value) => set(() => ({ bimehTakmili: value })),
-
-// bimeAsli: "",
-// setBimeAsli: (value) => set(() => ({ bimeAsli: value })),
-
-// justOnline: "",
-// setJustOnline: (value) => set(() => ({ justOnline: value })),
-
-// hasTurn: "",
-// setHasTurn: (value) => set(() => ({ hasTurn: value })),
-
-// acceptInsurance: "",
-// setAcceptInsurance: (value) => set(() => ({ acceptInsurance: value })),
-
-// gender: "",
-// setGender: (value) => set(() => ({ gender: value })),
-
-// sDate: "",
-// setSDate: (value) => set(() => ({ sDate: value })),
-
-// eDate: "",
-// setEDate: (value) => set(() => ({ eDate: value })),
-
-// onlineTypeId: "",
-// setOnlineTypeId: (value) => set(() => ({ onlineTypeId: value })),
-
-// officeOrClinicHozoori: "",
-// setOfficeOrClinicHozoori: (value) =>
-//   set(() => ({ officeOrClinicHozoori: value })),
-
 function FilterDoctors({ hidden, setIsFilterClickMobile }) {
+  const { filtredBoxes, multiSpecialtiesBoxes } = myStore();
   const {
+    setBimehTakmili,
+    specialistSearch,
+    setSpecialistSearch,
+    setBimeAsli,
     setJustOnline,
-    setAcceptInsurance,
     setHasTurn,
-    hasTurn,
-    setCurrentPageDoctorSearch,
-    acceptInsurance,
-    justOnline,
+    setAcceptInsurance,
+    setGender,
+    setSDate,
+    setEDate,
+    setOnlineTypeId,
+    setOfficeOrClinicHozoori,
+    provinceId,
+    cityId,
+    setProvinceId,
+    setCityId,
+    setMultiSpecialtiesBoxes,
+    storedIdsMultipleSearch,
+    setStoredIdsMultipleSearch,
   } = myStore();
+  const handleRemoveItem = (type) => {
+    if (type == "bimeAsli") {
+      setBimeAsli("");
+    } else if (type == "bimeTakmili") {
+      setBimehTakmili("");
+    } else if (type == "onlineTypeId") {
+      setOnlineTypeId("");
+    } else if (type == "province") {
+      setProvinceId("");
+    } else if (type == "city") {
+      setCityId("");
+    } else if (type == "justOnline") {
+      setJustOnline("");
+    } else if (type == "gender") {
+      setGender("");
+    } else if (type == "acceptInsurance") {
+      setAcceptInsurance("");
+    } else {
+      console.log(type);
+    }
+  };
+  const handleRemoveSpecial = (idToRemove, caption) => {
+    console.log(caption);
+    console.log(storedIdsMultipleSearch);
+    if (typeof storedIdsMultipleSearch == "string") {
+      let newIds = storedIdsMultipleSearch
+        .split(",")
+        .filter((id) => id !== idToRemove.toString())
+        .join(",");
+      console.log(newIds);
+      setStoredIdsMultipleSearch(newIds);
+      setSpecialistSearch(newIds);
+    } else {
+      setSpecialistSearch("");
+    }
+
+    let removedBox = multiSpecialtiesBoxes
+      .filter((item) => item.caption != caption)
+      .filter((item) => item.caption);
+    console.log(removedBox);
+    setMultiSpecialtiesBoxes(removedBox);
+  };
+  const { hasTurn, setCurrentPageDoctorSearch, acceptInsurance, justOnline } =
+    myStore();
 
   return (
     <div
@@ -79,6 +105,37 @@ function FilterDoctors({ hidden, setIsFilterClickMobile }) {
           onClick={() => setIsFilterClickMobile(false)}
           className=" flex lg:hidden"
         />
+      </div>
+      <div className=" w-full flex-wrap flex justify-start items-center gap-2">
+        {filtredBoxes.map((item, index) => {
+          return (
+            item.caption && (
+              <button
+                onClick={() => handleRemoveItem(item.type)}
+                key={index}
+                className=" items-center flex-wrap flex  gap-1 bg-[rgba(31,113,104,0.08)] border border-[#399086C9] text-[#399086C9] rounded-full text-xs overflow-hidden lg:p-2 p-1"
+              >
+                <RxCross2 className="text-[#399086C9]" />
+                {item.caption}
+              </button>
+            )
+          );
+        })}
+        {multiSpecialtiesBoxes
+          .filter((item) => item.id != 0)
+          .filter((item) => item.caption)
+          .map((item) => {
+            return (
+              <button
+                onClick={() => handleRemoveSpecial(item.id, item.caption)}
+                key={item.id}
+                className=" items-center flex-wrap flex  gap-1 bg-[rgba(31,113,104,0.08)] border border-[#399086C9] text-[#399086C9] rounded-full text-xs overflow-hidden lg:p-2 p-1"
+              >
+                <RxCross2 className="text-[#399086C9]" />
+                {item.caption}
+              </button>
+            );
+          })}
       </div>
       <SerchDropDowns />
       <h2 className=" text-sm lg:text-[16px]">روش ویزیت رو انتخاب کنید</h2>

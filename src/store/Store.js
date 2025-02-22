@@ -51,6 +51,17 @@ export const myStore = create((set) => ({
   cityNameSeacrhBox: "",
   setCityNameSeacrhBox: (value) => set(() => ({ cityNameSeacrhBox: value })),
 
+  storedIdsMultipleSearch: "",
+  setStoredIdsMultipleSearch: (value) =>
+    set(() => ({ storedIdsMultipleSearch: value })),
+
+  filtredBoxes: [],
+  setFiltredBoxes: (boxitems) => set(() => ({ filtredBoxes: boxitems })),
+
+  multiSpecialtiesBoxes: [],
+  setMultiSpecialtiesBoxes: (boxitems) =>
+    set(() => ({ multiSpecialtiesBoxes: boxitems })),
+
   officeOrClinicHozoori: "",
 
   setOfficeOrClinicHozoori: (value) =>
@@ -67,14 +78,19 @@ export const myStore = create((set) => ({
   isSerchDoctorLoading: true,
   setIsSerchDoctorLoading: (bool) =>
     set(() => ({ isSerchDoctorLoading: bool })),
-  specialistSearch: { name: null, id: null },
-  setSpecialistSearch: (name, id) =>
+  specialistSearch: null,
+  setSpecialistSearch: (id) =>
     set(() => ({
-      specialistSearch: {
+      specialistSearch: id,
+    })),
+  specialistNames: { name: null },
+  setSpecialistNames: (name) =>
+    set(() => ({
+      specialistNames: {
         name: name,
-        id: id,
       },
     })),
+
   currentPageDoctorSearch: 1,
   setCurrentPageDoctorSearch: (page) =>
     set(() => ({ currentPageDoctorSearch: page })),

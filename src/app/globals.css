@@ -42,6 +42,57 @@ line {
   bottom: 50px;
   left: 50px;
 }
+
+.rmdp-prime-admin .rmdp-calendar {
+  width: 450px;
+  min-height: 400px;
+  border-radius: 30px;
+  background-color: #ecf3fe;
+}
+
+.rmdp-prime-admin .rmdp-day:not(.rmdp-day-hidden) span:hover {
+  background-color: #c4e2ff !important;
+  color: white;
+}
+.rmdp-prime-admin .rmdp-week-day {
+  font-size: 12px;
+  width: 10px;
+  color: black;
+}
+
+.rmdp-prime-admin .rmdp-day-picker div {
+  width: 100%;
+}
+.rmdp-prime-admin .rmdp-week {
+  display: flex;
+}
+.rmdp-prime-admin .rmdp-day {
+  margin-right: 18px;
+  margin-top: 10px;
+}
+.rmdp-prime-admin .rmdp-day .sd {
+  width: 30px;
+  height: 30px;
+}
+.rmdp-prime-admin .rmdp-selected span:not(.highlight) {
+  padding: 5px;
+}
+
+
+
+
+.rmdp-prime-admin .rmdp-header,
+.rmdp-prime-admin .rmdp-panel-header {
+  /* background-color: #c4e2ff; */
+  border-bottom: 2px solid #cac4d0;
+  margin-bottom: 5px;
+  padding-bottom: 10px;
+  padding-top: 40px;
+  font-size: 20px;
+  font-size: 40px;
+}
+
+
 .rmdp-top-class {
   background-color: none;
   box-shadow: 0px;

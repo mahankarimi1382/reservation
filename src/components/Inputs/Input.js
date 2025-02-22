@@ -6,7 +6,14 @@ import { myStore } from "@/store/Store";
 import { get_province, get_specialties, read_city } from "@/api/ApiCalling";
 
 export const SerchDropDowns = () => {
-  const { setCurrentPageDoctorSearch } = myStore();
+  const {
+    setCurrentPageDoctorSearch,
+    setMultiSpecialtiesBoxes,
+    multiSpecialtiesBoxes,
+    setSpecialistNames,
+    storedIdsMultipleSearch,
+    setStoredIdsMultipleSearch,
+  } = myStore();
   const { setSpecialistSearch, specialistSearch } = myStore();
   const [specialties, setSpecialties] = useState([]);
   const [filtredArr, setFiltredArr] = useState([]);
@@ -38,10 +45,30 @@ export const SerchDropDowns = () => {
   const [isSearching, setIsSearching] = useState(false);
   // const [selectedOption, setSelectedOption] = useState("");
   const handleSelectOption = (name, id) => {
+    if (storedIdsMultipleSearch) {
+      setStoredIdsMultipleSearch(`${storedIdsMultipleSearch},${id}`);
+    } else {
+      setStoredIdsMultipleSearch(id);
+    }
+    if (storedIdsMultipleSearch) {
+      setSpecialistSearch(`${storedIdsMultipleSearch},${id}`);
+    } else {
+      setSpecialistSearch(id);
+    }
+
+    setCurrentPageDoctorSearch(1);
     setIsSearching(false);
     setInputVal("");
-    setSpecialistSearch(name, id);
+    setSpecialistNames(name);
     setCurrentPageDoctorSearch(1);
+    setMultiSpecialtiesBoxes([
+      ...multiSpecialtiesBoxes,
+      {
+        id: id,
+        caption: name,
+        type: "specialties",
+      },
+    ]);
   };
   return (
     <div className=" flex flex-col gap-3">
@@ -53,11 +80,7 @@ export const SerchDropDowns = () => {
         <input
           value={inputVal}
           onChange={handleInputChange}
-          placeholder={
-            specialistSearch.name
-              ? specialistSearch.name
-              : "نام بیماری را جستجو کنید"
-          }
+          placeholder={"نام بیماری را جستجو کنید"}
           className=" outline-none h-[54px] w-full rounded-xl"
         />
         <IoIosArrowDown
@@ -305,7 +328,7 @@ export const SpecialtiesSelectInput = ({
         onChange={(e) => setSpecialistId(e.target.value)}
         className=" border w-full border-[#636972] rounded-lg p-2"
       >
-        <option>{hiddenTitle&&"تخصص"}</option>
+        <option>{hiddenTitle && "تخصص"}</option>
         {specialist.map((item) => {
           return (
             <option value={item.id} key={item.id}>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ModalLogo from "../../../public/Pics/ModalLogo.png";
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
@@ -6,11 +6,7 @@ import Timer from "../Timer";
 import { Eror, success } from "../ToastAlerts";
 import { SyncLoader } from "react-spinners";
 import { activating_registarion, sendCodeAgain } from "@/api/ApiCalling";
-import {
-  fullNameStorage,
-  myStore,
-  smeIdStorage,
-} from "@/store/Store";
+import { fullNameStorage, myStore, smeIdStorage } from "@/store/Store";
 
 function ValidateModal({
   closeModal,
@@ -18,7 +14,15 @@ function ValidateModal({
   nationalCode,
   setIsValidateModal,
 }) {
-  const {setSmeId}=smeIdStorage()
+  const input1Ref = useRef();
+  const input2Ref = useRef();
+  const input3Ref = useRef();
+  const input4Ref = useRef();
+  const input5Ref = useRef();
+  useEffect(() => {
+    input1Ref.current.focus();
+  }, []);
+  const { setSmeId } = smeIdStorage();
   const { setToken } = myStore();
   const { setFullName } = fullNameStorage();
   const [inputs, setInputs] = useState({
@@ -31,10 +35,7 @@ function ValidateModal({
   const [isWrongCode, setIsWrongCode] = useState(false);
   const [isSendAgain, setIsSendAgain] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const input2Ref = useRef();
-  const input3Ref = useRef();
-  const input4Ref = useRef();
-  const input5Ref = useRef();
+
   const [activationCode, setActivationCode] = useState(null);
   const data = {
     metadata: {
@@ -105,6 +106,7 @@ function ValidateModal({
       </p>
       <div className=" w-full gap-4 justify-center flex flex-row-reverse items-center">
         <input
+          ref={input1Ref}
           name="input1"
           value={inputs.input1}
           onChange={(e) => {

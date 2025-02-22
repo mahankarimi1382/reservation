@@ -59,12 +59,18 @@ function DoctorsPaginate() {
     setProvinceId,
     setCityId,
   } = myStore();
-  const { currentPageDoctorSearch, setCurrentPageDoctorSearch } = myStore();
+  const {
+    currentPageDoctorSearch,
+    setCurrentPageDoctorSearch,
+    setFiltredBoxes,
+    multiSpecialtiesBoxes,
+    setMultiSpecialtiesBoxes,
+    specialistNames,
+  } = myStore();
   const [name, setName] = useState("");
-
+  console.log(multiSpecialtiesBoxes);
   const [totalPages, setTotalPages] = useState("");
   const [doctors, setDoctors] = useState([]);
-  const [filtredBoxes, setFiltredBoxes] = useState([]);
   const onlineTypeFn = (id) => {
     if (id == 2) {
       return "تصویری";
@@ -80,46 +86,41 @@ function DoctorsPaginate() {
   let boxItems = [
     {
       id: 1,
-      caption: specialistSearch.name,
-      type: "specialties",
-    },
-    {
-      id: 2,
       caption: bimeAsli,
       type: "bimeAsli",
     },
     {
-      id: 3,
+      id: 2,
       caption: bimehTakmili,
       type: "bimeTakmili",
     },
     {
-      id: 4,
+      id: 3,
       caption: onlineTypeFn(onlineTypeId),
       type: "onlineTypeId",
     },
     {
-      id: 5,
+      id: 4,
       caption: gender,
       type: "gender",
     },
     {
-      id: 6,
+      id: 5,
       caption: provinceId.label,
       type: "province",
     },
     {
-      id: 7,
+      id: 6,
       caption: cityId.label,
       type: "city",
     },
     {
-      id: 8,
+      id: 7,
       caption: justOnline && "فقط پزشکان آنلاین",
       type: "justOnline",
     },
     {
-      id: 9,
+      id: 8,
       caption: acceptInsurance && "فقط پزشکانی که بیمه قبول میکنند",
       type: "acceptInsurance",
     },
@@ -140,6 +141,8 @@ function DoctorsPaginate() {
     }
   };
   const handleFiltredBoxes = () => {
+    console.log("first");
+
     setFiltredBoxes(boxItems);
   };
   const genderFn = (gender) => {
@@ -156,7 +159,7 @@ function DoctorsPaginate() {
       name: name || "",
       pagesize: 3,
       currentPage: currentPageDoctorSearch || "",
-      specialistId: specialistSearch.id || "",
+      specialistId: specialistSearch|| "",
       provinceId: provinceId.id || "",
       cityId: cityId.id || "",
       BimehTakmili: bimehTakmili || "",
@@ -262,23 +265,6 @@ function DoctorsPaginate() {
         <button className=" text-[#858585]">کم ترین معطلی در مطب</button>
       </div>
       <div className=" w-full justify-center items-center flex flex-col gap-2 lg:gap-10">
-        <div className=" w-full flex-wrap flex justify-start items-center gap-2">
-          {filtredBoxes.map((item, index) => {
-            return (
-              item.caption && (
-                <button
-                  onClick={() => handleRemoveItem(item.type)}
-                  key={index}
-                  className=" items-center flex-wrap flex  gap-1 bg-[rgba(31,113,104,0.08)] border border-[#399086C9] text-[#399086C9] rounded-full text-xs overflow-hidden lg:p-2 p-1"
-                >
-                  <RxCross2 className="text-[#399086C9]" />
-                  {item.caption}
-                </button>
-              )
-            );
-          })}
-        </div>
-
         {isSerchDoctorLoading && <LoadingComponent />}
         {doctors.map((item) => {
           return (
@@ -291,15 +277,15 @@ function DoctorsPaginate() {
                   <Image
                     width={90}
                     height={90}
-                    className="w-[55px] h-[55px] lg:w-[90px] lg:h-[90px] border-2  border-[#005DAD] rounded-full"
+                    className="w-[60px] h-[60px] lg:w-[90px] lg:h-[90px] border-2  border-[#005DAD] rounded-full"
                     src={doctorprof}
                     alt="doctor-prof"
                   />
                   <div className=" flex flex-col gap-2 lg:gap-5">
-                    <h2 className=" text-xs lg:text-[22px]">
+                    <h2 className=" text-sm lg:text-[22px]">
                       {item.doctorName} {item.doctorFamily}
                     </h2>
-                    <h2 className=" text-[10px] lg:text-base text-[#757575]">
+                    <h2 className=" text-[12px] lg:text-base text-[#757575]">
                       {item.specialist}
                     </h2>
                   </div>
@@ -311,7 +297,7 @@ function DoctorsPaginate() {
                         <div key={index}>
                           <Image
                             width={22}
-                            className=" w-[10px] lg:w-[22px]"
+                            className=" w-[15px] lg:w-[22px]"
                             alt=""
                             src={star}
                           />
