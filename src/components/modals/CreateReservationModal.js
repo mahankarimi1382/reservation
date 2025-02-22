@@ -112,6 +112,7 @@ function CreateReservationModal({ closeModal, TreatmentId }) {
                   انصراف
                 </button>
                 <button
+                  onKeyDown={(e) => e.stopPropagation()}
                   onClick={() => create_Reservation(data)}
                   className=" bg-[#005DAD] text-white  p-3 w-1/3 rounded-lg"
                 >

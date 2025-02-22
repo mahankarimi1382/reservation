@@ -22,8 +22,12 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
       : signup(setIsLoading, data, setIsValidateModal);
   };
   const handleKeyDown = (e) => {
-    if (e.key == "Enter" && phoneNum.length >= 11) {
+    if (e.key == "Enter" && loginByPass && nationalCode && password) {
       handleSubmit();
+    } else {
+      if (e.key == "Enter" && phoneNum.length >= 11) {
+        handleSubmit();
+      }
     }
   };
   const data = {

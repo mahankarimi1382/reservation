@@ -25,6 +25,7 @@ function ValidateModal({
   const { setSmeId } = smeIdStorage();
   const { setToken } = myStore();
   const { setFullName } = fullNameStorage();
+  const [disabled, setDisabled] = useState(false);
   const [inputs, setInputs] = useState({
     input1: "",
     input2: "",
@@ -106,6 +107,7 @@ function ValidateModal({
       </p>
       <div className=" w-full gap-4 justify-center flex flex-row-reverse items-center">
         <input
+          disabled={disabled}
           ref={input1Ref}
           name="input1"
           value={inputs.input1}
@@ -120,6 +122,7 @@ function ValidateModal({
           }
         />
         <input
+          disabled={disabled}
           name="input2"
           value={inputs.input2}
           ref={input2Ref}
@@ -134,6 +137,7 @@ function ValidateModal({
           }
         />
         <input
+          disabled={disabled}
           name="input3"
           value={inputs.input3}
           ref={input3Ref}
@@ -148,6 +152,7 @@ function ValidateModal({
           }
         />
         <input
+          disabled={disabled}
           name="input4"
           value={inputs.input4}
           ref={input4Ref}
@@ -162,6 +167,7 @@ function ValidateModal({
           }
         />
         <input
+          disabled={disabled}
           name="input5"
           value={inputs.input5}
           ref={input5Ref}

@@ -14,6 +14,12 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [fullname, setFullname] = useState("");
+  const handleKeyDown = (e) => {
+    console.log(e)
+    if (e.key == "Enter") {
+      handleClickSignUp();
+    }
+  };
   const handleClickSignUp = () => {
     setIsLoading(true);
 
@@ -58,7 +64,10 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
           closeModal={closeModal}
         />
       ) : (
-        <div className=" py-2 w-[394px] gap-5     bg-white flex flex-col justify-between rounded">
+        <div
+          onKeyDown={handleKeyDown}
+          className=" py-2 w-[394px] gap-5     bg-white flex flex-col justify-between rounded"
+        >
           <div className=" w-full flex px-1 justify-end">
             <RxCross2
               onClick={closeModal}
