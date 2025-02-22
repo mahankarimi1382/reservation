@@ -10,7 +10,11 @@ import { useRouter } from "next/navigation";
 import { myStore } from "@/store/Store";
 import LoadingComponent from "./LoadingComponent";
 function SwipperSection() {
-  const { setSpecialistSearch } = myStore();
+  const {
+    setSpecialistSearch,
+    setMultiSpecialtiesBoxes,
+    multiSpecialtiesBoxes,
+  } = myStore();
   const router = useRouter();
   const [categorys, setCategorys] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -38,7 +42,15 @@ function SwipperSection() {
               <button
                 onClick={() => {
                   router.push("doctors-page");
-                  setSpecialistSearch(item.name, item.id);
+                  setSpecialistSearch(item.id);
+                  setMultiSpecialtiesBoxes([
+                    ...multiSpecialtiesBoxes,
+                    {
+                      id: item.id,
+                      caption: item.name,
+                      type: "specialties",
+                    },
+                  ]);
                 }}
                 key={item.id}
                 className=" group text-[10px] md:font-semibold font-light  lg:hover:shadow-lg w-[95px] h-[120px] md:w-[100px] md:h-[130px]  lg:hover:-mt-3 transition-all shadow-red-600  lg:hover:shadow-[#6991b4] lg:w-[131px] lg:h-[170px] flex flex-col justify-evenly items-center rounded-xl border border-[#DBD7D7]"

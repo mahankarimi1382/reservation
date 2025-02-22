@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import CreateReservationModal from "./CreateReservationModal";
 
-function SeeReservsModal({ closeModal, selectedMedical }) {
-  console.log(selectedMedical);
+function SeeReservsModal({ closeModal }) {
   const [isCreateReservModal, setIsCreateReservModal] = useState(false);
   return (
-    <div className=" z-20  w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]">
+    <div className=" z-20  w-screen h-screen top-0 justify-center items-center flex right-0 fixed">
       {isCreateReservModal && (
         <CreateReservationModal
-          TreatmentId={selectedMedical.id}
           closeModal={() => setIsCreateReservModal(false)}
         />
       )}
@@ -18,9 +16,7 @@ function SeeReservsModal({ closeModal, selectedMedical }) {
           onClick={closeModal}
           className=" cursor-pointer absolute top-2 left-2"
         />
-        <h5 className=" text-lg text-[#005DAD]">
-          نوبت های {selectedMedical.name}:
-        </h5>
+        <h5 className=" text-lg text-[#005DAD]">نوبت های:</h5>
 
         <div className=" bottom-2  absolute w-full flex justify-center items-center">
           <button

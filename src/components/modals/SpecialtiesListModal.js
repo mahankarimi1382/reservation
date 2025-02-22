@@ -10,7 +10,11 @@ import { myStore } from "@/store/Store";
 
 function SpecialtiesListModal({ setIsSpecialtiesModal }) {
   const router = useRouter();
-  const { setSpecialistSearch } = myStore();
+  const {
+    setSpecialistSearch,
+    setMultiSpecialtiesBoxes,
+    multiSpecialtiesBoxes,
+  } = myStore();
   const [inputValue, setInputValue] = useState("");
   const [categorys, setCategorys] = useState([]);
   const [filtredArr, setFiltredArr] = useState([]);
@@ -62,7 +66,15 @@ function SpecialtiesListModal({ setIsSpecialtiesModal }) {
               <button
                 onClick={() => {
                   router.push("doctors-page");
-                  setSpecialistSearch(item.name, item.id);
+                  setSpecialistSearch(item.id);
+                  setMultiSpecialtiesBoxes([
+                    ...multiSpecialtiesBoxes,
+                    {
+                      id: item.id,
+                      caption: item.name,
+                      type: "specialties",
+                    },
+                  ]);
                 }}
                 key={item.id}
                 className="  group cursor-pointer  hover:shadow-lg w-[123px] h-[123px]  hover:-mt-3 transition-all shadow-red-600  hover:shadow-[#6991b4] lg:w-[123px] lg:h-[123px] flex flex-col justify-evenly items-center rounded-xl border border-[#DBD7D7]"

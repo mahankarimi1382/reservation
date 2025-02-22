@@ -61,14 +61,17 @@ export const SerchDropDowns = () => {
     setInputVal("");
     setSpecialistNames(name);
     setCurrentPageDoctorSearch(1);
-    setMultiSpecialtiesBoxes([
-      ...multiSpecialtiesBoxes,
-      {
-        id: id,
-        caption: name,
-        type: "specialties",
-      },
-    ]);
+    let IsBoxExist = multiSpecialtiesBoxes.find((item) => item.id == id);
+    if (!IsBoxExist) {
+      setMultiSpecialtiesBoxes([
+        ...multiSpecialtiesBoxes,
+        {
+          id: id,
+          caption: name,
+          type: "specialties",
+        },
+      ]);
+    }
   };
   return (
     <div className=" flex flex-col gap-3">

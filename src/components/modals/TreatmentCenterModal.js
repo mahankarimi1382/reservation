@@ -11,8 +11,10 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { AddTreatmentButt } from "../Buttons/Button";
 import DeletingModal from "./DeletingModal";
+import SeeReservsModal from "./SeeReservsModal";
 
 function TreatmentCenterModal({ setIsTreatmentCenter, id, name }) {
+  const [isSeeReservsModal, setIsSeeReservsModal] = useState(false);
   const [isAddTreatmentModal, setIsAddTreatmentModal] = useState(false);
   const [isDeleteModal, setIsDeleteModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
@@ -26,6 +28,7 @@ function TreatmentCenterModal({ setIsTreatmentCenter, id, name }) {
       setTreatmenCenters(data);
     }
   };
+  console.log(treatmentCenters);
 
   useEffect(() => {
     getTreatMent();
@@ -35,6 +38,11 @@ function TreatmentCenterModal({ setIsTreatmentCenter, id, name }) {
   };
   return (
     <div className=" w-screen z-10 h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]">
+      {isSeeReservsModal && (
+        <SeeReservsModal
+          closeModal={() => setIsSeeReservsModal(false)}
+        />
+      )}
       {isDeleteModal && (
         <DeletingModal
           DeletingFn={delete_doctor_treatment}
@@ -65,9 +73,10 @@ function TreatmentCenterModal({ setIsTreatmentCenter, id, name }) {
           ) : (
             <div className=" overflow-auto rounded-xl border p-2 border-[#005DAD] w-full h-full flex flex-col">
               <div className=" p-2 border-b w-full  flex items-center justify-center">
-                <h5 className=" w-1/3">نام مرکز </h5>
-                <h5 className=" w-1/3  text-center">نوع مرکز</h5>
-                <h5 className=" w-1/3 "></h5>
+                <h5 className=" w-[15%] "></h5>
+                <h5 className=" w-[25%]">نام مرکز </h5>
+                <h5 className=" w-[30%]  text-center">نوع مرکز</h5>
+                <h5 className=" w-[30%] "></h5>
               </div>
               {treatmentCenters.map((item) => {
                 return (
@@ -75,13 +84,7 @@ function TreatmentCenterModal({ setIsTreatmentCenter, id, name }) {
                     className=" text-[#858585] border-b last:border-none p-2  flex items-center justify-center"
                     key={item.id}
                   >
-                    <h5 className=" w-1/3">
-                      {item.officeName || item.clinicName}
-                    </h5>
-                    <h5 className=" w-1/3  text-center">
-                      {item.officeName ? "مطب" : "بیمارستان,درمانگاه"}
-                    </h5>
-                    <div className=" w-1/3 flex justify-end items-center gap-5 ">
+                    <div className=" w-[15%] flex items-center justify-start gap-3 ">
                       <FaEdit className=" text-green-400 hover:text-green-600 transition-all" />
                       <MdDelete
                         onClick={() => {
@@ -91,6 +94,20 @@ function TreatmentCenterModal({ setIsTreatmentCenter, id, name }) {
                         className=" text-red-400 hover:text-red-600 transition-all"
                       />
                     </div>
+                    <h5 className=" w-[25%]">
+                      {item.officeName || item.clinicName}
+                    </h5>
+                    <h5 className=" w-[30%]  text-center">
+                      {item.officeName ? "مطب" : "بیمارستان,درمانگاه"}
+                    </h5>
+                    <button
+                      onClick={() => {
+                        setIsSeeReservsModal(true);
+                      }}
+                      className=" w-[30%] border rounded-lg  flex text-sm justify-center items-center bg-[#F2FEF8] border-[#1F7168] text-[#1F7168]"
+                    >
+                      مشاهده نوبت ها
+                    </button>
                   </div>
                 );
               })}
