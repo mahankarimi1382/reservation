@@ -4,9 +4,9 @@ import ModalLogo from "../../../public/Pics/ModalLogo.png";
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
 import { useRouter } from "next/navigation";
-import { myStore } from "@/store/Store";
+import { myStore, reservationTypeStore } from "@/store/Store";
 function SelfOrAnotherModal({ setModal }) {
-  const { setReservationType } = myStore();
+  const { setReservationType } = reservationTypeStore();
   const router = useRouter();
   const handleReservationType = (type) => {
     setReservationType(type);

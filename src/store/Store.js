@@ -1,10 +1,19 @@
 import Cookies from "js-cookie";
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-
+export const reservationTypeStore = create(
+  persist(
+    (set) => ({
+      reservationType: null,
+      setReservationType: (type) => set(() => ({ reservationType: type })),
+    }),
+    {
+      name: "reservation-type",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);
 export const myStore = create((set) => ({
-  reservationType: null,
-  setReservationType: (type) => set(() => ({ reservationType: type })),
   isEdit: false,
   setIsEdit: () => set((state) => ({ isEdit: !state.isEdit })),
   isSpecialtiesClick: false,

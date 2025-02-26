@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import ReservForMe from "./ReservForMe";
 import Pay from "./pay";
-import { myStore, smeIdStorage } from "@/store/Store";
+import { myStore, reservationTypeStore, smeIdStorage } from "@/store/Store";
 import ReservForAnother from "./ReservForAnother";
 import { useRouter } from "next/navigation";
 import Receipt from "./Receipt";
@@ -11,7 +11,7 @@ function Stepper() {
   const router = useRouter();
   const { smeId } = smeIdStorage();
 
-  const { reservationType } = myStore();
+  const { reservationType } = reservationTypeStore();
 
   console.log(reservationType);
   const [steps, setSteps] = useState(1);
@@ -26,8 +26,6 @@ function Stepper() {
       return <Pay setSteps={setSteps} />;
     } else if (steps === 3) {
       return <Receipt />;
-    } else {
-      // router.back();
     }
   };
   return <div className=" w-full">{stepper(3)}</div>;
