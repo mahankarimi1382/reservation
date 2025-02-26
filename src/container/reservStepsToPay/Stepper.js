@@ -27,7 +27,7 @@ function Stepper() {
     } else if (steps === 3) {
       return <Receipt />;
     } else {
-      router.back();
+      // router.back();
     }
   };
   return <div className=" w-full">{stepper(3)}</div>;
