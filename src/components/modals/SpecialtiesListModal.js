@@ -65,7 +65,7 @@ function SpecialtiesListModal({ setIsSpecialtiesModal }) {
             return (
               <button
                 onClick={() => {
-                  router.push("doctors-page");
+                  router.push("doctors");
                   setSpecialistSearch(item.id);
                   setMultiSpecialtiesBoxes([
                     ...multiSpecialtiesBoxes,

@@ -41,7 +41,7 @@ function SwipperSection() {
             <SwiperSlide key={item.id} className="  py-2 md:p-3 xl:p-[25px]">
               <button
                 onClick={() => {
-                  router.push("doctors-page");
+                  router.push("doctors");
                   setSpecialistSearch(item.id);
                   setMultiSpecialtiesBoxes([
                     ...multiSpecialtiesBoxes,
