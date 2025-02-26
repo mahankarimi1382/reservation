@@ -22,10 +22,13 @@ import {
 import Link from "next/link";
 import { Pagination } from "@mui/material";
 import { search_doctors } from "@/api/ApiCalling";
-import { myStore } from "@/store/Store";
+import { doctorProfileStore, myStore } from "@/store/Store";
 import { RxCross2 } from "react-icons/rx";
 import FilterDoctors from "./FilterDoctors";
+import { useRouter } from "next/navigation";
 function DoctorsPaginate() {
+  const { setDoctorId, setDoctorName } = doctorProfileStore();
+  const router = useRouter();
   const { isSerchDoctorLoading, setIsSerchDoctorLoading } = myStore();
   const [isFilterClickMobile, setIsFilterClickMobile] = useState(false);
   const {
@@ -39,34 +42,15 @@ function DoctorsPaginate() {
     eDate,
     onlineTypeId,
     officeOrClinicHozoori,
-  } = myStore();
-
-  const {
-    setBimehTakmili,
     specialistSearch,
-    setSpecialistSearch,
-    setBimeAsli,
-    setJustOnline,
-    setHasTurn,
-    setAcceptInsurance,
-    setGender,
-    setSDate,
-    setEDate,
-    setOnlineTypeId,
-    setOfficeOrClinicHozoori,
     provinceId,
     cityId,
-    setProvinceId,
-    setCityId,
-  } = myStore();
-  const {
     currentPageDoctorSearch,
     setCurrentPageDoctorSearch,
     setFiltredBoxes,
     multiSpecialtiesBoxes,
-    setMultiSpecialtiesBoxes,
-    specialistNames,
   } = myStore();
+
   const [name, setName] = useState("");
   console.log(multiSpecialtiesBoxes);
   const [totalPages, setTotalPages] = useState("");
@@ -159,7 +143,7 @@ function DoctorsPaginate() {
       name: name || "",
       pagesize: 3,
       currentPage: currentPageDoctorSearch || "",
-      specialistId: specialistSearch|| "",
+      specialistId: specialistSearch || "",
       provinceId: provinceId.id || "",
       cityId: cityId.id || "",
       BimehTakmili: bimehTakmili || "",
@@ -206,29 +190,29 @@ function DoctorsPaginate() {
   const handleChange = (event, value) => {
     setCurrentPageDoctorSearch(value);
   };
-  const handleRemoveItem = (type) => {
-    if (type == "specialties") {
-      setSpecialistSearch("");
-    } else if (type == "bimeAsli") {
-      setBimeAsli("");
-    } else if (type == "bimeTakmili") {
-      setBimehTakmili("");
-    } else if (type == "onlineTypeId") {
-      setOnlineTypeId("");
-    } else if (type == "province") {
-      setProvinceId("");
-    } else if (type == "city") {
-      setCityId("");
-    } else if (type == "justOnline") {
-      setJustOnline("");
-    } else if (type == "gender") {
-      setGender("");
-    } else if (type == "acceptInsurance") {
-      setAcceptInsurance("");
-    } else {
-      console.log(type);
-    }
-  };
+  // const handleRemoveItem = (type) => {
+  //   if (type == "specialties") {
+  //     setSpecialistSearch("");
+  //   } else if (type == "bimeAsli") {
+  //     setBimeAsli("");
+  //   } else if (type == "bimeTakmili") {
+  //     setBimehTakmili("");
+  //   } else if (type == "onlineTypeId") {
+  //     setOnlineTypeId("");
+  //   } else if (type == "province") {
+  //     setProvinceId("");
+  //   } else if (type == "city") {
+  //     setCityId("");
+  //   } else if (type == "justOnline") {
+  //     setJustOnline("");
+  //   } else if (type == "gender") {
+  //     setGender("");
+  //   } else if (type == "acceptInsurance") {
+  //     setAcceptInsurance("");
+  //   } else {
+  //     console.log(type);
+  //   }
+  // };
   return !isFilterClickMobile ? (
     <div className=" lg:w-[900px] w-[97%] flex flex-col items-center justify-center gap-2 lg:gap-10">
       <div className=" w-full bg-gray-500 rounded-xl h-20"></div>
@@ -355,13 +339,18 @@ function DoctorsPaginate() {
             </div> */}
               <div className=" mt-5 lg:-mt-3 flex justify-between">
                 <EmtyReservButt docDetail={item} />
-                <Link
+                <button
+                  onClick={() => {
+                    setDoctorName(item.doctorName + " " + item.doctorFamily);
+                    setDoctorId(item.id);
+                    router.push("/doctors/doctor-profile");
+                  }}
                   href={`/doctors/${item.id}`}
                   className=" flex justify-center p-2 px-4 rounded-md text-white items-center bg-[#005DAD] "
                 >
                   نوبت بگیرید
                   <IoIosArrowRoundBack className=" text-2xl" />
-                </Link>
+                </button>
               </div>
             </div>
           );

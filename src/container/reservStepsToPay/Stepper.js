@@ -2,21 +2,24 @@
 import React, { useState } from "react";
 import ReservForMe from "./ReservForMe";
 import Pay from "./pay";
-import { myStore } from "@/store/Store";
+import { myStore, smeIdStorage } from "@/store/Store";
 import ReservForAnother from "./ReservForAnother";
 import { useRouter } from "next/navigation";
 import Receipt from "./Receipt";
 
 function Stepper() {
   const router = useRouter();
+  const { smeId } = smeIdStorage();
 
   const { reservationType } = myStore();
 
   console.log(reservationType);
   const [steps, setSteps] = useState(1);
   const stepper = () => {
-    if (steps === 1 ) {
+    if (steps === 1 && reservationType === "reservForMe" && smeId) {
       return <ReservForMe setSteps={setSteps} />;
+    } else if (steps === 1 && reservationType === "reservForMe" && !smeId) {
+      return <ReservForAnother forme setSteps={setSteps} />;
     } else if (steps === 1 && reservationType === "reservForAnother") {
       return <ReservForAnother setSteps={setSteps} />;
     } else if (steps === 2) {
@@ -24,7 +27,7 @@ function Stepper() {
     } else if (steps === 3) {
       return <Receipt />;
     } else {
-      // router.back();
+      router.back();
     }
   };
   return <div className=" w-full">{stepper(3)}</div>;

@@ -211,6 +211,8 @@ export const SelectFilter = ({ title, options, setVal }) => {
   );
 };
 export const CitySelectInput = ({
+  height,
+  borderColor,
   setCityId,
   cities,
   hiddentitle,
@@ -232,7 +234,9 @@ export const CitySelectInput = ({
             });
           }
         }}
-        className=" border w-full border-[#636972] rounded-lg p-2"
+        className={`border w-full ${
+          borderColor ? borderColor : "border-[#636972]"
+        } ${height && height}  rounded-lg p-2`}
       >
         <option value={0}>
           {cities.length !== 0
@@ -256,6 +260,8 @@ export const CitySelectInput = ({
   );
 };
 export const ProvinceSelectInput = ({
+  height,
+  borderColor,
   setCities,
   hiddentitle,
   setProvince = () => console.log("first"),
@@ -289,7 +295,9 @@ export const ProvinceSelectInput = ({
             setCities([]);
           }
         }}
-        className=" border w-full border-[#636972] rounded-lg p-2"
+        className={` border w-full ${
+          borderColor ? borderColor : "border-[#636972]"
+        }  rounded-lg ${height && height} p-2`}
       >
         <option value={0}>استان را انتخاب کنید</option>
         {provinces.map((item) => {

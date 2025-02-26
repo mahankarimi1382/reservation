@@ -1,5 +1,6 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import doctorProfileImg from "../../../../public/Pics/user-profile.png";
 import { IoLocationOutline } from "react-icons/io5";
@@ -21,7 +22,27 @@ import AcordinDoctorpanel from "../../../components/AcordinDoctorpanel";
 import VisitSection from "./VisitSection";
 
 import { SabteNazarButton } from "@/components/Buttons/Button";
+import { get_doctor_profile_by_id } from "@/api/ApiCalling";
+import { doctorProfileStore } from "@/store/Store";
+import LoadingComponent from "@/components/LoadingComponent";
 function DoctorProfile() {
+  const { doctorId } = doctorProfileStore();
+  console.log(doctorId);
+  const [doctorDetails, setDoctorDetails] = useState();
+  console.log(doctorDetails);
+  const [isLoading, setIsLoading] = useState(true);
+  const getDoctor = async () => {
+    const data = await get_doctor_profile_by_id(doctorId);
+    if (data) {
+      setDoctorDetails(data);
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    if (doctorId) {
+      getDoctor();
+    }
+  }, [doctorId]);
   const usersExperineces = [
     {
       id: 1,
@@ -124,6 +145,7 @@ function DoctorProfile() {
   ];
   return (
     <div className=" pb-20  min-h-[2150px] flex flex-col w-full justify-between items-center bg-[#f5f5f5]">
+      {isLoading && <LoadingComponent />}
       <div className=" pt-10 min-h-[1582px]  flex w-full items-start justify-between px-20 ">
         <div className=" flex flex-col  items-center w-[57%] bg-white rounded-xl">
           <div className="w-[90%] flex py-10 flex-col gap-10">
@@ -135,7 +157,10 @@ function DoctorProfile() {
                 src={doctorProfileImg}
               />
               <div className=" flex w-72 flex-col justify-center gap-2">
-                <h2 className=" text-[22px]">بهرام میرزایی</h2>
+                <h2 className=" text-[22px]">
+                  {doctorDetails && doctorDetails.doctorName}{" "}
+                  {doctorDetails && doctorDetails.doctorFamily}
+                </h2>
                 <p className=" text-[14px] text-[#757575]">متخصص مغز و اعصاب</p>
                 <p className="flex items-center gap-1">
                   <IoLocationOutline />
@@ -269,7 +294,7 @@ function DoctorProfile() {
           </div>
         </div>
         <div className=" w-[41%] gap-5 mb-10  flex flex-col">
-          <VisitSection />
+          <VisitSection id={doctorId} />
 
           <div className=" flex flex-col gap-4 py-5  items-center justify-center w-full bg-white rounded-xl ">
             <h2 className=" text-[20px]">مقالات پزشک</h2>

@@ -1,11 +1,67 @@
-import { Checkbox } from "@mui/material";
+import {
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import step1reservation from "../../../public/Pics/reservationStep1.png";
+import { create_sme_profile_for_user } from "@/api/ApiCalling";
+import {
+  CitySelectInput,
+  ProvinceSelectInput,
+} from "@/components/Inputs/Input";
+import Cookies from "js-cookie";
+import { SyncLoader } from "react-spinners";
+import { reservationStore, smeIdStorage } from "@/store/Store";
 
-function ReservForAnother({ setSteps }) {
+function ReservForAnother({ setSteps, forme }) {
+  const [cities, setCities] = useState([]);
+  const daysOfMonth = Array.from({ length: 32 }, (_, i) => i + 1);
+  const persianMonths = [
+    "فروردین",
+    "اردیبهشت",
+    "خرداد",
+    "تیر",
+    "مرداد",
+    "شهریور",
+    "مهر",
+    "آبان",
+    "آذر",
+    "دی",
+    "بهمن",
+    "اسفند",
+  ];
+  const token = Cookies.get("token");
+  const { setPatientId } = reservationStore();
+  const [name, setName] = useState("");
+  const [familyName, setFamilyName] = useState("");
+  const [nationalCode, setNationalCode] = useState("");
+  const [dayOfBirth, setDayOfBirth] = useState("");
+  const [monthOfBirth, setMonthOfBirth] = useState("");
+  const [yearOfBirth, setYearOfBirth] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [cityId, setCityId] = useState("1");
+  const data = {
+    name,
+    familyName,
+    nationalCode,
+    birthDate: `${yearOfBirth}/${monthOfBirth}/${dayOfBirth}`,
+    cityId,
+  };
+  const { setSmeId } = smeIdStorage();
   const handlCompleteStep1 = () => {
-    setSteps(2);
+    setIsLoading(true);
+    create_sme_profile_for_user(
+      data,
+      token,
+      setIsLoading,
+      setSteps,
+      setPatientId,
+      setSmeId
+    );
   };
   return (
     <div className=" flex flex-col justify-center py-10 items-center" dir="rtl">
@@ -13,13 +69,16 @@ function ReservForAnother({ setSteps }) {
         <Image src={step1reservation} width={915} alt="step-picture" />
       </div>
       <div className=" w-[90%] flex flex-col mt-20 gap-10">
-        <h2 className=" text-[20px] text-[#005DAD]">دریافت نوبت برای دیگری</h2>
+        <h2 className=" text-[20px] text-[#005DAD]">
+          {forme ? "دریافت نوبت برای من" : "دریافت نوبت برای دیگری"}
+        </h2>
         <hr className=" border-dashed border-[#005DAD]" />
         <h2 className=" text-[20px]">اطلاعات بیمار</h2>
         <div className=" flex flex-col gap-10">
           <div className=" flex flex-col gap-2">
             <h2 className=" text-[20px]">نام</h2>
             <input
+              onChange={(e) => setName(e.target.value)}
               className=" px-4 border-[#005DAD] border rounded-xl w-[652px] h-[61px]"
               placeholder="لطفا نام خود را وارد کنید"
             />
@@ -27,6 +86,7 @@ function ReservForAnother({ setSteps }) {
           <div className=" flex flex-col gap-2">
             <h2 className=" text-[20px]">نام خانوادگی</h2>
             <input
+              onChange={(e) => setFamilyName(e.target.value)}
               className=" px-4 border-[#005DAD] border rounded-xl w-[652px] h-[61px]"
               placeholder="لطفا نام خود را وارد کنید"
             />
@@ -34,6 +94,7 @@ function ReservForAnother({ setSteps }) {
           <div className=" flex flex-col gap-2">
             <h2 className=" text-[20px]">کد ملی</h2>
             <input
+              onChange={(e) => setNationalCode(e.target.value)}
               className=" px-4 border-[#005DAD] border rounded-xl w-[652px] h-[61px]"
               placeholder="لطفا نام خود را وارد کنید"
             />
@@ -47,15 +108,32 @@ function ReservForAnother({ setSteps }) {
             <div className=" flex flex-col gap-2">
               <h2 className=" text-[18px]">تاریخ تولد</h2>
               <div className=" flex gap-8 items-center">
+                <select
+                  onChange={(e) => setDayOfBirth(e.target.value)}
+                  className=" text-slate-400 text-center w-[115px] py-4 rounded-xl border-[#005DAD] border"
+                  name="day"
+                >
+                  <option>روز</option>
+                  {daysOfMonth.map((day, index) => (
+                    <option key={day} value={index + 1}>
+                      {day}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  onChange={(e) => setMonthOfBirth(e.target.value)}
+                  className=" text-slate-400 text-center w-[115px] py-4 rounded-xl border-[#005DAD] border"
+                  name="month"
+                >
+                  {persianMonths.map((month, index) => (
+                    <option key={index} value={index + 1}>
+                      {month}
+                    </option>
+                  ))}
+                </select>
+
                 <input
-                  placeholder="روز"
-                  className=" text-center w-[115px] py-4 rounded-xl border-[#005DAD] border"
-                />
-                <input
-                  placeholder="ماه"
-                  className=" text-center w-[115px] py-4 rounded-xl border-[#005DAD] border"
-                />
-                <input
+                  onChange={(e) => setYearOfBirth(e.target.value)}
                   placeholder="سال"
                   className=" text-center w-[115px] py-4 rounded-xl border-[#005DAD] border"
                 />
@@ -68,40 +146,70 @@ function ReservForAnother({ setSteps }) {
               {" "}
               <h2 className=" text-[18px]">جنسیت</h2>
               <div className=" flex gap-5 items-center">
-                <span className=" flex items-center">
-                  <Checkbox />
-                  <h2>خانم</h2>
-                </span>
-                <span className=" flex items-center">
-                  <Checkbox />
-                  <h2>آقا</h2>
-                </span>
+                <FormControl className=" w-full flex ">
+                  <RadioGroup>
+                    <div className=" flex items-center gap-10">
+                      <span className=" flex items-center">
+                        <h2>خانم</h2>
+
+                        <FormControlLabel
+                          className=" mr-0 "
+                          value="female"
+                          control={<Radio className=" text-3xl" />}
+                        />
+                      </span>
+                      <span className=" flex items-center">
+                        <h2>آقا</h2>
+                        <FormControlLabel
+                          className=" mr-0 "
+                          value="male"
+                          control={<Radio className=" text-3xl" />}
+                        />{" "}
+                      </span>
+                    </div>
+                  </RadioGroup>
+                </FormControl>
               </div>
             </div>
             <div className=" flex items-center gap-8">
               <div className=" flex flex-col gap-2 text-[18px]">
-                <h2 className=" text-[18px]">استان</h2>
-                <input className=" w-[393px] py-4 rounded-xl h-[61px] border-[#005DAD] border" />{" "}
+                <div className=" w-[393px]">
+                  <ProvinceSelectInput
+                    height="h-[61px]"
+                    setCities={setCities}
+                    borderColor="border-[#005DAD]"
+                  />
+                </div>
               </div>
               <div className=" flex flex-col gap-2 text-[18px]">
-                <h2 className=" text-[18px]">شهر</h2>
-                <input className=" w-[227px] py-4 rounded-xl h-[61px] border-[#005DAD] border" />{" "}
+                <div className="w-[227px]">
+                  <CitySelectInput
+                    setCityId={setCityId}
+                    height="h-[61px]"
+                    borderColor="border-[#005DAD]"
+                    cities={cities}
+                  />
+                </div>
               </div>
             </div>
           </div>
-          <div className=" flex flex-col gap-2">
+          {/* <div className=" flex flex-col gap-2">
             <h2 className=" text-[18px]">شماره همراه</h2>
             <input
               placeholder="لطفا شماره همراه خود را وارد کنید"
               className=" w-[652px] py-4 rounded-xl h-[61px] border-[#005DAD] border"
             />{" "}
-          </div>{" "}
+          </div>{" "} */}
           <div className=" flex justify-center items-center">
             <button
               onClick={handlCompleteStep1}
               className=" mt-24 w-[460px] py-4 text-white rounded-xl bg-[#005DAD]"
             >
-              ثبت اطلاعات
+              {isLoading ? (
+                <SyncLoader color="white" size={10} />
+              ) : (
+                "ثبت اطلاعات"
+              )}
             </button>
           </div>
         </div>

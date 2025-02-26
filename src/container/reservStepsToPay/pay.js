@@ -1,14 +1,36 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import step2pay from "../../../public/Pics/step2pay.png";
 import PayDetails from "@/container/reservStepsToPay/PayDetails";
 import discountIcon from "../../../public/Pics/discount-shape.png";
 import cardIcon from "../../../public/Pics/card.png";
 import cardIcon_white from "../../../public/Pics/card-white.png";
 import samanBank from "../../../public/Pics/samanBank.png";
+import { reservationStore, smeIdStorage } from "@/store/Store";
+import { patinet_reservation } from "@/api/ApiCalling";
+import { SyncLoader } from "react-spinners";
+import { useRouter } from "next/navigation";
 function Pay({ setSteps }) {
+  const { smeId } = smeIdStorage();
+  const router=useRouter()
+  console.log(smeId)
+  const { patientId, reservationId, turnId } = reservationStore();
+  const [isLoading, setIsLoading] = useState(false);
+  const data = {
+    metadata: {
+      userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      userName: "string",
+      smeProfileId: smeId,
+    },
+    patientId: patientId,
+    reservationId: reservationId,
+    discountCodeId: null,
+    turnId: turnId,
+  };
   const handleCompleteStep2 = () => {
-    setSteps(3);
+    setIsLoading(true);
+    patinet_reservation(data, setIsLoading,router);
+    // setSteps(3);
   };
   return (
     <div
@@ -82,7 +104,11 @@ function Pay({ setSteps }) {
             className=" gap-2 w-[305px] py-3 rounded-xl flex justify-center items-center text-xl text-white bg-[#005DAD] "
           >
             <Image alt="icon" width={24} src={cardIcon_white} />
-            تایید و پرداخت
+            {isLoading ? (
+              <SyncLoader color="white" size={10} />
+            ) : (
+              "تایید و پرداخت"
+            )}
           </button>
         </div>
       </div>

@@ -2,6 +2,7 @@ import { Eror, success } from "@/components/ToastAlerts";
 import { axiosConfig } from "./axiosConfig";
 import axios from "axios";
 import { ErrorHandler } from "@/utils/ErrorHandler";
+import { reservationStore } from "@/store/Store";
 export const signup = (setIsLoading, data, setIsValidateModal) => {
   setIsLoading(true);
   console.log(data);
@@ -77,6 +78,9 @@ export const activating_registarion = (
       success("ورود موفق");
       closeModal();
       setFullName(res.data.result.userFullname);
+      if (res.data.result.smeprofileId) {
+        setSmeId(res.data.result.smeprofileId);
+      }
       setToken(res.data.result.token);
       if (res.data.result.userFullname != "string") {
         let name = res.data.result.userFullname;
@@ -826,4 +830,164 @@ export const create_Reservation = (data, setIsLoading, closeModal) => {
       console.log(err);
       setIsLoading(false);
     });
+};
+export const get_doctor_profile_by_id = async (id) => {
+  console.log(id);
+  try {
+    const response = await axiosConfig.get(`Doctor/read-doctor-byid?Id=${id}`);
+    const doctorProfile = response.data.result.data;
+    console.log(doctorProfile);
+    return doctorProfile;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+export const get_doctor_reservation = async (id) => {
+  console.log(id);
+  try {
+    const response = await axiosConfig.get(
+      `Reservation/read-doctor-reservation?DoctorId=${id}`
+    );
+    const reservation = response.data.result.data;
+    console.log(reservation);
+    return reservation;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+
+export const add_patient_by_user = (
+  data,
+  setIsLoading,
+  setSteps,
+  setPatientId
+) => {
+  console.log(data);
+  axiosConfig
+    .post("Patient/create-patient", data)
+    .then((res) => {
+      console.log(res.data.result.patient.id);
+      setPatientId(res.data.result.patient.id);
+      setIsLoading(false);
+      setSteps(2);
+    })
+    .catch((err) => {
+      Eror();
+      console.log(err);
+      setIsLoading(false);
+    });
+};
+export const create_sme_profile_for_user = (
+  data,
+  token,
+  setIsLoading,
+  setSteps,
+  setPatientId,
+  setSmeId
+) => {
+  console.log(data);
+  axios
+    .post(
+      "https://myapi.dadehavaran.com:8040/API/v1/SmeProfile/create-sme-profile",
+      {
+        metadata: {
+          userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          userName: "",
+        },
+        smeName: data.name + " " + data.familyName,
+        nationalCode: data.nationalCode,
+        businessCode: "",
+        managerName: "",
+        registerNumber: "",
+        economyCode: "",
+        permitNo: "",
+        managerPhoneNumber: "",
+        managerEmail: "",
+        aboutUs: "",
+        tellNumber: "",
+        activitySubject: "",
+        smeEmail: "",
+        smeWebsite: "",
+        address: "",
+        status: true,
+        cityId: data.cityId.id,
+        smeType: 1,
+        industrialParkId: 1,
+        logo: "",
+        headerpic: "",
+        postalcode: "",
+        smeRankId: 2,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res);
+      console.log(res.data.result.id);
+      let smeid = res.data.result.id;
+      setSmeId(smeid);
+      const data2 = {
+        metadata: {
+          userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+          userName: "string",
+          smeProfileId: smeid,
+        },
+        patientName: data.name,
+        patientFamily: data.familyName,
+        nationalId: data.nationalCode,
+        birthNumber: 0,
+        birthDate: data.birthDate,
+        cityId: data.cityId.id,
+        geolat: 0,
+        geolon: 0,
+        patientPhone: "09305485308",
+        necessaryPhone: "",
+        email: "string",
+        gender: true,
+        smeProfileId: smeid,
+      };
+
+      add_patient_by_user(data2, setIsLoading, setSteps, setPatientId);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const patinet_reservation = (data, setIsLoading,router) => {
+  console.log(data);
+  axiosConfig
+    .post("PatientReservation/create-patientreservation", data)
+    .then((res) => {
+      console.log(res);
+      setIsLoading(false);
+      success("نوبت شما با موفقیت رزرو شد");
+      router.push("/")
+    })
+    .catch((err) => {
+      Eror();
+      console.log(err);
+      setIsLoading(false);
+    });
+};
+export const get_doctor_treatment_reservation = async (
+  doctorId,
+  treatmentId
+) => {
+  try {
+    const response = await axiosConfig.get(
+      `Reservation/read-doctor-treatmentcenter-reservation?DoctorId=${doctorId}&TreatmentCenterId=${treatmentId}`
+    );
+    const reservation = response.data.result.data;
+    console.log(reservation);
+    return reservation;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
 };

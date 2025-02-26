@@ -134,3 +134,34 @@ export const nationalCodeStorage = create(
     }
   )
 );
+
+export const doctorProfileStore = create(
+  persist(
+    (set) => ({
+      doctorId: "",
+      setDoctorId: (id) => set(() => ({ doctorId: id })),
+      doctorName: "",
+      setDoctorName: (name) => set(() => ({ doctorName: name })),
+    }),
+    {
+      name: "doctor-search-id",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);
+export const reservationStore = create(
+  persist(
+    (set) => ({
+      reservationId: "",
+      setReservationId: (id) => set(() => ({ reservationId: id })),
+      turnId: "",
+      setTurnId: (id) => set(() => ({ turnId: id })),
+      patientId: "",
+      setPatientId: (id) => set(() => ({ patientId: id })),
+    }),
+    {
+      name: "reservation-details",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);

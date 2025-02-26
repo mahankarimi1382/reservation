@@ -18,7 +18,7 @@ function DoctorsSection() {
           ویزیت فوری
         </h2>
         <Link
-          href="/doctors-page"
+          href="/doctors"
           className=" text-[#005DAD] flex items-center gap-1 text-[12px] lg:text-[16px]"
         >
           مشاهده همه

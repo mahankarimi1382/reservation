@@ -13,7 +13,7 @@ import { smeIdStorage } from "@/store/Store";
 import { create_Reservation } from "@/api/ApiCalling";
 import { SyncLoader } from "react-spinners";
 
-function CreateReservationModal({ closeModal, TreatmentId = 5 }) {
+function CreateReservationModal({ closeModal, treatmentId }) {
   const [isLoading, setIsLoading] = useState(false);
   const { smeId } = smeIdStorage();
   const [reservationDate, setReservationDate] = useState("");
@@ -31,7 +31,7 @@ function CreateReservationModal({ closeModal, TreatmentId = 5 }) {
       smeProfileId: smeId,
     },
     reservationDate,
-    doctorTreatmentCenterId: TreatmentId,
+    doctorTreatmentCenterId: treatmentId,
     cancleTimeDuration: parseInt(cancleTimeDuration),
     reservationTime,
     visitCostId,

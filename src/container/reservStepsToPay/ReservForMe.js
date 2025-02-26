@@ -4,11 +4,18 @@ import { CiEdit } from "react-icons/ci";
 import bahramProf from "../../../public/Pics/bahramMirzayi.png";
 import star from "../../../public/Pics/star.png";
 import step1reservation from "../../../public/Pics/reservationStep1.png";
+import {
+  doctorProfileStore,
+  fullNameStorage,
+  smeIdStorage,
+} from "@/store/Store";
 
-function ReservForMe({setSteps}) {
-  const handleCompleteStep1=()=>{
-    setSteps(2)
-  }
+function ReservForMe({ setSteps }) {
+  const { fullName } = fullNameStorage();
+  const { doctorName } = doctorProfileStore();
+  const handleCompleteStep1 = () => {
+    setSteps(2);
+  };
   return (
     <div className="flex w-full flex-col justify-center gap-10 items-center">
       <div className=" flex justify-center items-center w-[90%] h-[124px] bg-[rgba(196,226,255,0.37)] rounded-2xl">
@@ -28,7 +35,7 @@ function ReservForMe({setSteps}) {
           </div>
           <div className=" w-full flex justify-between items-center">
             <h2 className=" text-[20px]">نام و نام خانوادگی</h2>
-            <h2 className=" text-[20px]">مهدیه خسروی</h2>
+            <h2 className=" text-[20px]">{fullName}</h2>
           </div>
           <div className=" w-full flex justify-between items-center">
             <h2 className=" text-[20px]">شماره موبایل</h2>
@@ -50,7 +57,7 @@ function ReservForMe({setSteps}) {
                 className="border rounded-full border-[#005DAD]"
               />
               <div className=" flex flex-col gap-2">
-                <h2 className=" text-[20px]">بهرام میرزایی</h2>
+                <h2 className=" text-[20px]">{doctorName}</h2>
                 <h5 className="text-[#757575]">متخصص مغز و اعصاب</h5>
               </div>
             </div>
@@ -76,7 +83,10 @@ function ReservForMe({setSteps}) {
           </div>
         </div>
       </div>
-      <button onClick={handleCompleteStep1} className=" w-[460px] rounded-xl bg-[#005DAD] text-white py-4">
+      <button
+        onClick={handleCompleteStep1}
+        className=" w-[460px] rounded-xl bg-[#005DAD] text-white py-4"
+      >
         ادامه
       </button>
     </div>

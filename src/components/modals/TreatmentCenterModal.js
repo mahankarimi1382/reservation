@@ -20,6 +20,9 @@ function TreatmentCenterModal({ setIsTreatmentCenter, id, name }) {
   const [selectedItem, setSelectedItem] = useState({});
   console.log(selectedItem);
   const [treatmentCenters, setTreatmenCenters] = useState([]);
+  const [treatmentId, setTrearmentId] = useState("");
+  const [clinicId, setClinicId] = useState("");
+  const [doctorId, setDoctorId] = useState("");
   console.log(treatmentCenters);
   const getTreatMent = async () => {
     const data = await get_doctor_treatmentCenter(id);
@@ -40,6 +43,9 @@ function TreatmentCenterModal({ setIsTreatmentCenter, id, name }) {
     <div className=" w-screen z-10 h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]">
       {isSeeReservsModal && (
         <SeeReservsModal
+          doctorId={doctorId}
+          clinicId={clinicId}
+          treatmentId={treatmentId}
           closeModal={() => setIsSeeReservsModal(false)}
         />
       )}
@@ -102,6 +108,9 @@ function TreatmentCenterModal({ setIsTreatmentCenter, id, name }) {
                     </h5>
                     <button
                       onClick={() => {
+                        setDoctorId(item.doctorId);
+                        setClinicId(item.clinicId || item.officeId);
+                        setTrearmentId(item.id);
                         setIsSeeReservsModal(true);
                       }}
                       className=" w-[30%] border rounded-lg  flex text-sm justify-center items-center bg-[#F2FEF8] border-[#1F7168] text-[#1F7168]"

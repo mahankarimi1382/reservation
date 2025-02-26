@@ -6,7 +6,8 @@ import calenderIcon from "../../../../public/Pics/calendar.png";
 import { RxCross2 } from "react-icons/rx";
 import VisitHozoriCard from "./VisitHozoriCard";
 
-function VisitSectionBoxes({ icon, topic }) {
+function VisitSectionBoxes({ icon, topic, list }) {
+  console.log(list)
   const [isBoxOpen, setIsBoxOpen] = useState(false);
   const handleOpenModal = () => {
     setIsBoxOpen(!isBoxOpen);
@@ -14,7 +15,7 @@ function VisitSectionBoxes({ icon, topic }) {
   return (
     <div className=" w-full justify-center flex">
       {isBoxOpen ? (
-        <div className=" transition-all duration-[1000ms]   w-[95%] h-[600px] flex flex-col items-center rounded-2xl border border-[#005DAD]">
+        <div className=" transition-all duration-[1000ms]   w-[95%] overflow-auto pb-2 h-[600px] flex flex-col items-center rounded-2xl border border-[#005DAD]">
           <div className=" w-full px-5 border-b border-dashed border-[#005DAD] py-3 flex items-center justify-between">
             <h2 className=" p-3 gap-2 text-[#005DAD] font-semibold flex items-end">
               <Image width={32} src={icon} alt="hispital-icon" />
@@ -27,13 +28,15 @@ function VisitSectionBoxes({ icon, topic }) {
           </div>
           {topic === "ویزیت حضوری" && (
             <div className=" delay-700 w-full flex  flex-col gap-5 pt-10 items-center">
-              <VisitHozoriCard   />
-              <VisitHozoriCard  />
+              {list.map((item) => {
+                return <VisitHozoriCard key={item.id} item={item} />;
+              })}
+              {/* <VisitHozoriCard /> */}
             </div>
           )}
         </div>
       ) : (
-        <div className=" transition-all bg-white duration-300 w-[95%] h-[226px] flex flex-col justify-between rounded-2xl border border-[#005DAD]">
+        <div className=" overflow-auto transition-all bg-white duration-300 w-[95%] h-[226px] flex flex-col justify-between rounded-2xl border border-[#005DAD]">
           <h2 className=" p-3 gap-2 text-[#005DAD] flex items-end">
             <Image width={32} src={icon} alt="hispital-icon" />
             {topic}

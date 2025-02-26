@@ -124,6 +124,7 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
       )}
       <div className=" flex w-full justify-center items-center">
         <button
+          onKeyDown={(e) => e.stopPropagation()}
           ref={buttRef}
           onClick={handleSubmit}
           disabled={
