@@ -36,7 +36,6 @@ import SubmitSpecialtiesModal from "../modals/SubmitSpecialtiesModal";
 import AddNewDoctorModal from "../modals/AddNewDoctorModal";
 import VisitTypeSelectionModal from "../modals/VisitTypeSelectionModal";
 import Link from "next/link";
-import AddTurnModal from "../modals/AddTurnModal";
 import MedicalFormModal from "../modals/MedicalFormModal";
 import dynamic from "next/dynamic";
 import TreatmentCenterModal from "../modals/TreatmentCenterModal";
@@ -45,6 +44,7 @@ import { read_office_type } from "@/api/ApiCalling";
 import CitySelectModal from "../modals/CitySelectModal";
 import DoctorFormModal from "../modals/DoctorFormModal";
 import { success } from "../ToastAlerts";
+import AddPatinetModal from "../modals/AddPatinetModal";
 
 export const LoginButton = () => {
   const { fullName, setFullName } = fullNameStorage();
@@ -179,7 +179,7 @@ export const SabteNazarButton = () => {
 
       <button
         onClick={() => setIsNazarModal(true)}
-        className=" flex items-center bg-[#005DAD] text-white p-3 rounded-xl px-5 text-lg"
+        className=" flex items-center bg-[#005DAD] text-white lg:p-3 p-1 rounded-lg px-3 lg:rounded-xl lg:px-5 lg:text-lg"
       >
         ثبت نظر
         <IoIosArrowRoundBack className=" text-2xl" />
@@ -299,6 +299,7 @@ export const MatabShowButt = ({ items }) => {
     <div className=" flex max-w-full flex-col">
       <div className="flex items-center gap-2 lg:gap-4 max-w-full overflow-auto xl:flex-nowrap flex-wrap">
         <h2 className=" text-[18px] flex whitespace-nowrap items-center">
+          <IoLocationOutline className=" text-xl text-[#005DAD]" />
           نشانی:
         </h2>
 
@@ -530,20 +531,20 @@ export const EditSpecialistButt = ({
     </div>
   );
 };
-export const AddTurnButt = ({ isAddTurn, setIsAddTurn }) => {
-  return (
-    <div>
-      {isAddTurn && <AddTurnModal setIsAddTurn={setIsAddTurn} />}
-      <button
-        onClick={() => setIsAddTurn(true)}
-        className=" flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
-      >
-        <GoPlus className=" text-2xl" />
-        ثبت نوبت
-      </button>
-    </div>
-  );
-};
+// export const AddTurnButt = ({ isAddTurn, setIsAddTurn }) => {
+//   return (
+//     <div>
+//       {isAddTurn && <AddTurnModal setIsAddTurn={setIsAddTurn} />}
+//       <button
+//         onClick={() => setIsAddTurn(true)}
+//         className=" flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
+//       >
+//         <GoPlus className=" text-2xl" />
+//         ثبت نوبت
+//       </button>
+//     </div>
+//   );
+// };
 export const MedicalCenterSignUpButt = () => {
   const token = Cookies.get("token");
 
@@ -597,8 +598,8 @@ export const AddMedicalCenterButt = ({
         className=" flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
       >
         <GoPlus className=" text-2xl" />
-        
-        {isOffice?"افزودن مطب":"افزودن مرکز درمانی"}
+
+        {isOffice ? "افزودن مطب" : "افزودن مرکز درمانی"}
       </button>
     </div>
   );
@@ -709,6 +710,20 @@ export const DoctorsSignUpButt = () => {
       >
         عضویت پزشک
         <IoIosArrowBack />
+      </button>
+    </div>
+  );
+};
+export const AddPatinetButt = ({ isAddPatient, setIsAddPatient }) => {
+  return (
+    <div>
+      {isAddPatient && <AddPatinetModal setIsAddPatient={setIsAddPatient} />}
+      <button
+        onClick={() => setIsAddPatient(true)}
+        className=" flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
+      >
+        <GoPlus className=" text-2xl" />
+        ثبت بیمار
       </button>
     </div>
   );

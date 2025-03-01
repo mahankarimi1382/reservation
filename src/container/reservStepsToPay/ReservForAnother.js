@@ -64,53 +64,53 @@ function ReservForAnother({ setSteps, forme }) {
     );
   };
   return (
-    <div className=" flex flex-col justify-center py-10 items-center" dir="rtl">
+    <div className=" flex flex-col justify-center lg:py-10 items-center" dir="rtl">
       <div className=" flex justify-center items-center w-[90%] h-[124px] bg-[rgba(196,226,255,0.37)] rounded-2xl">
         <Image src={step1reservation} width={915} alt="step-picture" />
       </div>
-      <div className=" w-[90%] flex flex-col mt-20 gap-10">
+      <div className=" w-[90%] flex flex-col lg:mt-20 lg:gap-10">
         <h2 className=" text-[20px] text-[#005DAD]">
           {forme ? "دریافت نوبت برای من" : "دریافت نوبت برای دیگری"}
         </h2>
         <hr className=" border-dashed border-[#005DAD]" />
-        <h2 className=" text-[20px]">اطلاعات بیمار</h2>
+        <h2 className=" lg:text-[20px]">اطلاعات بیمار</h2>
         <div className=" flex flex-col gap-10">
           <div className=" flex flex-col gap-2">
-            <h2 className=" text-[20px]">نام</h2>
+            <h2 className=" lg:text-[20px]">نام</h2>
             <input
               onChange={(e) => setName(e.target.value)}
-              className=" px-4 border-[#005DAD] border rounded-xl w-[652px] h-[61px]"
+              className=" px-4 border-[#005DAD] border rounded-xl lg:w-[652px] h-10 lg:h-[61px]"
               placeholder="لطفا نام خود را وارد کنید"
             />
           </div>
           <div className=" flex flex-col gap-2">
-            <h2 className=" text-[20px]">نام خانوادگی</h2>
+            <h2 className=" lg:text-[20px]">نام خانوادگی</h2>
             <input
               onChange={(e) => setFamilyName(e.target.value)}
-              className=" px-4 border-[#005DAD] border rounded-xl w-[652px] h-[61px]"
+              className=" px-4 border-[#005DAD] border rounded-xl lg:w-[652px] h-10 lg:h-[61px]"
               placeholder="لطفا نام خود را وارد کنید"
             />
           </div>{" "}
           <div className=" flex flex-col gap-2">
-            <h2 className=" text-[20px]">کد ملی</h2>
+            <h2 className=" lg:text-[20px]">کد ملی</h2>
             <input
               onChange={(e) => setNationalCode(e.target.value)}
-              className=" px-4 border-[#005DAD] border rounded-xl w-[652px] h-[61px]"
+              className=" px-4 border-[#005DAD] border rounded-xl lg:w-[652px] h-10 lg:h-[61px]"
               placeholder="لطفا نام خود را وارد کنید"
             />
-            <div dir="rtl" className=" gap-3 flex  items-center">
+            <div dir="rtl" className=" lg:gap-3 flex  items-center">
               <Checkbox size="medium" />
-              <h2 className=" text-[18px]">اتباع هستم</h2>
-              <p className=" text-[#E62333F2] text-sm">
+              <h2 className=" text-xs whitespace-nowrap lg:text-[18px]">اتباع هستم</h2>
+              <p className=" text-[#E62333F2] text-[10px] lg:text-sm">
                 (اگر اتباع هستید لطفا این گزینه را انتخاب کنید)
               </p>
             </div>
             <div className=" flex flex-col gap-2">
-              <h2 className=" text-[18px]">تاریخ تولد</h2>
-              <div className=" flex gap-8 items-center">
+              <h2 className=" lg:text-[18px]">تاریخ تولد</h2>
+              <div className=" flex lg:gap-8 lg:justify-start justify-center items-center">
                 <select
                   onChange={(e) => setDayOfBirth(e.target.value)}
-                  className=" text-slate-400 text-center w-[115px] py-4 rounded-xl border-[#005DAD] border"
+                  className=" text-slate-400 text-center lg:w-[115px] p-1 lg:py-4 rounded-xl border-[#005DAD] border"
                   name="day"
                 >
                   <option>روز</option>
@@ -122,7 +122,7 @@ function ReservForAnother({ setSteps, forme }) {
                 </select>
                 <select
                   onChange={(e) => setMonthOfBirth(e.target.value)}
-                  className=" text-slate-400 text-center w-[115px] py-4 rounded-xl border-[#005DAD] border"
+                  className=" text-slate-400 text-center lg:w-[115px] p-1 lg:py-4 rounded-xl border-[#005DAD] border"
                   name="month"
                 >
                   {persianMonths.map((month, index) => (
@@ -135,9 +135,9 @@ function ReservForAnother({ setSteps, forme }) {
                 <input
                   onChange={(e) => setYearOfBirth(e.target.value)}
                   placeholder="سال"
-                  className=" text-center w-[115px] py-4 rounded-xl border-[#005DAD] border"
+                  className=" text-center lg:w-[115px] p-1 lg:py-4 rounded-xl border-[#005DAD] border"
                 />
-                <h5 className=" text-sm text-[#E62333F2]">
+                <h5 className=" hidden lg:flex text-sm text-[#E62333F2]">
                   (پر کردن این فیلد اجباری نیست)
                 </h5>
               </div>
@@ -171,9 +171,9 @@ function ReservForAnother({ setSteps, forme }) {
                 </FormControl>
               </div>
             </div>
-            <div className=" flex items-center gap-8">
-              <div className=" flex flex-col gap-2 text-[18px]">
-                <div className=" w-[393px]">
+            <div className=" flex lg:flex-row flex-col items-center gap-2 lg:gap-8">
+              <div className=" flex w-full lg:w-1/2 flex-col gap-2 text-[18px]">
+                <div className=" w-full lg:w-[393px]">
                   <ProvinceSelectInput
                     height="h-[61px]"
                     setCities={setCities}
@@ -181,8 +181,8 @@ function ReservForAnother({ setSteps, forme }) {
                   />
                 </div>
               </div>
-              <div className=" flex flex-col gap-2 text-[18px]">
-                <div className="w-[227px]">
+              <div className=" w-full flex flex-col gap-2 text-[18px]">
+                <div className=" w-full lg:w-[227px]">
                   <CitySelectInput
                     setCityId={setCityId}
                     height="h-[61px]"

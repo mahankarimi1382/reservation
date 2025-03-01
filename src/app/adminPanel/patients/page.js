@@ -6,6 +6,7 @@ import React from "react";
 import excel_icon from "../../../../public/Pics/excelIcon.png";
 import printer from "../../../../public/Pics/printer.png";
 import { TiArrowSortedDown } from "react-icons/ti";
+import PatientsSection from "@/container/turns/PatientsSection";
 
 function page() {
   const fakeData = [
@@ -83,7 +84,8 @@ function page() {
   return (
     <div dir="rtl" className="flex bg-[#F6FBFF] justify-start">
       <AdminPanelMenu />
-      <div className=" gap-10 mt-20 w-full flex flex-col items-center ">
+      <PatientsSection />
+      {/* <div className=" gap-10 mt-20 w-full flex flex-col items-center ">
         <div className=" flex w-[80%]  gap-5 items-center">
           <DatePickerComponent title="از تاریخ" />
           <DatePickerComponent title="تا تاریخ" />
@@ -167,7 +169,7 @@ function page() {
             );
           })}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

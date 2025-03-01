@@ -3,16 +3,21 @@ import React, { useEffect, useState } from "react";
 import hospitalIcon from "../../../../public/Pics/hospital.png";
 import monitorIcon from "../../../../public/Pics/monitor-mobbile.png";
 import VisitSectionBoxes from "./VisitSectionBoxes";
-import { get_doctor_treatmentCenter } from "@/api/ApiCalling";
+import { get_doctor_treatmentCenter_hozoori, get_doctor_treatmentCenter_online } from "@/api/ApiCalling";
 function VisitSection({ id }) {
-  const [clinics, setClinics] = useState([]);
+  const [hozooriList, setHozooriList] = useState([]);
+  const [onlineList, setOnlineList] = useState([]);
+console.log(onlineList)
   const getTreatment = async () => {
-    const data = await get_doctor_treatmentCenter(id);
-    if (data) {
-      let clinics = data.filter((item) => item.clinicId);
-      console.log(clinics);
-      setClinics(clinics);
-      console.log(data);
+    const hozoori = await get_doctor_treatmentCenter_hozoori(id);
+    if (hozoori) {
+      console.log(hozoori);
+      setHozooriList(hozoori);
+    }
+    const online = await get_doctor_treatmentCenter_online(id);
+    if (online) {
+      console.log(online);
+      setOnlineList(online);
     }
   };
 
@@ -22,13 +27,17 @@ function VisitSection({ id }) {
     }
   }, [id]);
   return (
-    <div className=" w-full min-h-[505px] py-5 flex-col gap-5 bg-white rounded-xl flex justify-center items-center">
+    <div className=" w-full lg:min-h-[505px] lg:py-5 flex-col gap-5 bg-white rounded-xl flex justify-center items-center">
       <VisitSectionBoxes
-        list={clinics}
+        list={hozooriList}
         topic="ویزیت حضوری"
         icon={hospitalIcon}
       />
-      <VisitSectionBoxes topic="ویزیت آنلاین" icon={monitorIcon} />
+      <VisitSectionBoxes
+        list={onlineList}
+        topic="ویزیت آنلاین"
+        icon={monitorIcon}
+      />
     </div>
   );
 }

@@ -389,14 +389,14 @@ export const edit_doctors = (data, setIsLoading, setIsAddDoctorModal) => {
       setIsLoading(false);
     });
 };
-export const add_patient = (data, setIsLoading, setIsAddTurn) => {
+export const add_patient = (data, setIsLoading, setIsAddPatient) => {
   console.log(data);
   axiosConfig
     .post("Patient/create-patient", data)
     .then((res) => {
       console.log(res);
       setIsLoading(false);
-      setIsAddTurn(false);
+      setIsAddPatient(false);
       success("بیمار با موفقیت ثبت شد");
     })
     .catch((err) => {
@@ -959,7 +959,7 @@ export const create_sme_profile_for_user = (
     });
 };
 
-export const patinet_reservation = (data, setIsLoading,router) => {
+export const patinet_reservation = (data, setIsLoading, router) => {
   console.log(data);
   axiosConfig
     .post("PatientReservation/create-patientreservation", data)
@@ -967,7 +967,7 @@ export const patinet_reservation = (data, setIsLoading,router) => {
       console.log(res);
       setIsLoading(false);
       success("نوبت شما با موفقیت رزرو شد");
-      router.push("/")
+      router.push("/");
     })
     .catch((err) => {
       Eror();
@@ -979,6 +979,7 @@ export const get_doctor_treatment_reservation = async (
   doctorId,
   treatmentId
 ) => {
+  console.log(doctorId, treatmentId);
   try {
     const response = await axiosConfig.get(
       `Reservation/read-doctor-treatmentcenter-reservation?DoctorId=${doctorId}&TreatmentCenterId=${treatmentId}`
@@ -986,6 +987,32 @@ export const get_doctor_treatment_reservation = async (
     const reservation = response.data.result.data;
     console.log(reservation);
     return reservation;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+export const get_doctor_treatmentCenter_hozoori = async (id) => {
+  try {
+    const response = await axiosConfig.get(
+      `DoctorTreatmentCenter/read-DoctorTreatmentCenterByDoctorIdHozoori?Id=${id}`
+    );
+    const treatmentCenter = response.data.result.list;
+    console.log(treatmentCenter);
+    return treatmentCenter;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+export const get_doctor_treatmentCenter_online = async (id) => {
+  try {
+    const response = await axiosConfig.get(
+      `DoctorTreatmentCenter/read-DoctorTreatmentCenterByDoctorIdOnline?Id=${id}`
+    );
+    const treatmentCenter = response.data.result.list;
+    console.log(treatmentCenter);
+    return treatmentCenter;
   } catch (error) {
     console.error("Error fetching specialties:", error);
     return null;

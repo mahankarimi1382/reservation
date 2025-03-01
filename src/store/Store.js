@@ -167,6 +167,15 @@ export const reservationStore = create(
       setTurnId: (id) => set(() => ({ turnId: id })),
       patientId: "",
       setPatientId: (id) => set(() => ({ patientId: id })),
+      doctorNezamCode: "",
+      setDoctorNezamCode: (code) => set(() => ({ doctorNezamCode: code })),
+      dateAndTime: "",
+      setDateAndTime: (value) => set(() => ({ dateAndTime: value })),
+      doctorSpecialties: "",
+      setDoctorSpecialties: (value) =>
+        set(() => ({ doctorSpecialties: value })),
+      adress: "",
+      setAdress: (value) => set(() => ({ adress: value })),
     }),
     {
       name: "reservation-details",

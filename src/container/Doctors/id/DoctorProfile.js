@@ -21,20 +21,30 @@ import bookIcon from "../../../../public/Pics/book.png";
 import AcordinDoctorpanel from "../../../components/AcordinDoctorpanel";
 import VisitSection from "./VisitSection";
 
-import { SabteNazarButton } from "@/components/Buttons/Button";
+import { MatabShowButt, SabteNazarButton } from "@/components/Buttons/Button";
 import { get_doctor_profile_by_id } from "@/api/ApiCalling";
-import { doctorProfileStore } from "@/store/Store";
+import { doctorProfileStore, reservationStore } from "@/store/Store";
 import LoadingComponent from "@/components/LoadingComponent";
+import { RateCounter } from "@/utils/RateCounter";
 function DoctorProfile() {
+  const { setDoctorNezamCode } = reservationStore();
   const { doctorId } = doctorProfileStore();
   console.log(doctorId);
   const [doctorDetails, setDoctorDetails] = useState();
+  const [doctorTreatmentCenters, setDoctorTreatmentCenters] = useState([]);
+  const { setDoctorSpecialties } = reservationStore();
+  console.log(doctorTreatmentCenters);
   console.log(doctorDetails);
   const [isLoading, setIsLoading] = useState(true);
   const getDoctor = async () => {
     const data = await get_doctor_profile_by_id(doctorId);
     if (data) {
       setDoctorDetails(data);
+      setDoctorTreatmentCenters(
+        data.smeProfile.doctors[0].doctorTreatmentCenters
+      );
+      setDoctorSpecialties(data.smeProfile.doctors[0].specialist.name)
+      setDoctorNezamCode(data.smeProfile.doctors[0].codeNezam);
       setIsLoading(false);
     }
   };
@@ -146,53 +156,62 @@ function DoctorProfile() {
   return (
     <div className=" pb-20  min-h-[2150px] flex flex-col w-full justify-between items-center bg-[#f5f5f5]">
       {isLoading && <LoadingComponent />}
-      <div className=" pt-10 min-h-[1582px]  flex w-full items-start justify-between px-20 ">
-        <div className=" flex flex-col  items-center w-[57%] bg-white rounded-xl">
-          <div className="w-[90%] flex py-10 flex-col gap-10">
-            <div className=" w-full px-4 gap-4 flex items-center bg-white shadow-lg h-[150px] rounded-2xl">
+      <div className=" pt-10 min-h-[1582px]  flex-col lg:flex-row   flex w-full items-center lg:items-start   lg:justify-between lg:px-20 ">
+        <div className=" flex flex-col  items-center w-[95%] lg:w-[57%] bg-white rounded-xl">
+          <div className="w-[90%] flex py-10 flex-col gap-4 lg:gap-10">
+            <div className=" w-full px-1 gap-1 lg:px-4 lg:gap-4 text-sm xl:text-base flex items-center bg-white shadow-lg h-[111px] lg:h-[150px] rounded-2xl">
               <Image
                 width={113}
-                className=" w-[113px] border border-[#005DAD] rounded-full h-[113px]"
+                className=" w-[50px] h-[50px] lg:w-[113px] border border-[#005DAD] rounded-full lg:h-[113px]"
                 alt="doctor-profile"
                 src={doctorProfileImg}
               />
               <div className=" flex w-72 flex-col justify-center gap-2">
-                <h2 className=" text-[22px]">
+                <h2 className=" text-sm lg:text-[22px]">
                   {doctorDetails && doctorDetails.doctorName}{" "}
                   {doctorDetails && doctorDetails.doctorFamily}
                 </h2>
-                <p className=" text-[14px] text-[#757575]">متخصص مغز و اعصاب</p>
+                <p className=" text-xs lg:text-[14px] text-[#757575]">
+                  {doctorDetails &&
+                    doctorDetails.smeProfile.doctors[0].specialist.name}
+                </p>
                 <p className="flex items-center gap-1">
                   <IoLocationOutline />
                   تهران
                 </p>
               </div>
               <div className=" flex flex-col items-end justify-center gap-2">
-                <h2 className=" flex items-center gap-2 text-[16x] ">
+                <h2 className=" flex items-center lg:gap-2 gap-1 text-xs lg:text-[16x] ">
                   <CiBookmark className=" text-2xl" />
                   ذخیره
                   <span className=" text-2xl text-[#757575]">|</span>
-                  <span className=" text-[#005DAD] flex items-center ">
+                  <span className=" text-[#005DAD] lg:text-base text-xs flex items-center ">
                     <CiShare2 className=" text-2xl" />
                     اشتراک گذاری
                   </span>
                 </h2>
-                <p className=" rounded flex justify-center p-1 bg-[#F0F0F0] text-[#1F7168] text-[12px] items-center">
-                  <AiFillLike className=" text-xl" />
-                  97% پیشنهاد کابران دکتر رزرو
+                <p className=" rounded flex justify-center p-1 lg:bg-[#F0F0F0] text-[#1F7168] text-[12px] items-center">
+                  <AiFillLike className=" text-xs lg:text-xl" />
+                  97% پیشنهاد کابران
                 </p>
-                <p className="flex items-center gap-1">
+                <div className=" flex lg:hidden">
+                  <RateCounter rate={5} width={16} />
+                </div>
+                <p className="lg:flex hidden items-center gap-1">
                   <Image width={22} src={star} alt="star" />
                   4.5/5 از (نظر 320)
                 </p>
               </div>
             </div>
-            <div className=" flex flex-col gap-2">
-              <h2 className=" text-[16px] flex items-center">
+            <div className=" w-full flex lg:hidden">
+              <VisitSection id={doctorId} />
+            </div>
+            <div className="  flex flex-col gap-2">
+              <h2 className=" lg:text-[16px] flex items-center">
                 <Image width={24} src={personFrame} alt="person-frame" />
                 درباره پزشک
               </h2>
-              <p className=" text-[#757575]">
+              <p className=" lg:text-base text-sm text-[#757575]">
                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
                 استفاده از طراحان گرافیک است، چاپگره ا و متون بلکه روزنامه و
                 مجله در ستون و سطرآنچنان لازم است، و برای شرایط فعلی تکنولوژی
@@ -208,32 +227,59 @@ function DoctorProfile() {
               <Image width={28} src={doctorSkillFrame} alt="" />
               <h2>تخصص پزشک: </h2>
               <p className=" text-[#7E7E7E]">
-                جراحی مغز/درمان میگرن/عصب شناسی/نورولوژی/ستون فقرات
+                {doctorDetails &&
+                  doctorDetails.smeProfile.doctors[0].specialist.name}
               </p>
             </div>
-            <div className=" flex flex-col gap-5 border-b-2 pb-10">
-              <div className=" flex gap-4">
-                <h2 className=" text-[16px] flex items-center">
+            <div className=" flex flex-col justify-center items-center gap-5 border-b-2 pb-10">
+              <div className=" flex gap-4 w-full">
+                {/* <h2 className=" text-[16px] flex items-center">
                   <IoLocationOutline className=" text-xl text-[#005DAD]" />
                   نشانی :
-                </h2>
-                <button className=" gap-1 p-2 flex items-center border rounded-xl">
-                  مطب ونک
-                  <IoIosArrowDown />
-                </button>
-                <button className=" gap-1 p-2 flex border items-center rounded-xl">
-                  بیمارستان کسری
-                  <IoIosArrowDown />
-                </button>
+                </h2> */}
+
+                <MatabShowButt items={doctorTreatmentCenters} />
               </div>
               <Image src={map} alt="map" />
             </div>
             <div>
+              <div className=" flex lg:hidden flex-col gap-4 py-5  items-center justify-center w-full bg-white rounded-xl ">
+                <h2 className=" text-[20px]">مقالات پزشک</h2>
+                <div className=" items-center xl:text-base text-sm justify-center flex flex-col gap-7">
+                  {maqalat.slice(0, 4).map((item) => {
+                    return (
+                      <div
+                        key={item.id}
+                        className=" border rounded-xl shadow-md items-center justify-center gap-2 px-2 w-[95%] p-2 lg:p-0 lg:h-[169px] flex"
+                      >
+                        <Image src={maqalepic} width={110} alt="pic" />
+                        <div className=" lg:text-base text-sm flex flex-col gap-2 lg:gap-5">
+                          <h2>{item.topic}</h2>
+                          <p className=" text-[#757575] text-[12px]">
+                            {item.caption}
+                          </p>
+                          <div className=" w-[90%] flex justify-end">
+                            <button className=" text-[#005DAD] lg:text-base text-xs flex justify-center items-center">
+                              خواندن مقاله
+                              <IoIosArrowRoundBack className=" lg:text-xl" />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className=" w-[90%] flex justify-end">
+                  <button className=" text-[#005DAD] rounded-xl border border-[#005DAD] p-2">
+                    مشاهده همه مقالات
+                  </button>
+                </div>
+              </div>
               <div className=" flex items-center">
                 <Image width={28} src={experinceFrame} alt="" />
                 <h2>تجربیات کابران: </h2>
               </div>
-              <p className=" text-[#7E7E7E]">
+              <p className=" text-sm lg:text-base text-[#7E7E7E]">
                 در ادامه می‌توانید تجربه مراجعه‌ی کاربران دیگر به دکتر بهرام
                 میرزایی را بخوانید.در صورتی که شما هم از بیماران دکتر بهرام
                 میرزایی بوده‌اید می‌توانید نظر خود را ثبت کنید.
@@ -242,46 +288,65 @@ function DoctorProfile() {
                 <SabteNazarButton />
               </div>
             </div>
-            <div className=" flex flex-col gap-8">
+            <div className=" flex justify-center flex-col gap-2 lg:gap-8">
               {usersExperineces.map((item) => {
                 return (
                   <div
                     key={item.id}
-                    className=" rounded-xl flex-col flex py-2  items-center w-full h-[208px] shadow-[0_2px_15px_-5px_rgba(0,0,0,0.3)]"
+                    className=" rounded-xl  flex-col flex lg:py-2  items-center w-full lg:h-[208px] shadow-[0_2px_15px_-5px_rgba(0,0,0,0.3)]"
                   >
-                    <div className=" flex flex-col gap-5">
-                      <div className="flex gap-10 px-10 items-center">
-                        <Image src={imanKhosravi} alt="userpic" width={80} />
-                        <div className=" w-72 flex gap-4 flex-col">
-                          <h2 className=" text-[20px]">{item.name}</h2>
-                          <p className=" text-[14px] text-[#757575]">
-                            {item.date}
-                          </p>
+                    <div className=" flex w-full flex-col lg:gap-5">
+                      <div className="flex justify-between px-2 lg:px-10 items-center">
+                        <div className=" gap-2 flex lg:gap-10 items-center">
+                          <Image
+                            src={imanKhosravi}
+                            alt="userpic"
+                            className=" w-[44px] lg:w-[80px]  "
+                            width={80}
+                          />
+                          <div className=" lg:w-72 flex lg:gap-4 gap-2 flex-col">
+                            <h2 className=" lg:text-[20px]">{item.name}</h2>
+                            <p className="text-[14px] text-[#757575]">
+                              {item.date}
+                            </p>
+                          </div>
                         </div>
-                        <div className=" flex gap-4 flex-col">
-                          <div className=" flex gap-2">
+                        <div className=" flex lg:items-start items-end gap-4 flex-col">
+                          <div className=" flex gap-1 lg:gap-2">
                             {Array.from({ length: item.rate }).map(
                               (_, index) => {
                                 return (
                                   <div className="" key={index}>
-                                    <Image width={24} alt="" src={star} />
+                                    <Image
+                                      className=" w-[12px] lg:w-[24px]"
+                                      width={24}
+                                      alt=""
+                                      src={star}
+                                    />
                                   </div>
                                 );
                               }
                             )}
                           </div>
-                          <p className=" text-[#005DAD] text-[14px]">
+                          <p className=" text-[#005DAD] text-xs lg:text-[14px]">
                             {item.visit}
                           </p>
                         </div>
                       </div>
-                      <p className="  px-10 text-[#757575]">{item.caption}</p>
-                      <div className=" border-t py-5 mx-10 flex justify-between">
-                        <h2 className=" text-[#005DAD] flex items-center gap-1">
-                          <Image width={16} alt="icon" src={smmile} />
+                      <p className="  px-2 text-xs lg:text-base lg:px-10 text-[#757575]">
+                        {item.caption}
+                      </p>
+                      <div className=" px-2 lg:px-0 py-1 border-t lg:py-5 lg:mx-10 flex justify-between">
+                        <h2 className=" text-[#005DAD] text-[10px] lg:text-base flex items-center gap-1">
+                          <Image
+                            width={16}
+                            className=" w-[12px] lg:w-[16px]"
+                            alt="icon"
+                            src={smmile}
+                          />
                           این پزشک را پیشنهاد می‌کنم
                         </h2>
-                        <h2 className=" text-[#757575] text-[14px] flex items-center gap-1">
+                        <h2 className=" text-[#757575] text-[10px] lg:text-[14px] flex items-center gap-1">
                           <Image width={16} src={clock} alt="icon" />
                           زمان انتظار : {item.time} دقیقه
                         </h2>
@@ -293,12 +358,13 @@ function DoctorProfile() {
             </div>
           </div>
         </div>
-        <div className=" w-[41%] gap-5 mb-10  flex flex-col">
-          <VisitSection id={doctorId} />
-
-          <div className=" flex flex-col gap-4 py-5  items-center justify-center w-full bg-white rounded-xl ">
+        <div className="  lg:w-[41%] gap-5 mb-10  flex flex-col">
+          <div className=" hidden w-full lg:flex">
+            <VisitSection id={doctorId} />
+          </div>
+          <div className=" hidden lg:flex flex-col gap-4 py-5  items-center justify-center w-full bg-white rounded-xl ">
             <h2 className=" text-[20px]">مقالات پزشک</h2>
-            <div className=" items-center justify-center flex flex-col gap-7">
+            <div className=" items-center xl:text-base text-sm justify-center flex flex-col gap-7">
               {maqalat.slice(0, 4).map((item) => {
                 return (
                   <div
@@ -330,7 +396,7 @@ function DoctorProfile() {
           </div>
         </div>
       </div>
-      <div className=" w-[90%] bg-white flex  items-center flex-col rounded-xl min-h-[507px]">
+      {/* <div className=" w-[90%] bg-white flex  items-center flex-col rounded-xl min-h-[507px]">
         <div className=" flex  flex-col gap-10 py-10 justify-center w-[90%]">
           <h2 className=" text-[26px] flex  items-center gap-2">
             <Image width={32} src={bookIcon} alt="book-icon" />
@@ -338,7 +404,7 @@ function DoctorProfile() {
           </h2>
           <AcordinDoctorpanel />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

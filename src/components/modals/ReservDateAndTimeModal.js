@@ -7,17 +7,23 @@ import { IoLocationOutline } from "react-icons/io5";
 import docProf from "../../../public/Pics/bahramMirzayi.png";
 import SelfOrAnotherModal from "./SelfOrAnotherModal";
 import { doctorProfileStore, reservationStore } from "@/store/Store";
-import { get_doctor_reservation, get_doctor_treatment_reservation } from "@/api/ApiCalling";
+import {
+  get_doctor_reservation,
+  get_doctor_treatment_reservation,
+} from "@/api/ApiCalling";
 import LoadingComponent from "../LoadingComponent";
 function ReservDateAndTimeModal({ setIsReservModal, name, treatmentId }) {
   const { doctorName, doctorId } = doctorProfileStore();
+  const { doctorNezamCode } = reservationStore();
+
   const { reservationId, setReservationId, turnId, setTurnId } =
     reservationStore();
   console.log(reservationId, turnId);
   const [isLoading, setIsLoading] = useState(true);
   const [reservationList, setReservationList] = useState([]);
   console.log(reservationList);
-  
+  const { setDateAndTime } = reservationStore();
+
   const [selectedDay, setSelectedDay] = useState("");
   console.log(selectedDay);
   const [turns, setTurns] = useState([]);
@@ -38,12 +44,14 @@ function ReservDateAndTimeModal({ setIsReservModal, name, treatmentId }) {
   const [isSelfOrAnother, setIsSelfOrAnother] = useState(false);
 
   const uniqueStimeSet = new Set();
+  const { adress } = reservationStore();
 
   const mappedDayDetails = () => {
     return reservationList.map((item) => {
       return (
         <button
           onClick={() => {
+            setDateAndTime(item.reservationDateFull);
             setSelectedDay(item.id);
             let turns = item.visitCost.reservations[0].turns;
             const uniqueTurns = turns.filter((turn) => {
@@ -95,14 +103,14 @@ function ReservDateAndTimeModal({ setIsReservModal, name, treatmentId }) {
     setIsReservModal(false);
   };
   return (
-    <div className="   w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]">
+    <div className="  z-50  w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]">
       {isLoading && <LoadingComponent />}
-      {isSelfOrAnother && <SelfOrAnotherModal />}
+      {isSelfOrAnother && <SelfOrAnotherModal setModal={setIsSelfOrAnother} />}
       <div
         className={`${
           turns.length != 0
-            ? " w-[40%] h-[90%] transition-all  flex flex-col p-5 gap-5 bg-white rounded-2xl "
-            : " w-[40%] h-[60%] transition-all flex flex-col p-5 gap-5 bg-white rounded-2xl"
+            ? " lg:w-[40%] w-full h-[90%] transition-all  flex flex-col p-5 gap-5 bg-white rounded-2xl "
+            : " lg:w-[40%] w-full h-[50%] lg:h-[60%]  transition-all flex flex-col p-5 gap-5 bg-white rounded-2xl"
         }`}
       >
         <div className=" w-full flex items-center justify-between">
@@ -122,11 +130,11 @@ function ReservDateAndTimeModal({ setIsReservModal, name, treatmentId }) {
           <div className=" flex flex-col">
             <span className=" flex items-center gap-2">
               <h5 className=" text-lg"> {doctorName}</h5>
-              <p>شماره نظام پزشکی: ۱۲۴۴۳</p>
+              <p>شماره نظام پزشکی:{doctorNezamCode}</p>
             </span>
             <h5 className=" text-[#94989E] flex items-center gap-1">
               <IoLocationOutline className=" text-xl" />
-              تهران ، صادقیه وفا آذر بن بست پانیذ
+              {adress}
             </h5>
           </div>
         </div>
@@ -144,7 +152,9 @@ function ReservDateAndTimeModal({ setIsReservModal, name, treatmentId }) {
                 انصراف
               </button>
               <button
-                onClick={() => setIsSelfOrAnother(true)}
+                onClick={() => {
+                  setIsSelfOrAnother(true);
+                }}
                 className=" border px-10 rounded-lg p-2 text-white bg-[#005DAD]"
               >
                 تایید و ادامه

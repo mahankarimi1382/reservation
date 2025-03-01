@@ -7,12 +7,14 @@ import step1reservation from "../../../public/Pics/reservationStep1.png";
 import {
   doctorProfileStore,
   fullNameStorage,
+  reservationStore,
   smeIdStorage,
 } from "@/store/Store";
 
 function ReservForMe({ setSteps }) {
   const { fullName } = fullNameStorage();
   const { doctorName } = doctorProfileStore();
+  const { dateAndTime, adress, doctorSpecialties } = reservationStore();
   const handleCompleteStep1 = () => {
     setSteps(2);
   };
@@ -58,7 +60,7 @@ function ReservForMe({ setSteps }) {
               />
               <div className=" flex flex-col gap-2">
                 <h2 className=" text-[20px]">{doctorName}</h2>
-                <h5 className="text-[#757575]">متخصص مغز و اعصاب</h5>
+                <h5 className="text-[#757575]">{doctorSpecialties}</h5>
               </div>
             </div>
 
@@ -69,7 +71,7 @@ function ReservForMe({ setSteps }) {
           </div>
           <div className=" flex py-5 text-[20px] gap-1 border-b border-[#CBCBCB]">
             <h2>تاریخ و ساعت نوبت:</h2>
-            <h2 className=" text-[#757575]">1403/06/02 ساعت 10:30</h2>
+            <h2 className=" text-[#757575]">{dateAndTime}</h2>
           </div>
           <div className=" flex py-5 text-[20px] gap-1 border-b border-[#CBCBCB]">
             <h2>نوع نوبت دهی:</h2>
@@ -77,9 +79,7 @@ function ReservForMe({ setSteps }) {
           </div>
           <div className=" flex py-5 text-[20px] gap-1 ">
             <h2>آدرس:</h2>
-            <h2 className=" text-[#757575]">
-              گاندی شمالی برادران شریفی پلاک 55 واحد 11
-            </h2>
+            <h2 className=" text-[#757575]">{adress}</h2>
           </div>
         </div>
       </div>
