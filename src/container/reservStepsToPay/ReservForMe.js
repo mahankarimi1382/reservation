@@ -4,14 +4,18 @@ import { CiEdit } from "react-icons/ci";
 import bahramProf from "../../../public/Pics/bahramMirzayi.png";
 import star from "../../../public/Pics/star.png";
 import step1reservation from "../../../public/Pics/reservationStep1.png";
+import doctorIcon from "../../../public/Pics/doctor-icon.jpg";
+
 import {
   doctorProfileStore,
   fullNameStorage,
   reservationStore,
   smeIdStorage,
+  userProfileStore,
 } from "@/store/Store";
 
 function ReservForMe({ setSteps }) {
+  const { phoneNum } = userProfileStore();
   const { fullName } = fullNameStorage();
   const { doctorName } = doctorProfileStore();
   const { dateAndTime, adress, doctorSpecialties } = reservationStore();
@@ -41,11 +45,11 @@ function ReservForMe({ setSteps }) {
           </div>
           <div className=" w-full flex justify-between items-center">
             <h2 className=" text-[20px]">شماره موبایل</h2>
-            <h2 className=" text-[20px]">09121885312</h2>
+            <h2 className=" text-[20px]">{phoneNum}</h2>
           </div>
           <div className=" w-full flex justify-between items-center">
             <h2 className=" text-[20px]">بیمه</h2>
-            <h2 className=" text-[20px]">بیمه تکمیلی دانا</h2>
+            {/* <h2 className=" text-[20px]">بیمه تکمیلی دانا</h2> */}
           </div>
           <p>(باتوجه به بیمه تکمیلی شما هزینه تا 15% کسر می شود)</p>
         </div>
@@ -54,13 +58,15 @@ function ReservForMe({ setSteps }) {
             <div className=" flex justify-center items-center gap-2">
               <Image
                 alt="prof"
-                src={bahramProf}
+                src={doctorIcon}
                 width={87}
                 className="border lg:w-[87px] w-[50px] rounded-full border-[#005DAD]"
               />
               <div className=" flex flex-col gap-2">
                 <h2 className=" text-xs lg:text-[20px]">{doctorName}</h2>
-                <h5 className=" text-xs lg:text-base text-[#757575]">{doctorSpecialties}</h5>
+                <h5 className=" text-xs lg:text-base text-[#757575]">
+                  {doctorSpecialties}
+                </h5>
               </div>
             </div>
 
@@ -75,7 +81,7 @@ function ReservForMe({ setSteps }) {
           </div>
           <div className=" flex lg:py-5 lg:text-[20px] gap-1 border-b border-[#CBCBCB]">
             <h2>نوع نوبت دهی:</h2>
-            <h2 className=" text-[#757575]">آنلاین، متنی</h2>
+            <h2 className=" text-[#757575]">حضوری</h2>
           </div>
           <div className=" flex py-5 text-[20px] gap-1 ">
             <h2>آدرس:</h2>

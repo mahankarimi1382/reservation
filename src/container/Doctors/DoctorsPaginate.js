@@ -12,7 +12,7 @@ import { AiFillLike } from "react-icons/ai";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import LoadingComponent from "@/components/LoadingComponent";
 import filterIcon from "../../../public/Pics/filter.png";
-
+import doctorIcon from "../../../public/Pics/doctor-icon.jpg";
 import {
   CitySelectButtSearchingDoctors,
   EmtyReservButt,
@@ -262,7 +262,7 @@ function DoctorsPaginate() {
                     width={90}
                     height={90}
                     className="w-[60px] h-[60px] lg:w-[90px] lg:h-[90px] border-2  border-[#005DAD] rounded-full"
-                    src={doctorprof}
+                    src={doctorIcon}
                     alt="doctor-prof"
                   />
                   <div className=" flex flex-col gap-2 lg:gap-5">

@@ -183,3 +183,15 @@ export const reservationStore = create(
     }
   )
 );
+export const userProfileStore = create(
+  persist(
+    (set) => ({
+      phoneNum: "",
+      setPhoneNum: (phone) => set(() => ({ phoneNum: phone })),
+    }),
+    {
+      name: "user-details",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);

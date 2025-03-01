@@ -3,7 +3,12 @@ import ModalLogo from "../../../public/Pics/ModalLogo.png";
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
 import { SyncLoader } from "react-spinners";
-import { fullNameStorage, myStore, smeIdStorage } from "@/store/Store";
+import {
+  fullNameStorage,
+  myStore,
+  smeIdStorage,
+  userProfileStore,
+} from "@/store/Store";
 import { signin, signup } from "@/api/ApiCalling";
 import ValidateModal from "./ValidateModal";
 function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
@@ -12,10 +17,11 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
   const { setSmeId } = smeIdStorage();
   const [isValidateModal, setIsValidateModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [phoneNum, setPhoneNum] = useState("");
+  // const [phoneNum, setPhoneNum] = useState("");
   const [loginByPass, setLoginBypass] = useState(false);
   const [nationalCode, setNationalCode] = useState("");
   const [password, setPassword] = useState("");
+  const { phoneNum, setPhoneNum } = userProfileStore();
   const handleSubmit = () => {
     loginByPass
       ? signin(setIsLoading, data2, setFullName, setToken, closeModal, setSmeId)

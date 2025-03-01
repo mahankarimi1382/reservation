@@ -1,28 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import ModalLogo from "../../../public/Pics/ModalLogo.png";
 
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
 import { useRouter } from "next/navigation";
 import { myStore, reservationTypeStore } from "@/store/Store";
+import Cookies from "js-cookie";
+import LoginModal from "./LoginModal";
+import { Eror } from "../ToastAlerts";
 function SelfOrAnotherModal({ setModal }) {
   const { setReservationType } = reservationTypeStore();
+  const [isLoginModal, setIsLoginModal] = useState(false);
   const router = useRouter();
+  const token = Cookies.get("token");
+
   const handleReservationType = (type) => {
-    setReservationType(type);
-    router.push("/reservStepsToPay");
+    if (token) {
+      setReservationType(type);
+      router.push("/reservStepsToPay");
+    } else {
+      setIsLoginModal(true);
+      Eror("ابتدا لاگین کنید")
+    }
   };
   const closeModal = () => {
     setModal(false);
-    
   };
   return (
-    <div
-      className=" z-20  w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]"
-    >
-      <div
-        className=" py-2 w-[450px] h-[224px] rounded-xl bg-white flex flex-col gap-3 "
-      >
+    <div className=" z-20  w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]">
+      <div className=" py-2 w-[450px] h-[224px] rounded-xl bg-white flex flex-col gap-3 ">
+        {isLoginModal && <LoginModal setIsModal={setIsLoginModal} />}
         <div className=" w-full flex px-1 justify-end">
           <RxCross2
             onClick={closeModal}

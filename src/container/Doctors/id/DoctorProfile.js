@@ -26,6 +26,8 @@ import { get_doctor_profile_by_id } from "@/api/ApiCalling";
 import { doctorProfileStore, reservationStore } from "@/store/Store";
 import LoadingComponent from "@/components/LoadingComponent";
 import { RateCounter } from "@/utils/RateCounter";
+import doctorIcon from "../../../../public/Pics/doctor-icon.jpg";
+
 function DoctorProfile() {
   const { setDoctorNezamCode } = reservationStore();
   const { doctorId } = doctorProfileStore();
@@ -43,7 +45,7 @@ function DoctorProfile() {
       setDoctorTreatmentCenters(
         data.smeProfile.doctors[0].doctorTreatmentCenters
       );
-      setDoctorSpecialties(data.smeProfile.doctors[0].specialist.name)
+      setDoctorSpecialties(data.smeProfile.doctors[0].specialist.name);
       setDoctorNezamCode(data.smeProfile.doctors[0].codeNezam);
       setIsLoading(false);
     }
@@ -164,7 +166,7 @@ function DoctorProfile() {
                 width={113}
                 className=" w-[50px] h-[50px] lg:w-[113px] border border-[#005DAD] rounded-full lg:h-[113px]"
                 alt="doctor-profile"
-                src={doctorProfileImg}
+                src={doctorIcon}
               />
               <div className=" flex w-72 flex-col justify-center gap-2">
                 <h2 className=" text-sm lg:text-[22px]">

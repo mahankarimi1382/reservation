@@ -112,6 +112,9 @@ function ValidateModal({
           name="input1"
           value={inputs.input1}
           onChange={(e) => {
+            if (!/^[0-9]*$/.test(e.target.value)) {
+              e.target.value = e.target.value.replace(/[^0-9]/g, "");
+            }
             handleChange(e);
             focusOnInput(e, input2Ref);
           }}
@@ -122,11 +125,15 @@ function ValidateModal({
           }
         />
         <input
+          pattern="[0-9]*"
           disabled={disabled}
           name="input2"
           value={inputs.input2}
           ref={input2Ref}
           onChange={(e) => {
+            if (!/^[0-9]*$/.test(e.target.value)) {
+              e.target.value = e.target.value.replace(/[^0-9]/g, "");
+            }
             handleChange(e);
             focusOnInput(e, input3Ref);
           }}
@@ -137,11 +144,15 @@ function ValidateModal({
           }
         />
         <input
+          pattern="[0-9]*"
           disabled={disabled}
           name="input3"
           value={inputs.input3}
           ref={input3Ref}
           onChange={(e) => {
+            if (!/^[0-9]*$/.test(e.target.value)) {
+              e.target.value = e.target.value.replace(/[^0-9]/g, "");
+            }
             handleChange(e);
             focusOnInput(e, input4Ref);
           }}
@@ -152,11 +163,15 @@ function ValidateModal({
           }
         />
         <input
+          pattern="[0-9]*"
           disabled={disabled}
           name="input4"
           value={inputs.input4}
           ref={input4Ref}
           onChange={(e) => {
+            if (!/^[0-9]*$/.test(e.target.value)) {
+              e.target.value = e.target.value.replace(/[^0-9]/g, "");
+            }
             handleChange(e);
             focusOnInput(e, input5Ref);
           }}
@@ -167,11 +182,15 @@ function ValidateModal({
           }
         />
         <input
+          pattern="[0-9]*"
           disabled={disabled}
           name="input5"
           value={inputs.input5}
           ref={input5Ref}
           onChange={(e) => {
+            if (!/^[0-9]*$/.test(e.target.value)) {
+              e.target.value = e.target.value.replace(/[^0-9]/g, "");
+            }
             handleChange(e);
           }}
           className={

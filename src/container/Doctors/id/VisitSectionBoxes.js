@@ -10,7 +10,6 @@ function VisitSectionBoxes({ icon, topic, list }) {
   console.log(list);
   const [isBoxOpen, setIsBoxOpen] = useState(false);
   const handleOpenModal = () => {
-    
     setIsBoxOpen(!isBoxOpen);
   };
   return (
@@ -65,7 +64,7 @@ function VisitSectionBoxes({ icon, topic, list }) {
           </h2>
           <h2 className=" flex p-2 lg:p-3 items-center gap-2 text-sm lg:text-[20px] text-[#757575]">
             <Image width={24} src={calenderIcon} alt="calender-icon" />
-            اولین نوبت خالی ، {list.length != 0 && list[0].nearestDate}
+            اولین نوبت خالی ، {list.length != 0 && list[0].nearestDate} ({list.length != 0 && list[0].nearestTime})
           </h2>
           <div className=" mx-5 lg:h-20 flex justify-center items-center  border-t border-dashed border-[#005DAD]">
             <button

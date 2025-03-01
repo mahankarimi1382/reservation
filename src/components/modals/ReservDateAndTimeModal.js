@@ -7,6 +7,8 @@ import { IoLocationOutline } from "react-icons/io5";
 import docProf from "../../../public/Pics/bahramMirzayi.png";
 import SelfOrAnotherModal from "./SelfOrAnotherModal";
 import { doctorProfileStore, reservationStore } from "@/store/Store";
+import doctorIcon from "../../../public/Pics/doctor-icon.jpg";
+
 import {
   get_doctor_reservation,
   get_doctor_treatment_reservation,
@@ -70,9 +72,9 @@ function ReservDateAndTimeModal({ setIsReservModal, name, treatmentId }) {
           } disabled:bg-[#FBFBFB] disabled:text-[#B2B2B2] disabled:border-none flex flex-col min-w-[95px] min-h-[95px] justify-between py-2 items-center  rounded-lg transition-all hover:bg-[#DBEDFF] hover:border-[#005DAD] hover:text-[#005DAD] border  `}
           key={item.id}
         >
-          <h5>چهارشنبه</h5>
+          <h5>{item.reservationDayOfWeek}</h5>
           <h5>{item.reservationDate}</h5>
-          <h5>اسفند</h5>
+          <h5>{item.reservationMonth}</h5>
         </button>
       );
     });
@@ -123,7 +125,7 @@ function ReservDateAndTimeModal({ setIsReservModal, name, treatmentId }) {
         <div className=" flex items-center gap-4">
           <Image
             className=" rounded-full border border-[#005DAD]"
-            src={docProf}
+            src={doctorIcon}
             width={72}
             alt="profile"
           />
