@@ -6,17 +6,23 @@ import { myStore, reservationTypeStore, smeIdStorage } from "@/store/Store";
 import ReservForAnother from "./ReservForAnother";
 import { useRouter } from "next/navigation";
 import Receipt from "./Receipt";
+import Cookies from "js-cookie";
+import { Eror } from "@/components/ToastAlerts";
 
 function Stepper() {
   const router = useRouter();
   const { smeId } = smeIdStorage();
+  const token = Cookies.get("token");
 
   const { reservationType } = reservationTypeStore();
 
   console.log(reservationType);
   const [steps, setSteps] = useState(1);
   const stepper = () => {
-    if (steps === 1 && reservationType === "reservForMe" && smeId) {
+    if (!token) {
+      router.push("/");
+      Eror("لطفا ابتدا لاگین کنید");
+    } else if (steps === 1 && reservationType === "reservForMe" && smeId) {
       return <ReservForMe setSteps={setSteps} />;
     } else if (steps === 1 && reservationType === "reservForMe" && !smeId) {
       return <ReservForAnother forme setSteps={setSteps} />;
