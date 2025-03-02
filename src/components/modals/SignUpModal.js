@@ -56,7 +56,7 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
   };
   return (
     <div className=" z-50 fixed top-0 right-0 w-screen h-screen flex justify-center items-center">
-      {isValidateModal ? (
+      {true ? (
         <ValidateModal
           setIsValidateModal={setIsValidateModal}
           phoneNumber={phoneNumber}

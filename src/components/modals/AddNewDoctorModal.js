@@ -25,7 +25,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
     doctorItems ? doctorItems.doctorFamily : ""
   );
   const [nationalId, setnationalId] = useState(
-    doctorItems ? doctorItems.nationalId : ""
+    doctorItems ? doctorItems.nationalId : null
   );
   const [specialistId, setSpecialistId] = useState(
     doctorItems ? doctorItems.smeProfile.doctors[0].specialist.id : ""

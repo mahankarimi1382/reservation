@@ -79,10 +79,12 @@ export const activating_registarion = (
       closeModal();
       setFullName(res.data.result.userFullname);
       if (res.data.result.smeprofileId) {
+        alert("have sme");
         setSmeId(res.data.result.smeprofileId);
       }
       setToken(res.data.result.token);
       if (res.data.result.userFullname != "string") {
+        alert("create sme");
         let name = res.data.result.userFullname;
         setSmeId(create_sme_profile(name, token));
       }
@@ -1013,6 +1015,18 @@ export const get_doctor_treatmentCenter_online = async (id) => {
     const treatmentCenter = response.data.result.list;
     console.log(treatmentCenter);
     return treatmentCenter;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+
+export const get_all_users = async () => {
+  try {
+    const response = await axiosConfig.get(`UserProfile/read-all-userprofiles`);
+    const users = response.data.result.list;
+    console.log(users);
+    return users;
   } catch (error) {
     console.error("Error fetching specialties:", error);
     return null;
