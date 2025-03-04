@@ -43,6 +43,7 @@ function ReservForAnother({ setSteps, forme }) {
   const [monthOfBirth, setMonthOfBirth] = useState("");
   const [yearOfBirth, setYearOfBirth] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isAtba, setIsAtba] = useState(false);
   const [cityId, setCityId] = useState("1");
   const data = {
     name,
@@ -64,7 +65,10 @@ function ReservForAnother({ setSteps, forme }) {
     );
   };
   return (
-    <div className=" flex flex-col justify-center lg:py-10 items-center" dir="rtl">
+    <div
+      className=" flex flex-col justify-center lg:py-10 items-center"
+      dir="rtl"
+    >
       <div className=" flex justify-center items-center w-[90%] h-[124px] bg-[rgba(196,226,255,0.37)] rounded-2xl">
         <Image src={step1reservation} width={915} alt="step-picture" />
       </div>
@@ -92,15 +96,24 @@ function ReservForAnother({ setSteps, forme }) {
             />
           </div>{" "}
           <div className=" flex flex-col gap-2">
-            <h2 className=" lg:text-[20px]">کد ملی</h2>
-            <input
-              onChange={(e) => setNationalCode(e.target.value)}
-              className=" px-4 border-[#005DAD] border rounded-xl lg:w-[652px] h-10 lg:h-[61px]"
-              placeholder="لطفا نام خود را وارد کنید"
-            />
+            {!isAtba && <h2 className=" lg:text-[20px]">کد ملی</h2>}
+
+            {!isAtba && (
+              <input
+                onChange={(e) => setNationalCode(e.target.value)}
+                className=" px-4 border-[#005DAD] border rounded-xl lg:w-[652px] h-10 lg:h-[61px]"
+                placeholder="لطفا نام خود را وارد کنید"
+              />
+            )}
+
             <div dir="rtl" className=" lg:gap-3 flex  items-center">
-              <Checkbox size="medium" />
-              <h2 className=" text-xs whitespace-nowrap lg:text-[18px]">اتباع هستم</h2>
+              <Checkbox
+                onChange={(e) => setIsAtba(e.target.checked)}
+                size="medium"
+              />
+              <h2 className=" text-xs whitespace-nowrap lg:text-[18px]">
+                اتباع هستم
+              </h2>
               <p className=" text-[#E62333F2] text-[10px] lg:text-sm">
                 (اگر اتباع هستید لطفا این گزینه را انتخاب کنید)
               </p>
@@ -135,7 +148,7 @@ function ReservForAnother({ setSteps, forme }) {
                 <input
                   onChange={(e) => setYearOfBirth(e.target.value)}
                   placeholder="سال"
-                  className=" text-center lg:w-[115px] p-1 lg:py-4 rounded-xl border-[#005DAD] border"
+                  className="text-slate-400 text-center lg:w-[115px] p-1 lg:py-4 rounded-xl border-[#005DAD] border"
                 />
                 <h5 className=" hidden lg:flex text-sm text-[#E62333F2]">
                   (پر کردن این فیلد اجباری نیست)
@@ -150,6 +163,14 @@ function ReservForAnother({ setSteps, forme }) {
                   <RadioGroup>
                     <div className=" flex items-center gap-10">
                       <span className=" flex items-center">
+                        <h2>آقا</h2>
+                        <FormControlLabel
+                          className=" mr-0 "
+                          value="male"
+                          control={<Radio className=" text-3xl" />}
+                        />{" "}
+                      </span>
+                      <span className=" flex items-center">
                         <h2>خانم</h2>
 
                         <FormControlLabel
@@ -157,14 +178,6 @@ function ReservForAnother({ setSteps, forme }) {
                           value="female"
                           control={<Radio className=" text-3xl" />}
                         />
-                      </span>
-                      <span className=" flex items-center">
-                        <h2>آقا</h2>
-                        <FormControlLabel
-                          className=" mr-0 "
-                          value="male"
-                          control={<Radio className=" text-3xl" />}
-                        />{" "}
                       </span>
                     </div>
                   </RadioGroup>

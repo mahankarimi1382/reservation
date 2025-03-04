@@ -76,6 +76,12 @@ function AdminPanelMenu() {
         href="/adminPanel/opinions"
       />{" "}
       <AdminPanelLink
+        title="بیمه ها"
+        icon={skills_icon}
+        blackIcon={skills_icon_black}
+        href="/adminPanel/insurances"
+      />
+      <AdminPanelLink
         title="تراکنش ها"
         icon={transactions_icon}
         blackIcon={transactions_icon_black}

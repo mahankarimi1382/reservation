@@ -1032,3 +1032,67 @@ export const get_all_users = async () => {
     return null;
   }
 };
+
+export const get_user_role_by_username = async (userName = "") => {
+  try {
+    const response = await axiosConfig.get(
+      `UserManager/read-user-role?UserName=${userName}`
+    );
+    const userRoles = response.data.result.list;
+    console.log(userRoles);
+    return userRoles;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+
+export const get_roles = async () => {
+  try {
+    const response = await axiosConfig.get(`RoleManager/read-roles`);
+    const Roles = response.data.result.list;
+    console.log(Roles);
+    return Roles;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+export const add_role_to_user = (data, setIsLoading, closeModal) => {
+  axiosConfig
+    .post("UserManager/add-role-to-user", data)
+    .then(() => {
+      success("دسترسی با موفقیت داده شد");
+      setIsLoading(false);
+      closeModal();
+    })
+    .catch((err) => {
+      console.log(err);
+      setIsLoading(false);
+    });
+};
+export const get_4first_doctor_turns = async () => {
+  try {
+    const response = await axiosConfig.get(
+      `Doctor/readfirstfreeturns?DoctorId=1239`
+    );
+    const turns = response.data.result.list;
+    console.log(turns);
+    return turns;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+
+export const read_all_insirances = async () => {
+  try {
+    const response = await axiosConfig.get(`Insurance/read-all-insurances`);
+    const insurances = response.data.result.list;
+    console.log(insurances);
+    return insurances;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};

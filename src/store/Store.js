@@ -147,7 +147,7 @@ export const nationalCodeStorage = create(
 export const doctorProfileStore = create(
   persist(
     (set) => ({
-      doctorId: "",
+      doctorId: "1239",
       setDoctorId: (id) => set(() => ({ doctorId: id })),
       doctorName: "",
       setDoctorName: (name) => set(() => ({ doctorName: name })),

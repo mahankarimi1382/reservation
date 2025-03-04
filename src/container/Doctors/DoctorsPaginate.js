@@ -345,7 +345,6 @@ function DoctorsPaginate() {
                     setDoctorId(item.id);
                     router.push("/doctors/doctor-profile");
                   }}
-                  href={`/doctors/${item.id}`}
                   className=" flex justify-center p-2 px-4 rounded-md text-white items-center bg-[#005DAD] "
                 >
                   نوبت بگیرید
