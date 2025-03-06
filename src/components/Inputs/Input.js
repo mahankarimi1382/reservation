@@ -217,11 +217,13 @@ export const CitySelectInput = ({
   cities,
   hiddentitle,
   fromFilter,
+  cityId,
 }) => {
   return (
     <div className=" lg:text-base text-xs  flex gap-2 flex-col items-start">
       {!hiddentitle && <h5>شهر</h5>}
       <select
+        value={cityId.id || cityId}
         onChange={(e) => {
           console.log(e.target.value);
           if (e.target.value) {
@@ -264,12 +266,17 @@ export const ProvinceSelectInput = ({
   borderColor,
   setCities,
   hiddentitle,
+  initProvince,
+  setInitProvince,
   setProvince = () => console.log("first"),
 }) => {
   const [provinces, setProvinces] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const data = await get_province();
+      if (initProvince) {
+        read_city(initProvince, setCities);
+      }
       if (data) {
         setProvinces(data);
       }
@@ -280,10 +287,12 @@ export const ProvinceSelectInput = ({
     <div className=" flex lg:text-base text-xs gap-2 flex-col items-start">
       {!hiddentitle && <h5>استان</h5>}
       <select
+        value={initProvince}
         onChange={(e) => {
           console.log(e.target.value);
           if (e.target.value) {
             read_city(e.target.value, setCities);
+            setInitProvince && setInitProvince(e.target.value);
             setProvince({
               id: e.target.value,
               label:

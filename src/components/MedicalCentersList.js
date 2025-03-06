@@ -194,7 +194,7 @@ function MedicalCentersList({ type }) {
                 {type == "office" ? item.postalCode : item.siamCode}
               </h4>
               <h4 className=" text-[#005DAD] w-[14%] flex justify-center items-center ">
-                0
+                {item.doctorsCount}
               </h4>
               <h4 className=" text-[#005DAD] w-[14%] flex justify-center items-center ">
                 {type == "office" ? item.officeTypeName : item.clinicTypeName}

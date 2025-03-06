@@ -22,6 +22,7 @@ const MapTest = dynamic(() => import("../../components/MapTest"), {
 });
 const MedicalFormModal = ({ closeModal, selectedMedical }) => {
   console.log(selectedMedical);
+  console.log(selectedMedical);
   const pathName = usePathname();
   console.log(selectedMedical);
   console.log(pathName);
@@ -29,6 +30,9 @@ const MedicalFormModal = ({ closeModal, selectedMedical }) => {
   const [isVirtual, setIsVirtual] = useState(false);
   const [loading, setLoading] = useState(false);
   const [cities, setCities] = useState([]);
+  const [initProvince, setInitProvince] = useState(
+    (selectedMedical && selectedMedical.provinceId) || ""
+  );
   const [position, setPosition] = useState([
     (selectedMedical && selectedMedical.geolon) || 51.4055941,
     (selectedMedical && selectedMedical.geolat) || 35.758954,
@@ -50,11 +54,15 @@ const MedicalFormModal = ({ closeModal, selectedMedical }) => {
     (selectedMedical && selectedMedical.phone) || ""
   );
 
-  const [cityId, setCityId] = useState("");
+  const [cityId, setCityId] = useState(
+    (selectedMedical && selectedMedical.cityId) || ""
+  );
   const [desc, setDesc] = useState(
     (selectedMedical && selectedMedical.desc) || ""
   );
-  const [clinicTypeId, setClinicTypeId] = useState(0);
+  const [clinicTypeId, setClinicTypeId] = useState(
+    (selectedMedical && selectedMedical.clinicTypeId) || 0
+  );
   const [officeTypeId, setOfficeTypeId] = useState(0);
   const data = {
     metadata: {
@@ -231,6 +239,7 @@ const MedicalFormModal = ({ closeModal, selectedMedical }) => {
                   </select>
                 ) : (
                   <select
+                    value={clinicTypeId}
                     onChange={(e) => setClinicTypeId(e.target.value)}
                     className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
@@ -266,7 +275,12 @@ const MedicalFormModal = ({ closeModal, selectedMedical }) => {
                   استان
                 </label>
 
-                <ProvinceSelectInput setCities={setCities} hiddentitle />
+                <ProvinceSelectInput
+                  setInitProvince={setInitProvince}
+                  initProvince={initProvince}
+                  setCities={setCities}
+                  hiddentitle
+                />
               </div>
             </div>
 
@@ -279,6 +293,7 @@ const MedicalFormModal = ({ closeModal, selectedMedical }) => {
                   شهر
                 </label>
                 <CitySelectInput
+                  cityId={cityId}
                   setCityId={setCityId}
                   hiddentitle
                   cities={cities}
