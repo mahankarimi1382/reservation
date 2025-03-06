@@ -47,22 +47,19 @@ function UserAccesPaginate({
             className=" border flex py-3 rounded-lg bg-white shadow-md"
             key={item.id}
           >
-            <h4 className=" w-[13%] flex justify-center items-center text-[#3F444D] ">
+            <h4 className=" w-[15%] flex justify-center items-center text-[#3F444D] ">
               {" "}
             </h4>
-            <h4 className=" w-[13%] flex justify-center items-center text-[#3F444D] ">
+            <h4 className=" w-[15%] flex justify-center items-center text-[#3F444D] ">
               {item.profileName}
             </h4>
-            <h4 className=" w-[13%] flex justify-center items-center text-[#3F444D] ">
+            <h4 className=" w-[15%] flex justify-center items-center text-[#3F444D] ">
               {" "}
             </h4>
-            <h4 className=" w-[13%] flex justify-center items-center text-[#3F444D] ">
+            <h4 className=" w-[15%] flex justify-center items-center text-[#3F444D] ">
               {item.userName}
             </h4>
-            <h4 className=" w-[14%] max-w-[15%] flex justify-center items-center text-[#3F444D] ">
-              {" "}
-            </h4>
-            <h4 className="  pl-8 text-green-600 w-[10%] flex justify-center items-center ">
+            <h4 className="  pl-8 text-green-600 w-[15%] flex justify-center items-center ">
               <FormControlLabel
                 control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
               />

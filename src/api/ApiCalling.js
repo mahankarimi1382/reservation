@@ -1187,3 +1187,16 @@ export const edit_office = (data, setLoading, closeModal) => {
       setLoading(false);
     });
 };
+export const create_role = (data, setIsLoading, closeModal) => {
+  axiosConfig
+    .post("RoleManager/create-role", data)
+    .then(() => {
+      success("نقش با موفقیت ثبت شد");
+      setIsLoading(false);
+      closeModal();
+    })
+    .catch((err) => {
+      console.log(err);
+      setIsLoading(false);
+    });
+};

@@ -64,6 +64,8 @@ function EditUserRoleModal({ userName, closeModal }) {
       return "ادمین مراکز درمانی";
     } else if (name == "SuperAdmin") {
       return "سوپر ادمین";
+    }else{
+      return(name)
     }
   };
   return (
