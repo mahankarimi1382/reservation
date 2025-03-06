@@ -16,8 +16,9 @@ import {
   create_sme_profile_for_doctor,
 } from "@/api/ApiCalling";
 import Cookies from "js-cookie";
-import { smeIdStorage } from "@/store/Store";
+import { smeIdStorage, userProfileStore } from "@/store/Store";
 const DoctorFormModal = ({ setIsAddDoctorModal, fromSignup }) => {
+  const { phoneNum } = userProfileStore();
   const [cityId, setCityId] = useState("");
   console.log(cityId);
   console.log(cityId.id);
@@ -47,8 +48,7 @@ const DoctorFormModal = ({ setIsAddDoctorModal, fromSignup }) => {
     gender: doctorformData.gender,
     docExperiance: "string",
     docInstaLink: "string",
-    smeProfileId: smeId||"",
-
+    smeProfileId: smeId || "",
   };
 
   const token = Cookies.get("token");
@@ -71,7 +71,8 @@ const DoctorFormModal = ({ setIsAddDoctorModal, fromSignup }) => {
         data,
         token,
         setIsLoading,
-        setIsAddDoctorModal
+        setIsAddDoctorModal,
+        phoneNum
       );
     }
   };

@@ -743,7 +743,8 @@ export const create_sme_profile_for_doctor = (
   data,
   token,
   setIsLoading,
-  setIsAddDoctorModal
+  setIsAddDoctorModal,
+  phoneNum
 ) => {
   console.log(data);
   axios
@@ -756,7 +757,7 @@ export const create_sme_profile_for_doctor = (
         },
         smeName: `${data.doctorName + " " + data.doctorFamily}`,
         nationalCode: "",
-        businessCode: "",
+        businessCode: phoneNum,
         managerName: "",
         registerNumber: "",
         economyCode: "",
@@ -881,7 +882,8 @@ export const create_sme_profile_for_user = (
   setIsLoading,
   setSteps,
   setPatientId,
-  setSmeId
+  setSmeId,
+  phoneNum
 ) => {
   console.log(data);
   axios
@@ -894,7 +896,7 @@ export const create_sme_profile_for_user = (
         },
         smeName: data.name + " " + data.familyName,
         nationalCode: data.nationalCode,
-        businessCode: "",
+        businessCode: phoneNum,
         managerName: "",
         registerNumber: "",
         economyCode: "",

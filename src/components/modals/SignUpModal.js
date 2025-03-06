@@ -15,7 +15,7 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
   const [password, setPassword] = useState("");
   const [fullname, setFullname] = useState("");
   const handleKeyDown = (e) => {
-    console.log(e)
+    console.log(e);
     if (e.key == "Enter") {
       handleClickSignUp();
     }
@@ -56,7 +56,7 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
   };
   return (
     <div className=" z-50 fixed top-0 right-0 w-screen h-screen flex justify-center items-center">
-      {true ? (
+      {isValidateModal ? (
         <ValidateModal
           setIsValidateModal={setIsValidateModal}
           phoneNumber={phoneNumber}

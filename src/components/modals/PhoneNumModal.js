@@ -89,7 +89,10 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
         |
         <button
           className={loginByPass && " text-[#005DAD]"}
-          onClick={() => setLoginBypass(true)}
+          onClick={() => {
+            setPhoneNum("");
+            setLoginBypass(true);
+          }}
         >
           ورود با رمز ثابت
         </button>

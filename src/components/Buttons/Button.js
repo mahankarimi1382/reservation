@@ -16,6 +16,7 @@ import {
   myStore,
   nationalCodeStorage,
   smeIdStorage,
+  userProfileStore,
 } from "@/store/Store";
 import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
@@ -48,6 +49,8 @@ import AddPatinetModal from "../modals/AddPatinetModal";
 
 export const LoginButton = () => {
   const { fullName, setFullName } = fullNameStorage();
+  const { phoneNum, setPhoneNum } = userProfileStore();
+  console.log(phoneNum);
   const { removeSmeId, smeId } = smeIdStorage();
   const [isHover, setIsHover] = useState(false);
   const router = useRouter();
@@ -117,6 +120,7 @@ export const LoginButton = () => {
             </Link>
             <div
               onClick={() => {
+                setPhoneNum("");
                 removeSmeId();
                 Cookies.remove("token");
                 setFullName(null);

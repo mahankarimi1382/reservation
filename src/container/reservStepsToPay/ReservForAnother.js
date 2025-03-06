@@ -15,7 +15,7 @@ import {
 } from "@/components/Inputs/Input";
 import Cookies from "js-cookie";
 import { SyncLoader } from "react-spinners";
-import { reservationStore, smeIdStorage } from "@/store/Store";
+import { reservationStore, smeIdStorage, userProfileStore } from "@/store/Store";
 
 function ReservForAnother({ setSteps, forme }) {
   const [cities, setCities] = useState([]);
@@ -36,6 +36,8 @@ function ReservForAnother({ setSteps, forme }) {
   ];
   const token = Cookies.get("token");
   const { patientPhone, setPatientPhone } = reservationStore();
+  const { phoneNum } = userProfileStore();
+
   const { setPatientId } = reservationStore();
   const [name, setName] = useState("");
   const [familyName, setFamilyName] = useState("");
@@ -63,7 +65,8 @@ function ReservForAnother({ setSteps, forme }) {
       setIsLoading,
       setSteps,
       setPatientId,
-      setSmeId
+      setSmeId,
+      phoneNum
     );
   };
   return (
