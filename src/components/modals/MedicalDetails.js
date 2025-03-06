@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 
-function SeeMedicalDetails({ closeModal, selectedItem }) {
+function MedicalDetails({ closeModal, selectedItem }) {
   console.log(selectedItem);
   //     name:
   //     item.doctor.doctorName + " " + item.doctor.doctorFamily,
@@ -32,7 +32,6 @@ function SeeMedicalDetails({ closeModal, selectedItem }) {
             <h5>نام </h5>
             <h5 className=" text-gray-500">
               {selectedItem.name || selectedItem.clinicName}
-              
             </h5>
           </div>
           <div className=" border-b p-2 w-full flex justify-between items-center">
@@ -65,4 +64,4 @@ function SeeMedicalDetails({ closeModal, selectedItem }) {
   );
 }
 
-export default SeeMedicalDetails;
+export default MedicalDetails;

@@ -21,7 +21,8 @@ import { AddMedicalCenterButt } from "@/components/Buttons/Button";
 import SeeReservsModal from "./modals/SeeReservsModal";
 import medicalProf from "../../public/Pics/medicalcenters.jpg";
 import MedicalFormModal from "./modals/MedicalFormModal";
-import SeeMedicalDetails from "./modals/seeMedicalDetails";
+import MedicalDetails from "./modals/MedicalDetails";
+
 function MedicalCentersList({ type }) {
   const [medicalCenters, setMedicalCenters] = useState([]);
   const [isMedicalCenterForm, setIsMedicalCenterForm] = useState(false);
@@ -74,7 +75,7 @@ function MedicalCentersList({ type }) {
     <div className=" gap-10 mt-20 w-full flex flex-col items-center ">
       <div className=" flex w-[80%]  gap-5 items-center">
         {IsSeeMedicalDetails && (
-          <SeeMedicalDetails
+          <MedicalDetails
             closeModal={() => setIsSeeMedicalDetails(false)}
             selectedItem={selectedItem}
           />
