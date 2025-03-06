@@ -98,7 +98,7 @@ function ValidateModal({
   };
 
   return (
-    <div className="py-4 w-[394px] h-[326px] bg-white flex flex-col justify-between rounded">
+    <div className="py-4 w-[394px] h-[326px] px-5 bg-white flex flex-col justify-between rounded">
       <div className="w-full flex px-1 justify-end">
         <RxCross2
           onClick={closeModal}
