@@ -584,6 +584,7 @@ export const MedicalCenterSignUpButt = () => {
   );
 };
 export const AddMedicalCenterButt = ({
+  selectedMedical,
   isOffice,
   isMedicalCenterForm,
   setIsMedicalCenterForm,
@@ -591,7 +592,7 @@ export const AddMedicalCenterButt = ({
   return (
     <div>
       {isMedicalCenterForm && (
-        <MedicalFormModal setIsMedicalCenterForm={setIsMedicalCenterForm} />
+        <MedicalFormModal closeModal={() => setIsMedicalCenterForm(false)} />
       )}
       <button
         onClick={() => setIsMedicalCenterForm(true)}

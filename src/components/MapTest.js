@@ -5,10 +5,11 @@ import "@neshan-maps-platform/mapbox-gl-react/dist/style.css";
 import mapboxgl from "@neshan-maps-platform/mapbox-gl";
 import axios from "axios";
 
-export default function MapTest({ setPosition }) {
+export default function MapTest({ setPosition, position }) {
   const mapRef = useRef(null);
+  console.log(position);
   const mapContainerRef = useRef(null);
-  const [center, setCenter] = useState([51.4055941, 35.758954]);
+  const [center, setCenter] = useState(position);
   const [markerPosition, setMarkerPosition] = useState(center);
   const [searchResults, setSearchResults] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(false);

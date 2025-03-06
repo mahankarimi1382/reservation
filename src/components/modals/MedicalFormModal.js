@@ -6,7 +6,12 @@ import MedicalCenterFormImage from "../../../public/Pics/MedicalCenterFormImage.
 
 import { CitySelectInput, ProvinceSelectInput } from "../Inputs/Input";
 import { RxCross2 } from "react-icons/rx";
-import { add_medical_center, add_Office } from "@/api/ApiCalling";
+import {
+  add_medical_center,
+  add_Office,
+  edit_clinic,
+  edit_office,
+} from "@/api/ApiCalling";
 import { SyncLoader } from "react-spinners";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
@@ -15,35 +20,54 @@ import { Eror } from "../ToastAlerts";
 const MapTest = dynamic(() => import("../../components/MapTest"), {
   ssr: false,
 });
-const MedicalFormModal = ({ setIsMedicalCenterForm }) => {
+const MedicalFormModal = ({ closeModal, selectedMedical }) => {
+  console.log(selectedMedical);
   const pathName = usePathname();
-
+  console.log(selectedMedical);
   console.log(pathName);
   const isoffice = pathName === "/adminPanel/medicalcenters/offices";
   const [isVirtual, setIsVirtual] = useState(false);
   const [loading, setLoading] = useState(false);
   const [cities, setCities] = useState([]);
-  const [position, setPosition] = useState([]);
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [siamCode, setSiamCode] = useState("");
-  const [phone, setPhone] = useState("");
+  const [position, setPosition] = useState([
+    (selectedMedical && selectedMedical.geolon) || 51.4055941,
+    (selectedMedical && selectedMedical.geolat) || 35.758954,
+  ]);
+  const [name, setName] = useState(
+    (selectedMedical && selectedMedical.clinicName) ||
+      (selectedMedical && selectedMedical.name) ||
+      ""
+  );
+  const [address, setAddress] = useState(
+    (selectedMedical && selectedMedical.address) || ""
+  );
+  const [siamCode, setSiamCode] = useState(
+    (selectedMedical && selectedMedical.siamCode) ||
+      (selectedMedical && selectedMedical.postalCode) ||
+      ""
+  );
+  const [phone, setPhone] = useState(
+    (selectedMedical && selectedMedical.phone) || ""
+  );
 
-  const [cityId, setCityId] = useState("1");
-  const [desc, setDesc] = useState("");
+  const [cityId, setCityId] = useState("");
+  const [desc, setDesc] = useState(
+    (selectedMedical && selectedMedical.desc) || ""
+  );
   const [clinicTypeId, setClinicTypeId] = useState(0);
-  const [officeTypeId, setOfficeTypeId] = useState(1);
+  const [officeTypeId, setOfficeTypeId] = useState(0);
   const data = {
     metadata: {
       userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       userName: "string",
     },
+    id: selectedMedical && selectedMedical.id,
     name,
     address,
-    geolon: position[0],
-    geolat: position[1],
+    geolon: position ? position[0] : 0,
+    geolat: position ? position[1] : 0,
     phone,
-    cityId: cityId.id || 1,
+    cityId: cityId.id,
     siamCode,
     desc,
     clinicTypeId,
@@ -54,17 +78,30 @@ const MedicalFormModal = ({ setIsMedicalCenterForm }) => {
       userName: "string",
       smeProfileId: 0,
     },
+    id: selectedMedical && selectedMedical.id,
     name,
     address,
     geolon: position ? position[0] : 0,
     geolat: position ? position[1] : 0,
     phone,
-    cityId: cityId.id || 1,
+    cityId: cityId.id,
     postalCode: siamCode,
     officeTypeId,
   };
   const handleSubmit = () => {
+    // console.log(
+    //   selectedMedical,
+    //   isoffice,
+    //   !isVirtual,
+    //   cityId,
+    //   officeTypeId,
+    //   name,
+    //   address,
+    //   phone,
+    //   siamCode
+    // );
     if (
+      selectedMedical &&
       isoffice &&
       !isVirtual &&
       cityId &&
@@ -77,14 +114,51 @@ const MedicalFormModal = ({ setIsMedicalCenterForm }) => {
       console.log(isoffice);
       setLoading(true);
       console.log("first");
-      add_Office(data2, setLoading, setIsMedicalCenterForm);
+      edit_office(data2, setLoading, closeModal);
+    } else if (
+      isoffice &&
+      !isVirtual &&
+      cityId &&
+      officeTypeId &&
+      name &&
+      address &&
+      phone &&
+      siamCode
+    ) {
+      console.log(isoffice);
+      setLoading(true);
+      console.log("first");
+      add_Office(data2, setLoading, closeModal);
+    } else if (
+      selectedMedical &&
+      isoffice &&
+      isVirtual &&
+      officeTypeId &&
+      name &&
+      phone
+    ) {
+      setLoading(true);
+      console.log("dahd");
+      edit_office(data2, setLoading, closeModal);
     } else if (isoffice && isVirtual && officeTypeId && name && phone) {
       setLoading(true);
       console.log("dahd");
-      add_Office(data2, setLoading, setIsMedicalCenterForm);
+      add_Office(data2, setLoading, closeModal);
+    } else if (
+      selectedMedical &&
+      cityId &&
+      clinicTypeId &&
+      name &&
+      address &&
+      phone &&
+      siamCode
+    ) {
+      console.log("medical");
+      edit_clinic(data, setLoading, closeModal);
+      setLoading(true);
     } else if (cityId && clinicTypeId && name && address && phone && siamCode) {
       console.log("medical");
-      add_medical_center(data, setLoading, setIsMedicalCenterForm);
+      add_medical_center(data, setLoading, closeModal);
       setLoading(true);
     } else {
       Eror("لطفا اطلاعات را کامل وارد کنید");
@@ -97,7 +171,7 @@ const MedicalFormModal = ({ setIsMedicalCenterForm }) => {
     >
       <div className=" relative overflow-hidden bg-white w-2/3 flex rounded-lg  items-center h-[90%] max-h-[90%]">
         <RxCross2
-          onClick={() => setIsMedicalCenterForm(false)}
+          onClick={closeModal}
           className=" absolute z-50 left-1 top-1 cursor-pointer"
         />
         <div className="customScroll overflow-auto max-h-full  w-[80%] p-5 gap-4 flex flex-col">
@@ -133,14 +207,23 @@ const MedicalFormModal = ({ setIsMedicalCenterForm }) => {
                     onChange={(e) => {
                       if (e.target.value != 1) {
                         setIsVirtual(true);
+                        setAddress("");
+                        setPosition(null);
                         setOfficeTypeId(e.target.value);
                       } else {
+                        setPosition([
+                          (selectedMedical && selectedMedical.geolon) ||
+                            51.4055941,
+                          (selectedMedical && selectedMedical.geolat) ||
+                            35.758954,
+                        ]);
                         setIsVirtual(false);
                         setOfficeTypeId(e.target.value);
                       }
                     }}
                     className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
+                    <option value={null}>انتخاب نوع مطب</option>
                     <option value={1}>حضوری</option>
                     <option value={2}>تصویری</option>
                     <option value={3}>تلفنی</option>
@@ -161,65 +244,64 @@ const MedicalFormModal = ({ setIsMedicalCenterForm }) => {
                 )}
               </div>
             </div>
-            {!isVirtual && (
-              <div className=" flex gap-8 ">
-                <div className=" w-1/2 flex flex-col ">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
-                    {isoffice ? "کد پستی" : "کد سیام"}
-                  </label>
 
-                  <input
-                    type="text"
-                    className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    value={siamCode}
-                    onChange={(e) => setSiamCode(e.target.value)}
-                  />
-                </div>
-                <div className="w-1/2 flex flex-col ">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    htmlFor="medicalCode"
-                  >
-                    استان
-                  </label>
+            <div className=" flex gap-8 ">
+              <div className=" w-1/2 flex flex-col ">
+                <label className="block text-gray-700 text-sm font-bold mb-2">
+                  {isoffice ? "کد پستی" : "کد سیام"}
+                </label>
 
-                  <ProvinceSelectInput setCities={setCities} hiddentitle />
-                </div>
+                <input
+                  type="text"
+                  className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={siamCode}
+                  onChange={(e) => setSiamCode(e.target.value)}
+                />
               </div>
-            )}
-            {!isVirtual && (
-              <div className=" flex gap-8 ">
-                <div className=" w-1/2 flex flex-col ">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    htmlFor="gender"
-                  >
-                    شهر
-                  </label>
-                  <CitySelectInput
-                    setCityId={setCityId}
-                    hiddentitle
-                    cities={cities}
-                  />
-                </div>
-                <div className="w-1/2 flex flex-col ">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    htmlFor="gender"
-                  >
-                    شماره تلفن
-                  </label>
+              <div className="w-1/2 flex flex-col ">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="medicalCode"
+                >
+                  استان
+                </label>
 
-                  <input
-                    type="text"
-                    className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                  />
-                </div>
+                <ProvinceSelectInput setCities={setCities} hiddentitle />
               </div>
-            )}
-            {!isVirtual ? (
+            </div>
+
+            <div className=" flex gap-8 ">
+              <div className=" w-1/2 flex flex-col ">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="gender"
+                >
+                  شهر
+                </label>
+                <CitySelectInput
+                  setCityId={setCityId}
+                  hiddentitle
+                  cities={cities}
+                />
+              </div>
+              <div className="w-1/2 flex flex-col ">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="gender"
+                >
+                  شماره تلفن
+                </label>
+
+                <input
+                  type="text"
+                  className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+              </div>
+            </div>
+
+            {!isVirtual && (
               <div className=" w-full flex flex-col ">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
                   {isoffice ? "آدرس مطب" : "آدرس مرکز درمانی"}
@@ -229,18 +311,6 @@ const MedicalFormModal = ({ setIsMedicalCenterForm }) => {
                   className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                />
-              </div>
-            ) : (
-              <div className=" w-full flex flex-col ">
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  شماره تلفن
-                </label>
-                <input
-                  type="text"
-                  className="w-full px-3 py-2 border border-[#636972] rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
                 />
               </div>
             )}
@@ -261,7 +331,7 @@ const MedicalFormModal = ({ setIsMedicalCenterForm }) => {
             </div>
             {!isVirtual && (
               <div className=" w-full">
-                <MapTest setPosition={setPosition} />
+                <MapTest position={position} setPosition={setPosition} />
               </div>
             )}
 

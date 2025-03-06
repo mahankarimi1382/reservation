@@ -454,11 +454,7 @@ export const create_ads = (data, setLoading) => {
       console.log(err);
     });
 };
-export const add_medical_center = (
-  data,
-  setLoading,
-  setIsMedicalCenterForm
-) => {
+export const add_medical_center = (data, setLoading, closeModal) => {
   console.log(data);
   axiosConfig
     .post("Clinic/create-Clinic", data)
@@ -466,7 +462,7 @@ export const add_medical_center = (
       setLoading(false);
       console.log(res);
       success("مرکز درمانی با موفقیت ثبت شد");
-      setIsMedicalCenterForm(false);
+      closeModal();
     })
     .catch((err) => {
       setLoading(false);
@@ -474,7 +470,7 @@ export const add_medical_center = (
       Eror();
     });
 };
-export const add_Office = (data, setLoading, setIsMedicalCenterForm) => {
+export const add_Office = (data, setLoading, closeModal) => {
   console.log(data);
   axiosConfig
     .post("Office/create-Office", data)
@@ -482,7 +478,7 @@ export const add_Office = (data, setLoading, setIsMedicalCenterForm) => {
       setLoading(false);
       console.log(res);
       success("مطب با موفقیت ثبت شد");
-      setIsMedicalCenterForm(false);
+      closeModal();
     })
     .catch((err) => {
       setLoading(false);
@@ -1159,4 +1155,35 @@ export const get_all_turns = async () => {
     console.error("Error fetching specialties:", error);
     return null;
   }
+};
+export const edit_clinic = (data, setLoading, closeModal) => {
+  setLoading(true);
+  console.log(data);
+  axiosConfig
+    .put("Clinic/update-Clinic", data)
+    .then((res) => {
+      setLoading(false);
+      console.log(res);
+      success("مرکز درمانی با موفقیت ویرایش شد");
+      closeModal();
+    })
+    .catch((err) => {
+      console.log(err);
+      setLoading(false);
+    });
+};
+export const edit_office = (data, setLoading, closeModal) => {
+  console.log(data);
+  axiosConfig
+    .put("Office/update-Office", data)
+    .then((res) => {
+      success("مطب با موفقیت ویرایش شد");
+      setLoading(false);
+      console.log(res);
+      closeModal();
+    })
+    .catch((err) => {
+      console.log(err);
+      setLoading(false);
+    });
 };

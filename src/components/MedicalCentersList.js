@@ -20,11 +20,14 @@ import { SelectFilter } from "@/components/Inputs/Input";
 import { AddMedicalCenterButt } from "@/components/Buttons/Button";
 import SeeReservsModal from "./modals/SeeReservsModal";
 import medicalProf from "../../public/Pics/medicalcenters.jpg";
+import MedicalFormModal from "./modals/MedicalFormModal";
+import SeeMedicalDetails from "./modals/seeMedicalDetails";
 function MedicalCentersList({ type }) {
   const [medicalCenters, setMedicalCenters] = useState([]);
   const [isMedicalCenterForm, setIsMedicalCenterForm] = useState(false);
   const [isSeeReservsModal, setIsSeeReservsModal] = useState(false);
   const [selectedMedical, setSelectedMedical] = useState({});
+  const [isEditMedical, setIsEditMedical] = useState(false);
   console.log(medicalCenters);
   const getMedicalCenters = async () => {
     const data = await get_clinics();
@@ -47,10 +50,11 @@ function MedicalCentersList({ type }) {
     } else {
       getMedicalCenters();
     }
-  }, [isMedicalCenterForm]);
+  }, [isMedicalCenterForm, isEditMedical]);
 
   const [isDeletingModal, setIsDeletingModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
+  const [IsSeeMedicalDetails, setIsSeeMedicalDetails] = useState(false);
   console.log(selectedItem);
   const [currentPage, setCurrentPage] = useState(1);
   const handleChange = (event, value) => {
@@ -69,6 +73,18 @@ function MedicalCentersList({ type }) {
   return (
     <div className=" gap-10 mt-20 w-full flex flex-col items-center ">
       <div className=" flex w-[80%]  gap-5 items-center">
+        {IsSeeMedicalDetails && (
+          <SeeMedicalDetails
+            closeModal={() => setIsSeeMedicalDetails(false)}
+            selectedItem={selectedItem}
+          />
+        )}
+        {isEditMedical && (
+          <MedicalFormModal
+            selectedMedical={selectedMedical}
+            closeModal={() => setIsEditMedical(false)}
+          />
+        )}
         {isSeeReservsModal && (
           <SeeReservsModal
             closeModal={() => setIsSeeReservsModal(false)}
@@ -156,8 +172,8 @@ function MedicalCentersList({ type }) {
                 />
                 <FaEdit
                   onClick={() => {
-                    setIsAddDoctorModal(true);
-                    setDoctorItems(item);
+                    setIsEditMedical(true);
+                    setSelectedMedical(item);
                   }}
                   className="  text-[#3F444D]  transition-all cursor-pointer hover:text-green-600"
                 />
@@ -185,7 +201,13 @@ function MedicalCentersList({ type }) {
                 {}
               </h4>
               <div className=" flex justify-center gap-2 items-center w-[25%]">
-                <button className=" gap-2 border rounded-lg p-1 flex justify-center items-center bg-[#DBEDFF] border-[#005DAD] text-[#005DAD]">
+                <button
+                  onClick={() => {
+                    setSelectedItem(item);
+                    setIsSeeMedicalDetails(true);
+                  }}
+                  className=" gap-2 border rounded-lg p-1 flex justify-center items-center bg-[#DBEDFF] border-[#005DAD] text-[#005DAD]"
+                >
                   مشاهده جزئیات
                 </button>
                 {/* <button
