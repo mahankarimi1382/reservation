@@ -19,6 +19,7 @@ import DatePickerComponent from "@/components/DatePickerComponent";
 import { SelectFilter } from "@/components/Inputs/Input";
 import { AddMedicalCenterButt } from "@/components/Buttons/Button";
 import SeeReservsModal from "./modals/SeeReservsModal";
+import medicalProf from "../../public/Pics/medicalcenters.jpg";
 function MedicalCentersList({ type }) {
   const [medicalCenters, setMedicalCenters] = useState([]);
   const [isMedicalCenterForm, setIsMedicalCenterForm] = useState(false);
@@ -163,7 +164,7 @@ function MedicalCentersList({ type }) {
               </div>
               <div className=" w-[14%] flex justify-center items-center text-[#3F444D] ">
                 <Image
-                  src={""}
+                  src={medicalProf}
                   alt="image"
                   width={67}
                   className=" rounded-full border border-[#005DAD]"
