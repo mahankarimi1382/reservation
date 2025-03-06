@@ -131,6 +131,7 @@ function SignupModal({ closeModal, setIsValidateModal, isValidateModal }) {
           </div>
           <div className=" flex w-full justify-center items-center">
             <button
+              onKeyDown={(e) => e.stopPropagation()}
               onClick={handleClickSignUp}
               disabled={!nationalCode && !phoneNumber && !password && !fullname}
               className={
