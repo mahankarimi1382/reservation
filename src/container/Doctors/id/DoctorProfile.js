@@ -22,8 +22,15 @@ import AcordinDoctorpanel from "../../../components/AcordinDoctorpanel";
 import VisitSection from "./VisitSection";
 
 import { MatabShowButt, SabteNazarButton } from "@/components/Buttons/Button";
-import { get_doctor_profile_by_id } from "@/api/ApiCalling";
-import { doctorProfileStore, reservationStore } from "@/store/Store";
+import {
+  follow_doctor_profile,
+  get_doctor_profile_by_id,
+} from "@/api/ApiCalling";
+import {
+  doctorProfileStore,
+  reservationStore,
+  smeIdStorage,
+} from "@/store/Store";
 import LoadingComponent from "@/components/LoadingComponent";
 import { RateCounter } from "@/utils/RateCounter";
 import doctorIcon from "../../../../public/Pics/doctor-icon.jpg";
@@ -31,7 +38,25 @@ import doctorIcon from "../../../../public/Pics/doctor-icon.jpg";
 function DoctorProfile() {
   const { setDoctorNezamCode } = reservationStore();
   const { doctorId } = doctorProfileStore();
+  const { smeId } = smeIdStorage();
+
+  const FollowDoctor = () => {
+    setIsLoading(true);
+    let data = {
+      metadata: {
+        userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        userName: "string",
+        smeProfileId: smeId,
+      },
+      followProfileId: doctorId,
+      myProfileId: smeId,
+      followProfileLogo: "string",
+      followProfileName: "string",
+    };
+    follow_doctor_profile(data, setIsLoading);
+  };
   console.log(doctorId);
+
   const [doctorDetails, setDoctorDetails] = useState();
   const [doctorTreatmentCenters, setDoctorTreatmentCenters] = useState([]);
   const { setDoctorSpecialties } = reservationStore();
@@ -184,7 +209,10 @@ function DoctorProfile() {
               </div>
               <div className=" flex flex-col items-end justify-center gap-2">
                 <h2 className=" flex items-center lg:gap-2 gap-1 text-xs lg:text-[16x] ">
-                  <CiBookmark className=" text-2xl" />
+                  <CiBookmark
+                    onClick={() => FollowDoctor()}
+                    className=" text-2xl"
+                  />
                   ذخیره
                   <span className=" text-2xl text-[#757575]">|</span>
                   <span className=" text-[#005DAD] lg:text-base text-xs flex items-center ">

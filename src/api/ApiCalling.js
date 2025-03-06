@@ -79,12 +79,10 @@ export const activating_registarion = (
       closeModal();
       setFullName(res.data.result.userFullname);
       if (res.data.result.smeprofileId) {
-        alert("have sme");
         setSmeId(res.data.result.smeprofileId);
       }
       setToken(res.data.result.token);
       if (res.data.result.userFullname != "string") {
-        alert("create sme");
         let name = res.data.result.userFullname;
         setSmeId(create_sme_profile(name, token));
       }
@@ -908,7 +906,7 @@ export const create_sme_profile_for_user = (
         managerPhoneNumber: "",
         managerEmail: "",
         aboutUs: "",
-        tellNumber: "",
+        tellNumber: data.patientPhone,
         activitySubject: "",
         smeEmail: "",
         smeWebsite: "",
@@ -947,7 +945,7 @@ export const create_sme_profile_for_user = (
         cityId: data.cityId.id,
         geolat: 0,
         geolon: 0,
-        patientPhone: "09305485308",
+        patientPhone: data.patientPhone,
         necessaryPhone: "",
         email: "string",
         gender: true,
@@ -1091,6 +1089,72 @@ export const read_all_insirances = async () => {
     const insurances = response.data.result.list;
     console.log(insurances);
     return insurances;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+
+export const read_firsPage_doctors = async () => {
+  console.log("first");
+  try {
+    const response = await axiosConfig.get(
+      `Reservation/read-doctor-resevationtop4firstpage`
+    );
+    const doctors = response.data.result.data;
+    console.log(doctors);
+    return doctors;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+export const follow_doctor_profile = (data, setIsLoading) => {
+  axiosConfig
+    .post("FollowProfile/create-FollowProfile", data)
+    .then(() => {
+      success("پزشک به علاقه مندی ها اضافه شد");
+      setIsLoading(false);
+    })
+    .catch((err) => {
+      console.log(err);
+      setIsLoading(false);
+    });
+};
+export const read_followed_profile = async (smeId) => {
+  console.log("first");
+  try {
+    const response = await axiosConfig.get(
+      `FollowProfile/read-FollowProfile?Id=${smeId}`
+    );
+    const followedList = response.data.result.list;
+    console.log(followedList);
+    return followedList;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+export const get_first_page_specialties = async () => {
+  try {
+    const response = await axiosConfig.get(
+      "Specialist/read-specialists-firstpage"
+    );
+    const specialties = response.data.result.list;
+    return specialties;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    return null;
+  }
+};
+
+export const get_all_turns = async () => {
+  try {
+    const response = await axiosConfig.get(
+      "PatientReservation/read-all-patientreservations"
+    );
+    const turns = response.data.result.list;
+    return turns;
   } catch (error) {
     console.error("Error fetching specialties:", error);
     return null;

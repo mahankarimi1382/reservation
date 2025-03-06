@@ -74,8 +74,8 @@ function MedicalCentersList({ type }) {
             selectedMedical={selectedMedical}
           />
         )}
-        <DatePickerComponent title="از تاریخ" />
-        <DatePickerComponent title="تا تاریخ" />
+        {/* <DatePickerComponent title="از تاریخ" />
+        <DatePickerComponent title="تا تاریخ" /> */}
         {/* <SelectFilter title="نظر" />
         <SelectFilter title="نوع ویزیت" />
         <SelectFilter title="محل ویزیت" />
@@ -187,7 +187,7 @@ function MedicalCentersList({ type }) {
                 <button className=" gap-2 border rounded-lg p-1 flex justify-center items-center bg-[#DBEDFF] border-[#005DAD] text-[#005DAD]">
                   مشاهده جزئیات
                 </button>
-                <button
+                {/* <button
                   onClick={() => {
                     setSelectedMedical(item);
                     setIsSeeReservsModal(true);
@@ -195,7 +195,7 @@ function MedicalCentersList({ type }) {
                   className=" gap-2 border rounded-lg  p-1 flex justify-center items-center bg-[#F2FEF8] border-[#1F7168] text-[#1F7168]"
                 >
                   مشاهده نوبت ها
-                </button>
+                </button> */}
               </div>
             </div>
           );

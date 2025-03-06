@@ -6,7 +6,7 @@ import { SelectFilter } from "@/components/Inputs/Input";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { TiArrowSortedDown } from "react-icons/ti";
-import excel_icon from "../../../public/Pics/excelIcon.png";
+import excel_icon from "../../../../public/Pics/excelIcon.png";
 import { MdDeleteForever } from "react-icons/md";
 function PatientsSection() {
   const [isAddPatient, setIsAddPatient] = useState(false);
@@ -42,33 +42,33 @@ function PatientsSection() {
             <Image src={printer} alt=" icon" width={24} />
             چاپ اطلاعات{" "}
           </button> */}
-        <AddPatinetButt
+        {/* <AddPatinetButt
           isAddPatient={isAddPatient}
           setIsAddPatient={setIsAddPatient}
-        />
+        /> */}
       </div>
       <div className=" gap-3 flex flex-col w-[80%] rounded-lg border shadow-md p-4 bg-white">
         <div className=" py-2 w-full flex rounded-lg bg-[#F4F4F4]">
-          <h4 className=" w-[11%] flex justify-center  items-center text-[#3F444D] ">
+          <h4 className=" w-[12%] flex justify-center  items-center text-[#3F444D] ">
             کدملی <TiArrowSortedDown />
           </h4>
-          <h4 className=" w-[11%] flex justify-center items-center text-[#3F444D] ">
+          <h4 className=" w-[12%] flex justify-center items-center text-[#3F444D] ">
             نام بیمار <TiArrowSortedDown />
           </h4>
-          <h4 className=" w-[11%] flex justify-center items-center text-[#3F444D] ">
+          <h4 className=" w-[12%] flex justify-center items-center text-[#3F444D] ">
             کد رهگیری <TiArrowSortedDown />
           </h4>
-          <h4 className=" w-[11%] flex justify-center items-center text-[#3F444D] ">
+          <h4 className=" w-[12%] flex justify-center items-center text-[#3F444D] ">
             پرداخت شده
             <TiArrowSortedDown />
           </h4>
-          <h4 className=" w-[11%] flex justify-center items-center text-[#3F444D] ">
+          <h4 className=" w-[12%] flex justify-center items-center text-[#3F444D] ">
             تاریخ ویزیت <TiArrowSortedDown />
           </h4>
-          <h4 className=" w-[11%] flex justify-center items-center text-[#3F444D] ">
+          <h4 className=" w-[12%] flex justify-center items-center text-[#3F444D] ">
             ساعت ویزیت <TiArrowSortedDown />
           </h4>
-          <h4 className=" w-[11%] flex justify-center items-center text-[#3F444D]">
+          <h4 className=" w-[12%] flex justify-center items-center text-[#3F444D]">
             وضعیت <TiArrowSortedDown />
           </h4>
         </div>
@@ -101,20 +101,20 @@ function PatientsSection() {
               className=" border flex py-3 rounded-lg bg-white shadow-md"
               key={item.id}
             >
-              <h4 className=" w-[11%] flex justify-center items-center text-[#3F444D] ">
+              <h4 className=" w-[12%] flex justify-center items-center text-[#3F444D] ">
                 {item.nationalId}
               </h4>
-              <h4 className=" w-[11%] flex justify-center items-center text-[#3F444D] ">
+              <h4 className=" w-[12%] flex justify-center items-center text-[#3F444D] ">
                 {item.patientName} {item.patientFamily}
               </h4>
-              <h4 className=" w-[11%] flex justify-center items-center text-[#3F444D] "></h4>
-              <h4 className=" w-[11%] flex justify-center items-center text-[#3F444D] "></h4>
-              <h4 className=" w-[11%] flex justify-center items-center text-[#3F444D] "></h4>
-              <h4 className=" w-[11%] flex justify-center items-center text-[#3F444D] "></h4>
+              <h4 className=" w-[12%] flex justify-center items-center text-[#3F444D] "></h4>
+              <h4 className=" w-[12%] flex justify-center items-center text-[#3F444D] "></h4>
+              <h4 className=" w-[12%] flex justify-center items-center text-[#3F444D] "></h4>
+              <h4 className=" w-[12%] flex justify-center items-center text-[#3F444D] "></h4>
               <h4 className=" text-green-600 w-[11%] flex justify-center items-center ">
                 ثبت شده{" "}
               </h4>
-              <button className=" text-sm w-[11%] bg-[#DBEDFF] text-[#005DAD] border border-[#005DAD] p-2 rounded-lg">
+              <button className=" text-sm w-[12%] bg-[#DBEDFF] text-[#005DAD] border border-[#005DAD] p-2 rounded-lg">
                 مشاهده جزئیات
               </button>
             </div>

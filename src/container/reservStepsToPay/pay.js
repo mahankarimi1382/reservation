@@ -20,6 +20,7 @@ function Pay({ setSteps }) {
   const { doctorName } = doctorProfileStore();
   console.log(smeId);
   const { patientId, reservationId, turnId } = reservationStore();
+  console.log(patientId)
   const [isLoading, setIsLoading] = useState(false);
   const data = {
     metadata: {
@@ -27,13 +28,14 @@ function Pay({ setSteps }) {
       userName: "string",
       smeProfileId: smeId,
     },
-    patientId: patientId||34,
+    patientId: patientId,
     reservationId: reservationId,
     discountCodeId: null,
     turnId: turnId,
   };
   const handleCompleteStep2 = () => {
     setIsLoading(true);
+    console.log(data)
     patinet_reservation(data, setIsLoading, router);
     // setSteps(3);
   };
@@ -114,16 +116,16 @@ function Pay({ setSteps }) {
         </div>
         <div className="border-[#005DAD] flex gap-10 flex-col justify-center items-center p-4 rounded-xl border lg:w-[45%]">
           <div className=" pb-5 border-b w-full flex items-center justify-between">
-            <h2 className=" text-xl">هزینه رزرو دکتر {doctorName}</h2>
+            <h2 className=" lg:text-xl">هزینه رزرو دکتر {doctorName}</h2>
             <h5 className=" text-[#757575]">250,000 تومان</h5>
           </div>
           <div className=" w-full  flex items-center justify-between">
-            <h2 className=" text-xl text-[#005DAD]">مبلغ قابل پرداخت</h2>
+            <h2 className=" lg:text-xl text-[#005DAD]">مبلغ قابل پرداخت</h2>
             <h5 className=" text-[#005DAD]">250,000 تومان</h5>
           </div>
           <button
             onClick={handleCompleteStep2}
-            className=" gap-2 px-5 lg:px-0 lg:w-[305px] py-3 rounded-xl flex justify-center items-center text-xl text-white bg-[#005DAD] "
+            className=" gap-2 px-5 lg:px-0 lg:w-[305px] py-3 rounded-xl flex justify-center items-center lg:text-xl text-white bg-[#005DAD] "
           >
             <Image alt="icon" width={24} src={cardIcon_white} />
             {isLoading ? (

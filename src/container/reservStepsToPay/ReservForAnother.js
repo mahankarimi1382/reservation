@@ -35,6 +35,7 @@ function ReservForAnother({ setSteps, forme }) {
     "اسفند",
   ];
   const token = Cookies.get("token");
+  const { patientPhone, setPatientPhone } = reservationStore();
   const { setPatientId } = reservationStore();
   const [name, setName] = useState("");
   const [familyName, setFamilyName] = useState("");
@@ -51,6 +52,7 @@ function ReservForAnother({ setSteps, forme }) {
     nationalCode,
     birthDate: `${yearOfBirth}/${monthOfBirth}/${dayOfBirth}`,
     cityId,
+    patientPhone,
   };
   const { setSmeId } = smeIdStorage();
   const handlCompleteStep1 = () => {
@@ -92,7 +94,7 @@ function ReservForAnother({ setSteps, forme }) {
             <input
               onChange={(e) => setFamilyName(e.target.value)}
               className=" px-4 border-[#005DAD] border rounded-xl lg:w-[652px] h-10 lg:h-[61px]"
-              placeholder="لطفا نام خود را وارد کنید"
+              placeholder="لطفا نام خانوادگی خود را وارد کنید"
             />
           </div>{" "}
           <div className=" flex flex-col gap-2">
@@ -102,7 +104,7 @@ function ReservForAnother({ setSteps, forme }) {
               <input
                 onChange={(e) => setNationalCode(e.target.value)}
                 className=" px-4 border-[#005DAD] border rounded-xl lg:w-[652px] h-10 lg:h-[61px]"
-                placeholder="لطفا نام خود را وارد کنید"
+                placeholder="لطفا کد ملی خود را وارد کنید"
               />
             )}
 
@@ -206,13 +208,14 @@ function ReservForAnother({ setSteps, forme }) {
               </div>
             </div>
           </div>
-          {/* <div className=" flex flex-col gap-2">
+          <div className=" flex flex-col gap-2">
             <h2 className=" text-[18px]">شماره همراه</h2>
             <input
+              onChange={(e) => setPatientPhone(e.target.value)}
               placeholder="لطفا شماره همراه خود را وارد کنید"
               className=" w-[652px] py-4 rounded-xl h-[61px] border-[#005DAD] border"
             />{" "}
-          </div>{" "} */}
+          </div>{" "}
           <div className=" flex justify-center items-center">
             <button
               onClick={handlCompleteStep1}

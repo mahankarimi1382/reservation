@@ -339,7 +339,7 @@ export const SpecialtiesSelectInput = ({
         onChange={(e) => setSpecialistId(e.target.value)}
         className=" border w-full border-[#636972] rounded-lg p-2"
       >
-        <option>{hiddenTitle && "تخصص"}</option>
+        <option value="">{hiddenTitle && "همه"}</option>
         {specialist.map((item) => {
           return (
             <option value={item.id} key={item.id}>

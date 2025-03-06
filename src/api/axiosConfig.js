@@ -31,17 +31,18 @@ axiosConfig.interceptors.response.use(
   },
   (err) => {
     console.log(err);
-    if (err.message == "Network Error") {
+    if (err.message == "Request failed with status code 401") {
+      Eror("لطفا در ابتدا وارد شوید");
+    } else if (err.message == "Network Error") {
       Eror("خطا در برقراری ارتباط !");
     } else if (
       err.response &&
-      err.response.data.message.message ==
-        "حجم فایل برای ذخیره در بیس64 زیاد است !"
+      err.response.data.message &&
+      err.response.data.message.message
     ) {
-      Eror("حجم فایل بیش از حد مجاز است");
-    } 
-    else if (err.response && err.response.data.message.message) {
       Eror(err.response.data.message.message);
+    } else if (err.response) {
+      Eror(err.response.data.message);
     }
     return Promise.reject(err);
   }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import heart from "../../../public/Pics/Specialties/heart-icon.png";
 import Image from "next/image";
 import { CiSearch } from "react-icons/ci";
-import { get_specialties } from "@/api/ApiCalling";
+import { get_first_page_specialties, get_specialties } from "@/api/ApiCalling";
 import { RxCross2 } from "react-icons/rx";
 import LoadingComponent from "../LoadingComponent";
 import { useRouter } from "next/navigation";
@@ -30,9 +30,8 @@ function SpecialtiesListModal({ setIsSpecialtiesModal }) {
   };
   console.log(categorys);
   const [loading, setLoading] = useState(true);
-  const url = "Specialist/read-specialists";
   const fetchData = async () => {
-    const data = await get_specialties(url);
+    const data = await get_first_page_specialties();
     if (data) {
       setCategorys(data);
       setFiltredArr(data);

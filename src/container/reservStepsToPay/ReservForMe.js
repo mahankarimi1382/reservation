@@ -16,6 +16,7 @@ import {
 
 function ReservForMe({ setSteps }) {
   const { phoneNum } = userProfileStore();
+  console.log(phoneNum);
   const { fullName } = fullNameStorage();
   const { doctorName } = doctorProfileStore();
   const { dateAndTime, adress, doctorSpecialties } = reservationStore();
@@ -29,26 +30,28 @@ function ReservForMe({ setSteps }) {
       </div>
       <div className=" w-[90%] flex flex-col gap-2 lg:flex-row justify-between">
         <div className=" lg:w-[750px] p-4 lg:h-[340px] gap-5 rounded-xl border border-[#005DAD] flex flex-col bg-[#F8FCFF]">
-          <h2 className=" pb-4 text-[20px] border-b border-dashed border-[#005DAD] text-[#005DAD] ">
+          <h2 className=" pb-4 lg:text-[20px] border-b border-dashed border-[#005DAD] text-[#005DAD] ">
             دریافت نوبت برای خودم
           </h2>
           <div className=" w-full flex justify-between items-center">
-            <h2 className=" text-[20px]">اطلاعات من</h2>
+            <h2 className=" lg:text-[20px]">اطلاعات من</h2>
             <button className=" flex gap-1 items-center text-[#005DAD] p-2 rounded-lg border border-[#005DAD]">
               <CiEdit className=" text-2xl" />
               ویرایش
             </button>
           </div>
           <div className=" w-full flex justify-between items-center">
-            <h2 className=" text-[20px]">نام و نام خانوادگی</h2>
-            <h2 className=" text-[20px]">{fullName}</h2>
+            <h2 className=" lg:text-[20px]">نام و نام خانوادگی</h2>
+            <h2 className=" lg:text-[20px]">
+              {fullName != "string" ? fullName : "کاربر مهمان"}
+            </h2>
           </div>
           <div className=" w-full flex justify-between items-center">
-            <h2 className=" text-[20px]">شماره موبایل</h2>
-            <h2 className=" text-[20px]">{phoneNum}</h2>
+            <h2 className=" lg:text-[20px]">شماره موبایل</h2>
+            <h2 className=" lg:text-[20px]">{phoneNum}</h2>
           </div>
           <div className=" w-full flex justify-between items-center">
-            <h2 className=" text-[20px]">بیمه</h2>
+            <h2 className=" lg:text-[20px]">بیمه</h2>
             {/* <h2 className=" text-[20px]">بیمه تکمیلی دانا</h2> */}
           </div>
           <p>(باتوجه به بیمه تکمیلی شما هزینه تا 15% کسر می شود)</p>

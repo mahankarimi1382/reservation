@@ -6,12 +6,30 @@ import { IoIosArrowBack } from "react-icons/io";
 import doctor_icon from "../../../public/Pics/doctor-icon.jpg";
 import Image from "next/image";
 import Link from "next/link";
-import {} from "@/api/ApiCalling";
+import { read_firsPage_doctors } from "@/api/ApiCalling";
+import LoadingComponent from "@/components/LoadingComponent";
+import { doctorProfileStore } from "@/store/Store";
+import { useRouter } from "next/navigation";
 function DoctorsSection() {
+  const { setDoctorId } = doctorProfileStore();
+  const router = useRouter();
   const [doctors, setDoctors] = useState([1]);
-
+  console.log(doctors);
+  const [loading, setLoading] = useState(false);
+  const getFirstPageDoctors = async () => {
+    const data = await read_firsPage_doctors();
+    console.log(data);
+    // if (data) {
+    //   setDoctors(data);
+    //   setLoading(false);
+    // }
+  };
+  useEffect(() => {
+    getFirstPageDoctors();
+  }, []);
   return (
     <div className=" w-full flex flex-col items-center justify-center">
+      {loading && <LoadingComponent />}
       <div className=" lg:mt-20 mt-5 flex justify-between w-11/12">
         <h2 className=" lg:text-[38px] flex justify-center items-center gap-1 lg:gap-2">
           <span className=" text-[#005DAD] ">پزشکان</span>
@@ -26,7 +44,7 @@ function DoctorsSection() {
         </Link>
       </div>
       <div className=" lg:mt-10 mt-5 flex gap-12 no-scrollbar overflow-x-auto w-11/12">
-        {doctors.map((items,index) => {
+        {doctors.map((items, index) => {
           return (
             <div
               key={index}
@@ -68,7 +86,13 @@ function DoctorsSection() {
                   );
                 })}
               </div> */}
-              <button className=" hover:bg-[#005DAD] hover:text-white transition-all flex justify-center items-center gap-2 text-sm lg:text-base lg:w-2/3 text-[#005DAD] rounded-lg p-1 lg:p-2 border-2 border-[#005DAD]">
+              <button
+                onClick={() => {
+                  setDoctorId(1239);
+                  router.push("/doctors/doctor-profile");
+                }}
+                className=" hover:bg-[#005DAD] hover:text-white transition-all flex justify-center items-center gap-2 text-sm lg:text-base lg:w-2/3 text-[#005DAD] rounded-lg p-1 lg:p-2 border-2 border-[#005DAD]"
+              >
                 نوبت بگیرید
                 <MdArrowBackIosNew />
               </button>

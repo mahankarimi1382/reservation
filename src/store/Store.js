@@ -176,6 +176,8 @@ export const reservationStore = create(
         set(() => ({ doctorSpecialties: value })),
       adress: "",
       setAdress: (value) => set(() => ({ adress: value })),
+      patientPhone: "",
+      setPatientPhone: (phone) => set(() => ({ patientPhone: phone })),
     }),
     {
       name: "reservation-details",

@@ -10,10 +10,11 @@ function SeeReservsModal({ closeModal, treatmentId, clinicId, doctorId }) {
   const [turns, setTurns] = useState([]);
   const [reservationList, setReservationList] = useState([]);
   console.log(reservationList);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const uniqueStimeSet = new Set();
 
   const getReservation = async () => {
+    console.log("first");
     const data = await get_doctor_treatment_reservation(doctorId, clinicId);
     if (data) {
       setReservationList(data);

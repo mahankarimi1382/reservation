@@ -7,6 +7,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { delete_doctor } from "@/api/ApiCalling";
 import DeletingModal from "@/components/modals/DeletingModal";
 import { TreatMentCenterButt } from "@/components/Buttons/Button";
+import DoctorCostModal from "@/components/modals/DoctorCostModal";
 
 const DoctorsPagination = ({
   isLoading,
@@ -18,6 +19,7 @@ const DoctorsPagination = ({
   setIsAddDoctorModal,
   setDoctors,
 }) => {
+  const [isDoctorCostModal, setIsDoctorCostModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
   console.log(selectedItem);
   const [isDeletingModal, setIsDeletingModal] = useState(false);
@@ -27,6 +29,13 @@ const DoctorsPagination = ({
 
   return (
     <div className=" w-full h-full">
+      {isDoctorCostModal && (
+        <DoctorCostModal
+          name={selectedItem.name}
+          id={selectedItem.id}
+          setIsDoctorCostModal={setIsDoctorCostModal}
+        />
+      )}
       {isDeletingModal && (
         <DeletingModal
           DeletingFn={delete_doctor}
@@ -81,7 +90,16 @@ const DoctorsPagination = ({
                 <button className=" p-1 bg-[rgba(31,113,104,0.08)] border border-[#399086C9] text-[#399086C9] rounded-lg text-sm">
                   عکس ها
                 </button>
-                <button className=" p-1 bg-[rgba(247,79,115,0.21)] border border-[#921A34] text-[#921A34] rounded-lg text-sm">
+                <button
+                  onClick={() => {
+                    setSelectedItem({
+                      id: item.id,
+                      name: item.doctorName + " " + item.doctorFamily,
+                    });
+                    setIsDoctorCostModal(true);
+                  }}
+                  className=" p-1 bg-[rgba(247,79,115,0.21)] border border-[#921A34] text-[#921A34] rounded-lg text-sm"
+                >
                   هزینه زیرساخت
                 </button>
                 <TreatMentCenterButt
