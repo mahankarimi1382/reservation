@@ -13,16 +13,20 @@ import { useRouter } from "next/navigation";
 function DoctorsSection() {
   const { setDoctorId } = doctorProfileStore();
   const router = useRouter();
-  const [doctors, setDoctors] = useState([1]);
+  const [doctors, setDoctors] = useState([]);
   console.log(doctors);
   const [loading, setLoading] = useState(false);
   const getFirstPageDoctors = async () => {
+    // item.doctorTreatmentCenter.doctor.doctorName
+    // item.doctorTreatmentCenter.doctor.    //item.doctorTreatmentCenter.doctor.specialist
+    // item.doctorTreatmentCenter.doctor.id
+
     const data = await read_firsPage_doctors();
     console.log(data);
-    // if (data) {
-    //   setDoctors(data);
-    //   setLoading(false);
-    // }
+    if (data) {
+      setDoctors(data);
+      setLoading(false);
+    }
   };
   useEffect(() => {
     getFirstPageDoctors();
@@ -44,10 +48,10 @@ function DoctorsSection() {
         </Link>
       </div>
       <div className=" lg:mt-10 mt-5 flex gap-12 no-scrollbar overflow-x-auto w-11/12">
-        {doctors.map((items, index) => {
+        {doctors.map((item) => {
           return (
             <div
-              key={index}
+              key={item.id}
               className=" px-2 lg:px-0 flex lg:gap-5 gap-2 flex-col justify-center items-center rounded-xl border-2 min-w-[215px] lg:min-w-[310px] h-[266px] lg:h-[399px]"
             >
               <Image
@@ -57,7 +61,8 @@ function DoctorsSection() {
               />
               <div className=" flex w-full lg:px-5 justify-between items-center">
                 <h2 className=" lg:text-[16px] lg:font-semibold">
-                  سعید کلانتری
+                  {item.doctorTreatmentCenter.doctor.doctorName}{" "}
+                  {item.doctorTreatmentCenter.doctor.doctorFamily}
                 </h2>
                 <div className=" flex items-center justify-center">
                   <h2 className=" font-medium text-[12px]">0</h2>
@@ -69,7 +74,7 @@ function DoctorsSection() {
                 </div>
               </div>
               <h2 className=" text-gray-400 text-[14px] lg:font-semibold lg:px-5 w-full">
-                تخصص: عمومی
+                تخصص: {item.doctorTreatmentCenter.doctor.specialist}
               </h2>
               <h2 className=" text-[#1F7168] text-[14px] lg:font-semibold w-full lg:px-5">
                 (0) 0 بیمار راضی{" "}
@@ -88,7 +93,7 @@ function DoctorsSection() {
               </div> */}
               <button
                 onClick={() => {
-                  setDoctorId(1239);
+                  setDoctorId(item.doctorTreatmentCenter.doctor.id);
                   router.push("/doctors/doctor-profile");
                 }}
                 className=" hover:bg-[#005DAD] hover:text-white transition-all flex justify-center items-center gap-2 text-sm lg:text-base lg:w-2/3 text-[#005DAD] rounded-lg p-1 lg:p-2 border-2 border-[#005DAD]"

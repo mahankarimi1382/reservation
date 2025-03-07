@@ -97,17 +97,8 @@ const MedicalFormModal = ({ closeModal, selectedMedical }) => {
     officeTypeId,
   };
   const handleSubmit = () => {
-    // console.log(
-    //   selectedMedical,
-    //   isoffice,
-    //   !isVirtual,
-    //   cityId,
-    //   officeTypeId,
-    //   name,
-    //   address,
-    //   phone,
-    //   siamCode
-    // );
+    console.log(cityId);
+
     if (
       selectedMedical &&
       isoffice &&
