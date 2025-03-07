@@ -223,7 +223,7 @@ export const CitySelectInput = ({
     <div className=" lg:text-base text-xs  flex gap-2 flex-col items-start">
       {!hiddentitle && <h5>شهر</h5>}
       <select
-        value={cityId.id || cityId}
+        value={(cityId && cityId.id) || cityId}
         onChange={(e) => {
           console.log(e.target.value);
           if (e.target.value) {
