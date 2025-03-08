@@ -8,14 +8,21 @@ import {
 import Image from "next/image";
 import React, { useState } from "react";
 import step1reservation from "../../../public/Pics/reservationStep1.png";
-import { create_sme_profile_for_user } from "@/api/ApiCalling";
+import {
+  add_patient_by_user,
+  create_sme_profile_for_user,
+} from "@/api/ApiCalling";
 import {
   CitySelectInput,
   ProvinceSelectInput,
 } from "@/components/Inputs/Input";
 import Cookies from "js-cookie";
 import { SyncLoader } from "react-spinners";
-import { reservationStore, smeIdStorage, userProfileStore } from "@/store/Store";
+import {
+  reservationStore,
+  smeIdStorage,
+  userProfileStore,
+} from "@/store/Store";
 
 function ReservForAnother({ setSteps, forme }) {
   const [cities, setCities] = useState([]);
@@ -37,7 +44,7 @@ function ReservForAnother({ setSteps, forme }) {
   const token = Cookies.get("token");
   const { patientPhone, setPatientPhone } = reservationStore();
   const { phoneNum } = userProfileStore();
-
+  const { smeId } = smeIdStorage();
   const { setPatientId } = reservationStore();
   const [name, setName] = useState("");
   const [familyName, setFamilyName] = useState("");
@@ -47,27 +54,33 @@ function ReservForAnother({ setSteps, forme }) {
   const [yearOfBirth, setYearOfBirth] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isAtba, setIsAtba] = useState(false);
-  const [cityId, setCityId] = useState("1");
+  const [gender, setGender] = useState(null);
+  const [cityId, setCityId] = useState(0);
   const data = {
-    name,
-    familyName,
-    nationalCode,
+    metadata: {
+      userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      userName: "string",
+      smeProfileId: smeId,
+    },
+    patientName: name,
+    patientFamily: familyName,
+    nationalId: nationalCode,
+    birthNumber: 0,
     birthDate: `${yearOfBirth}/${monthOfBirth}/${dayOfBirth}`,
-    cityId,
-    patientPhone,
+    cityId: cityId.id,
+    geolat: 0,
+    geolon: 0,
+    patientPhone: forme ? phoneNum : patientPhone,
+    necessaryPhone: forme ? phoneNum : patientPhone,
+    email: "",
+    gender,
+    smeProfileId: smeId,
   };
+
   const { setSmeId } = smeIdStorage();
   const handlCompleteStep1 = () => {
     setIsLoading(true);
-    create_sme_profile_for_user(
-      data,
-      token,
-      setIsLoading,
-      setSteps,
-      setPatientId,
-      setSmeId,
-      phoneNum
-    );
+    add_patient_by_user(data, setIsLoading, setSteps, setPatientId);
   };
   return (
     <div
@@ -165,13 +178,13 @@ function ReservForAnother({ setSteps, forme }) {
               <h2 className=" text-[18px]">جنسیت</h2>
               <div className=" flex gap-5 items-center">
                 <FormControl className=" w-full flex ">
-                  <RadioGroup>
+                  <RadioGroup onChange={(e) => setGender(e.target.value)}>
                     <div className=" flex items-center gap-10">
                       <span className=" flex items-center">
                         <h2>آقا</h2>
                         <FormControlLabel
                           className=" mr-0 "
-                          value="male"
+                          value={true}
                           control={<Radio className=" text-3xl" />}
                         />{" "}
                       </span>
@@ -180,7 +193,7 @@ function ReservForAnother({ setSteps, forme }) {
 
                         <FormControlLabel
                           className=" mr-0 "
-                          value="female"
+                          value={false}
                           control={<Radio className=" text-3xl" />}
                         />
                       </span>
@@ -214,6 +227,8 @@ function ReservForAnother({ setSteps, forme }) {
           <div className=" flex flex-col gap-2">
             <h2 className=" text-[18px]">شماره همراه</h2>
             <input
+              value={forme && phoneNum}
+              disabled={forme}
               onChange={(e) => setPatientPhone(e.target.value)}
               placeholder="لطفا شماره همراه خود را وارد کنید"
               className=" w-[652px] py-4 rounded-xl h-[61px] border-[#005DAD] border"

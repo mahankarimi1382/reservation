@@ -21,11 +21,8 @@ const MapTest = dynamic(() => import("../../components/MapTest"), {
   ssr: false,
 });
 const MedicalFormModal = ({ closeModal, selectedMedical }) => {
-  console.log(selectedMedical);
-  console.log(selectedMedical);
   const pathName = usePathname();
   console.log(selectedMedical);
-  console.log(pathName);
   const isoffice = pathName === "/adminPanel/medicalcenters/offices";
   const [isVirtual, setIsVirtual] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -63,7 +60,9 @@ const MedicalFormModal = ({ closeModal, selectedMedical }) => {
   const [clinicTypeId, setClinicTypeId] = useState(
     (selectedMedical && selectedMedical.clinicTypeId) || 0
   );
-  const [officeTypeId, setOfficeTypeId] = useState(0);
+  const [officeTypeId, setOfficeTypeId] = useState(
+    (selectedMedical && selectedMedical.officeTypeId) || 0
+  );
   const data = {
     metadata: {
       userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -75,7 +74,7 @@ const MedicalFormModal = ({ closeModal, selectedMedical }) => {
     geolon: position ? position[0] : 0,
     geolat: position ? position[1] : 0,
     phone,
-    cityId: cityId.id,
+    cityId: cityId.id || cityId,
     siamCode,
     desc,
     clinicTypeId,
@@ -92,13 +91,11 @@ const MedicalFormModal = ({ closeModal, selectedMedical }) => {
     geolon: position ? position[0] : 0,
     geolat: position ? position[1] : 0,
     phone,
-    cityId: cityId.id,
+    cityId: cityId.id || cityId,
     postalCode: siamCode,
     officeTypeId,
   };
   const handleSubmit = () => {
-    console.log(cityId);
-
     if (
       selectedMedical &&
       isoffice &&
@@ -203,6 +200,7 @@ const MedicalFormModal = ({ closeModal, selectedMedical }) => {
                 </label>
                 {isoffice ? (
                   <select
+                    value={officeTypeId}
                     onChange={(e) => {
                       if (e.target.value != 1) {
                         setIsVirtual(true);

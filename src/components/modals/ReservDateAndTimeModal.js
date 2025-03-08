@@ -56,15 +56,15 @@ function ReservDateAndTimeModal({ setIsReservModal, name, treatmentId }) {
             setDateAndTime(item.reservationDateFull);
             setSelectedDay(item.id);
             let turns = item.visitCost.reservations[0].turns;
-            const uniqueTurns = turns.filter((turn) => {
-              if (uniqueStimeSet.has(turn.stime)) {
-                return false;
-              } else {
-                uniqueStimeSet.add(turn.stime);
-                return true;
-              }
-            });
-            setTurns(uniqueTurns);
+            // const uniqueTurns = turns.filter((turn) => {
+            //   if (uniqueStimeSet.has(turn.stime)) {
+            //     return false;
+            //   } else {
+            //     uniqueStimeSet.add(turn.stime);
+            //     return true;
+            //   }
+            // });
+            setTurns(turns);
           }}
           className={`${
             selectedDay == item.id &&
@@ -80,9 +80,41 @@ function ReservDateAndTimeModal({ setIsReservModal, name, treatmentId }) {
     });
   };
   const mappedHours = () => {
-    return turns.map((item) => {
-      const hasFreeTurn = turns.some((t) => t.stime === item.stime && t.isFree);
-      const isDisable = hasFreeTurn ? false : true;
+    const map = new Map();
+    turns.map((item) => {
+      if (!map.has(item.etime)) {
+        map.set(item.etime, item.isFree);
+      } else {
+        if (item.isFree && map.get(item.etime)) {
+          map.set(item.etime, item.isFree);
+        } else {
+          map.set(item.etime, false);
+        }
+      }
+    });
+
+    // مرحله 2: فیلتر کردن آیتم‌ها و ذخیره در آرایه جدید
+    const result = turns.filter((item) => map.get(item.etime) === item.isFree);
+
+    // مرحله 3: چک کردن همه‌ی isFree ها و غیرفعال کردن دکمه‌ها
+    const updatedResult = result.map((item) => {
+      const allFalse = turns
+        .filter((el) => el.etime === item.etime)
+        .every((el) => !el.isFree);
+      return {
+        ...item,
+        buttonDisabled: allFalse,
+      };
+    });
+
+    // مرحله 4: انتخاب یک عضو از هر etime برابر
+    const finalResult = Array.from(
+      new Set(updatedResult.map((item) => item.etime))
+    ).map((etime) => updatedResult.find((item) => item.etime === etime));
+
+    return finalResult.map((item) => {
+      // const hasFreeTurn = turns.some((t) => t.stime === item.stime && t.isFree);
+      // const isDisable = hasFreeTurn ? false : true;
       console.log(item);
       return (
         <button
@@ -90,7 +122,7 @@ function ReservDateAndTimeModal({ setIsReservModal, name, treatmentId }) {
             setReservationId(item.reservationId);
             setTurnId(item.id);
           }}
-          disabled={isDisable}
+          disabled={item.buttonDisabled}
           className={` ${
             turnId == item.id && "bg-[#DBEDFF] border-[#005DAD]"
           } disabled:bg-[#FBFBFB] transition-all hover:bg-[#DBEDFF] hover:border-[#005DAD] text-[#005DAD] disabled:text-[#B2B2B2] disabled:border-none border p-2 px-4 rounded-lg`}

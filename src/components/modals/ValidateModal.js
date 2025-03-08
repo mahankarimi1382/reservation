@@ -6,7 +6,12 @@ import Timer from "../Timer";
 import { Eror, success } from "../ToastAlerts";
 import { SyncLoader } from "react-spinners";
 import { activating_registarion, sendCodeAgain } from "@/api/ApiCalling";
-import { fullNameStorage, myStore, smeIdStorage } from "@/store/Store";
+import {
+  fullNameStorage,
+  myStore,
+  smeIdStorage,
+  userSubmitedArrStore,
+} from "@/store/Store";
 
 function ValidateModal({
   closeModal,
@@ -23,6 +28,7 @@ function ValidateModal({
     input1Ref.current.focus();
   }, []);
   const { setSmeId } = smeIdStorage();
+  const { setPatients } = userSubmitedArrStore();
   const { setToken } = myStore();
   const { setFullName } = fullNameStorage();
   const [disabled, setDisabled] = useState(false);
@@ -46,7 +52,7 @@ function ValidateModal({
     mobile: phoneNumber,
     activationCode,
   };
-  
+
   // تابع handleChange
   const handleChange = (event, index) => {
     const { name, value } = event.target;
@@ -72,14 +78,19 @@ function ValidateModal({
         closeModal,
         setToken,
         setFullName,
-        setSmeId
+        setSmeId,
+        setPatients
       );
     }
   };
-  
+
   // تابع handleKeyDown
   const handleKeyDown = (event, index) => {
-    if (event.key === "Backspace" && inputs[`input${index}`].length === 0 && index > 1) {
+    if (
+      event.key === "Backspace" &&
+      inputs[`input${index}`].length === 0 &&
+      index > 1
+    ) {
       const prevInput = document.querySelector(`input[name=input${index - 1}]`);
       if (prevInput) prevInput.focus();
     }

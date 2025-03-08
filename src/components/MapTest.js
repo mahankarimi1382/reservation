@@ -77,6 +77,7 @@ export default function MapTest({ setPosition, position }) {
   const handleResultClick = (location) => {
     setCenter([location.x, location.y]);
     setMarkerPosition([location.x, location.y]);
+    setPosition([location.x, location.y]);
     if (mapRef.current) {
       mapRef.current.flyTo({ center: [location.x, location.y], zoom: 12 });
     }
@@ -92,15 +93,17 @@ export default function MapTest({ setPosition, position }) {
       <div className=" w-full relative flex flex-col  items-center">
         {dropdownVisible && (
           <div className="absolute z-10 bg-white border mt-1 max-h-60 w-full overflow-auto">
-            {searchResults.map((result, index) => (
-              <div
-                key={index}
-                onClick={() => handleResultClick(result.location)}
-                className="p-2 cursor-pointer hover:bg-gray-200"
-              >
-                {result.title}
-              </div>
-            ))}
+            {searchResults.map((result, index) => {
+              return (
+                <div
+                  key={index}
+                  onClick={() => handleResultClick(result.location)}
+                  className="p-2 cursor-pointer hover:bg-gray-200"
+                >
+                  {result.title}
+                </div>
+              );
+            })}
           </div>
         )}
         <div

@@ -51,7 +51,7 @@ function UserAccesPaginate({
               {" "}
             </h4>
             <h4 className=" w-[15%] flex justify-center items-center text-[#3F444D] ">
-              {item.profileName}
+              {item.profileName == "string" ? "کاربر مهمان" : item.profileName}
             </h4>
             <h4 className=" w-[15%] flex justify-center items-center text-[#3F444D] ">
               {" "}

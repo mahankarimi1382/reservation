@@ -219,7 +219,6 @@ export const CitySelectInput = ({
   fromFilter,
   cityId,
 }) => {
-  console.log(cityId);
   return (
     <div className=" lg:text-base text-xs  flex gap-2 flex-col items-start">
       {!hiddentitle && <h5>شهر</h5>}

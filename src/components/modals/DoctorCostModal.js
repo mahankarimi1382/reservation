@@ -14,15 +14,8 @@ import DeletingModal from "./DeletingModal";
 import SeeReservsModal from "./SeeReservsModal";
 
 function DoctorCostModal({ id, name, setIsDoctorCostModal }) {
-  const [isSeeReservsModal, setIsSeeReservsModal] = useState(false);
-  const [isAddTreatmentModal, setIsAddTreatmentModal] = useState(false);
-  const [isDeleteModal, setIsDeleteModal] = useState(false);
-  const [selectedItem, setSelectedItem] = useState({});
-  console.log(selectedItem);
   const [treatmentCenters, setTreatmenCenters] = useState([]);
-  const [treatmentId, setTrearmentId] = useState("");
-  const [clinicId, setClinicId] = useState("");
-  const [doctorId, setDoctorId] = useState("");
+
   console.log(treatmentCenters);
   const getTreatMent = async () => {
     const data = await get_doctor_treatmentCenter(id);
@@ -35,7 +28,7 @@ function DoctorCostModal({ id, name, setIsDoctorCostModal }) {
 
   useEffect(() => {
     getTreatMent();
-  }, [isAddTreatmentModal]);
+  }, []);
   const handleClose = () => {
     setIsDoctorCostModal(false);
   };
@@ -62,9 +55,9 @@ function DoctorCostModal({ id, name, setIsDoctorCostModal }) {
           ) : (
             <div className=" overflow-auto rounded-xl border p-2 border-[#005DAD] w-full h-full flex flex-col">
               <div className=" p-2 border-b w-full  flex items-center justify-center">
-                <h5 className=" w-[25%]">نام مرکز </h5>
+                <h5 className=" w-[30%]">نام مرکز </h5>
                 <h5 className=" w-[30%]  text-center">نوع مرکز</h5>
-                <h5 className=" w-[50%] "></h5>
+                <h5 className=" w-[40%] "></h5>
               </div>
               {treatmentCenters.map((item) => {
                 return (
@@ -72,23 +65,22 @@ function DoctorCostModal({ id, name, setIsDoctorCostModal }) {
                     className=" text-[#858585] border-b last:border-none p-2  flex items-center justify-center"
                     key={item.id}
                   >
-                    <h5 className=" w-[25%]">
+                    <h5 className=" w-[30%]">
                       {item.officeName || item.clinicName}
                     </h5>
                     <h5 className=" w-[30%]  text-center">
                       {item.officeName ? "مطب" : "بیمارستان,درمانگاه"}
                     </h5>
                     <input
-                      className=" border rounded-lg w-[50%]"
-                      placeholder="قیمت ویزیت را وارد کنید"
+                      className=" p-1 text-xs border rounded-lg w-[30%]"
+                      placeholder="قیمت ویزیت "
                     />
+                    <button className=" w-[10%] text-xs bg-[#005DAD] text-white p-1 px-2 rounded-lg">ثبت</button>
                   </div>
                 );
               })}
             </div>
           )}
-
-
         </div>
       </div>
     </div>

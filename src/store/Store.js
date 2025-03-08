@@ -197,3 +197,15 @@ export const userProfileStore = create(
     }
   )
 );
+export const userSubmitedArrStore = create(
+  persist(
+    (set) => ({
+      patients: [],
+      setPatients: (patientArr) => set(() => ({ patients: patientArr })),
+    }),
+    {
+      name: "user-submitted-array",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);

@@ -6,6 +6,8 @@ const TimeInput = ({ format, setTime }) => {
   return (
     <div>
       <TimePicker
+        showNow={false}
+
         onChange={(e) => setTime(e.format(format))}
         className=" w-[81px] h-[38px] rounded-lg border-[#005DAD] border"
         defaultValue={dayjs("00:00", format)}

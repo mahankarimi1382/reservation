@@ -22,8 +22,10 @@ import SeeReservsModal from "./modals/SeeReservsModal";
 import medicalProf from "../../public/Pics/medicalcenters.jpg";
 import MedicalFormModal from "./modals/MedicalFormModal";
 import MedicalDetails from "./modals/MedicalDetails";
+import LoadingComponent from "./LoadingComponent";
 
 function MedicalCentersList({ type }) {
+  const [isLoading, setIsLoading] = useState(true);
   const [medicalCenters, setMedicalCenters] = useState([]);
   const [isMedicalCenterForm, setIsMedicalCenterForm] = useState(false);
   const [isSeeReservsModal, setIsSeeReservsModal] = useState(false);
@@ -35,6 +37,7 @@ function MedicalCentersList({ type }) {
     if (data) {
       console.log(data);
       setMedicalCenters(data);
+      setIsLoading(false);
     }
   };
   const getOffices = async () => {
@@ -42,6 +45,7 @@ function MedicalCentersList({ type }) {
     if (data) {
       console.log(data);
       setMedicalCenters(data);
+      setIsLoading(false);
     }
   };
 
@@ -74,6 +78,7 @@ function MedicalCentersList({ type }) {
   return (
     <div className=" gap-10 mt-20 w-full flex flex-col items-center ">
       <div className=" flex w-[80%]  gap-5 items-center">
+        {isLoading && <LoadingComponent />}
         {IsSeeMedicalDetails && (
           <MedicalDetails
             closeModal={() => setIsSeeMedicalDetails(false)}

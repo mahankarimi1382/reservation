@@ -17,9 +17,7 @@ function DoctorsSection() {
   console.log(doctors);
   const [loading, setLoading] = useState(false);
   const getFirstPageDoctors = async () => {
-    // item.doctorTreatmentCenter.doctor.doctorName
-    // item.doctorTreatmentCenter.doctor.    //item.doctorTreatmentCenter.doctor.specialist
-    // item.doctorTreatmentCenter.doctor.id
+
 
     const data = await read_firsPage_doctors();
     console.log(data);

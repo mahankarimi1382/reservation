@@ -96,7 +96,7 @@ function CreateReservationModal({ closeModal, treatmentId }) {
               <div className=" flex-col gap-6  flex w-[45%]">
                 <div className=" flex items-center justify-between">
                   <h4>بازه زمانی نوبت (دقیقه):</h4>
-                  <TimeInput setTime={setTimeofturnsinlimit} format="mm" />
+                  <TimeInput setTime={setTimeofturnsinlimit} format="HH:mm" />
                 </div>
                 <div className=" flex items-center justify-between">
                   <h4>تعداد نوبت :</h4>

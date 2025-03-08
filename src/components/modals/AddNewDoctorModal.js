@@ -36,6 +36,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
   );
   const [mobile, setMobile] = useState(doctorItems ? doctorItems.mobile : "");
   const [cityId, setCityId] = useState("");
+  const [gender, setGender] = useState(doctorItems ? doctorItems.gender : null);
   const data = {
     metadata: {
       userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
@@ -48,11 +49,9 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
     nationalId,
     codeNezam,
     specialistId,
-    docExperiance: "string",
-    docInstaLink: "string",
     mobile,
-    desc: "string",
     smeProfileId: smeId,
+    gender,
   };
   const handleclick = () => {
     if (!doctorName) {
@@ -65,6 +64,8 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
       Eror("شهر را وارد کنید");
     } else if (!specialistId) {
       Eror("تخصص را انتخاب کنید");
+    } else if (gender === null) {
+      Eror("جنسیت را انتخاب کنید");
     } else {
       doctorItems
         ? edit_doctors(data, setIsLoading, setIsAddDoctorModal)
@@ -89,7 +90,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
             پر کنید
           </h5>
         </div>
-        <div className=" flex flex-wrap w-full gap-x-16 gap-y-5 justify-center  ">
+        <div className=" flex flex-wrap w-full gap-x-16 gap-y-5 mx-auto justify-center  ">
           <div className=" w-[40%] flex gap-2 flex-col items-start">
             <h5>نام</h5>
             <input
@@ -108,10 +109,14 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
           </div>
           <div className=" flex w-[40%] gap-2 flex-col items-start">
             <h5>جنسیت</h5>
-            <select className=" border border-[#636972] rounded-lg p-2 w-full">
-              <option></option>
-              <option>مرد</option>
-              <option>زن</option>
+            <select
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              className=" border border-[#636972] rounded-lg p-2 w-full"
+            >
+              <option value={null}>جنسیت را انتخاب کنید</option>
+              <option value={true}>مرد</option>
+              <option value={false}>زن</option>
             </select>
           </div>
           <div className=" w-[40%] flex gap-2 flex-col items-start">
@@ -138,21 +143,25 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
               className=" border w-full border-[#636972] rounded-lg p-2"
             />
           </div>
-          <div className=" w-[40%]">
-            <ProvinceSelectInput setCities={setCities} />
+          <div className=" w-[40%] flex flex-col gap-2">
+            <h5>استان تولد</h5>
+            <ProvinceSelectInput hiddentitle setCities={setCities} />
           </div>
-          <div className="w-[40%]">
-            <CitySelectInput setCityId={setCityId} cities={cities} />
-          </div>
-          <div className=" w-[40%]">
-            <SpecialtiesSelectInput
-              specialistId={specialistId}
-              setSpecialistId={setSpecialistId}
+          <div className="w-[40%] flex flex-col gap-2">
+            <h5>شهر تولد</h5>
+            <CitySelectInput
+              hiddentitle
+              setCityId={setCityId}
+              cities={cities}
             />
           </div>
-          <div className=" w-[40%] flex gap-2 flex-col items-start">
-            <h5>آدرس مطب</h5>
-            <input className=" border w-full border-[#636972] rounded-lg p-2" />
+          <div className=" w-[90%] flex ">
+            <div className=" w-[45%]">
+              <SpecialtiesSelectInput
+                specialistId={specialistId}
+                setSpecialistId={setSpecialistId}
+              />
+            </div>
           </div>
         </div>
         <button
