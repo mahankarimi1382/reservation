@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import React from "react";
 import { CiEdit } from "react-icons/ci";
@@ -12,10 +13,13 @@ import {
   reservationStore,
   smeIdStorage,
   userProfileStore,
+  userSubmitedArrStore,
 } from "@/store/Store";
 
 function ReservForMe({ setSteps }) {
   const { phoneNum } = userProfileStore();
+  const { patients } = userSubmitedArrStore();
+  console.log(patients);
   console.log(phoneNum);
   const { fullName } = fullNameStorage();
   const { doctorName } = doctorProfileStore();
@@ -35,15 +39,15 @@ function ReservForMe({ setSteps }) {
           </h2>
           <div className=" w-full flex justify-between items-center">
             <h2 className=" lg:text-[20px]">اطلاعات من</h2>
-            <button className=" flex gap-1 items-center text-[#005DAD] p-2 rounded-lg border border-[#005DAD]">
+            {/* <button className=" flex gap-1 items-center text-[#005DAD] p-2 rounded-lg border border-[#005DAD]">
               <CiEdit className=" text-2xl" />
               ویرایش
-            </button>
+            </button> */}
           </div>
           <div className=" w-full flex justify-between items-center">
             <h2 className=" lg:text-[20px]">نام و نام خانوادگی</h2>
             <h2 className=" lg:text-[20px]">
-              {fullName != "string" ? fullName : "کاربر مهمان"}
+              {fullName != "string" ? fullName : patients[0].patientName+" "+patients[0].patientFamily}
             </h2>
           </div>
           <div className=" w-full flex justify-between items-center">

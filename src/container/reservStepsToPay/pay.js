@@ -10,6 +10,7 @@ import {
   doctorProfileStore,
   reservationStore,
   smeIdStorage,
+  userSubmitedArrStore,
 } from "@/store/Store";
 import { patinet_reservation } from "@/api/ApiCalling";
 import { SyncLoader } from "react-spinners";
@@ -18,9 +19,10 @@ function Pay({ setSteps }) {
   const { smeId } = smeIdStorage();
   const router = useRouter();
   const { doctorName } = doctorProfileStore();
+  const { patients } = userSubmitedArrStore();
   console.log(smeId);
   const { patientId, reservationId, turnId } = reservationStore();
-  console.log(patientId)
+  console.log(patientId);
   const [isLoading, setIsLoading] = useState(false);
   const data = {
     metadata: {
@@ -28,14 +30,14 @@ function Pay({ setSteps }) {
       userName: "string",
       smeProfileId: smeId,
     },
-    patientId: patientId,
+    patientId: patientId || patients[0].id,
     reservationId: reservationId,
     discountCodeId: null,
     turnId: turnId,
   };
   const handleCompleteStep2 = () => {
     setIsLoading(true);
-    console.log(data)
+    console.log(data);
     patinet_reservation(data, setIsLoading, router);
     // setSteps(3);
   };
