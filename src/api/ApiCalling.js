@@ -1024,3 +1024,34 @@ export const create_reservation_date_to_date = (
       setIsLoading(false);
     });
 };
+export const delete_reservation_day = async (
+  id,
+  seList,
+  closeModal,
+  setIsLoading,
+  list
+) => {
+  console.log(id);
+  try {
+    const response = await axiosConfig.delete(
+      "Reservation/delete-reservation",
+      {
+        data: {
+          metadata: {
+            userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            userName: "string",
+            smeProfileId: 0,
+          },
+          id,
+        },
+      }
+    );
+
+    closeModal();
+    setIsLoading(false)
+    console.log(response);
+    success("نوبت دکتر با موفقیت حذف شد");
+  } catch (error) {
+    console.log(error);
+  }
+};

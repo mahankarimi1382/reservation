@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import CreateReservationModal from "./CreateReservationModal";
-import { get_doctor_treatment_reservation } from "@/api/ApiCalling";
+import {
+  delete_reservation_day,
+  get_doctor_treatment_reservation,
+} from "@/api/ApiCalling";
 import LoadingComponent from "../LoadingComponent";
+import DeletingModal from "./DeletingModal";
 
 function SeeReservsModal({ closeModal, treatmentId, clinicId, doctorId }) {
   const [selectedDay, setSelectedDay] = useState("");
   console.log(selectedDay);
   const [turns, setTurns] = useState([]);
   const [reservationList, setReservationList] = useState([]);
+  const [isDeleteModal, setIsDeleteModal] = useState(false);
   console.log(reservationList);
   const [isLoading, setIsLoading] = useState(false);
   const uniqueStimeSet = new Set();
@@ -26,7 +31,7 @@ function SeeReservsModal({ closeModal, treatmentId, clinicId, doctorId }) {
     if (doctorId) {
       getReservation();
     }
-  }, [doctorId, isCreateReservModal]);
+  }, [doctorId, isCreateReservModal, isDeleteModal]);
   const mappedDayDetails = () => {
     return reservationList.map((item) => {
       return (
@@ -108,6 +113,16 @@ function SeeReservsModal({ closeModal, treatmentId, clinicId, doctorId }) {
   return (
     <div className=" z-20  w-screen h-screen top-0 justify-center items-center flex right-0 fixed">
       {isLoading && <LoadingComponent />}
+      {isDeleteModal && (
+        <DeletingModal
+          DeletingFn={delete_reservation_day}
+          closeModal={() => setIsDeleteModal(false)}
+          name="این نوبت"
+          id={selectedDay}
+          setList={setReservationList}
+          list={reservationList}
+        />
+      )}
       {isCreateReservModal && (
         <CreateReservationModal
           treatmentId={treatmentId}
@@ -136,12 +151,20 @@ function SeeReservsModal({ closeModal, treatmentId, clinicId, doctorId }) {
             </div>
           </div>
         )}
-        <div className=" bottom-2  absolute w-full flex justify-center items-center">
+        <div className=" bottom-2 gap-5  absolute w-full flex justify-center items-center">
           <button
             onClick={() => setIsCreateReservModal(true)}
             className="  flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
           >
             افزودن نوبت
+          </button>
+          <button
+            disabled={!selectedDay}
+            onClick={() => {
+              setIsDeleteModal(true)}}
+            className=" disabled:bg-slate-400 disabled:text-gray-700 disabled:border-none bg-[rgba(247,79,115,0.21)] border border-[#921A34] text-[#921A34]  flex justify-center items-center gap-2 rounded-lg p-2 bg-[#005DAD]"
+          >
+            حذف نوبت
           </button>
         </div>
       </div>
