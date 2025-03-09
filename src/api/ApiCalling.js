@@ -1,8 +1,7 @@
 import { Eror, success } from "@/components/ToastAlerts";
 import { axiosConfig } from "./axiosConfig";
 import axios from "axios";
-import { ErrorHandler } from "@/utils/ErrorHandler";
-import { reservationStore } from "@/store/Store";
+
 export const signup = (setIsLoading, data, setIsValidateModal) => {
   setIsLoading(true);
   console.log(data);
@@ -97,54 +96,7 @@ export const activating_registarion = (
       setIsWrongCode(true);
     });
 };
-// export const create_sme_profile = (name, token) => {
-//   axios
-//     .post(
-//       "https://myapi.dadehavaran.com:8040/API/v1/SmeProfile/create-sme-profile",
-//       {
-//         metadata: {
-//           userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-//           userName: "",
-//         },
-//         smeName: name,
-//         nationalCode: "",
-//         businessCode: "",
-//         managerName: "",
-//         registerNumber: "",
-//         economyCode: "",
-//         permitNo: "",
-//         managerPhoneNumber: "",
-//         managerEmail: "",
-//         aboutUs: "",
-//         tellNumber: "",
-//         activitySubject: "",
-//         smeEmail: "",
-//         smeWebsite: "",
-//         address: "",
-//         status: true,
-//         cityId: 1,
-//         smeType: 1,
-//         industrialParkId: 1,
-//         logo: "",
-//         headerpic: "",
-//         postalcode: "",
-//         smeRankId: 2,
-//       },
-//       {
-//         headers: {
-//           Authorization: token,
-//         },
-//       }
-//     )
-//     .then((res) => {
-//       console.log(res);
-//       console.log(res.data.result.id);
-//       return res.data.result.id;
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// };
+
 export const add_specialties = (data, setIsLoading, setIsAddSpecialModal) => {
   setIsLoading(true);
   console.log(data);
@@ -743,80 +695,7 @@ export const read_office_type = async () => {
     return null;
   }
 };
-// export const create_sme_profile_for_doctor = (
-//   data,
-//   token,
-//   setIsLoading,
-//   setIsAddDoctorModal,
-//   phoneNum
-// ) => {
-//   console.log(data);
-//   axios
-//     .post(
-//       "https://myapi.dadehavaran.com:8040/API/v1/SmeProfile/create-sme-profile",
-//       {
-//         metadata: {
-//           userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-//           userName: "",
-//         },
-//         smeName: `${data.doctorName + " " + data.doctorFamily}`,
-//         nationalCode: "",
-//         businessCode: phoneNum,
-//         managerName: "",
-//         registerNumber: "",
-//         economyCode: "",
-//         permitNo: "",
-//         managerPhoneNumber: "",
-//         managerEmail: "",
-//         aboutUs: "",
-//         tellNumber: "",
-//         activitySubject: "",
-//         smeEmail: "",
-//         smeWebsite: "",
-//         address: "",
-//         status: true,
-//         cityId: 1,
-//         smeType: 1,
-//         industrialParkId: 1,
-//         logo: "",
-//         headerpic: "",
-//         postalcode: "",
-//         smeRankId: 2,
-//       },
-//       {
-//         headers: {
-//           Authorization: token,
-//         },
-//       }
-//     )
-//     .then((res) => {
-//       console.log(res);
-//       console.log(res.data.result.id);
-//       let smeid = res.data.result.id;
-//       let data2 = {
-//         metadata: {
-//           userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-//           userName: "string",
-//           smeProfileId: 0,
-//         },
-//         doctorName: data.doctorName,
-//         doctorFamily: data.doctorFamily,
-//         nationalId: data.nationalId,
-//         codeNezam: data.codeNezam,
-//         specialistId: data.specialistId,
-//         docExperiance: "string",
-//         docInstaLink: "string",
-//         mobile: data.mobile,
-//         desc: data.desc,
-//         smeProfileId: smeid,
-//         gender: data.gender,
-//       };
-//       add_doctor(data2, setIsLoading, setIsAddDoctorModal);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// };
+
 export const create_Reservation = (data, setIsLoading, closeModal) => {
   console.log(data);
   axiosConfig
@@ -880,87 +759,6 @@ export const add_patient_by_user = (
       setIsLoading(false);
     });
 };
-// export const create_sme_profile_for_user = (
-//   data,
-//   token,
-//   setIsLoading,
-//   setSteps,
-//   setPatientId,
-//   setSmeId,
-//   phoneNum
-// ) => {
-//   console.log(data);
-//   axios
-//     .post(
-//       "https://myapi.dadehavaran.com:8040/API/v1/SmeProfile/create-sme-profile",
-//       {
-//         metadata: {
-//           userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-//           userName: "",
-//         },
-//         smeName: data.name + " " + data.familyName,
-//         nationalCode: data.nationalCode,
-//         businessCode: phoneNum,
-//         managerName: "",
-//         registerNumber: "",
-//         economyCode: "",
-//         permitNo: "",
-//         managerPhoneNumber: "",
-//         managerEmail: "",
-//         aboutUs: "",
-//         tellNumber: data.patientPhone,
-//         activitySubject: "",
-//         smeEmail: "",
-//         smeWebsite: "",
-//         address: "",
-//         status: true,
-//         cityId: data.cityId.id,
-//         smeType: 1,
-//         industrialParkId: 1,
-//         logo: "",
-//         headerpic: "",
-//         postalcode: "",
-//         smeRankId: 2,
-//       },
-//       {
-//         headers: {
-//           Authorization: token,
-//         },
-//       }
-//     )
-//     .then((res) => {
-//       console.log(res);
-//       console.log(res.data.result.id);
-//       let smeid = res.data.result.id;
-//       setSmeId(smeid);
-//       const data2 = {
-//         metadata: {
-//           userId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-//           userName: "string",
-//           smeProfileId: smeid,
-//         },
-//         patientName: data.name,
-//         patientFamily: data.familyName,
-//         nationalId: data.nationalCode,
-//         birthNumber: 0,
-//         birthDate: data.birthDate,
-//         cityId: data.cityId.id,
-//         geolat: 0,
-//         geolon: 0,
-//         patientPhone: data.patientPhone,
-//         necessaryPhone: "",
-//         email: "string",
-//         gender: true,
-//         smeProfileId: smeid,
-//       };
-
-//       add_patient_by_user(data2, setIsLoading, setSteps, setPatientId);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// };
-
 export const patinet_reservation = (data, setIsLoading, router) => {
   console.log(data);
   axiosConfig
@@ -1198,6 +996,26 @@ export const create_role = (data, setIsLoading, closeModal) => {
     .post("RoleManager/create-role", data)
     .then(() => {
       success("نقش با موفقیت ثبت شد");
+      setIsLoading(false);
+      closeModal();
+    })
+    .catch((err) => {
+      console.log(err);
+      setIsLoading(false);
+    });
+};
+
+export const create_reservation_date_to_date = (
+  data,
+  setIsLoading,
+  closeModal
+) => {
+  console.log(data);
+  axiosConfig
+    .post("/Reservation/create-reservationfromdatetodate", data)
+    .then((res) => {
+      console.log(res);
+      success("نوبت با موفقیت ثبت شد");
       setIsLoading(false);
       closeModal();
     })
