@@ -46,12 +46,12 @@ function SpecialtiesListModal({ setIsSpecialtiesModal }) {
   };
   return (
     <div className=" w-screen h-screen top-0 justify-center items-center flex z-50 right-0 fixed bg-[rgba(0,0,0,0.6)]">
-      <div className=" relative w-[60%] min-w-80 min-h-[550px] max-h-[550px] bg-white rounded-xl py-5 p-2 gap-5 flex flex-col">
+      <div className=" relative w-[100%] h-[100%] lg:w-[60%] lg:min-w-80 lg:min-h-[550px] lg:max-h-[550px] bg-white rounded-xl py-5 p-2 gap-5 flex flex-col">
         <RxCross2
-          className=" z-50 absolute top-1 left-1 cursor-pointer"
+          className=" z-50 absolute top-2 text-lg left-2 cursor-pointer"
           onClick={handleCloseModal}
         />
-        <div className=" flex bg-white items-center border rounded-lg px-2 lg:px-10 border-[#005DAD]">
+        <div className=" flex mt-5 bg-white items-center border rounded-lg px-2 lg:px-10 border-[#005DAD]">
           <CiSearch className=" text-[#C0C0C0] text-xl lg:text-3xl" />
           <input
             onChange={handleInputChange}

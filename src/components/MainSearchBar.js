@@ -63,7 +63,7 @@ function MainSearchBar() {
             className=" text-sm outline-none h-full w-[80%]"
             placeholder="جستجو پزشک،درمانگر،کلینیک..."
           />
-          <IoLocationOutline className="  text-lg text-[#919191]" />
+          <IoLocationOutline className=" bg-[#005DAD21] lg:bg-white lg:border-none bg-opacity-20 w-8 h-8 rounded p-1 border border-[#005DAD] text-lg text-[#005DAD]" />
           <p className=" hidden lg:flex text-[12px] text-[#919191] font-medium">
             انتخاب شهر
           </p>
