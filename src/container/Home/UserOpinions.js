@@ -52,7 +52,7 @@ function UserOpinions() {
           <span className=" text-[#005DAD]">نظرات</span>
           کاربران
         </h2>
-        <div className=" p-10 lg:mt-10 flex gap-12 no-scrollbar overflow-x-auto w-[109%]">
+        <div className=" lg:p-10 p-5 py-10 lg:py-0 gap-4 lg:mt-10 flex lg:gap-12 no-scrollbar overflow-x-auto w-[109%]">
           {opinions.map((item) => {
             return (
               <div

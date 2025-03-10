@@ -2,6 +2,7 @@ import React from "react";
 import { FaArrowLeft } from "react-icons/fa6";
 import magezineimg from "../../../public/Pics/magezineimg.png";
 import Image from "next/image";
+import { IoIosArrowBack } from "react-icons/io";
 function MagezineSection() {
   const Magezine = [
     {
@@ -36,13 +37,16 @@ function MagezineSection() {
     },
   ];
   return (
-    <div className=" lg:flex flex-col w-full lg:mt-20 mt-5 justify-center items-center">
-      <div className=" mr-4 lg:mr-0 flex w-11/12 justify-between items-center">
-        <h2 className=" flex gap-1 w-full justify-center items-center text-[18px] lg:text-[32px]">
+    <div className="  flex flex-col w-full lg:mt-20 mt-5 justify-center items-center">
+      <div className=" flex items-center justify-between w-11/12">
+        <h2 className=" flex gap-1 justify-center items-center text-[18px] lg:text-[32px]">
           <span className=" text-[#005DAD]">مجله سلامت</span>
           دکتر رزرو
         </h2>
-        <div className=" flex gap-5"></div>
+        <button className=" text-[#005DAD] lg:text-base text-xs flex justify-center items-center gap-1">
+          مشاهده همه
+          <IoIosArrowBack />
+        </button>
       </div>
       <div className=" flex no-scrollbar overflow-x-auto mt-4 lg:mt-10 gap-6 lg:p-0 p-2 max-w-full lg:w-[1184px]">
         {Magezine.map((item) => {

@@ -8,10 +8,10 @@ import telephone from "../../../public/Pics/FullBannerIcons/telephone.png";
 
 function FullBanerSection() {
   return (
-    <div className=" w-full relative flex justify-center items-center">
-      <Image alt="full banner" src={fullBanner} />
-      <div className=" w-[80%] absolute flex justify-between">
-        <div className=" text-[4px] sm:text-base flex text-white justify-center items-center flex-col">
+    <div className=" w-full bg-blue-300 lg:h-full h-[150px] relative flex justify-center items-center">
+      <Image alt="full banner" className=" h-full" src={fullBanner} />
+      <div className=" flex-wrap lg:flex-row w-[80%] absolute flex justify-between">
+        <div className=" w-1/2 lg:w-1/4 text-[10px] lg:text-base flex text-white justify-center items-center flex-col">
           <Image
             width={110}
             className=" xs:w-8 w-5 sm:w-10 md:w-[50%]"
@@ -21,17 +21,17 @@ function FullBanerSection() {
           <h5 className=" mt-2">+456</h5>
           <p>بیمارستان های طرف قرارداد</p>
         </div>
-        <div className=" text-[4px] sm:text-base flex text-white justify-center items-center flex-col">
+        <div className=" w-1/2 lg:w-1/4 text-[10px] lg:text-base flex text-white justify-center items-center flex-col">
           <Image
             width={110}
-            className=" xs:w-8 w-5 sm:w-10 md:w-[50%]"
+            className=" xs:w-8 w-5 sm:w-10"
             src={doctor}
             alt="hospital-icon"
           />
           <h5 className=" mt-2">+456</h5>
           <p>بیمارستان های طرف قرارداد</p>
         </div>
-        <div className=" text-[4px] sm:text-base flex text-white justify-center items-center flex-col">
+        <div className=" w-1/2 lg:w-1/4 text-[10px] lg:text-base flex text-white justify-center items-center flex-col">
           <Image
             className=" xs:w-8 w-5 sm:w-10 md:w-[50%]"
             width={110}
@@ -41,7 +41,7 @@ function FullBanerSection() {
           <h5 className=" mt-2">+456</h5>
           <p>بیمارستان های طرف قرارداد</p>
         </div>
-        <div className=" text-[4px] sm:text-base flex text-white justify-center items-center flex-col">
+        <div className=" w-1/2 lg:w-1/4 text-[10px] lg:text-base flex text-white justify-center items-center flex-col">
           <Image
             className=" xs:w-8 w-5 sm:w-10 md:w-[50%]"
             width={110}

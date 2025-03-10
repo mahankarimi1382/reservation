@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ModalLogo from "../../../public/Pics/ModalLogo.png";
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
@@ -12,6 +12,7 @@ import {
 import { signin, signup } from "@/api/ApiCalling";
 import ValidateModal from "./ValidateModal";
 function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
+  const inputRef = useRef(null);
   const { setToken } = myStore();
   const { setFullName } = fullNameStorage();
   const { setSmeId } = smeIdStorage();
@@ -22,6 +23,12 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
   const [nationalCode, setNationalCode] = useState("");
   const [password, setPassword] = useState("");
   const { phoneNum, setPhoneNum } = userProfileStore();
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
   const handleSubmit = () => {
     loginByPass
       ? signin(setIsLoading, data2, setFullName, setToken, closeModal, setSmeId)
@@ -111,6 +118,7 @@ function PhoneNumModal({ closeModal, setIsPhoneNuumModal, setIsSignupModal }) {
         <div className=" relative w-full justify-center flex items-center">
           <h2 className="absolute bg-white px-2 right-8 -top-3">شماره همراه</h2>
           <input
+            ref={inputRef}
             dir="ltr"
             value={phoneNum}
             onChange={(e) => setPhoneNum(e.target.value)}

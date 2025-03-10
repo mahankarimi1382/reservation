@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import MainSearchBar from "@/components/MainSearchBar";
 import SupportModal from "@/components/modals/SupportModal";
 import EventSection from "@/components/EventSection";
+import BannerSwipperPhone from "@/container/Home/BannerSwipperPhone";
 export default function Home() {
   return (
     <div dir="rtl" className=" pb-5">
@@ -25,6 +26,9 @@ export default function Home() {
       </div>
       <SpecialtiesSection />
       <DoctorsSection />
+      <div className=" w-full flex justify-center items-center">
+        <BannerSwipperPhone />
+      </div>
       <BannersSection />
       <HospitalsSection />
       <FullBanerSection />
@@ -34,7 +38,7 @@ export default function Home() {
       <UserOpinions />
       <MagezineSection />
       <Footer />
-      <PhoneMenu />
+      {/* <PhoneMenu /> */}
       <SupportModal />
     </div>
   );

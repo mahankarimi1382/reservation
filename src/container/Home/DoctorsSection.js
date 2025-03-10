@@ -10,6 +10,8 @@ import { read_firsPage_doctors } from "@/api/ApiCalling";
 import LoadingComponent from "@/components/LoadingComponent";
 import { doctorProfileStore } from "@/store/Store";
 import { useRouter } from "next/navigation";
+import doctorOnlineIcon from "../../../public/Pics/is-doctor-online-icon.png";
+import { RateCounter } from "@/utils/RateCounter";
 function DoctorsSection() {
   const { setDoctorId } = doctorProfileStore();
   const router = useRouter();
@@ -17,8 +19,6 @@ function DoctorsSection() {
   console.log(doctors);
   const [loading, setLoading] = useState(false);
   const getFirstPageDoctors = async () => {
-
-
     const data = await read_firsPage_doctors();
     console.log(data);
     if (data) {
@@ -45,30 +45,35 @@ function DoctorsSection() {
           <IoIosArrowBack />
         </Link>
       </div>
-      <div className=" lg:mt-10 mt-5 flex gap-12 no-scrollbar overflow-x-auto w-11/12">
+      <div className=" py-2 lg:mt-10 mt-5 flex gap-12 no-scrollbar overflow-x-auto w-11/12">
         {doctors.map((item) => {
           return (
             <div
               key={item.id}
-              className=" px-2 lg:px-0 flex lg:gap-5 gap-2 flex-col justify-center items-center rounded-xl border-2 min-w-[215px] lg:min-w-[310px] h-[266px] lg:h-[399px]"
+              className=" bg-white px-2 lg:px-0 flex lg:gap-5 gap-2 flex-col justify-center items-center rounded-xl shadow-[3px_5px_9px_0px_rgba(0,_0,_0,_0.1)]
+ min-w-[215px] lg:min-w-[310px] h-[266px] lg:h-[399px]"
             >
-              <Image
-                alt="doctot-img"
-                className=" object-cover w-[86px] h-[86px]   lg:w-[133px] lg:h-[133px] rounded-full"
-                src={doctor_icon}
-              />
+              <div className=" relative ">
+                <span className=" bg-[#00B62A] w-3 h-3 right-[5%] top-[3%] absolute z-40 rounded-full border-2 border-white" />
+                <Image
+                  alt="doctot-img"
+                  className=" object-cover w-[86px] h-[86px]   lg:w-[133px] lg:h-[133px] rounded-full"
+                  src={doctor_icon}
+                />
+              </div>
               <div className=" flex w-full lg:px-5 justify-between items-center">
                 <h2 className=" lg:text-[16px] lg:font-semibold">
                   {item.doctorTreatmentCenter.doctor.doctorName}{" "}
                   {item.doctorTreatmentCenter.doctor.doctorFamily}
                 </h2>
                 <div className=" flex items-center justify-center">
-                  <h2 className=" font-medium text-[12px]">0</h2>
-                  <Image
+                  {/* <h2 className=" font-medium text-[12px]">0</h2> */}
+                  <RateCounter rate={5} width={16} />
+                  {/* <Image
                     alt="star-icon"
                     className=" lg:w-[18px] w-4 h-4 lg:h-[18px]"
                     src={star}
-                  />
+                  /> */}
                 </div>
               </div>
               <h2 className=" text-gray-400 text-[14px] lg:font-semibold lg:px-5 w-full">

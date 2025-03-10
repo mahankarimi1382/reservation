@@ -6,12 +6,12 @@ import { MdOutlineArrowCircleLeft } from "react-icons/md";
 import Image from "next/image";
 function Baner({ pic, text }) {
   return (
-    <div className=" rounded-3xl relative bg-black flex flex-col">
+    <div className="rounded-3xl relative flex flex-col">
       <Image
         width={592}
         src={pic}
         alt="banner1"
-        className=" rounded-3xl object-cover"
+        className=" w-full rounded-3xl object-cover"
       />
       <button className=" text-xs sm:text-base bottom-1 left-1 flex justify-center items-center gap-1 absolute z-10  px-4 bg-[#B0DAFF] p-2 rounded-full">
         کلینیک زیبایی

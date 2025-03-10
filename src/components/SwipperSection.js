@@ -52,7 +52,7 @@ function SwipperSection() {
                   ]);
                 }}
                 key={item.id}
-                className=" group text-[10px] md:font-semibold font-light  lg:hover:shadow-lg w-[95px] h-[120px] md:w-[100px] md:h-[130px]  lg:hover:-mt-3 transition-all shadow-red-600  lg:hover:shadow-[#6991b4] lg:w-[131px] lg:h-[170px] flex flex-col justify-evenly items-center rounded-xl border border-[#DBD7D7]"
+                className=" lg:my-0 my-2 group text-[10px] md:font-semibold font-light  lg:hover:shadow-lg w-[95px] h-[120px] md:w-[100px] md:h-[130px]  lg:hover:-mt-3 transition-all shadow-red-600  lg:hover:shadow-[#6991b4] lg:w-[131px] lg:h-[170px] flex flex-col justify-evenly items-center rounded-xl border border-[#DBD7D7]"
               >
                 <div className=" bg-[#eaeaea]  transition-all group-hover:bg-[#6eb6f6] rounded-full w-[77px] h-[77px] flex justify-center items-center ">
                   <img alt="icon" width={51} height={51} src={item.logoFile} />

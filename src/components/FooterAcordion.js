@@ -11,7 +11,7 @@ function FooterAcordion() {
     setExpanded(isExpanded ? panel : false);
   };
   return (
-    <div className=" xl:hidden w-11/12">
+    <div className=" xl:hidden w-full">
       <Accordion
         expanded={expanded === "panel1"}
         onChange={handleChange("panel1")}

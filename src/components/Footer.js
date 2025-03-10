@@ -10,12 +10,15 @@ import { FaTelegramPlane } from "react-icons/fa";
 import { IoLogoYoutube } from "react-icons/io";
 import Image from "next/image";
 import FooterAcordion from "./FooterAcordion";
+import PhoneIcon from "../../public/Pics/footerIcons/phone-footer-icon.png";
+import mailIcon from "../../public/Pics/footerIcons/mail-footer-icon.png";
+import addressIcon from "../../public/Pics/footerIcons/address-footer-icon.png";
 
 function Footer() {
   return (
     <div className=" mb-32 mt-36 lg:mb-0 lg:mt-28 w-full h-[595px] gap-10 flex justify-center items-center flex-col lg:border-t-4 ">
       <FooterAcordion />
-      <div className=" hidden xl:flex flex-col w-full h-1/2">
+      <div className="  hidden xl:flex flex-col w-full h-1/2">
         <div className=" hidden text-[22px]  lg:flex px-32 p-10 text-[#414141]">
           <h2 className=" w-44 ">دکتر سریع</h2>
           <h2 className=" w-44 ">خدمات</h2>
@@ -70,7 +73,7 @@ function Footer() {
         </div>
       </div>
       <div className=" flex-col lg:flex-row w-full lg:h-1/2 flex justify-between lg:px-32">
-        <div className=" lg:hidden lg:mr-10 lg:-mt-[75px] gap-3 justify-center items-center flex flex-col">
+        <div className=" lg:hidden px-1 lg:mr-10 lg:-mt-[75px] gap-3 justify-center items-center flex flex-col">
           <h2 className=" w-11/12 text-[#414141] lg:text-[18px] font-semibold">
             خبرنامه
           </h2>
@@ -92,7 +95,8 @@ function Footer() {
           </p>
         </div>
         <div className=" text-[#414141] flex flex-col gap-8 items-start mr-5">
-          <span className="flex justify-center gap-3 items-center">
+          <span className="flex justify-center gap-3 items-start">
+            <Image width={24} src={PhoneIcon} />
             <h2>
               تماس با پشتیبانی:
               <br />
@@ -100,9 +104,12 @@ function Footer() {
             </h2>
           </span>
           <span className="flex  justify-center gap-3 items-center">
+            <Image width={24} src={mailIcon} />
             <h2> نشانی پست الکترونیک:example@gmail.com</h2>
           </span>
           <span className="flex justify-center gap-3 items-center">
+            <Image width={24} src={addressIcon} />
+
             <h2>نشانی: تهران</h2>
           </span>
         </div>
