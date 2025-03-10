@@ -57,7 +57,7 @@ function UserOpinions() {
             return (
               <div
                 key={item.id}
-                className=" rounded-xl min-w-[263px] lg:min-w-[432px] flex flex-col gap-2 lg:gap-10 px-5 h-[165px] lg:h-[257px] shadow-md bg-white"
+                className=" rounded-xl min-w-[263px] lg:min-w-[432px] flex flex-col gap-2 lg:gap-10 px-5 my-10 h-[165px] lg:h-[257px] shadow-md bg-white"
               >
                 <div className=" flex items-center justify-between">
                   <div className=" flex flex-col gap-2 justify-center -mt-8 lg:mr-5   items-center">
