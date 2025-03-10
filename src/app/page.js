@@ -34,7 +34,7 @@ export default function Home() {
       <UserOpinions />
       <MagezineSection />
       <Footer />
-      {/* <PhoneMenu /> */}
+      <PhoneMenu />
       <SupportModal />
     </div>
   );
