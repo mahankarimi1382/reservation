@@ -17,7 +17,6 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
   console.log(doctorItems);
   const [isLoading, setIsLoading] = useState(false);
   const { smeId } = smeIdStorage();
-  const [cities, setCities] = useState([]);
   const [doctorName, setDoctorName] = useState(
     doctorItems ? doctorItems.doctorName : ""
   );
@@ -35,7 +34,6 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
     doctorItems ? doctorItems.smeProfile.doctors[0].codeNezam : ""
   );
   const [mobile, setMobile] = useState(doctorItems ? doctorItems.mobile : "");
-  const [cityId, setCityId] = useState("");
   const [gender, setGender] = useState(doctorItems ? doctorItems.gender : null);
   const data = {
     metadata: {
@@ -60,8 +58,6 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
       Eror("نام خانوادگی دکتر را وارد کنید");
     } else if (!codeNezam) {
       Eror("وارد کردن کد نظام پزشکی اجباریست");
-    } else if (!cityId) {
-      Eror("شهر را وارد کنید");
     } else if (!specialistId) {
       Eror("تخصص را انتخاب کنید");
     } else if (gender === null) {
@@ -75,7 +71,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
   };
   return (
     <div className=" z-20  w-screen h-screen top-0 justify-center items-center flex right-0 fixed bg-[rgba(0,0,0,0.6)]">
-      <div className=" w-1/2 h-[95%] gap-4 rounded-xl p-3 bg-white flex flex-col items-center">
+      <div className=" relative w-1/2 h-[85%] gap-4 rounded-xl p-3 bg-white flex flex-col items-center">
         <div className=" relative w-full justify-center items-center flex">
           <Image src={logo} alt="logo" width={67} />
           <RxCross2
@@ -143,7 +139,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
               className=" border w-full border-[#636972] rounded-lg p-2"
             />
           </div>
-          <div className=" w-[40%] flex flex-col gap-2">
+          {/* <div className=" w-[40%] flex flex-col gap-2">
             <h5>استان تولد</h5>
             <ProvinceSelectInput hiddentitle setCities={setCities} />
           </div>
@@ -154,10 +150,11 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
               setCityId={setCityId}
               cities={cities}
             />
-          </div>
+          </div> */}
           <div className=" w-[90%] flex ">
             <div className=" w-[45%]">
               <SpecialtiesSelectInput
+                title
                 specialistId={specialistId}
                 setSpecialistId={setSpecialistId}
               />
@@ -166,7 +163,7 @@ function AddNewDoctorModal({ setIsAddDoctorModal, doctorItems }) {
         </div>
         <button
           onClick={handleclick}
-          className=" w-1/2 flex justify-center h-10 items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
+          className=" w-1/2  absolute bottom-2  flex justify-center h-10 items-center gap-2 rounded-lg p-2 bg-[#005DAD] text-white"
         >
           {isLoading ? <SyncLoader color="white" size={10} /> : "ثبت"}
         </button>

@@ -320,10 +320,140 @@ export const ProvinceSelectInput = ({
     </div>
   );
 };
+// export const SerchDropDowns = () => {
+//   const {
+//     setCurrentPageDoctorSearch,
+//     setMultiSpecialtiesBoxes,
+//     multiSpecialtiesBoxes,
+//     setSpecialistNames,
+//     storedIdsMultipleSearch,
+//     setStoredIdsMultipleSearch,
+//   } = myStore();
+//   const { setSpecialistSearch, specialistSearch } = myStore();
+//   const [specialties, setSpecialties] = useState([]);
+//   const [filtredArr, setFiltredArr] = useState([]);
+//   const [inputVal, setInputVal] = useState("");
+//   const [loading, setLoading] = useState(false);
+//   const handleInputChange = (event) => {
+//     filterArray(event.target.value);
+//     setInputVal(event.target.value);
+//   };
+//   const filterArray = (value) => {
+//     const filtered = specialties.filter((item) =>
+//       item.name.toLowerCase().includes(value.toLowerCase())
+//     );
+//     setFiltredArr(filtered);
+//   };
+//   const fetchData = async () => {
+//     const url = "Specialist/read-specialists";
+//     const data = await get_specialties(url);
+//     if (data) {
+//       setSpecialties(data);
+//       setFiltredArr(data);
+//       setLoading(false);
+//     }
+//   };
+//   useEffect(() => {
+//     fetchData();
+//   }, []);
+
+//   const [isSearching, setIsSearching] = useState(false);
+//   // const [selectedOption, setSelectedOption] = useState("");
+//   const handleSelectOption = (name, id) => {
+//     if (storedIdsMultipleSearch) {
+//       setStoredIdsMultipleSearch(`${storedIdsMultipleSearch},${id}`);
+//     } else {
+//       setStoredIdsMultipleSearch(id);
+//     }
+//     if (storedIdsMultipleSearch) {
+//       setSpecialistSearch(`${storedIdsMultipleSearch},${id}`);
+//     } else {
+//       setSpecialistSearch(id);
+//     }
+
+//     setCurrentPageDoctorSearch(1);
+//     setIsSearching(false);
+//     setInputVal("");
+//     setSpecialistNames(name);
+//     setCurrentPageDoctorSearch(1);
+//     let IsBoxExist = multiSpecialtiesBoxes.find((item) => item.id == id);
+//     if (!IsBoxExist) {
+//       setMultiSpecialtiesBoxes([
+//         ...multiSpecialtiesBoxes,
+//         {
+//           id: id,
+//           caption: name,
+//           type: "specialties",
+//         },
+//       ]);
+//     }
+//   };
+//   return (
+//     <div className=" flex flex-col gap-3">
+//       <div
+//         onClick={() => setIsSearching(!isSearching)}
+//         className=" px-2 border shadow-[0_1px_15px_-5px_rgba(0,0,0,0.3)] flex justify-center items-center  rounded-xl w-full"
+//       >
+//         <CiSearch className=" text-4xl text-[#005DAD]" />
+//         <input
+//           value={inputVal}
+//           onChange={handleInputChange}
+//           placeholder={"نام بیماری را جستجو کنید"}
+//           className=" outline-none h-[54px] w-full rounded-xl"
+//         />
+//         <IoIosArrowDown
+//           className={` ${
+//             isSearching && "rotate-180"
+//           } transition-all   duration-300 text-xl text-[#858585]`}
+//         />
+//       </div>
+//       <div className="bg-white shadow-lg rounded-xl">
+//         {isSearching ? (
+//           <div className="  mt-6 mr-2  p-2 transition-all duration-500 w-[95%] h-52 overflow-auto customScroll flex flex-col">
+//             {filtredArr.length != 0 ? (
+//               filtredArr.map((item) => {
+//                 return (
+//                   <div
+//                     className=" hover:text-[#005dad]  p-1 border-b mx-2 flex items-center"
+//                     key={item.id}
+//                   >
+//                     <button
+//                       onClick={() => handleSelectOption(item.name, item.id)}
+//                     >
+//                       {item.name}
+//                     </button>
+//                   </div>
+//                 );
+//               })
+//             ) : (
+//               <div className=" w-full flex justify-center items-center">
+//                 نتیجه ای یافت نشد
+//               </div>
+//             )}
+//           </div>
+//         ) : (
+//           <div className=" transition-all mr-2 duration-300  w-[95%] h-0 overflow-auto customScroll flex flex-col">
+//             {filtredArr.map((item) => {
+//               return (
+//                 <div
+//                   className=" border-b mx-2 p-1 flex items-center"
+//                   key={item.id}
+//                 >
+//                   <h5> {item.name}</h5>
+//                 </div>
+//               );
+//             })}
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
 export const SpecialtiesSelectInput = ({
   specialistId,
   setSpecialistId,
   hiddenTitle,
+  title,
 }) => {
   const [specialist, setSpecialist] = useState([]);
   console.log(specialist);
@@ -339,25 +469,166 @@ export const SpecialtiesSelectInput = ({
     };
     fetchData();
   }, []);
-  return (
-    <div className=" min:w-[40%] w-full flex gap-2 flex-col items-start">
-      {!hiddenTitle && <h5>تخصص</h5>}
 
-      <select
-        value={specialistId}
-        onChange={(e) => setSpecialistId(e.target.value)}
-        className=" border w-full border-[#636972] rounded-lg p-2"
+  const { setSpecialistSearch, specialistSearch } = myStore();
+  const [filtredArr, setFiltredArr] = useState([]);
+  const [specialistName, setSpecialistName] = useState("");
+  const [inputVal, setInputVal] = useState("");
+  const [loading, setLoading] = useState(false);
+  const handleInputChange = (event) => {
+    setIsSearching(true);
+    filterArray(event.target.value);
+    setInputVal(event.target.value);
+  };
+  const filterArray = (value) => {
+    const filtered = specialist.filter((item) =>
+      item.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setFiltredArr(filtered);
+  };
+  const fetchData = async () => {
+    const url = "Specialist/read-specialists";
+    const data = await get_specialties(url);
+    if (data) {
+      setSpecialist(data);
+      setFiltredArr(data);
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const [isSearching, setIsSearching] = useState(false);
+  // const [selectedOption, setSelectedOption] = useState("");
+  const handleSelectOption = (name, id) => {
+    if (storedIdsMultipleSearch) {
+      setStoredIdsMultipleSearch(`${storedIdsMultipleSearch},${id}`);
+    } else {
+      setStoredIdsMultipleSearch(id);
+    }
+    if (storedIdsMultipleSearch) {
+      setSpecialistSearch(`${storedIdsMultipleSearch},${id}`);
+    } else {
+      setSpecialistSearch(id);
+    }
+
+    setCurrentPageDoctorSearch(1);
+    setIsSearching(false);
+    setInputVal("");
+    setSpecialistNames(name);
+    setCurrentPageDoctorSearch(1);
+    let IsBoxExist = multiSpecialtiesBoxes.find((item) => item.id == id);
+    if (!IsBoxExist) {
+      setMultiSpecialtiesBoxes([
+        ...multiSpecialtiesBoxes,
+        {
+          id: id,
+          caption: name,
+          type: "specialties",
+        },
+      ]);
+    }
+  };
+
+  return (
+    <div className=" flex flex-col gap-3">
+      {title && <h5>تخصص</h5>}
+      <div
+        onClick={() => setIsSearching(!isSearching)}
+        className=" border w-full border-[#636972] rounded-lg p-2  bg-white px-2 shadow-[0_1px_15px_-5px_rgba(0,0,0,0.3)] flex justify-center items-center  "
       >
-        <option value="">{hiddenTitle && "همه"}</option>
-        {specialist.map((item) => {
-          return (
-            <option value={item.id} key={item.id}>
-              {item.name}
-            </option>
-          );
-        })}
-      </select>
+        <input
+          value={inputVal}
+          onChange={handleInputChange}
+          placeholder={specialistName ? specialistName : " تخصص "}
+          className=" outline-none w-full rounded-xl"
+        />
+        <IoIosArrowDown
+          className={` ${
+            isSearching && "rotate-180"
+          } transition-all   duration-300 text-xl text-[#858585]`}
+        />
+      </div>
+      <div className="bg-white shadow-lg rounded-xl">
+        {isSearching ? (
+          <div className=" absolute bg-white w-[300px] z-40 h-40 border rounded-lg  transition-all duration-500 overflow-auto customScroll flex flex-col">
+            {all && (
+              <div
+                className=" w-full hover:text-[#005dad]  p-1 border-b flex items-starttext-start"
+                key={item.id}
+              >
+                <button
+                  onClick={() => {
+                    setInputVal("");
+                    setIsSearching(false);
+                    setSpecialistId("");
+                  }}
+                >
+                  همه
+                </button>
+              </div>
+            )}
+            {filtredArr.length != 0 ? (
+              filtredArr.map((item) => {
+                return (
+                  <div
+                    className=" w-full hover:text-[#005dad]  p-1 border-b flex items-starttext-start"
+                    key={item.id}
+                  >
+                    <button
+                      onClick={() => {
+                        setInputVal("");
+                        setIsSearching(false);
+                        setSpecialistName(item.name);
+                        setSpecialistId(item.id);
+                      }}
+                    >
+                      {item.name}
+                    </button>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="  w-full flex justify-center items-center">
+                نتیجه ای یافت نشد
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="absolute bg-white w-[300px] z-40  rounded-lg transition-all mr-2 duration-300   h-0 overflow-auto customScroll flex flex-col">
+            {filtredArr.map((item) => {
+              return (
+                <div
+                  className=" border-b mx-2 p-1 flex items-center"
+                  key={item.id}
+                >
+                  <h5> {item.name}</h5>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </div>
+    // <div className=" min:w-[40%] w-full flex gap-2 flex-col items-start">
+    //   {!hiddenTitle && <h5>تخصص</h5>}
+
+    //   <select
+    //     value={specialistId}
+    //     onChange={(e) => setSpecialistId(e.target.value)}
+    //     className=" border w-full border-[#636972] rounded-lg p-2"
+    //   >
+    //     <option value="">{hiddenTitle && "همه"}</option>
+    //     {specialist.map((item) => {
+    //       return (
+    //         <option value={item.id} key={item.id}>
+    //           {item.name}
+    //         </option>
+    //       );
+    //     })}
+    //   </select>
+    // </div>
   );
 };
 export const ClinicSelectInput = ({ setType }) => {
