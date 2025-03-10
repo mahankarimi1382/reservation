@@ -88,7 +88,7 @@ function HospitalsSection() {
     },
   ];
   return (
-    <div className=" lg:mt-20 flex flex-col justify-center items-center">
+    <div className=" mt-5 lg:mt-20 flex flex-col justify-center items-center">
       <div className=" flex items-center justify-between w-11/12">
         <h2 className=" flex gap-1 items-center lg:gap-2 lg:text-[38px]">
           <span className=" text-[#005DAD]">مراکز درمانی</span>

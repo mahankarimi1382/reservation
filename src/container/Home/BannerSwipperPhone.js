@@ -19,7 +19,7 @@ export default function BannerSwipperPhone() {
       spaceBetween={10}
         modules={[Pagination, Autoplay]}
         autoplay={{
-          delay: 3000,
+          delay: 5000,
           disableOnInteraction: false,
         }}
         pagination={{
