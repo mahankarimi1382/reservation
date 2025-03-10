@@ -108,8 +108,10 @@ function SwipperSection() {
         dragSize: 50,
         dragClass: "scrollbar-drag",
       }}
-      touchStartPreventDefault={false} // اضافه کردن این خط
-      simulateTouch={true} // اضافه کردن این خط
+      touchStartPreventDefault={false}
+      simulateTouch={true}
+      preventClicks={false} // اضافه کردن این خط
+      preventClicksPropagation={false} // اضافه کردن این خط
       className="flex lg:w-[80%] justify-center items-center"
     >
       {mappingCategoryFn()}
