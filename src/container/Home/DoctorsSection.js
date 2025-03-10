@@ -45,7 +45,7 @@ function DoctorsSection() {
           <IoIosArrowBack />
         </Link>
       </div>
-      <div className=" py-2 lg:mt-10 mt-5 flex gap-12 no-scrollbar overflow-x-auto w-11/12">
+      <div className=" py-2 px-2 lg:mt-10 mt-5 flex gap-12 no-scrollbar overflow-x-auto w-11/12">
         {doctors.map((item) => {
           return (
             <div
